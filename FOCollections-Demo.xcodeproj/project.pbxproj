@@ -8,12 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		4C7AEC071BF5027A001A2636 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC061BF5027A001A2636 /* AppDelegate.swift */; };
-		4C7AEC091BF5027A001A2636 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC081BF5027A001A2636 /* ViewController.swift */; };
 		4C7AEC0C1BF5027A001A2636 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7AEC0A1BF5027A001A2636 /* Main.storyboard */; };
 		4C7AEC0E1BF5027A001A2636 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C7AEC0D1BF5027A001A2636 /* Assets.xcassets */; };
 		4C7AEC111BF5027A001A2636 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7AEC0F1BF5027A001A2636 /* LaunchScreen.storyboard */; };
 		4C7AEC1C1BF5027A001A2636 /* FOCollections_DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC1B1BF5027A001A2636 /* FOCollections_DemoTests.swift */; };
 		4C7AEC271BF5027A001A2636 /* FOCollections_DemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC261BF5027A001A2636 /* FOCollections_DemoUITests.swift */; };
+		4C7AEC3A1BF502AE001A2636 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC351BF502AD001A2636 /* CollectionViewController.swift */; };
+		4C7AEC3B1BF502AE001A2636 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC361BF502AD001A2636 /* TableViewController.swift */; };
+		4C7AEC3C1BF502AE001A2636 /* FOCollectionConfiguratorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC371BF502AD001A2636 /* FOCollectionConfiguratorFactory.swift */; };
+		4C7AEC3D1BF502AE001A2636 /* FOTableConfiguratorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC381BF502AD001A2636 /* FOTableConfiguratorFactory.swift */; };
+		4C7AEC3E1BF50326001A2636 /* FOCollections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7AEC341BF502AD001A2636 /* FOCollections.framework */; };
+		4C7AEC3F1BF50326001A2636 /* FOCollections.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7AEC341BF502AD001A2636 /* FOCollections.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,10 +38,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4C7AEC401BF50326001A2636 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4C7AEC3F1BF50326001A2636 /* FOCollections.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		4C7AEC031BF5027A001A2636 /* FOCollections-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FOCollections-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C7AEC061BF5027A001A2636 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4C7AEC081BF5027A001A2636 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4C7AEC0B1BF5027A001A2636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C7AEC0D1BF5027A001A2636 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C7AEC101BF5027A001A2636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +65,11 @@
 		4C7AEC221BF5027A001A2636 /* FOCollections-DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FOCollections-DemoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C7AEC261BF5027A001A2636 /* FOCollections_DemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FOCollections_DemoUITests.swift; sourceTree = "<group>"; };
 		4C7AEC281BF5027A001A2636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C7AEC341BF502AD001A2636 /* FOCollections.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FOCollections.framework; sourceTree = "<group>"; };
+		4C7AEC351BF502AD001A2636 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		4C7AEC361BF502AD001A2636 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		4C7AEC371BF502AD001A2636 /* FOCollectionConfiguratorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionConfiguratorFactory.swift; sourceTree = "<group>"; };
+		4C7AEC381BF502AD001A2636 /* FOTableConfiguratorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTableConfiguratorFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C7AEC3E1BF50326001A2636 /* FOCollections.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +122,11 @@
 			isa = PBXGroup;
 			children = (
 				4C7AEC061BF5027A001A2636 /* AppDelegate.swift */,
-				4C7AEC081BF5027A001A2636 /* ViewController.swift */,
+				4C7AEC351BF502AD001A2636 /* CollectionViewController.swift */,
+				4C7AEC361BF502AD001A2636 /* TableViewController.swift */,
+				4C7AEC371BF502AD001A2636 /* FOCollectionConfiguratorFactory.swift */,
+				4C7AEC381BF502AD001A2636 /* FOTableConfiguratorFactory.swift */,
+				4C7AEC341BF502AD001A2636 /* FOCollections.framework */,
 				4C7AEC0A1BF5027A001A2636 /* Main.storyboard */,
 				4C7AEC0D1BF5027A001A2636 /* Assets.xcassets */,
 				4C7AEC0F1BF5027A001A2636 /* LaunchScreen.storyboard */,
@@ -135,6 +163,7 @@
 				4C7AEBFF1BF5027A001A2636 /* Sources */,
 				4C7AEC001BF5027A001A2636 /* Frameworks */,
 				4C7AEC011BF5027A001A2636 /* Resources */,
+				4C7AEC401BF50326001A2636 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -256,8 +285,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C7AEC091BF5027A001A2636 /* ViewController.swift in Sources */,
+				4C7AEC3A1BF502AE001A2636 /* CollectionViewController.swift in Sources */,
 				4C7AEC071BF5027A001A2636 /* AppDelegate.swift in Sources */,
+				4C7AEC3C1BF502AE001A2636 /* FOCollectionConfiguratorFactory.swift in Sources */,
+				4C7AEC3D1BF502AE001A2636 /* FOTableConfiguratorFactory.swift in Sources */,
+				4C7AEC3B1BF502AE001A2636 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +431,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FOCollections-Demo",
+				);
 				INFOPLIST_FILE = "FOCollections-Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "FO.FOCollections-Demo";
@@ -410,6 +446,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FOCollections-Demo",
+				);
 				INFOPLIST_FILE = "FOCollections-Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "FO.FOCollections-Demo";
