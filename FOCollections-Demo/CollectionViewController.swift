@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FOCollections
 
 class CollectionViewController: FOCollectionViewController {
 

@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import FOCollections
 
 class FOCollectionItemConfigurator: FOCollectionConfigurator {
     

@@ -7,6 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C7520661BFA34BD00D01CC1 /* FOCollectionsGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520631BFA34BD00D01CC1 /* FOCollectionsGlobal.swift */; };
+		4C7520671BFA34BD00D01CC1 /* NSArray+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520641BFA34BD00D01CC1 /* NSArray+Extensions.swift */; };
+		4C7520681BFA34BD00D01CC1 /* FOCompletionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520651BFA34BD00D01CC1 /* FOCompletionOperation.swift */; };
+		4C7520711BFA34C500D01CC1 /* FOTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520691BFA34C500D01CC1 /* FOTableViewController.swift */; };
+		4C7520721BFA34C500D01CC1 /* FOTableViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75206A1BFA34C500D01CC1 /* FOTableViewController+Delegate.swift */; };
+		4C7520731BFA34C500D01CC1 /* FOTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75206B1BFA34C500D01CC1 /* FOTableViewDataSource.swift */; };
+		4C7520741BFA34C500D01CC1 /* FOTableViewDataSource+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75206C1BFA34C500D01CC1 /* FOTableViewDataSource+Delegate.swift */; };
+		4C7520751BFA34C500D01CC1 /* FOTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75206D1BFA34C500D01CC1 /* FOTableSection.swift */; };
+		4C7520761BFA34C500D01CC1 /* FOTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75206E1BFA34C500D01CC1 /* FOTableItem.swift */; };
+		4C7520771BFA34C500D01CC1 /* FOTableConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75206F1BFA34C500D01CC1 /* FOTableConfigurator.swift */; };
+		4C7520781BFA34C500D01CC1 /* FOTablePagingConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520701BFA34C500D01CC1 /* FOTablePagingConfigurator.swift */; };
+		4C7520821BFA34CA00D01CC1 /* FOCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520791BFA34CA00D01CC1 /* FOCollectionViewController.swift */; };
+		4C7520831BFA34CA00D01CC1 /* FOCollectionViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75207A1BFA34CA00D01CC1 /* FOCollectionViewController+Delegate.swift */; };
+		4C7520841BFA34CA00D01CC1 /* FOCollectionViewController+DelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75207B1BFA34CA00D01CC1 /* FOCollectionViewController+DelegateFlowLayout.swift */; };
+		4C7520851BFA34CA00D01CC1 /* FOCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75207C1BFA34CA00D01CC1 /* FOCollectionViewDataSource.swift */; };
+		4C7520861BFA34CA00D01CC1 /* FOCollectionViewDataSource+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75207D1BFA34CA00D01CC1 /* FOCollectionViewDataSource+Delegate.swift */; };
+		4C7520871BFA34CA00D01CC1 /* FOCollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75207E1BFA34CA00D01CC1 /* FOCollectionSection.swift */; };
+		4C7520881BFA34CA00D01CC1 /* FOCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75207F1BFA34CA00D01CC1 /* FOCollectionItem.swift */; };
+		4C7520891BFA34CA00D01CC1 /* FOCollectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520801BFA34CA00D01CC1 /* FOCollectionConfigurator.swift */; };
+		4C75208A1BFA34CA00D01CC1 /* FOCollectionPagingConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520811BFA34CA00D01CC1 /* FOCollectionPagingConfigurator.swift */; };
 		4C7AEC071BF5027A001A2636 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC061BF5027A001A2636 /* AppDelegate.swift */; };
 		4C7AEC0C1BF5027A001A2636 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7AEC0A1BF5027A001A2636 /* Main.storyboard */; };
 		4C7AEC0E1BF5027A001A2636 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C7AEC0D1BF5027A001A2636 /* Assets.xcassets */; };
@@ -17,8 +37,6 @@
 		4C7AEC3B1BF502AE001A2636 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC361BF502AD001A2636 /* TableViewController.swift */; };
 		4C7AEC3C1BF502AE001A2636 /* FOCollectionConfiguratorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC371BF502AD001A2636 /* FOCollectionConfiguratorFactory.swift */; };
 		4C7AEC3D1BF502AE001A2636 /* FOTableConfiguratorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC381BF502AD001A2636 /* FOTableConfiguratorFactory.swift */; };
-		4C7AEC3E1BF50326001A2636 /* FOCollections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7AEC341BF502AD001A2636 /* FOCollections.framework */; };
-		4C7AEC3F1BF50326001A2636 /* FOCollections.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7AEC341BF502AD001A2636 /* FOCollections.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +63,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4C7AEC3F1BF50326001A2636 /* FOCollections.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -53,6 +70,26 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4C7520631BFA34BD00D01CC1 /* FOCollectionsGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionsGlobal.swift; sourceTree = "<group>"; };
+		4C7520641BFA34BD00D01CC1 /* NSArray+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSArray+Extensions.swift"; sourceTree = "<group>"; };
+		4C7520651BFA34BD00D01CC1 /* FOCompletionOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCompletionOperation.swift; sourceTree = "<group>"; };
+		4C7520691BFA34C500D01CC1 /* FOTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTableViewController.swift; sourceTree = "<group>"; };
+		4C75206A1BFA34C500D01CC1 /* FOTableViewController+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOTableViewController+Delegate.swift"; sourceTree = "<group>"; };
+		4C75206B1BFA34C500D01CC1 /* FOTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTableViewDataSource.swift; sourceTree = "<group>"; };
+		4C75206C1BFA34C500D01CC1 /* FOTableViewDataSource+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOTableViewDataSource+Delegate.swift"; sourceTree = "<group>"; };
+		4C75206D1BFA34C500D01CC1 /* FOTableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTableSection.swift; sourceTree = "<group>"; };
+		4C75206E1BFA34C500D01CC1 /* FOTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTableItem.swift; sourceTree = "<group>"; };
+		4C75206F1BFA34C500D01CC1 /* FOTableConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTableConfigurator.swift; sourceTree = "<group>"; };
+		4C7520701BFA34C500D01CC1 /* FOTablePagingConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTablePagingConfigurator.swift; sourceTree = "<group>"; };
+		4C7520791BFA34CA00D01CC1 /* FOCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionViewController.swift; sourceTree = "<group>"; };
+		4C75207A1BFA34CA00D01CC1 /* FOCollectionViewController+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOCollectionViewController+Delegate.swift"; sourceTree = "<group>"; };
+		4C75207B1BFA34CA00D01CC1 /* FOCollectionViewController+DelegateFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOCollectionViewController+DelegateFlowLayout.swift"; sourceTree = "<group>"; };
+		4C75207C1BFA34CA00D01CC1 /* FOCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		4C75207D1BFA34CA00D01CC1 /* FOCollectionViewDataSource+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOCollectionViewDataSource+Delegate.swift"; sourceTree = "<group>"; };
+		4C75207E1BFA34CA00D01CC1 /* FOCollectionSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionSection.swift; sourceTree = "<group>"; };
+		4C75207F1BFA34CA00D01CC1 /* FOCollectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionItem.swift; sourceTree = "<group>"; };
+		4C7520801BFA34CA00D01CC1 /* FOCollectionConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionConfigurator.swift; sourceTree = "<group>"; };
+		4C7520811BFA34CA00D01CC1 /* FOCollectionPagingConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionPagingConfigurator.swift; sourceTree = "<group>"; };
 		4C7AEC031BF5027A001A2636 /* FOCollections-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FOCollections-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C7AEC061BF5027A001A2636 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C7AEC0B1BF5027A001A2636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -65,7 +102,6 @@
 		4C7AEC221BF5027A001A2636 /* FOCollections-DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FOCollections-DemoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C7AEC261BF5027A001A2636 /* FOCollections_DemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FOCollections_DemoUITests.swift; sourceTree = "<group>"; };
 		4C7AEC281BF5027A001A2636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4C7AEC341BF502AD001A2636 /* FOCollections.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FOCollections.framework; sourceTree = "<group>"; };
 		4C7AEC351BF502AD001A2636 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		4C7AEC361BF502AD001A2636 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		4C7AEC371BF502AD001A2636 /* FOCollectionConfiguratorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionConfiguratorFactory.swift; sourceTree = "<group>"; };
@@ -77,7 +113,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C7AEC3E1BF50326001A2636 /* FOCollections.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,9 +133,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C75205F1BFA348100D01CC1 /* FOCollections */ = {
+			isa = PBXGroup;
+			children = (
+				4C7520621BFA34A000D01CC1 /* UICollectionView */,
+				4C7520611BFA349600D01CC1 /* UITableView */,
+				4C7520601BFA348900D01CC1 /* Shared */,
+			);
+			name = FOCollections;
+			sourceTree = "<group>";
+		};
+		4C7520601BFA348900D01CC1 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				4C7520631BFA34BD00D01CC1 /* FOCollectionsGlobal.swift */,
+				4C7520641BFA34BD00D01CC1 /* NSArray+Extensions.swift */,
+				4C7520651BFA34BD00D01CC1 /* FOCompletionOperation.swift */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		4C7520611BFA349600D01CC1 /* UITableView */ = {
+			isa = PBXGroup;
+			children = (
+				4C7520691BFA34C500D01CC1 /* FOTableViewController.swift */,
+				4C75206A1BFA34C500D01CC1 /* FOTableViewController+Delegate.swift */,
+				4C75206B1BFA34C500D01CC1 /* FOTableViewDataSource.swift */,
+				4C75206C1BFA34C500D01CC1 /* FOTableViewDataSource+Delegate.swift */,
+				4C75206D1BFA34C500D01CC1 /* FOTableSection.swift */,
+				4C75206E1BFA34C500D01CC1 /* FOTableItem.swift */,
+				4C75206F1BFA34C500D01CC1 /* FOTableConfigurator.swift */,
+				4C7520701BFA34C500D01CC1 /* FOTablePagingConfigurator.swift */,
+			);
+			name = UITableView;
+			sourceTree = "<group>";
+		};
+		4C7520621BFA34A000D01CC1 /* UICollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				4C7520791BFA34CA00D01CC1 /* FOCollectionViewController.swift */,
+				4C75207A1BFA34CA00D01CC1 /* FOCollectionViewController+Delegate.swift */,
+				4C75207B1BFA34CA00D01CC1 /* FOCollectionViewController+DelegateFlowLayout.swift */,
+				4C75207C1BFA34CA00D01CC1 /* FOCollectionViewDataSource.swift */,
+				4C75207D1BFA34CA00D01CC1 /* FOCollectionViewDataSource+Delegate.swift */,
+				4C75207E1BFA34CA00D01CC1 /* FOCollectionSection.swift */,
+				4C75207F1BFA34CA00D01CC1 /* FOCollectionItem.swift */,
+				4C7520801BFA34CA00D01CC1 /* FOCollectionConfigurator.swift */,
+				4C7520811BFA34CA00D01CC1 /* FOCollectionPagingConfigurator.swift */,
+			);
+			name = UICollectionView;
+			sourceTree = "<group>";
+		};
 		4C7AEBFA1BF5027A001A2636 = {
 			isa = PBXGroup;
 			children = (
+				4C75205F1BFA348100D01CC1 /* FOCollections */,
 				4C7AEC051BF5027A001A2636 /* FOCollections-Demo */,
 				4C7AEC1A1BF5027A001A2636 /* FOCollections-DemoTests */,
 				4C7AEC251BF5027A001A2636 /* FOCollections-DemoUITests */,
@@ -126,7 +213,6 @@
 				4C7AEC361BF502AD001A2636 /* TableViewController.swift */,
 				4C7AEC371BF502AD001A2636 /* FOCollectionConfiguratorFactory.swift */,
 				4C7AEC381BF502AD001A2636 /* FOTableConfiguratorFactory.swift */,
-				4C7AEC341BF502AD001A2636 /* FOCollections.framework */,
 				4C7AEC0A1BF5027A001A2636 /* Main.storyboard */,
 				4C7AEC0D1BF5027A001A2636 /* Assets.xcassets */,
 				4C7AEC0F1BF5027A001A2636 /* LaunchScreen.storyboard */,
@@ -285,11 +371,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C7520851BFA34CA00D01CC1 /* FOCollectionViewDataSource.swift in Sources */,
+				4C7520781BFA34C500D01CC1 /* FOTablePagingConfigurator.swift in Sources */,
+				4C7520741BFA34C500D01CC1 /* FOTableViewDataSource+Delegate.swift in Sources */,
+				4C7520881BFA34CA00D01CC1 /* FOCollectionItem.swift in Sources */,
 				4C7AEC3A1BF502AE001A2636 /* CollectionViewController.swift in Sources */,
+				4C7520861BFA34CA00D01CC1 /* FOCollectionViewDataSource+Delegate.swift in Sources */,
 				4C7AEC071BF5027A001A2636 /* AppDelegate.swift in Sources */,
+				4C7520771BFA34C500D01CC1 /* FOTableConfigurator.swift in Sources */,
+				4C7520711BFA34C500D01CC1 /* FOTableViewController.swift in Sources */,
+				4C75208A1BFA34CA00D01CC1 /* FOCollectionPagingConfigurator.swift in Sources */,
+				4C7520761BFA34C500D01CC1 /* FOTableItem.swift in Sources */,
 				4C7AEC3C1BF502AE001A2636 /* FOCollectionConfiguratorFactory.swift in Sources */,
+				4C7520661BFA34BD00D01CC1 /* FOCollectionsGlobal.swift in Sources */,
 				4C7AEC3D1BF502AE001A2636 /* FOTableConfiguratorFactory.swift in Sources */,
+				4C7520871BFA34CA00D01CC1 /* FOCollectionSection.swift in Sources */,
+				4C7520831BFA34CA00D01CC1 /* FOCollectionViewController+Delegate.swift in Sources */,
 				4C7AEC3B1BF502AE001A2636 /* TableViewController.swift in Sources */,
+				4C7520731BFA34C500D01CC1 /* FOTableViewDataSource.swift in Sources */,
+				4C7520821BFA34CA00D01CC1 /* FOCollectionViewController.swift in Sources */,
+				4C7520721BFA34C500D01CC1 /* FOTableViewController+Delegate.swift in Sources */,
+				4C7520681BFA34BD00D01CC1 /* FOCompletionOperation.swift in Sources */,
+				4C7520671BFA34BD00D01CC1 /* NSArray+Extensions.swift in Sources */,
+				4C7520891BFA34CA00D01CC1 /* FOCollectionConfigurator.swift in Sources */,
+				4C7520751BFA34C500D01CC1 /* FOTableSection.swift in Sources */,
+				4C7520841BFA34CA00D01CC1 /* FOCollectionViewController+DelegateFlowLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +630,7 @@
 				4C7AEC2D1BF5027A001A2636 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4C7AEC2E1BF5027A001A2636 /* Build configuration list for PBXNativeTarget "FOCollections-DemoTests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +639,7 @@
 				4C7AEC301BF5027A001A2636 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4C7AEC311BF5027A001A2636 /* Build configuration list for PBXNativeTarget "FOCollections-DemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +648,7 @@
 				4C7AEC331BF5027A001A2636 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
