@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4C7AEC021BF5027A001A2636"
-               BuildableName = "FOCollections-Demo.app"
-               BlueprintName = "FOCollections-Demo"
-               ReferencedContainer = "container:FOCollections-Demo.xcodeproj">
+               BuildableName = "FOCollections.app"
+               BlueprintName = "FOCollections"
+               ReferencedContainer = "container:FOCollections.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4C7AEC161BF5027A001A2636"
-               BuildableName = "FOCollections-DemoTests.xctest"
-               BlueprintName = "FOCollections-DemoTests"
-               ReferencedContainer = "container:FOCollections-Demo.xcodeproj">
+               BuildableName = "FOCollections.xctest"
+               BlueprintName = "FOCollectionsTests"
+               ReferencedContainer = "container:FOCollections.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4C7AEC211BF5027A001A2636"
-               BuildableName = "FOCollections-DemoUITests.xctest"
-               BlueprintName = "FOCollections-DemoUITests"
-               ReferencedContainer = "container:FOCollections-Demo.xcodeproj">
+               BuildableName = "FOCollections.xctest"
+               BlueprintName = "FOCollectionsUITests"
+               ReferencedContainer = "container:FOCollections.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4C7AEC021BF5027A001A2636"
-            BuildableName = "FOCollections-Demo.app"
-            BlueprintName = "FOCollections-Demo"
-            ReferencedContainer = "container:FOCollections-Demo.xcodeproj">
+            BuildableName = "FOCollections.app"
+            BlueprintName = "FOCollections"
+            ReferencedContainer = "container:FOCollections.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4C7AEC021BF5027A001A2636"
-            BuildableName = "FOCollections-Demo.app"
-            BlueprintName = "FOCollections-Demo"
-            ReferencedContainer = "container:FOCollections-Demo.xcodeproj">
+            BuildableName = "FOCollections.app"
+            BlueprintName = "FOCollections"
+            ReferencedContainer = "container:FOCollections.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4C7AEC021BF5027A001A2636"
-            BuildableName = "FOCollections-Demo.app"
-            BlueprintName = "FOCollections-Demo"
-            ReferencedContainer = "container:FOCollections-Demo.xcodeproj">
+            BuildableName = "FOCollections.app"
+            BlueprintName = "FOCollections"
+            ReferencedContainer = "container:FOCollections.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

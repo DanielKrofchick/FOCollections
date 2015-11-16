@@ -31,30 +31,11 @@
 		4C7AEC0C1BF5027A001A2636 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7AEC0A1BF5027A001A2636 /* Main.storyboard */; };
 		4C7AEC0E1BF5027A001A2636 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C7AEC0D1BF5027A001A2636 /* Assets.xcassets */; };
 		4C7AEC111BF5027A001A2636 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7AEC0F1BF5027A001A2636 /* LaunchScreen.storyboard */; };
-		4C7AEC1C1BF5027A001A2636 /* FOCollections_DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC1B1BF5027A001A2636 /* FOCollections_DemoTests.swift */; };
-		4C7AEC271BF5027A001A2636 /* FOCollections_DemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC261BF5027A001A2636 /* FOCollections_DemoUITests.swift */; };
 		4C7AEC3A1BF502AE001A2636 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC351BF502AD001A2636 /* CollectionViewController.swift */; };
 		4C7AEC3B1BF502AE001A2636 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC361BF502AD001A2636 /* TableViewController.swift */; };
 		4C7AEC3C1BF502AE001A2636 /* FOCollectionConfiguratorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC371BF502AD001A2636 /* FOCollectionConfiguratorFactory.swift */; };
 		4C7AEC3D1BF502AE001A2636 /* FOTableConfiguratorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC381BF502AD001A2636 /* FOTableConfiguratorFactory.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		4C7AEC181BF5027A001A2636 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4C7AEBFB1BF5027A001A2636 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4C7AEC021BF5027A001A2636;
-			remoteInfo = "FOCollections-Demo";
-		};
-		4C7AEC231BF5027A001A2636 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4C7AEBFB1BF5027A001A2636 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4C7AEC021BF5027A001A2636;
-			remoteInfo = "FOCollections-Demo";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		4C7AEC401BF50326001A2636 /* Embed Frameworks */ = {
@@ -70,38 +51,32 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4C7520631BFA34BD00D01CC1 /* FOCollectionsGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionsGlobal.swift; sourceTree = "<group>"; };
-		4C7520641BFA34BD00D01CC1 /* NSArray+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSArray+Extensions.swift"; sourceTree = "<group>"; };
-		4C7520651BFA34BD00D01CC1 /* FOCompletionOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCompletionOperation.swift; sourceTree = "<group>"; };
-		4C7520691BFA34C500D01CC1 /* FOTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTableViewController.swift; sourceTree = "<group>"; };
-		4C75206A1BFA34C500D01CC1 /* FOTableViewController+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOTableViewController+Delegate.swift"; sourceTree = "<group>"; };
-		4C75206B1BFA34C500D01CC1 /* FOTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTableViewDataSource.swift; sourceTree = "<group>"; };
-		4C75206C1BFA34C500D01CC1 /* FOTableViewDataSource+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOTableViewDataSource+Delegate.swift"; sourceTree = "<group>"; };
-		4C75206D1BFA34C500D01CC1 /* FOTableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTableSection.swift; sourceTree = "<group>"; };
-		4C75206E1BFA34C500D01CC1 /* FOTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTableItem.swift; sourceTree = "<group>"; };
-		4C75206F1BFA34C500D01CC1 /* FOTableConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTableConfigurator.swift; sourceTree = "<group>"; };
-		4C7520701BFA34C500D01CC1 /* FOTablePagingConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTablePagingConfigurator.swift; sourceTree = "<group>"; };
-		4C7520791BFA34CA00D01CC1 /* FOCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionViewController.swift; sourceTree = "<group>"; };
-		4C75207A1BFA34CA00D01CC1 /* FOCollectionViewController+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOCollectionViewController+Delegate.swift"; sourceTree = "<group>"; };
-		4C75207B1BFA34CA00D01CC1 /* FOCollectionViewController+DelegateFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOCollectionViewController+DelegateFlowLayout.swift"; sourceTree = "<group>"; };
-		4C75207C1BFA34CA00D01CC1 /* FOCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionViewDataSource.swift; sourceTree = "<group>"; };
-		4C75207D1BFA34CA00D01CC1 /* FOCollectionViewDataSource+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOCollectionViewDataSource+Delegate.swift"; sourceTree = "<group>"; };
-		4C75207E1BFA34CA00D01CC1 /* FOCollectionSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionSection.swift; sourceTree = "<group>"; };
-		4C75207F1BFA34CA00D01CC1 /* FOCollectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionItem.swift; sourceTree = "<group>"; };
-		4C7520801BFA34CA00D01CC1 /* FOCollectionConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionConfigurator.swift; sourceTree = "<group>"; };
-		4C7520811BFA34CA00D01CC1 /* FOCollectionPagingConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionPagingConfigurator.swift; sourceTree = "<group>"; };
-		4C7AEC031BF5027A001A2636 /* FOCollections-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FOCollections-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C7520631BFA34BD00D01CC1 /* FOCollectionsGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCollectionsGlobal.swift; path = FOCollections/Shared/FOCollectionsGlobal.swift; sourceTree = "<group>"; };
+		4C7520641BFA34BD00D01CC1 /* NSArray+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSArray+Extensions.swift"; path = "FOCollections/Shared/NSArray+Extensions.swift"; sourceTree = "<group>"; };
+		4C7520651BFA34BD00D01CC1 /* FOCompletionOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCompletionOperation.swift; path = FOCollections/Shared/FOCompletionOperation.swift; sourceTree = "<group>"; };
+		4C7520691BFA34C500D01CC1 /* FOTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOTableViewController.swift; path = FOCollections/UITableView/FOTableViewController.swift; sourceTree = "<group>"; };
+		4C75206A1BFA34C500D01CC1 /* FOTableViewController+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FOTableViewController+Delegate.swift"; path = "FOCollections/UITableView/FOTableViewController+Delegate.swift"; sourceTree = "<group>"; };
+		4C75206B1BFA34C500D01CC1 /* FOTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOTableViewDataSource.swift; path = FOCollections/UITableView/FOTableViewDataSource.swift; sourceTree = "<group>"; };
+		4C75206C1BFA34C500D01CC1 /* FOTableViewDataSource+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FOTableViewDataSource+Delegate.swift"; path = "FOCollections/UITableView/FOTableViewDataSource+Delegate.swift"; sourceTree = "<group>"; };
+		4C75206D1BFA34C500D01CC1 /* FOTableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOTableSection.swift; path = FOCollections/UITableView/FOTableSection.swift; sourceTree = "<group>"; };
+		4C75206E1BFA34C500D01CC1 /* FOTableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOTableItem.swift; path = FOCollections/UITableView/FOTableItem.swift; sourceTree = "<group>"; };
+		4C75206F1BFA34C500D01CC1 /* FOTableConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOTableConfigurator.swift; path = FOCollections/UITableView/FOTableConfigurator.swift; sourceTree = "<group>"; };
+		4C7520701BFA34C500D01CC1 /* FOTablePagingConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOTablePagingConfigurator.swift; path = FOCollections/UITableView/FOTablePagingConfigurator.swift; sourceTree = "<group>"; };
+		4C7520791BFA34CA00D01CC1 /* FOCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCollectionViewController.swift; path = FOCollections/UICollectionView/FOCollectionViewController.swift; sourceTree = "<group>"; };
+		4C75207A1BFA34CA00D01CC1 /* FOCollectionViewController+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FOCollectionViewController+Delegate.swift"; path = "FOCollections/UICollectionView/FOCollectionViewController+Delegate.swift"; sourceTree = "<group>"; };
+		4C75207B1BFA34CA00D01CC1 /* FOCollectionViewController+DelegateFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FOCollectionViewController+DelegateFlowLayout.swift"; path = "FOCollections/UICollectionView/FOCollectionViewController+DelegateFlowLayout.swift"; sourceTree = "<group>"; };
+		4C75207C1BFA34CA00D01CC1 /* FOCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCollectionViewDataSource.swift; path = FOCollections/UICollectionView/FOCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		4C75207D1BFA34CA00D01CC1 /* FOCollectionViewDataSource+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FOCollectionViewDataSource+Delegate.swift"; path = "FOCollections/UICollectionView/FOCollectionViewDataSource+Delegate.swift"; sourceTree = "<group>"; };
+		4C75207E1BFA34CA00D01CC1 /* FOCollectionSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCollectionSection.swift; path = FOCollections/UICollectionView/FOCollectionSection.swift; sourceTree = "<group>"; };
+		4C75207F1BFA34CA00D01CC1 /* FOCollectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCollectionItem.swift; path = FOCollections/UICollectionView/FOCollectionItem.swift; sourceTree = "<group>"; };
+		4C7520801BFA34CA00D01CC1 /* FOCollectionConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCollectionConfigurator.swift; path = FOCollections/UICollectionView/FOCollectionConfigurator.swift; sourceTree = "<group>"; };
+		4C7520811BFA34CA00D01CC1 /* FOCollectionPagingConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCollectionPagingConfigurator.swift; path = FOCollections/UICollectionView/FOCollectionPagingConfigurator.swift; sourceTree = "<group>"; };
+		4C7AEC031BF5027A001A2636 /* FOCollections.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FOCollections.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C7AEC061BF5027A001A2636 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C7AEC0B1BF5027A001A2636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C7AEC0D1BF5027A001A2636 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C7AEC101BF5027A001A2636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C7AEC121BF5027A001A2636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4C7AEC171BF5027A001A2636 /* FOCollections-DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FOCollections-DemoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4C7AEC1B1BF5027A001A2636 /* FOCollections_DemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FOCollections_DemoTests.swift; sourceTree = "<group>"; };
-		4C7AEC1D1BF5027A001A2636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4C7AEC221BF5027A001A2636 /* FOCollections-DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FOCollections-DemoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4C7AEC261BF5027A001A2636 /* FOCollections_DemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FOCollections_DemoUITests.swift; sourceTree = "<group>"; };
-		4C7AEC281BF5027A001A2636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C7AEC351BF502AD001A2636 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		4C7AEC361BF502AD001A2636 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		4C7AEC371BF502AD001A2636 /* FOCollectionConfiguratorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionConfiguratorFactory.swift; sourceTree = "<group>"; };
@@ -110,20 +85,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		4C7AEC001BF5027A001A2636 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4C7AEC141BF5027A001A2636 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4C7AEC1F1BF5027A001A2636 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -188,9 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				4C75205F1BFA348100D01CC1 /* FOCollections */,
-				4C7AEC051BF5027A001A2636 /* FOCollections-Demo */,
-				4C7AEC1A1BF5027A001A2636 /* FOCollections-DemoTests */,
-				4C7AEC251BF5027A001A2636 /* FOCollections-DemoUITests */,
+				4C7AEC051BF5027A001A2636 /* Demo */,
 				4C7AEC041BF5027A001A2636 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -198,14 +157,12 @@
 		4C7AEC041BF5027A001A2636 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4C7AEC031BF5027A001A2636 /* FOCollections-Demo.app */,
-				4C7AEC171BF5027A001A2636 /* FOCollections-DemoTests.xctest */,
-				4C7AEC221BF5027A001A2636 /* FOCollections-DemoUITests.xctest */,
+				4C7AEC031BF5027A001A2636 /* FOCollections.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4C7AEC051BF5027A001A2636 /* FOCollections-Demo */ = {
+		4C7AEC051BF5027A001A2636 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
 				4C7AEC061BF5027A001A2636 /* AppDelegate.swift */,
@@ -218,33 +175,16 @@
 				4C7AEC0F1BF5027A001A2636 /* LaunchScreen.storyboard */,
 				4C7AEC121BF5027A001A2636 /* Info.plist */,
 			);
+			name = Demo;
 			path = "FOCollections-Demo";
-			sourceTree = "<group>";
-		};
-		4C7AEC1A1BF5027A001A2636 /* FOCollections-DemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				4C7AEC1B1BF5027A001A2636 /* FOCollections_DemoTests.swift */,
-				4C7AEC1D1BF5027A001A2636 /* Info.plist */,
-			);
-			path = "FOCollections-DemoTests";
-			sourceTree = "<group>";
-		};
-		4C7AEC251BF5027A001A2636 /* FOCollections-DemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				4C7AEC261BF5027A001A2636 /* FOCollections_DemoUITests.swift */,
-				4C7AEC281BF5027A001A2636 /* Info.plist */,
-			);
-			path = "FOCollections-DemoUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4C7AEC021BF5027A001A2636 /* FOCollections-Demo */ = {
+		4C7AEC021BF5027A001A2636 /* FOCollections */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4C7AEC2B1BF5027A001A2636 /* Build configuration list for PBXNativeTarget "FOCollections-Demo" */;
+			buildConfigurationList = 4C7AEC2B1BF5027A001A2636 /* Build configuration list for PBXNativeTarget "FOCollections" */;
 			buildPhases = (
 				4C7AEBFF1BF5027A001A2636 /* Sources */,
 				4C7AEC001BF5027A001A2636 /* Frameworks */,
@@ -255,46 +195,10 @@
 			);
 			dependencies = (
 			);
-			name = "FOCollections-Demo";
+			name = FOCollections;
 			productName = "FOCollections-Demo";
-			productReference = 4C7AEC031BF5027A001A2636 /* FOCollections-Demo.app */;
+			productReference = 4C7AEC031BF5027A001A2636 /* FOCollections.app */;
 			productType = "com.apple.product-type.application";
-		};
-		4C7AEC161BF5027A001A2636 /* FOCollections-DemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4C7AEC2E1BF5027A001A2636 /* Build configuration list for PBXNativeTarget "FOCollections-DemoTests" */;
-			buildPhases = (
-				4C7AEC131BF5027A001A2636 /* Sources */,
-				4C7AEC141BF5027A001A2636 /* Frameworks */,
-				4C7AEC151BF5027A001A2636 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4C7AEC191BF5027A001A2636 /* PBXTargetDependency */,
-			);
-			name = "FOCollections-DemoTests";
-			productName = "FOCollections-DemoTests";
-			productReference = 4C7AEC171BF5027A001A2636 /* FOCollections-DemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		4C7AEC211BF5027A001A2636 /* FOCollections-DemoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4C7AEC311BF5027A001A2636 /* Build configuration list for PBXNativeTarget "FOCollections-DemoUITests" */;
-			buildPhases = (
-				4C7AEC1E1BF5027A001A2636 /* Sources */,
-				4C7AEC1F1BF5027A001A2636 /* Frameworks */,
-				4C7AEC201BF5027A001A2636 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4C7AEC241BF5027A001A2636 /* PBXTargetDependency */,
-			);
-			name = "FOCollections-DemoUITests";
-			productName = "FOCollections-DemoUITests";
-			productReference = 4C7AEC221BF5027A001A2636 /* FOCollections-DemoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -309,17 +213,9 @@
 					4C7AEC021BF5027A001A2636 = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
-					4C7AEC161BF5027A001A2636 = {
-						CreatedOnToolsVersion = 7.1.1;
-						TestTargetID = 4C7AEC021BF5027A001A2636;
-					};
-					4C7AEC211BF5027A001A2636 = {
-						CreatedOnToolsVersion = 7.1.1;
-						TestTargetID = 4C7AEC021BF5027A001A2636;
-					};
 				};
 			};
-			buildConfigurationList = 4C7AEBFE1BF5027A001A2636 /* Build configuration list for PBXProject "FOCollections-Demo" */;
+			buildConfigurationList = 4C7AEBFE1BF5027A001A2636 /* Build configuration list for PBXProject "FOCollections" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -332,9 +228,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4C7AEC021BF5027A001A2636 /* FOCollections-Demo */,
-				4C7AEC161BF5027A001A2636 /* FOCollections-DemoTests */,
-				4C7AEC211BF5027A001A2636 /* FOCollections-DemoUITests */,
+				4C7AEC021BF5027A001A2636 /* FOCollections */,
 			);
 		};
 /* End PBXProject section */
@@ -347,20 +241,6 @@
 				4C7AEC111BF5027A001A2636 /* LaunchScreen.storyboard in Resources */,
 				4C7AEC0E1BF5027A001A2636 /* Assets.xcassets in Resources */,
 				4C7AEC0C1BF5027A001A2636 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4C7AEC151BF5027A001A2636 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4C7AEC201BF5027A001A2636 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,36 +279,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4C7AEC131BF5027A001A2636 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4C7AEC1C1BF5027A001A2636 /* FOCollections_DemoTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4C7AEC1E1BF5027A001A2636 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4C7AEC271BF5027A001A2636 /* FOCollections_DemoUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		4C7AEC191BF5027A001A2636 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4C7AEC021BF5027A001A2636 /* FOCollections-Demo */;
-			targetProxy = 4C7AEC181BF5027A001A2636 /* PBXContainerItemProxy */;
-		};
-		4C7AEC241BF5027A001A2636 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4C7AEC021BF5027A001A2636 /* FOCollections-Demo */;
-			targetProxy = 4C7AEC231BF5027A001A2636 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4C7AEC0A1BF5027A001A2636 /* Main.storyboard */ = {
@@ -544,7 +395,7 @@
 				INFOPLIST_FILE = "FOCollections-Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "FO.FOCollections-Demo";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FOCollections;
 			};
 			name = Debug;
 		};
@@ -559,62 +410,14 @@
 				INFOPLIST_FILE = "FOCollections-Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "FO.FOCollections-Demo";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		4C7AEC2F1BF5027A001A2636 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "FOCollections-DemoTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "FO.FOCollections-DemoTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FOCollections-Demo.app/FOCollections-Demo";
-			};
-			name = Debug;
-		};
-		4C7AEC301BF5027A001A2636 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "FOCollections-DemoTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "FO.FOCollections-DemoTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FOCollections-Demo.app/FOCollections-Demo";
-			};
-			name = Release;
-		};
-		4C7AEC321BF5027A001A2636 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "FOCollections-DemoUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "FO.FOCollections-DemoUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "FOCollections-Demo";
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		4C7AEC331BF5027A001A2636 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "FOCollections-DemoUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "FO.FOCollections-DemoUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "FOCollections-Demo";
-				USES_XCTRUNNER = YES;
+				PRODUCT_NAME = FOCollections;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4C7AEBFE1BF5027A001A2636 /* Build configuration list for PBXProject "FOCollections-Demo" */ = {
+		4C7AEBFE1BF5027A001A2636 /* Build configuration list for PBXProject "FOCollections" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4C7AEC291BF5027A001A2636 /* Debug */,
@@ -623,29 +426,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4C7AEC2B1BF5027A001A2636 /* Build configuration list for PBXNativeTarget "FOCollections-Demo" */ = {
+		4C7AEC2B1BF5027A001A2636 /* Build configuration list for PBXNativeTarget "FOCollections" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4C7AEC2C1BF5027A001A2636 /* Debug */,
 				4C7AEC2D1BF5027A001A2636 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4C7AEC2E1BF5027A001A2636 /* Build configuration list for PBXNativeTarget "FOCollections-DemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4C7AEC2F1BF5027A001A2636 /* Debug */,
-				4C7AEC301BF5027A001A2636 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4C7AEC311BF5027A001A2636 /* Build configuration list for PBXNativeTarget "FOCollections-DemoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4C7AEC321BF5027A001A2636 /* Debug */,
-				4C7AEC331BF5027A001A2636 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
