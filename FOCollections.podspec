@@ -4,7 +4,9 @@ Pod::Spec.new do |s|
   s.version      = "0.1"
   s.summary      = "UITableView and UICollectionView controller and data-source classes that make it easy to work with large code bases."
   s.homepage     = "https://github.com/DanielKrofchick/FOCollections.git"
-  s.license      = "MIT"
+  s.license      = { :type => 'MIT', :text => <<-LICENSE
+      LICENSE
+    }
   s.author       = { "Daniel Krofchick" => "krofchick@gmail.com" }
   s.platform     = :ios
   s.platform     = :ios, "8.0"
