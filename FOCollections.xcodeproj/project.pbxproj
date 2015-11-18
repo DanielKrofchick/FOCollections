@@ -393,6 +393,7 @@
 					"$(PROJECT_DIR)/FOCollections-Demo",
 				);
 				INFOPLIST_FILE = "FOCollections-Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "FO.FOCollections-Demo";
 				PRODUCT_NAME = FOCollections;
@@ -408,6 +409,7 @@
 					"$(PROJECT_DIR)/FOCollections-Demo",
 				);
 				INFOPLIST_FILE = "FOCollections-Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "FO.FOCollections-Demo";
 				PRODUCT_NAME = FOCollections;

@@ -8,7 +8,7 @@
         <!--Collection View Controller-->
         <scene sceneID="Iq2-Pi-55W">
             <objects>
-                <collectionViewController id="8Yx-Si-iT0" customClass="CollectionViewController" customModule="FOCollections_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="8Yx-Si-iT0" customClass="CollectionViewController" customModule="FOCollections" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="RiL-iQ-hZJ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,7 +45,7 @@
         <!--Table View Controller-->
         <scene sceneID="b0v-Vb-RsT">
             <objects>
-                <tableViewController id="JhV-pT-mIA" customClass="TableViewController" customModule="FOCollections_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="JhV-pT-mIA" customClass="TableViewController" customModule="FOCollections" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="loL-Pq-tBr">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -56,7 +56,7 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Odz-5u-uXP" id="y7r-Dg-NX7">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>

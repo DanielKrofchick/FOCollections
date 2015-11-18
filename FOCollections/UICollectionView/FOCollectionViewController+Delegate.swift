@@ -93,6 +93,7 @@ extension FOCollectionViewController  {
     }
     **/
 
+    @available(iOS 9.0, *)
     override public func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         if let value = configurator(indexPath)?.collectionView?(collectionView, canFocusItemAtIndexPath: indexPath) {
             return value

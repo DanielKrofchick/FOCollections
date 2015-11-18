@@ -222,6 +222,7 @@ extension FOTableViewController {
         configurator(indexPath)?.tableView?(tableView, performAction: action, forRowAtIndexPath: indexPath, withSender: sender)
     }
     
+    @available(iOS 9.0, *)
     override public func tableView(tableView: UITableView, canFocusRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         if let value = configurator(indexPath)?.tableView?(tableView, canFocusRowAtIndexPath: indexPath) {
             return value
