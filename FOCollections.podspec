@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/DanielKrofchick/FOCollections.git", :tag => "0.1" }
-  s.source_files = "FOCollections/**/*.swift"
+  s.source_files = "./**/*.swift"
 
 end
