@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C7AEC021BF5027A001A2636"
-               BuildableName = "FOCollections.app"
-               BlueprintName = "FOCollectionsDemo"
+               BlueprintIdentifier = "4C49214E1BFD3FEB001511AC"
+               BuildableName = "FOCollections.framework"
+               BlueprintName = "FOCollections"
                ReferencedContainer = "container:FOCollections.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,36 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C4921571BFD3FEB001511AC"
-               BuildableName = "FOCollectionsTests.xctest"
-               BlueprintName = "FOCollectionsTests"
-               ReferencedContainer = "container:FOCollections.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C7AEC211BF5027A001A2636"
-               BuildableName = "FOCollections.xctest"
-               BlueprintName = "FOCollectionsUITests"
-               ReferencedContainer = "container:FOCollections.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4C7AEC021BF5027A001A2636"
-            BuildableName = "FOCollections.app"
-            BlueprintName = "FOCollectionsDemo"
-            ReferencedContainer = "container:FOCollections.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -71,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4C7AEC021BF5027A001A2636"
-            BuildableName = "FOCollections.app"
-            BlueprintName = "FOCollectionsDemo"
+            BlueprintIdentifier = "4C49214E1BFD3FEB001511AC"
+            BuildableName = "FOCollections.framework"
+            BlueprintName = "FOCollections"
             ReferencedContainer = "container:FOCollections.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -90,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4C7AEC021BF5027A001A2636"
-            BuildableName = "FOCollections.app"
-            BlueprintName = "FOCollectionsDemo"
+            BlueprintIdentifier = "4C49214E1BFD3FEB001511AC"
+            BuildableName = "FOCollections.framework"
+            BlueprintName = "FOCollections"
             ReferencedContainer = "container:FOCollections.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
