@@ -1,0 +1,208 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "FOTableItem"
+provides-nominal:
+- "C13FOCollections11FOTableItem"
+provides-member:
+- ["C13FOCollections11FOTableItem", ""]
+provides-dynamic-lookup:
+- "data"
+- "isEqual"
+- "reuseIdentifier"
+- "section"
+- "configurator"
+- "link"
+- "identifier"
+- "cellClass"
+depends-top-level:
+- "FOTableItem"
+- !private "BooleanLiteralType"
+- !private "FOCollectionItem"
+- "UIViewController"
+- "String"
+- "FOTableConfigurator"
+- "AnyClass"
+- !private "!="
+- "NSObject"
+- !private "&&"
+- !private "=="
+- "Bool"
+- "AnyObject"
+- "FOTableSection"
+depends-member:
+- ["PSs9AnyObject", "cellClass"]
+- ["PSs9AnyObject", "configurator"]
+- ["PSs9AnyObject", "data"]
+- !private ["PSs9AnyObject", "deinit"]
+- ["PSs9AnyObject", "identifier"]
+- ["PSs9AnyObject", "init"]
+- ["PSs9AnyObject", "isEqual"]
+- !private ["PSs9AnyObject", "item"]
+- ["PSs9AnyObject", "link"]
+- ["PSs9AnyObject", "reuseIdentifier"]
+- ["PSs9AnyObject", "section"]
+- !private ["PSs9AnyObject", "viewController"]
+- ["PSs9AnyObject", ""]
+- !private ["Sb", "_getBuiltinLogicValue"]
+- !private ["PSs25BooleanLiteralConvertible", "_getBuiltinLogicValue"]
+- !private ["PSs11BooleanType", "_getBuiltinLogicValue"]
+- ["PSs11CVarArgType", "cellClass"]
+- ["PSs11CVarArgType", "configurator"]
+- ["PSs11CVarArgType", "data"]
+- ["PSs11CVarArgType", "identifier"]
+- ["PSs11CVarArgType", "init"]
+- ["PSs11CVarArgType", "isEqual"]
+- !private ["PSs11CVarArgType", "item"]
+- ["PSs11CVarArgType", "link"]
+- ["PSs11CVarArgType", "reuseIdentifier"]
+- ["PSs11CVarArgType", "section"]
+- !private ["PSs11CVarArgType", "viewController"]
+- ["PSs11CVarArgType", ""]
+- ["PSs28CustomDebugStringConvertible", "Some"]
+- !private ["PSs23CustomStringConvertible", "_getBuiltinLogicValue"]
+- ["PSs23CustomStringConvertible", "cellClass"]
+- ["PSs23CustomStringConvertible", "configurator"]
+- ["PSs23CustomStringConvertible", "data"]
+- ["PSs23CustomStringConvertible", "identifier"]
+- ["PSs23CustomStringConvertible", "init"]
+- ["PSs23CustomStringConvertible", "isEqual"]
+- !private ["PSs23CustomStringConvertible", "item"]
+- ["PSs23CustomStringConvertible", "link"]
+- ["PSs23CustomStringConvertible", "reuseIdentifier"]
+- ["PSs23CustomStringConvertible", "section"]
+- !private ["PSs23CustomStringConvertible", "viewController"]
+- ["PSs23CustomStringConvertible", ""]
+- !private ["PSs9Equatable", "_getBuiltinLogicValue"]
+- ["PSs9Equatable", "cellClass"]
+- ["PSs9Equatable", "configurator"]
+- ["PSs9Equatable", "data"]
+- ["PSs9Equatable", "identifier"]
+- ["PSs9Equatable", "init"]
+- ["PSs9Equatable", "isEqual"]
+- !private ["PSs9Equatable", "item"]
+- ["PSs9Equatable", "link"]
+- ["PSs9Equatable", "reuseIdentifier"]
+- ["PSs9Equatable", "section"]
+- !private ["PSs9Equatable", "viewController"]
+- ["PSs9Equatable", ""]
+- !private ["C13FOCollections16FOCollectionItem", "data"]
+- !private ["C13FOCollections16FOCollectionItem", "identifier"]
+- !private ["C13FOCollections19FOTableConfigurator", "deinit"]
+- !private ["C13FOCollections19FOTableConfigurator", "item"]
+- !private ["C13FOCollections19FOTableConfigurator", "viewController"]
+- !private ["P13FOCollections27FOTableConfiguratorProtocol", "item"]
+- !private ["P13FOCollections27FOTableConfiguratorProtocol", "viewController"]
+- ["C13FOCollections11FOTableItem", "AnyClass"]
+- ["C13FOCollections11FOTableItem", "AnyObject"]
+- ["C13FOCollections11FOTableItem", "Bool"]
+- !private ["C13FOCollections11FOTableItem", "FOCollectionItem"]
+- ["C13FOCollections11FOTableItem", "FOTableConfigurator"]
+- ["C13FOCollections11FOTableItem", "FOTableSection"]
+- ["C13FOCollections11FOTableItem", "String"]
+- ["C13FOCollections11FOTableItem", "UIViewController"]
+- ["C13FOCollections11FOTableItem", "cellClass"]
+- ["C13FOCollections11FOTableItem", "configurator"]
+- ["C13FOCollections11FOTableItem", "data"]
+- ["C13FOCollections11FOTableItem", "deinit"]
+- ["C13FOCollections11FOTableItem", "identifier"]
+- ["C13FOCollections11FOTableItem", "init"]
+- ["C13FOCollections11FOTableItem", "isEqual"]
+- ["C13FOCollections11FOTableItem", "link"]
+- ["C13FOCollections11FOTableItem", "reuseIdentifier"]
+- ["C13FOCollections11FOTableItem", "section"]
+- !private ["PSs8Hashable", "_getBuiltinLogicValue"]
+- ["PSs8Hashable", "cellClass"]
+- ["PSs8Hashable", "configurator"]
+- ["PSs8Hashable", "data"]
+- ["PSs8Hashable", "identifier"]
+- ["PSs8Hashable", "init"]
+- ["PSs8Hashable", "isEqual"]
+- !private ["PSs8Hashable", "item"]
+- ["PSs8Hashable", "link"]
+- ["PSs8Hashable", "reuseIdentifier"]
+- ["PSs8Hashable", "section"]
+- !private ["PSs8Hashable", "viewController"]
+- ["PSs8Hashable", ""]
+- ["CSo8NSObject", "AnyClass"]
+- ["CSo8NSObject", "AnyObject"]
+- ["CSo8NSObject", "Bool"]
+- !private ["CSo8NSObject", "FOCollectionItem"]
+- ["CSo8NSObject", "FOTableConfigurator"]
+- ["CSo8NSObject", "FOTableSection"]
+- ["CSo8NSObject", "String"]
+- ["CSo8NSObject", "UIViewController"]
+- ["CSo8NSObject", "cellClass"]
+- ["CSo8NSObject", "configurator"]
+- ["CSo8NSObject", "data"]
+- ["CSo8NSObject", "identifier"]
+- ["CSo8NSObject", "init"]
+- ["CSo8NSObject", "isEqual"]
+- !private ["CSo8NSObject", "item"]
+- ["CSo8NSObject", "link"]
+- ["CSo8NSObject", "reuseIdentifier"]
+- ["CSo8NSObject", "section"]
+- !private ["CSo8NSObject", "viewController"]
+- ["CSo8NSObject", ""]
+- ["PSo16NSObjectProtocol", "cellClass"]
+- ["PSo16NSObjectProtocol", "configurator"]
+- ["PSo16NSObjectProtocol", "data"]
+- ["PSo16NSObjectProtocol", "identifier"]
+- ["PSo16NSObjectProtocol", "init"]
+- ["PSo16NSObjectProtocol", "isEqual"]
+- !private ["PSo16NSObjectProtocol", "item"]
+- ["PSo16NSObjectProtocol", "link"]
+- ["PSo16NSObjectProtocol", "reuseIdentifier"]
+- ["PSo16NSObjectProtocol", "section"]
+- !private ["PSo16NSObjectProtocol", "viewController"]
+- ["PSo16NSObjectProtocol", ""]
+- ["PSs21NilLiteralConvertible", "Some"]
+- ["Sq", "Some"]
+- !private ["Sq", "deinit"]
+- !private ["PSo20UIScrollViewDelegate", "item"]
+- !private ["PSo20UIScrollViewDelegate", "viewController"]
+- !private ["PSo21UITableViewDataSource", "item"]
+- !private ["PSo21UITableViewDataSource", "viewController"]
+- !private ["PSo19UITableViewDelegate", "item"]
+- !private ["PSo19UITableViewDelegate", "viewController"]
+- !private ["PSs33_BuiltinBooleanLiteralConvertible", "_getBuiltinLogicValue"]
+- !private ["PSs21_ObjectiveCBridgeable", "_getBuiltinLogicValue"]
+- ["PSs12_Reflectable", "Some"]
+- !private ["PSs12_Reflectable", "_getBuiltinLogicValue"]
+depends-nominal:
+- "PSs9AnyObject"
+- !private "Sb"
+- !private "PSs25BooleanLiteralConvertible"
+- !private "PSs11BooleanType"
+- "PSs11CVarArgType"
+- "PSs28CustomDebugStringConvertible"
+- "PSs23CustomStringConvertible"
+- "PSs9Equatable"
+- !private "C13FOCollections16FOCollectionItem"
+- !private "C13FOCollections19FOTableConfigurator"
+- !private "P13FOCollections27FOTableConfiguratorProtocol"
+- "C13FOCollections11FOTableItem"
+- "PSs8Hashable"
+- "CSo8NSObject"
+- "PSo16NSObjectProtocol"
+- "PSs21NilLiteralConvertible"
+- "Sq"
+- !private "PSo20UIScrollViewDelegate"
+- !private "PSo21UITableViewDataSource"
+- !private "PSo19UITableViewDelegate"
+- !private "PSs33_BuiltinBooleanLiteralConvertible"
+- !private "PSs21_ObjectiveCBridgeable"
+- "PSs12_Reflectable"
+depends-dynamic-lookup:
+- !private "isEqual"
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Swift.swiftmodule"
+- "/Users/danielkrofchick/Documents/Figure1/Development/App/FOCollections/FOCollections-Demo/FOCollections/FOCollections.h"
+- "/Users/danielkrofchick/Documents/Figure1/Development/App/FOCollections/FOCollections-Demo/build/FOCollections.build/Debug-iphonesimulator/FOCollections.build/unextended-module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/CoreImage.swiftmodule"
+interface-hash: "5f9dbe0450da9c00d48814a8508e4a80"

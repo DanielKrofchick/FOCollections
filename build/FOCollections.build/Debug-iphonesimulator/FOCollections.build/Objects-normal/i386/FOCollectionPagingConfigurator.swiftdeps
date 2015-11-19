@@ -1,0 +1,286 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "FOCollectionPagingConfigurator"
+provides-nominal:
+- "C13FOCollections30FOCollectionPagingConfigurator"
+provides-member:
+- ["C13FOCollections30FOCollectionPagingConfigurator", ""]
+provides-dynamic-lookup:
+- "collectionView"
+- "configure"
+depends-top-level:
+- "FOCollectionPagingConfigurator"
+- "UICollectionViewCell"
+- "CGSize"
+- "UICollectionViewLayout"
+- "FOCollectionConfigurator"
+- !private "UICollectionViewFlowLayout"
+- !private "-"
+- !private "UICollectionViewDelegateFlowLayout"
+- !private "UIColor"
+- "UICollectionView"
+- "NSIndexPath"
+depends-member:
+- !private ["PSs9AnyObject", "CGSize"]
+- !private ["PSs9AnyObject", "UIColor"]
+- !private ["PSs9AnyObject", "backgroundColor"]
+- ["PSs9AnyObject", "collectionView"]
+- ["PSs9AnyObject", "configure"]
+- !private ["PSs9AnyObject", "contentView"]
+- !private ["PSs9AnyObject", "frame"]
+- ["PSs9AnyObject", "init"]
+- !private ["PSs9AnyObject", "redColor"]
+- !private ["PSs9AnyObject", "section"]
+- !private ["PSs9AnyObject", "viewController"]
+- ["PSs9AnyObject", ""]
+- !private ["V12CoreGraphics7CGFloat", "deinit"]
+- !private ["VSC6CGRect", "size"]
+- !private ["VSC6CGSize", "init"]
+- !private ["VSC6CGSize", "width"]
+- !private ["PSs11CVarArgType", "CGSize"]
+- !private ["PSs11CVarArgType", "UIColor"]
+- !private ["PSs11CVarArgType", "backgroundColor"]
+- ["PSs11CVarArgType", "collectionView"]
+- ["PSs11CVarArgType", "configure"]
+- !private ["PSs11CVarArgType", "contentView"]
+- !private ["PSs11CVarArgType", "frame"]
+- ["PSs11CVarArgType", "init"]
+- !private ["PSs11CVarArgType", "redColor"]
+- !private ["PSs11CVarArgType", "section"]
+- !private ["PSs11CVarArgType", "viewController"]
+- ["PSs11CVarArgType", ""]
+- ["PSs28CustomDebugStringConvertible", "Some"]
+- !private ["PSs23CustomStringConvertible", "CGSize"]
+- !private ["PSs23CustomStringConvertible", "UIColor"]
+- !private ["PSs23CustomStringConvertible", "backgroundColor"]
+- ["PSs23CustomStringConvertible", "collectionView"]
+- ["PSs23CustomStringConvertible", "configure"]
+- !private ["PSs23CustomStringConvertible", "contentView"]
+- !private ["PSs23CustomStringConvertible", "frame"]
+- ["PSs23CustomStringConvertible", "init"]
+- !private ["PSs23CustomStringConvertible", "redColor"]
+- !private ["PSs23CustomStringConvertible", "section"]
+- !private ["PSs23CustomStringConvertible", "viewController"]
+- ["PSs23CustomStringConvertible", ""]
+- !private ["PSs9Equatable", "CGSize"]
+- !private ["PSs9Equatable", "UIColor"]
+- !private ["PSs9Equatable", "backgroundColor"]
+- ["PSs9Equatable", "collectionView"]
+- ["PSs9Equatable", "configure"]
+- !private ["PSs9Equatable", "contentView"]
+- !private ["PSs9Equatable", "frame"]
+- ["PSs9Equatable", "init"]
+- !private ["PSs9Equatable", "left"]
+- !private ["PSs9Equatable", "redColor"]
+- !private ["PSs9Equatable", "right"]
+- !private ["PSs9Equatable", "section"]
+- !private ["PSs9Equatable", "size"]
+- !private ["PSs9Equatable", "viewController"]
+- !private ["PSs9Equatable", "width"]
+- ["PSs9Equatable", ""]
+- ["C13FOCollections24FOCollectionConfigurator", "CGSize"]
+- ["C13FOCollections24FOCollectionConfigurator", "NSIndexPath"]
+- ["C13FOCollections24FOCollectionConfigurator", "UICollectionView"]
+- ["C13FOCollections24FOCollectionConfigurator", "UICollectionViewCell"]
+- !private ["C13FOCollections24FOCollectionConfigurator", "UICollectionViewDelegateFlowLayout"]
+- !private ["C13FOCollections24FOCollectionConfigurator", "UICollectionViewFlowLayout"]
+- ["C13FOCollections24FOCollectionConfigurator", "UICollectionViewLayout"]
+- !private ["C13FOCollections24FOCollectionConfigurator", "UIColor"]
+- ["C13FOCollections24FOCollectionConfigurator", "collectionView"]
+- ["C13FOCollections24FOCollectionConfigurator", "configure"]
+- ["C13FOCollections24FOCollectionConfigurator", "init"]
+- !private ["C13FOCollections24FOCollectionConfigurator", "viewController"]
+- ["C13FOCollections24FOCollectionConfigurator", ""]
+- !private ["P13FOCollections32FOCollectionConfiguratorProtocol", "CGSize"]
+- !private ["P13FOCollections32FOCollectionConfiguratorProtocol", "UIColor"]
+- ["P13FOCollections32FOCollectionConfiguratorProtocol", "collectionView"]
+- ["P13FOCollections32FOCollectionConfiguratorProtocol", "configure"]
+- ["P13FOCollections32FOCollectionConfiguratorProtocol", "init"]
+- !private ["P13FOCollections32FOCollectionConfiguratorProtocol", "viewController"]
+- ["P13FOCollections32FOCollectionConfiguratorProtocol", ""]
+- ["C13FOCollections30FOCollectionPagingConfigurator", "CGSize"]
+- ["C13FOCollections30FOCollectionPagingConfigurator", "NSIndexPath"]
+- ["C13FOCollections30FOCollectionPagingConfigurator", "UICollectionView"]
+- ["C13FOCollections30FOCollectionPagingConfigurator", "UICollectionViewCell"]
+- !private ["C13FOCollections30FOCollectionPagingConfigurator", "UICollectionViewDelegateFlowLayout"]
+- !private ["C13FOCollections30FOCollectionPagingConfigurator", "UICollectionViewFlowLayout"]
+- ["C13FOCollections30FOCollectionPagingConfigurator", "UICollectionViewLayout"]
+- !private ["C13FOCollections30FOCollectionPagingConfigurator", "UIColor"]
+- ["C13FOCollections30FOCollectionPagingConfigurator", "collectionView"]
+- ["C13FOCollections30FOCollectionPagingConfigurator", "configure"]
+- ["C13FOCollections30FOCollectionPagingConfigurator", "deinit"]
+- ["C13FOCollections30FOCollectionPagingConfigurator", "init"]
+- !private ["C13FOCollections30FOCollectionPagingConfigurator", "viewController"]
+- !private ["PSs8Hashable", "CGSize"]
+- !private ["PSs8Hashable", "UIColor"]
+- !private ["PSs8Hashable", "backgroundColor"]
+- ["PSs8Hashable", "collectionView"]
+- ["PSs8Hashable", "configure"]
+- !private ["PSs8Hashable", "contentView"]
+- !private ["PSs8Hashable", "frame"]
+- ["PSs8Hashable", "init"]
+- !private ["PSs8Hashable", "redColor"]
+- !private ["PSs8Hashable", "section"]
+- !private ["PSs8Hashable", "viewController"]
+- ["PSs8Hashable", ""]
+- !private ["PSo8NSCoding", "backgroundColor"]
+- !private ["PSo8NSCoding", "contentView"]
+- !private ["PSo8NSCoding", "frame"]
+- !private ["PSo8NSCoding", "redColor"]
+- !private ["PSo8NSCoding", "section"]
+- !private ["PSo9NSCopying", "redColor"]
+- !private ["PSo9NSCopying", "section"]
+- !private ["CSo11NSIndexPath", "section"]
+- ["CSo8NSObject", "CGSize"]
+- ["CSo8NSObject", "NSIndexPath"]
+- ["CSo8NSObject", "UICollectionView"]
+- ["CSo8NSObject", "UICollectionViewCell"]
+- !private ["CSo8NSObject", "UICollectionViewDelegateFlowLayout"]
+- !private ["CSo8NSObject", "UICollectionViewFlowLayout"]
+- ["CSo8NSObject", "UICollectionViewLayout"]
+- !private ["CSo8NSObject", "UIColor"]
+- !private ["CSo8NSObject", "backgroundColor"]
+- ["CSo8NSObject", "collectionView"]
+- ["CSo8NSObject", "configure"]
+- !private ["CSo8NSObject", "contentView"]
+- !private ["CSo8NSObject", "frame"]
+- ["CSo8NSObject", "init"]
+- !private ["CSo8NSObject", "redColor"]
+- !private ["CSo8NSObject", "section"]
+- !private ["CSo8NSObject", "viewController"]
+- !private ["PSo16NSObjectProtocol", "CGSize"]
+- !private ["PSo16NSObjectProtocol", "UIColor"]
+- !private ["PSo16NSObjectProtocol", "backgroundColor"]
+- ["PSo16NSObjectProtocol", "collectionView"]
+- ["PSo16NSObjectProtocol", "configure"]
+- !private ["PSo16NSObjectProtocol", "contentView"]
+- !private ["PSo16NSObjectProtocol", "frame"]
+- ["PSo16NSObjectProtocol", "init"]
+- !private ["PSo16NSObjectProtocol", "redColor"]
+- !private ["PSo16NSObjectProtocol", "section"]
+- !private ["PSo16NSObjectProtocol", "viewController"]
+- ["PSo16NSObjectProtocol", ""]
+- !private ["PSo14NSSecureCoding", "redColor"]
+- !private ["PSo14NSSecureCoding", "section"]
+- ["PSs21NilLiteralConvertible", "Some"]
+- ["Sq", "Some"]
+- !private ["Sq", "deinit"]
+- !private ["PSo29UIAccessibilityIdentification", "backgroundColor"]
+- !private ["PSo29UIAccessibilityIdentification", "contentView"]
+- !private ["PSo29UIAccessibilityIdentification", "frame"]
+- !private ["PSo12UIAppearance", "backgroundColor"]
+- !private ["PSo12UIAppearance", "contentView"]
+- !private ["PSo12UIAppearance", "frame"]
+- !private ["PSo21UIAppearanceContainer", "backgroundColor"]
+- !private ["PSo21UIAppearanceContainer", "contentView"]
+- !private ["PSo21UIAppearanceContainer", "frame"]
+- !private ["CSo24UICollectionReusableView", "contentView"]
+- !private ["CSo16UICollectionView", "frame"]
+- !private ["CSo20UICollectionViewCell", "contentView"]
+- !private ["PSo24UICollectionViewDelegate", "CGSize"]
+- !private ["PSo24UICollectionViewDelegate", "UIColor"]
+- ["PSo24UICollectionViewDelegate", "collectionView"]
+- ["PSo24UICollectionViewDelegate", "configure"]
+- ["PSo24UICollectionViewDelegate", "init"]
+- !private ["PSo24UICollectionViewDelegate", "viewController"]
+- ["PSo24UICollectionViewDelegate", ""]
+- !private ["PSo34UICollectionViewDelegateFlowLayout", "CGSize"]
+- !private ["PSo34UICollectionViewDelegateFlowLayout", "UIColor"]
+- ["PSo34UICollectionViewDelegateFlowLayout", "collectionView"]
+- ["PSo34UICollectionViewDelegateFlowLayout", "configure"]
+- ["PSo34UICollectionViewDelegateFlowLayout", "init"]
+- !private ["PSo34UICollectionViewDelegateFlowLayout", "viewController"]
+- ["PSo34UICollectionViewDelegateFlowLayout", ""]
+- !private ["CSo22UICollectionViewLayout", "deinit"]
+- !private ["CSo7UIColor", "redColor"]
+- !private ["PSo17UICoordinateSpace", "backgroundColor"]
+- !private ["PSo17UICoordinateSpace", "contentView"]
+- !private ["PSo17UICoordinateSpace", "frame"]
+- !private ["PSo13UIDynamicItem", "backgroundColor"]
+- !private ["PSo13UIDynamicItem", "contentView"]
+- !private ["PSo13UIDynamicItem", "frame"]
+- !private ["VSC12UIEdgeInsets", "left"]
+- !private ["VSC12UIEdgeInsets", "right"]
+- !private ["PSo18UIFocusEnvironment", "backgroundColor"]
+- !private ["PSo18UIFocusEnvironment", "contentView"]
+- !private ["PSo18UIFocusEnvironment", "frame"]
+- !private ["CSo11UIResponder", "backgroundColor"]
+- !private ["CSo11UIResponder", "contentView"]
+- !private ["CSo11UIResponder", "frame"]
+- !private ["CSo12UIScrollView", "frame"]
+- !private ["PSo20UIScrollViewDelegate", "CGSize"]
+- !private ["PSo20UIScrollViewDelegate", "UIColor"]
+- ["PSo20UIScrollViewDelegate", "collectionView"]
+- ["PSo20UIScrollViewDelegate", "configure"]
+- ["PSo20UIScrollViewDelegate", "init"]
+- !private ["PSo20UIScrollViewDelegate", "viewController"]
+- ["PSo20UIScrollViewDelegate", ""]
+- !private ["PSo18UITraitEnvironment", "backgroundColor"]
+- !private ["PSo18UITraitEnvironment", "contentView"]
+- !private ["PSo18UITraitEnvironment", "frame"]
+- !private ["CSo6UIView", "backgroundColor"]
+- !private ["CSo6UIView", "contentView"]
+- !private ["CSo6UIView", "frame"]
+- !private ["PSs24_ColorLiteralConvertible", "redColor"]
+- ["PSs12_Reflectable", "Some"]
+- !private ["PSs12_Reflectable", "backgroundColor"]
+- !private ["PSs12_Reflectable", "contentView"]
+- !private ["PSs12_Reflectable", "frame"]
+- !private ["PSs12_Reflectable", "init"]
+- !private ["PSs12_Reflectable", "size"]
+- !private ["PSs12_Reflectable", "width"]
+depends-nominal:
+- "PSs9AnyObject"
+- !private "V12CoreGraphics7CGFloat"
+- !private "VSC6CGRect"
+- !private "VSC6CGSize"
+- "PSs11CVarArgType"
+- "PSs28CustomDebugStringConvertible"
+- "PSs23CustomStringConvertible"
+- "PSs9Equatable"
+- "C13FOCollections24FOCollectionConfigurator"
+- "P13FOCollections32FOCollectionConfiguratorProtocol"
+- "C13FOCollections30FOCollectionPagingConfigurator"
+- "PSs8Hashable"
+- !private "PSo8NSCoding"
+- !private "PSo9NSCopying"
+- !private "CSo11NSIndexPath"
+- "CSo8NSObject"
+- "PSo16NSObjectProtocol"
+- !private "PSo14NSSecureCoding"
+- "PSs21NilLiteralConvertible"
+- "Sq"
+- !private "PSo29UIAccessibilityIdentification"
+- !private "PSo12UIAppearance"
+- !private "PSo21UIAppearanceContainer"
+- !private "CSo24UICollectionReusableView"
+- !private "CSo16UICollectionView"
+- !private "CSo20UICollectionViewCell"
+- "PSo24UICollectionViewDelegate"
+- "PSo34UICollectionViewDelegateFlowLayout"
+- !private "CSo22UICollectionViewLayout"
+- !private "CSo7UIColor"
+- !private "PSo17UICoordinateSpace"
+- !private "PSo13UIDynamicItem"
+- !private "VSC12UIEdgeInsets"
+- !private "PSo18UIFocusEnvironment"
+- !private "CSo11UIResponder"
+- !private "CSo12UIScrollView"
+- "PSo20UIScrollViewDelegate"
+- !private "PSo18UITraitEnvironment"
+- !private "CSo6UIView"
+- !private "PSs24_ColorLiteralConvertible"
+- "PSs12_Reflectable"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Swift.swiftmodule"
+- "/Users/danielkrofchick/Documents/Figure1/Development/App/FOCollections/FOCollections-Demo/FOCollections/FOCollections.h"
+- "/Users/danielkrofchick/Documents/Figure1/Development/App/FOCollections/FOCollections-Demo/build/FOCollections.build/Debug-iphonesimulator/FOCollections.build/unextended-module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/CoreImage.swiftmodule"
+interface-hash: "5f8ef7c687339570baf0aa1c993421b7"

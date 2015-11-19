@@ -1,0 +1,225 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "FOCompletionOperation"
+provides-nominal:
+- "C13FOCollections21FOCompletionOperation"
+provides-member:
+- ["C13FOCollections21FOCompletionOperation", ""]
+provides-dynamic-lookup:
+- "finished"
+- "finish"
+- "executing"
+- "main"
+depends-top-level:
+- "Void"
+- !private "!="
+- !private "DISPATCH_QUEUE_PRIORITY_DEFAULT"
+- "BooleanLiteralType"
+- "Bool"
+- "dispatch_queue_t"
+- !private "dispatch_get_global_queue"
+- "FOCompletionOperation"
+- !private "dispatch_async"
+- "NSOperation"
+- !private "StringLiteralType"
+depends-member:
+- !private ["PSs9AnyObject", "DISPATCH_QUEUE_PRIORITY_DEFAULT"]
+- ["PSs9AnyObject", "_executing"]
+- ["PSs9AnyObject", "_finished"]
+- !private ["PSs9AnyObject", "cancelled"]
+- !private ["PSs9AnyObject", "didChangeValueForKey"]
+- !private ["PSs9AnyObject", "dispatch_async"]
+- !private ["PSs9AnyObject", "dispatch_get_global_queue"]
+- ["PSs9AnyObject", "executing"]
+- ["PSs9AnyObject", "finish"]
+- ["PSs9AnyObject", "finished"]
+- ["PSs9AnyObject", "init"]
+- ["PSs9AnyObject", "main"]
+- ["PSs9AnyObject", "queue"]
+- !private ["PSs9AnyObject", "willChangeValueForKey"]
+- ["PSs9AnyObject", "work"]
+- ["PSs9AnyObject", ""]
+- !private ["Sb", "_getBuiltinLogicValue"]
+- !private ["Sb", "deinit"]
+- !private ["PSs25BooleanLiteralConvertible", "_getBuiltinLogicValue"]
+- !private ["PSs11BooleanType", "_getBuiltinLogicValue"]
+- !private ["PSs11CVarArgType", "DISPATCH_QUEUE_PRIORITY_DEFAULT"]
+- ["PSs11CVarArgType", "_executing"]
+- ["PSs11CVarArgType", "_finished"]
+- !private ["PSs11CVarArgType", "cancelled"]
+- !private ["PSs11CVarArgType", "didChangeValueForKey"]
+- !private ["PSs11CVarArgType", "dispatch_async"]
+- !private ["PSs11CVarArgType", "dispatch_get_global_queue"]
+- ["PSs11CVarArgType", "executing"]
+- ["PSs11CVarArgType", "finish"]
+- ["PSs11CVarArgType", "finished"]
+- ["PSs11CVarArgType", "init"]
+- ["PSs11CVarArgType", "main"]
+- ["PSs11CVarArgType", "queue"]
+- !private ["PSs11CVarArgType", "willChangeValueForKey"]
+- ["PSs11CVarArgType", "work"]
+- ["PSs11CVarArgType", ""]
+- !private ["PSs23CustomStringConvertible", "DISPATCH_QUEUE_PRIORITY_DEFAULT"]
+- ["PSs23CustomStringConvertible", "_executing"]
+- ["PSs23CustomStringConvertible", "_finished"]
+- !private ["PSs23CustomStringConvertible", "_getBuiltinLogicValue"]
+- !private ["PSs23CustomStringConvertible", "cancelled"]
+- !private ["PSs23CustomStringConvertible", "didChangeValueForKey"]
+- !private ["PSs23CustomStringConvertible", "dispatch_async"]
+- !private ["PSs23CustomStringConvertible", "dispatch_get_global_queue"]
+- ["PSs23CustomStringConvertible", "executing"]
+- ["PSs23CustomStringConvertible", "finish"]
+- ["PSs23CustomStringConvertible", "finished"]
+- ["PSs23CustomStringConvertible", "init"]
+- ["PSs23CustomStringConvertible", "main"]
+- ["PSs23CustomStringConvertible", "queue"]
+- !private ["PSs23CustomStringConvertible", "willChangeValueForKey"]
+- ["PSs23CustomStringConvertible", "work"]
+- ["PSs23CustomStringConvertible", ""]
+- !private ["PSs9Equatable", "DISPATCH_QUEUE_PRIORITY_DEFAULT"]
+- ["PSs9Equatable", "_executing"]
+- ["PSs9Equatable", "_finished"]
+- !private ["PSs9Equatable", "_getBuiltinLogicValue"]
+- !private ["PSs9Equatable", "cancelled"]
+- !private ["PSs9Equatable", "didChangeValueForKey"]
+- !private ["PSs9Equatable", "dispatch_async"]
+- !private ["PSs9Equatable", "dispatch_get_global_queue"]
+- ["PSs9Equatable", "executing"]
+- ["PSs9Equatable", "finish"]
+- ["PSs9Equatable", "finished"]
+- ["PSs9Equatable", "init"]
+- ["PSs9Equatable", "main"]
+- ["PSs9Equatable", "queue"]
+- !private ["PSs9Equatable", "willChangeValueForKey"]
+- ["PSs9Equatable", "work"]
+- ["PSs9Equatable", ""]
+- ["C13FOCollections21FOCompletionOperation", "Bool"]
+- !private ["C13FOCollections21FOCompletionOperation", "DISPATCH_QUEUE_PRIORITY_DEFAULT"]
+- ["C13FOCollections21FOCompletionOperation", "FOCompletionOperation"]
+- ["C13FOCollections21FOCompletionOperation", "Void"]
+- !private ["C13FOCollections21FOCompletionOperation", "_executing"]
+- !private ["C13FOCollections21FOCompletionOperation", "_finished"]
+- !private ["C13FOCollections21FOCompletionOperation", "cancelled"]
+- ["C13FOCollections21FOCompletionOperation", "deinit"]
+- !private ["C13FOCollections21FOCompletionOperation", "didChangeValueForKey"]
+- !private ["C13FOCollections21FOCompletionOperation", "dispatch_async"]
+- !private ["C13FOCollections21FOCompletionOperation", "dispatch_get_global_queue"]
+- ["C13FOCollections21FOCompletionOperation", "dispatch_queue_t"]
+- ["C13FOCollections21FOCompletionOperation", "executing"]
+- ["C13FOCollections21FOCompletionOperation", "finish"]
+- ["C13FOCollections21FOCompletionOperation", "finished"]
+- ["C13FOCollections21FOCompletionOperation", "init"]
+- ["C13FOCollections21FOCompletionOperation", "main"]
+- !private ["C13FOCollections21FOCompletionOperation", "queue"]
+- !private ["C13FOCollections21FOCompletionOperation", "willChangeValueForKey"]
+- !private ["C13FOCollections21FOCompletionOperation", "work"]
+- !private ["PSs8Hashable", "DISPATCH_QUEUE_PRIORITY_DEFAULT"]
+- ["PSs8Hashable", "_executing"]
+- ["PSs8Hashable", "_finished"]
+- !private ["PSs8Hashable", "_getBuiltinLogicValue"]
+- !private ["PSs8Hashable", "cancelled"]
+- !private ["PSs8Hashable", "didChangeValueForKey"]
+- !private ["PSs8Hashable", "dispatch_async"]
+- !private ["PSs8Hashable", "dispatch_get_global_queue"]
+- ["PSs8Hashable", "executing"]
+- ["PSs8Hashable", "finish"]
+- ["PSs8Hashable", "finished"]
+- ["PSs8Hashable", "init"]
+- ["PSs8Hashable", "main"]
+- ["PSs8Hashable", "queue"]
+- !private ["PSs8Hashable", "willChangeValueForKey"]
+- ["PSs8Hashable", "work"]
+- ["PSs8Hashable", ""]
+- !private ["SQ", "deinit"]
+- ["CSo8NSObject", "Bool"]
+- !private ["CSo8NSObject", "DISPATCH_QUEUE_PRIORITY_DEFAULT"]
+- ["CSo8NSObject", "FOCompletionOperation"]
+- ["CSo8NSObject", "Void"]
+- ["CSo8NSObject", "_executing"]
+- ["CSo8NSObject", "_finished"]
+- !private ["CSo8NSObject", "cancelled"]
+- !private ["CSo8NSObject", "didChangeValueForKey"]
+- !private ["CSo8NSObject", "dispatch_async"]
+- !private ["CSo8NSObject", "dispatch_get_global_queue"]
+- ["CSo8NSObject", "dispatch_queue_t"]
+- ["CSo8NSObject", "executing"]
+- ["CSo8NSObject", "finish"]
+- ["CSo8NSObject", "finished"]
+- ["CSo8NSObject", "init"]
+- ["CSo8NSObject", "main"]
+- ["CSo8NSObject", "queue"]
+- !private ["CSo8NSObject", "willChangeValueForKey"]
+- ["CSo8NSObject", "work"]
+- !private ["PSo16NSObjectProtocol", "DISPATCH_QUEUE_PRIORITY_DEFAULT"]
+- ["PSo16NSObjectProtocol", "_executing"]
+- ["PSo16NSObjectProtocol", "_finished"]
+- !private ["PSo16NSObjectProtocol", "cancelled"]
+- !private ["PSo16NSObjectProtocol", "didChangeValueForKey"]
+- !private ["PSo16NSObjectProtocol", "dispatch_async"]
+- !private ["PSo16NSObjectProtocol", "dispatch_get_global_queue"]
+- ["PSo16NSObjectProtocol", "executing"]
+- ["PSo16NSObjectProtocol", "finish"]
+- ["PSo16NSObjectProtocol", "finished"]
+- ["PSo16NSObjectProtocol", "init"]
+- ["PSo16NSObjectProtocol", "main"]
+- ["PSo16NSObjectProtocol", "queue"]
+- !private ["PSo16NSObjectProtocol", "willChangeValueForKey"]
+- ["PSo16NSObjectProtocol", "work"]
+- ["PSo16NSObjectProtocol", ""]
+- ["CSo11NSOperation", "Bool"]
+- !private ["CSo11NSOperation", "DISPATCH_QUEUE_PRIORITY_DEFAULT"]
+- ["CSo11NSOperation", "FOCompletionOperation"]
+- ["CSo11NSOperation", "Void"]
+- ["CSo11NSOperation", "_executing"]
+- ["CSo11NSOperation", "_finished"]
+- !private ["CSo11NSOperation", "cancelled"]
+- !private ["CSo11NSOperation", "didChangeValueForKey"]
+- !private ["CSo11NSOperation", "dispatch_async"]
+- !private ["CSo11NSOperation", "dispatch_get_global_queue"]
+- ["CSo11NSOperation", "dispatch_queue_t"]
+- ["CSo11NSOperation", "executing"]
+- ["CSo11NSOperation", "finish"]
+- ["CSo11NSOperation", "finished"]
+- ["CSo11NSOperation", "init"]
+- ["CSo11NSOperation", "main"]
+- ["CSo11NSOperation", "queue"]
+- !private ["CSo11NSOperation", "willChangeValueForKey"]
+- ["CSo11NSOperation", "work"]
+- ["CSo11NSOperation", ""]
+- !private ["PSo17OS_dispatch_queue", "deinit"]
+- !private ["Sq", "deinit"]
+- !private ["PSs33_BuiltinBooleanLiteralConvertible", "_getBuiltinLogicValue"]
+- !private ["PSs21_ObjectiveCBridgeable", "_getBuiltinLogicValue"]
+- !private ["PSs12_Reflectable", "_getBuiltinLogicValue"]
+depends-nominal:
+- "PSs9AnyObject"
+- !private "Sb"
+- !private "PSs25BooleanLiteralConvertible"
+- !private "PSs11BooleanType"
+- "PSs11CVarArgType"
+- "PSs23CustomStringConvertible"
+- "PSs9Equatable"
+- "C13FOCollections21FOCompletionOperation"
+- "PSs8Hashable"
+- !private "SQ"
+- "CSo8NSObject"
+- "PSo16NSObjectProtocol"
+- "CSo11NSOperation"
+- !private "PSo17OS_dispatch_queue"
+- !private "Sq"
+- !private "PSs33_BuiltinBooleanLiteralConvertible"
+- !private "PSs21_ObjectiveCBridgeable"
+- !private "PSs12_Reflectable"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
+- "/Users/danielkrofchick/Documents/Figure1/Development/App/FOCollections/FOCollections-Demo/FOCollections/FOCollections.h"
+- "/Users/danielkrofchick/Documents/Figure1/Development/App/FOCollections/FOCollections-Demo/build/FOCollections.build/Debug-iphonesimulator/FOCollections.build/unextended-module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
+interface-hash: "b98ba9da714763fcb24b1d48f02d320f"
