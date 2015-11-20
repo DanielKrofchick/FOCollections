@@ -78,6 +78,8 @@
 		D1A8610C1BFFABF700FA6479 /* TableViewCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A8610B1BFFABF700FA6479 /* TableViewCellItem.swift */; };
 		D1A8610E1BFFAEBC00FA6479 /* FOCollectionCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A8610D1BFFAEBC00FA6479 /* FOCollectionCellItem.swift */; };
 		D1A861101BFFAEFE00FA6479 /* FOCollectionSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A8610F1BFFAEFE00FA6479 /* FOCollectionSectionItem.swift */; };
+		D1A861141BFFB3E700FA6479 /* FOCollectionPagingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A861131BFFB3E700FA6479 /* FOCollectionPagingItem.swift */; };
+		D1A861151BFFB45A00FA6479 /* FOCollectionPagingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A861131BFFB3E700FA6479 /* FOCollectionPagingItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +161,7 @@
 		D1A8610B1BFFABF700FA6479 /* TableViewCellItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellItem.swift; sourceTree = "<group>"; };
 		D1A8610D1BFFAEBC00FA6479 /* FOCollectionCellItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionCellItem.swift; sourceTree = "<group>"; };
 		D1A8610F1BFFAEFE00FA6479 /* FOCollectionSectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionSectionItem.swift; sourceTree = "<group>"; };
+		D1A861131BFFB3E700FA6479 /* FOCollectionPagingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCollectionPagingItem.swift; path = FOCollections/UICollectionView/FOCollectionPagingItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +256,7 @@
 				4C75207E1BFA34CA00D01CC1 /* FOCollectionSection.swift */,
 				4C75207F1BFA34CA00D01CC1 /* FOCollectionItem.swift */,
 				4C7520801BFA34CA00D01CC1 /* FOCollectionConfigurator.swift */,
+				D1A861131BFFB3E700FA6479 /* FOCollectionPagingItem.swift */,
 				4C7520811BFA34CA00D01CC1 /* FOCollectionPagingConfigurator.swift */,
 			);
 			name = UICollectionView;
@@ -464,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1A861151BFFB45A00FA6479 /* FOCollectionPagingItem.swift in Sources */,
 				4C4921781BFD401E001511AC /* FOTableViewDataSource+Delegate.swift in Sources */,
 				4C49217C1BFD401E001511AC /* FOTablePagingConfigurator.swift in Sources */,
 				4C4921711BFD401B001511AC /* FOCollectionSection.swift in Sources */,
@@ -513,6 +518,7 @@
 				4C7520761BFA34C500D01CC1 /* FOTableItem.swift in Sources */,
 				4C7AEC3C1BF502AE001A2636 /* FOCollectionConfiguratorFactory.swift in Sources */,
 				4C7520661BFA34BD00D01CC1 /* FOCollectionsGlobal.swift in Sources */,
+				D1A861141BFFB3E700FA6479 /* FOCollectionPagingItem.swift in Sources */,
 				4C7AEC3D1BF502AE001A2636 /* FOTableConfiguratorFactory.swift in Sources */,
 				4C7520871BFA34CA00D01CC1 /* FOCollectionSection.swift in Sources */,
 				4C7520831BFA34CA00D01CC1 /* FOCollectionViewController+Delegate.swift in Sources */,

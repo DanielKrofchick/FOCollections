@@ -206,7 +206,7 @@ public class FOCollectionViewController: UICollectionViewController {
     let pagingItemReuseIdentifier = "pagingItemResuseIdentifier"
     
     public func pagingItemForSection(section: FOCollectionSection) -> FOCollectionItem {
-        let item = FOCollectionItem()
+        let item = FOCollectionPagingItem()
 
         item.data = nil
         item.identifier = "pagingItem-\(section)"
