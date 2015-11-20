@@ -38,7 +38,7 @@ class CollectionViewController: FOCollectionViewController {
     }
     
     func section() -> FOCollectionSection {
-        let section = FOCollectionSection()
+        let section = FOCollectionSectionItem()
         
         section.identifier = NSUUID().UUIDString
         section.pagingState = .NotPaging
@@ -50,7 +50,7 @@ class CollectionViewController: FOCollectionViewController {
     }
     
     func item() -> FOCollectionItem {
-        let item = FOCollectionItem()
+        let item = FOCollectionCellItem()
         
         item.data = UIColor.greenColor()
         item.identifier = NSUUID().UUIDString

@@ -15,7 +15,7 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
         
         if key != nil && cellSizeCache[key!] != nil {
             return cellSizeCache[key!]!
-        } else if let value = configurator(indexPath)?.collectionView?(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: indexPath) {
+        } else if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: indexPath) {
             if key != nil {
                 cellSizeCache[key!] = value
             }
@@ -27,7 +27,7 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        if let value = configuratorForSection(section)?.collectionView?(collectionView, layout: collectionViewLayout, insetForSectionAtIndex: section) {
+        if let value = delegateWithSectionIndex(section)?.collectionView?(collectionView, layout: collectionViewLayout, insetForSectionAtIndex: section) {
             return value
         } else {
             return UIEdgeInsetsZero
@@ -35,7 +35,7 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        if let value = configuratorForSection(section)?.collectionView?(collectionView, layout: collectionViewLayout, minimumLineSpacingForSectionAtIndex: section) {
+        if let value = delegateWithSectionIndex(section)?.collectionView?(collectionView, layout: collectionViewLayout, minimumLineSpacingForSectionAtIndex: section) {
             return value
         } else {
             return 0
@@ -43,7 +43,7 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        if let value = configuratorForSection(section)?.collectionView?(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAtIndex: section) {
+        if let value = delegateWithSectionIndex(section)?.collectionView?(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAtIndex: section) {
             return value
         } else {
             return 0
@@ -51,7 +51,7 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if let value = configuratorForSection(section)?.collectionView?(collectionView, layout: collectionViewLayout, referenceSizeForHeaderInSection: section) {
+        if let value = delegateWithSectionIndex(section)?.collectionView?(collectionView, layout: collectionViewLayout, referenceSizeForHeaderInSection: section) {
             return value
         } else {
             return CGSizeZero
@@ -59,7 +59,7 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        if let value = configuratorForSection(section)?.collectionView?(collectionView, layout: collectionViewLayout, referenceSizeForFooterInSection: section) {
+        if let value = delegateWithSectionIndex(section)?.collectionView?(collectionView, layout: collectionViewLayout, referenceSizeForFooterInSection: section) {
             return value
         } else {
             return CGSizeZero
@@ -87,4 +87,11 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
         return cell
     }
     
+    private func delegateWithIndexPath(indexPath: NSIndexPath) -> UICollectionViewDelegateFlowLayout? {
+        return dataSource.itemAtIndexPath(indexPath) as? UICollectionViewDelegateFlowLayout
+    }
+    
+    private func delegateWithSectionIndex(index: Int) -> UICollectionViewDelegateFlowLayout? {
+        return dataSource.sectionAtIndex(index) as? UICollectionViewDelegateFlowLayout
+    }
 }

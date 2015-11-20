@@ -75,6 +75,9 @@
 		4C7AEC3B1BF502AE001A2636 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC361BF502AD001A2636 /* TableViewController.swift */; };
 		4C7AEC3C1BF502AE001A2636 /* FOCollectionConfiguratorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC371BF502AD001A2636 /* FOCollectionConfiguratorFactory.swift */; };
 		4C7AEC3D1BF502AE001A2636 /* FOTableConfiguratorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AEC381BF502AD001A2636 /* FOTableConfiguratorFactory.swift */; };
+		D1A8610C1BFFABF700FA6479 /* TableViewCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A8610B1BFFABF700FA6479 /* TableViewCellItem.swift */; };
+		D1A8610E1BFFAEBC00FA6479 /* FOCollectionCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A8610D1BFFAEBC00FA6479 /* FOCollectionCellItem.swift */; };
+		D1A861101BFFAEFE00FA6479 /* FOCollectionSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A8610F1BFFAEFE00FA6479 /* FOCollectionSectionItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +156,9 @@
 		4C7AEC361BF502AD001A2636 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		4C7AEC371BF502AD001A2636 /* FOCollectionConfiguratorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionConfiguratorFactory.swift; sourceTree = "<group>"; };
 		4C7AEC381BF502AD001A2636 /* FOTableConfiguratorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOTableConfiguratorFactory.swift; sourceTree = "<group>"; };
+		D1A8610B1BFFABF700FA6479 /* TableViewCellItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellItem.swift; sourceTree = "<group>"; };
+		D1A8610D1BFFAEBC00FA6479 /* FOCollectionCellItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionCellItem.swift; sourceTree = "<group>"; };
+		D1A8610F1BFFAEFE00FA6479 /* FOCollectionSectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionSectionItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,10 +287,13 @@
 				4C7AEC361BF502AD001A2636 /* TableViewController.swift */,
 				4C7AEC371BF502AD001A2636 /* FOCollectionConfiguratorFactory.swift */,
 				4C7AEC381BF502AD001A2636 /* FOTableConfiguratorFactory.swift */,
+				D1A8610B1BFFABF700FA6479 /* TableViewCellItem.swift */,
 				4C7AEC0A1BF5027A001A2636 /* Main.storyboard */,
 				4C7AEC0D1BF5027A001A2636 /* Assets.xcassets */,
 				4C7AEC0F1BF5027A001A2636 /* LaunchScreen.storyboard */,
 				4C7AEC121BF5027A001A2636 /* Info.plist */,
+				D1A8610D1BFFAEBC00FA6479 /* FOCollectionCellItem.swift */,
+				D1A8610F1BFFAEFE00FA6479 /* FOCollectionSectionItem.swift */,
 			);
 			name = Demo;
 			path = "FOCollections-Demo";
@@ -498,6 +507,7 @@
 				4C7520861BFA34CA00D01CC1 /* FOCollectionViewDataSource+Delegate.swift in Sources */,
 				4C7AEC071BF5027A001A2636 /* AppDelegate.swift in Sources */,
 				4C7520771BFA34C500D01CC1 /* FOTableConfigurator.swift in Sources */,
+				D1A8610C1BFFABF700FA6479 /* TableViewCellItem.swift in Sources */,
 				4C7520711BFA34C500D01CC1 /* FOTableViewController.swift in Sources */,
 				4C75208A1BFA34CA00D01CC1 /* FOCollectionPagingConfigurator.swift in Sources */,
 				4C7520761BFA34C500D01CC1 /* FOTableItem.swift in Sources */,
@@ -510,6 +520,8 @@
 				4C7520731BFA34C500D01CC1 /* FOTableViewDataSource.swift in Sources */,
 				4C7520821BFA34CA00D01CC1 /* FOCollectionViewController.swift in Sources */,
 				4C7520721BFA34C500D01CC1 /* FOTableViewController+Delegate.swift in Sources */,
+				D1A861101BFFAEFE00FA6479 /* FOCollectionSectionItem.swift in Sources */,
+				D1A8610E1BFFAEBC00FA6479 /* FOCollectionCellItem.swift in Sources */,
 				4C7520681BFA34BD00D01CC1 /* FOCompletionOperation.swift in Sources */,
 				4C7520671BFA34BD00D01CC1 /* NSArray+Extensions.swift in Sources */,
 				4C7520891BFA34CA00D01CC1 /* FOCollectionConfigurator.swift in Sources */,

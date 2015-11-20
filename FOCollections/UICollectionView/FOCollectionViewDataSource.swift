@@ -113,13 +113,13 @@ public class FOCollectionViewDataSource: NSObject {
     
     // MARK: - Lookup
     
-    func configurator(indexPath: NSIndexPath) -> FOCollectionConfiguratorProtocol? {
-        return itemAtIndexPath(indexPath)?.configurator
-    }
-    
-    func configuratorForSection(section: Int) -> FOCollectionConfiguratorProtocol? {
-        return sectionAtIndex(section)?.configurator
-    }
+//    func configurator(indexPath: NSIndexPath) -> FOCollectionConfiguratorProtocol? {
+//        return itemAtIndexPath(indexPath)?.configurator
+//    }
+//    
+//    func configuratorForSection(section: Int) -> FOCollectionConfiguratorProtocol? {
+//        return sectionAtIndex(section)?.configurator
+//    }
     
     func keyForItemAtIndexPath(indexPath: NSIndexPath) -> String? {
         if let key = keyCache[indexPath] {

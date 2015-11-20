@@ -52,13 +52,13 @@ public class FOCollectionViewController: UICollectionViewController {
     
     // MARK: Utility
     
-    func configurator(indexPath: NSIndexPath) -> FOCollectionConfiguratorProtocol? {
-        return dataSource.configurator(indexPath)
-    }
-
-    func configuratorForSection(section: Int) -> FOCollectionConfiguratorProtocol? {
-        return dataSource.configuratorForSection(section)
-    }
+//    func configurator(indexPath: NSIndexPath) -> FOCollectionConfiguratorProtocol? {
+//        return dataSource.configurator(indexPath)
+//    }
+//
+//    func configuratorForSection(section: Int) -> FOCollectionConfiguratorProtocol? {
+//        return dataSource.configuratorForSection(section)
+//    }
     
     // MARK: Modification
 

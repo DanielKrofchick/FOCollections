@@ -9,16 +9,10 @@
 import Foundation
 import UIKit
 
-class FOTableItemConfigurator: FOTableConfigurator {
-
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 50.0
-    }
-    
+class FOTableItemConfigurator: FOTableConfigurator {    
     override func configure(cell: UITableViewCell, tableView: UITableView, indexPath: NSIndexPath) {
         cell.contentView.backgroundColor = UIColor.blueColor()
     }
-    
 }
 
 class FOTableSectionConfigurator: FOTableConfigurator {

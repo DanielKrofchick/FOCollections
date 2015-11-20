@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FOTableItem: NSObject {
+public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     public var data: AnyObject? = nil                                              // Data cargo
     public var identifier: String? = nil                                           // Unique item ID
@@ -37,4 +37,7 @@ public class FOTableItem: NSObject {
         configurator?.viewController = viewController
     }
     
+    // Dummy protocol definitions. These are not implemented by FOTableItem
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {return 0}
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {return UITableViewCell()}
 }
