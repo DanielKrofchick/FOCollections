@@ -39,15 +39,15 @@ extension FOTableViewDataSource: UITableViewDataSource {
     }
     
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return configuratorForSection(section)?.tableView?(tableView, titleForHeaderInSection: section)
+        return delegateWithSectionIndex(section)?.tableView?(tableView, titleForHeaderInSection: section)
     }
 
     public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return configuratorForSection(section)?.tableView?(tableView, titleForFooterInSection: section)
+        return delegateWithSectionIndex(section)?.tableView?(tableView, titleForFooterInSection: section)
     }
 
     public func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if let value = configurator(indexPath)?.tableView?(tableView, canEditRowAtIndexPath: indexPath) {
+        if let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, canEditRowAtIndexPath: indexPath) {
             return value
         } else {
             return true
@@ -55,7 +55,7 @@ extension FOTableViewDataSource: UITableViewDataSource {
     }
 
     public func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if let value = configurator(indexPath)?.tableView?(tableView, canMoveRowAtIndexPath: indexPath) {
+        if let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, canMoveRowAtIndexPath: indexPath) {
             return value
         } else {
             return false
@@ -71,7 +71,7 @@ extension FOTableViewDataSource: UITableViewDataSource {
     **/
 
     public func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        configurator(indexPath)?.tableView?(tableView, commitEditingStyle: editingStyle, forRowAtIndexPath: indexPath)
+        delegateWithIndexPath(indexPath)?.tableView?(tableView, commitEditingStyle: editingStyle, forRowAtIndexPath: indexPath)
     }
     
     /**
@@ -79,4 +79,12 @@ extension FOTableViewDataSource: UITableViewDataSource {
     }
     **/
     
+     //MARK:- utils
+    private func delegateWithIndexPath(indexPath: NSIndexPath) -> UITableViewDataSource? {
+        return itemAtIndexPath(indexPath) as? UITableViewDataSource
+    }
+    
+    private func delegateWithSectionIndex(sectionIndex: Int) -> UITableViewDataSource? {
+        return sectionAtIndex(sectionIndex) as? UITableViewDataSource
+    }
 }

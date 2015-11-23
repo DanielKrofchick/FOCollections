@@ -50,17 +50,7 @@ public class FOTableViewController: UITableViewController {
         cellSizeCache.removeAll()
         tableView.reloadData()
     }
-    
-    // MARK: Utility
-    
-    func configurator(indexPath: NSIndexPath) -> FOTableConfiguratorProtocol? {
-        return dataSource.configurator(indexPath)
-    }
-    
-    func configuratorForSection(section: Int) -> FOTableConfiguratorProtocol? {
-        return dataSource.configuratorForSection(section)
-    }
-    
+        
     // MARK: Modification
     
     func tableUpdate(updates: (() -> ()), duration: NSTimeInterval, completion: (() -> ())?) {

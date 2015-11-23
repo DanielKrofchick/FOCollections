@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FOCollectionSection: NSObject {
+public class FOCollectionSection: NSObject, UICollectionViewDelegateFlowLayout {
 
     public var items: [FOCollectionItem]? = nil
     public var identifier: String? = nil                                           // Unique item ID

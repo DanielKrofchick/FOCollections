@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FOCollectionConfigurator: NSObject, FOCollectionConfiguratorProtocol {
+public class FOCollectionConfigurator: NSObject {
     
     weak public var item: FOCollectionItem? = nil
     weak public var viewController: UIViewController? = nil
@@ -16,16 +16,4 @@ public class FOCollectionConfigurator: NSObject, FOCollectionConfiguratorProtoco
     public func configure(cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: NSIndexPath){}
     public func getExtras(collectionView: UICollectionView, indexPath: NSIndexPath){}
     public func setExtras(collectionView: UICollectionView, indexPath: NSIndexPath, extras: [NSObject: AnyObject]){}
-    
-}
-
-public protocol FOCollectionConfiguratorProtocol: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    weak var item: FOCollectionItem? {get set}
-    weak var viewController: UIViewController? {get set}
-    
-    func configure(cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: NSIndexPath)
-    func getExtras(collectionView: UICollectionView, indexPath: NSIndexPath)
-    func setExtras(collectionView: UICollectionView, indexPath: NSIndexPath, extras: [NSObject: AnyObject])
-    
 }

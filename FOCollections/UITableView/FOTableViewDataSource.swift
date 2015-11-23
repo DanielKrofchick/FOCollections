@@ -111,16 +111,7 @@ public class FOTableViewDataSource: NSObject {
         }
     }
     
-    // MARK: - Lookup
-    
-    func configurator(indexPath: NSIndexPath) -> FOTableConfiguratorProtocol? {
-        return itemAtIndexPath(indexPath)?.configurator
-    }
-    
-    func configuratorForSection(section: Int) -> FOTableConfiguratorProtocol? {
-        return sectionAtIndex(section)?.configurator
-    }
-    
+    // MARK: - Lookup    
     func keyForItemAtIndexPath(indexPath: NSIndexPath) -> String? {
         if let key = keyCache[indexPath] {
             return key
