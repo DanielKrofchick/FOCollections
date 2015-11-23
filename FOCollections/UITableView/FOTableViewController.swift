@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 public class FOTableViewController: UITableViewController {
 
@@ -205,22 +206,13 @@ public class FOTableViewController: UITableViewController {
         }, completion: nil)
     }
     
-    let pagingItemReuseIdentifier = "pagingItemResuseIdentifier"
     
     public func pagingItemForSection(section: FOTableSection) -> FOTableItem {
-        let item = FOTableItem()
-        
-        item.data = nil
-        item.identifier = "pagingItem-\(section)"
-        item.reuseIdentifier = pagingItemReuseIdentifier
-        item.cellClass = UITableViewCell.self
-        item.configurator = FOTablePagingConfigurator()
-        
-        return item
+        return FOTablePagingItem(section: section)
     }
     
     func pagingItemExistsForSection(section: FOTableSection) -> Bool {
-        return section.items?.filter({$0.reuseIdentifier == pagingItemReuseIdentifier}).first != nil
+        return section.items?.filter({$0.reuseIdentifier == tablePagingItemReuseIdentifier}).first != nil
     }
     
 }

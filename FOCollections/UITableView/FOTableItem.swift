@@ -14,8 +14,12 @@ public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
     public var identifier: String? = nil                                           // Unique item ID
     public var reuseIdentifier: String? = nil                                      // collectionView reuseIdentifier
     public var cellClass: AnyClass? = nil                                          // View Class to register with the collectionView
-    public var configurator: FOTableConfigurator? = nil                            // Configures the cell and perfroms action on controller events
-    public weak var section: FOTableSection?                                       // Weak reference to section
+    weak public var section: FOTableSection?                                       // Weak reference to section
+    weak public var viewController: UIViewController? = nil
+    
+    public func configure(cell: UITableViewCell, tableView: UITableView, indexPath: NSIndexPath){}
+    public func getExtras(tableView: UITableView, indexPath: NSIndexPath){}
+    public func setExtras(tableView: UITableView, indexPath: NSIndexPath, extras: [NSObject: AnyObject]){}
     
     override public func isEqual(o: AnyObject?) -> Bool {
         if let o = o as? FOCollectionItem {
@@ -33,11 +37,11 @@ public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func link(section: FOTableSection?, viewController: UIViewController?) {
         self.section = section
-        configurator?.item = self
-        configurator?.viewController = viewController
+        self.viewController = viewController
     }
     
     // Dummy protocol definitions. These are not implemented by FOTableItem
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {return 0}
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {return UITableViewCell()}
+    
 }

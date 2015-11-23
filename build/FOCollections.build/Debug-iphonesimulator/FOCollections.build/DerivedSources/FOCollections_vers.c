@@ -1,1 +1,0 @@
- const unsigned char FOCollectionsVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:FOCollections  PROJECT:FOCollections-1" "\n"; const double FOCollectionsVersionNumber __attribute__ ((used)) = (double)1.;

@@ -43,22 +43,20 @@ class TableViewController: FOTableViewController {
         
         section.identifier = NSUUID().UUIDString
         section.pagingState = .NotPaging
-        section.configurator = FOTableSectionConfigurator()
-        section.configurator?.item?.section = section
 
         return section
     }
     
     func item() -> FOTableItem {
-        let item = FOTableItem()
+        let item = FOTableCellItem()
         
         item.data = UIColor.greenColor()
         item.identifier = NSUUID().UUIDString
         item.reuseIdentifier = "itemReuseIdentifier"
         item.cellClass = UITableViewCell.self
-        item.configurator = FOTableItemConfigurator()
         
         return item
     }
     
 }
+

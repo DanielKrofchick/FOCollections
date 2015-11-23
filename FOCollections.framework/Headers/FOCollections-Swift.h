@@ -97,47 +97,37 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 @class UICollectionViewCell;
 @class UICollectionView;
 @class NSIndexPath;
-@class FOCollectionItem;
+@class FOCollectionSection;
 @class UIViewController;
 
-SWIFT_CLASS("_TtC13FOCollections24FOCollectionConfigurator")
-@interface FOCollectionConfigurator : NSObject <UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout>
-@property (nonatomic, weak) FOCollectionItem * __nullable item;
-@property (nonatomic, weak) UIViewController * __nullable viewController;
-- (void)configure:(UICollectionViewCell * __nonnull)cell collectionView:(UICollectionView * __nonnull)collectionView indexPath:(NSIndexPath * __nonnull)indexPath;
-- (void)getExtras:(UICollectionView * __nonnull)collectionView indexPath:(NSIndexPath * __nonnull)indexPath;
-- (void)setExtras:(UICollectionView * __nonnull)collectionView indexPath:(NSIndexPath * __nonnull)indexPath extras:(NSDictionary * __nonnull)extras;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class FOCollectionSection;
-
 SWIFT_CLASS("_TtC13FOCollections16FOCollectionItem")
-@interface FOCollectionItem : NSObject
+@interface FOCollectionItem : NSObject <UIScrollViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
 @property (nonatomic, strong) id __nullable data;
 @property (nonatomic, copy) NSString * __nullable identifier;
 @property (nonatomic, copy) NSString * __nullable reuseIdentifier;
 @property (nonatomic) Class __nullable cellClass;
-@property (nonatomic, strong) FOCollectionConfigurator * __nullable configurator;
 @property (nonatomic) NSInteger columns;
 @property (nonatomic, weak) FOCollectionSection * __nullable section;
+@property (nonatomic, weak) UIViewController * __nullable viewController;
+- (void)configure:(UICollectionViewCell * __nonnull)cell collectionView:(UICollectionView * __nonnull)collectionView indexPath:(NSIndexPath * __nonnull)indexPath;
+- (void)getExtras:(UICollectionView * __nonnull)collectionView indexPath:(NSIndexPath * __nonnull)indexPath;
+- (void)setExtras:(UICollectionView * __nonnull)collectionView indexPath:(NSIndexPath * __nonnull)indexPath extras:(NSDictionary * __nonnull)extras;
 - (BOOL)isEqual:(id __nullable)o;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
-SWIFT_CLASS("_TtC13FOCollections30FOCollectionPagingConfigurator")
-@interface FOCollectionPagingConfigurator : FOCollectionConfigurator
+SWIFT_CLASS("_TtC13FOCollections22FOCollectionPagingItem")
+@interface FOCollectionPagingItem : FOCollectionItem
 - (void)configure:(UICollectionViewCell * __nonnull)cell collectionView:(UICollectionView * __nonnull)collectionView indexPath:(NSIndexPath * __nonnull)indexPath;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 SWIFT_CLASS("_TtC13FOCollections19FOCollectionSection")
-@interface FOCollectionSection : NSObject
+@interface FOCollectionSection : NSObject <UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, copy) NSArray<FOCollectionItem *> * __nullable items;
 @property (nonatomic, copy) NSString * __nullable identifier;
-@property (nonatomic, strong) FOCollectionConfigurator * __nullable configurator;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -234,21 +224,19 @@ SWIFT_CLASS("_TtC13FOCollections26FOCollectionViewDataSource")
 @class FOTableItem;
 
 SWIFT_CLASS("_TtC13FOCollections19FOTableConfigurator")
-@interface FOTableConfigurator : NSObject <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+@interface FOTableConfigurator : NSObject
 @property (nonatomic, weak) FOTableItem * __nullable item;
 @property (nonatomic, weak) UIViewController * __nullable viewController;
 - (void)configure:(UITableViewCell * __nonnull)cell tableView:(UITableView * __nonnull)tableView indexPath:(NSIndexPath * __nonnull)indexPath;
 - (void)getExtras:(UITableView * __nonnull)tableView indexPath:(NSIndexPath * __nonnull)indexPath;
 - (void)setExtras:(UITableView * __nonnull)tableView indexPath:(NSIndexPath * __nonnull)indexPath extras:(NSDictionary * __nonnull)extras;
-- (NSInteger)tableView:(UITableView * __nonnull)tableView numberOfRowsInSection:(NSInteger)section;
-- (UITableViewCell * __nonnull)tableView:(UITableView * __nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * __nonnull)indexPath;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class FOTableSection;
 
 SWIFT_CLASS("_TtC13FOCollections11FOTableItem")
-@interface FOTableItem : NSObject
+@interface FOTableItem : NSObject <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) id __nullable data;
 @property (nonatomic, copy) NSString * __nullable identifier;
 @property (nonatomic, copy) NSString * __nullable reuseIdentifier;
@@ -256,6 +244,8 @@ SWIFT_CLASS("_TtC13FOCollections11FOTableItem")
 @property (nonatomic, strong) FOTableConfigurator * __nullable configurator;
 @property (nonatomic, weak) FOTableSection * __nullable section;
 - (BOOL)isEqual:(id __nullable)o;
+- (NSInteger)tableView:(UITableView * __nonnull)tableView numberOfRowsInSection:(NSInteger)section;
+- (UITableViewCell * __nonnull)tableView:(UITableView * __nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * __nonnull)indexPath;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

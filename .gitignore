@@ -3,3 +3,4 @@ FOCollections.xcodeproj/xcuserdata/xiaoma.xcuserdatad/xcschemes/FOCollections 2.
 FOCollections.xcodeproj/xcuserdata/xiaoma.xcuserdatad/xcschemes/FOCollections-Universal.xcscheme
 FOCollections.xcodeproj/xcuserdata/xiaoma.xcuserdatad/xcschemes/FOCollections.xcscheme
 FOCollections.xcodeproj/xcuserdata/xiaoma.xcuserdatad/xcschemes/xcschememanagement.plist
+build/**

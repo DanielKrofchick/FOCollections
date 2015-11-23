@@ -202,23 +202,13 @@ public class FOCollectionViewController: UICollectionViewController {
             }
         }, completion: nil)
     }
-    
-    let pagingItemReuseIdentifier = "pagingItemResuseIdentifier"
-    
-    public func pagingItemForSection(section: FOCollectionSection) -> FOCollectionItem {
-        let item = FOCollectionPagingItem()
-
-        item.data = nil
-        item.identifier = "pagingItem-\(section)"
-        item.reuseIdentifier = pagingItemReuseIdentifier
-        item.cellClass = UICollectionViewCell.self
-        item.configurator = FOCollectionPagingConfigurator()
         
-        return item
+    public func pagingItemForSection(section: FOCollectionSection) -> FOCollectionItem {
+        return FOCollectionPagingItem(section: section)
     }
     
     func pagingItemExistsForSection(section: FOCollectionSection) -> Bool {
-        return section.items?.filter({$0.reuseIdentifier == pagingItemReuseIdentifier}).first != nil
+        return section.items?.filter({$0.reuseIdentifier == collectionPagingItemReuseIdentifier}).first != nil
     }
     
 }

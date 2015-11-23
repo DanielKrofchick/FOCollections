@@ -9,6 +9,7 @@
 import UIKit
 
 class FOCollectionSectionItem: FOCollectionSection {
+
     var edgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     var minimumLineSpacing = CGFloat(5)
     var minimumInteritemSpacing = CGFloat(5)
@@ -24,4 +25,5 @@ class FOCollectionSectionItem: FOCollectionSection {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return minimumInteritemSpacing
     }
+    
 }

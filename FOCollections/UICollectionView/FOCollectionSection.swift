@@ -13,7 +13,6 @@ public class FOCollectionSection: NSObject, UICollectionViewDelegateFlowLayout {
     public var items: [FOCollectionItem]? = nil
     public var identifier: String? = nil                                           // Unique item ID
     public var pagingState: PagingState = .Disabled
-    public var configurator: FOCollectionConfigurator? = nil
     public var columns: Int? = nil
     
     func linkItems(viewController: UIViewController?) {

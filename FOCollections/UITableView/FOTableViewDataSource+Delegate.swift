@@ -20,12 +20,12 @@ extension FOTableViewDataSource: UITableViewDataSource {
         if let item = itemAtIndexPath(indexPath) {
             if let reuseIdentifier = item.reuseIdentifier {
                 cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
-                item.configurator?.configure(cell!, tableView: tableView, indexPath: indexPath)
+                item.configure(cell!, tableView: tableView, indexPath: indexPath)
                 
                 // delay one cycle to allow cell to finish being created
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-                        item.configurator?.getExtras(tableView, indexPath: indexPath)
+                        item.getExtras(tableView, indexPath: indexPath)
                     })
                 })
             }

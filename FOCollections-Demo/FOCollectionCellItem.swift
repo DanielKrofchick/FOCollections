@@ -9,6 +9,11 @@
 import UIKit
 
 class FOCollectionCellItem: FOCollectionItem {
+    
+    override func configure(cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: NSIndexPath) {
+        cell.contentView.backgroundColor = UIColor.blueColor()
+    }
+    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         if let width = widthForCollectionView(collectionView, indexPath: indexPath) {
             return CGSize(width: width, height: width)
@@ -16,6 +21,7 @@ class FOCollectionCellItem: FOCollectionItem {
             return CGSize(width: 50.0, height: 50.0)
         }
     }
+
 }
 
 

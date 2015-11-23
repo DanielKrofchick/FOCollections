@@ -42,8 +42,6 @@ class CollectionViewController: FOCollectionViewController {
         
         section.identifier = NSUUID().UUIDString
         section.pagingState = .NotPaging
-        section.configurator = FOCollectionSectionConfigurator()
-        section.configurator?.item?.section = section
         section.columns = 8
         
         return section
@@ -56,11 +54,9 @@ class CollectionViewController: FOCollectionViewController {
         item.identifier = NSUUID().UUIDString
         item.reuseIdentifier = "itemReuseIdentifier"
         item.cellClass = UICollectionViewCell.self
-        item.configurator = FOCollectionItemConfigurator()
-        //item.columns = Int(arc4random_uniform(2) + 1)
+        item.columns = 1 //Int(arc4random_uniform(2) + 1)
         
         return item
     }
 
 }
-
