@@ -85,53 +85,72 @@ public class FOTableViewController: UITableViewController {
     
     // queued if completion block given
     public func insertSections(sections: [FOTableSection], indexes: NSIndexSet, completion: (() -> ())? = nil) {
+        let work = {
+            self.dataSource.insertSections(sections, atIndexes: indexes, tableView: self.tableView)
+            self.tableView.insertSections(indexes, withRowAnimation: .Fade)
+        }
+        
         if completion != nil {
-            performQueuedBatchUpdates({
-                self.dataSource.insertSections(sections, atIndexes: indexes, tableView: self.tableView)
-                self.tableView.insertSections(indexes, withRowAnimation: .Fade)
-                }, completion: completion)
+            performQueuedBatchUpdates({work()}, completion: completion)
         } else {
-            dataSource.insertSections(sections, atIndexes: indexes, tableView: self.tableView)
-            tableView.insertSections(indexes, withRowAnimation: .Fade)
+            work()
         }
     }
     
     // queued if completion block given
     public func deleteSectionsAtIndexes(indexes: NSIndexSet, completion: (() -> ())? = nil) {
+        let work = {
+            self.dataSource.deleteSectionsAtIndexes(indexes, tableView: self.tableView)
+            self.tableView.deleteSections(indexes, withRowAnimation: .Fade)
+        }
+        
         if completion != nil {
-            performQueuedBatchUpdates({
-                self.dataSource.deleteSectionsAtIndexes(indexes, tableView: self.tableView)
-                self.tableView.deleteSections(indexes, withRowAnimation: .Fade)
-                }, completion: completion)
+            performQueuedBatchUpdates({work()}, completion: completion)
         } else {
-            dataSource.deleteSectionsAtIndexes(indexes, tableView: self.tableView)
-            tableView.deleteSections(indexes, withRowAnimation: .Fade)
+            work()
         }
     }
     
     // queued if completion block given
     public func insertItems(items: [FOTableItem], indexPaths: [NSIndexPath], completion: (() -> ())? = nil) {
+        let work = {
+            self.dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: self.tableView)
+            self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
+        }
+        
         if completion != nil {
-            performQueuedBatchUpdates({
-                self.dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: self.tableView)
-                self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
-                }, completion: completion)
+            performQueuedBatchUpdates({work()}, completion: completion)
         } else {
-            dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: self.tableView)
-            tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
+            work()
         }
     }
     
     // queued if completion block given
     public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], completion: (() -> ())? = nil) {
+        let work = {
+            self.dataSource.deleteItemsAtIndexPaths(indexPaths, tableView: self.tableView)
+            self.tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
+        }
+        
         if completion != nil {
-            performQueuedBatchUpdates({
-                self.dataSource.deleteItemsAtIndexPaths(indexPaths, tableView: self.tableView)
-                self.tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
-                }, completion: completion)
+            performQueuedBatchUpdates({work()}, completion: completion)
         } else {
-            dataSource.deleteItemsAtIndexPaths(indexPaths, tableView: self.tableView)
-            tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
+            work()
+        }
+    }
+    
+    // queued if completion block given
+    public func appendItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, completion: (() -> ())? = nil) {
+        let work = {
+            let location = self.tableView(self.tableView, numberOfRowsInSection: sectionIndex)
+            let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
+            self.insertItems(items, indexPaths: indexPaths)
+        }
+        
+        if completion != nil {
+            performQueuedBatchUpdates({work()}, completion: completion)
+        } else {
+            work()
         }
     }
     

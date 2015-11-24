@@ -33,18 +33,42 @@ public class FOCollectionViewDataSource: NSObject {
         }
     }
     
-    public func insertItems(items: [FOCollectionItem], var atIndexPaths indexPaths: [NSIndexPath], collectionView: UICollectionView, viewController: UIViewController? = nil) {
-        indexPaths.sortInPlace{$0.item > $1.item}
+    public func insertItems(items: [FOCollectionItem], atIndexPaths indexPaths: [NSIndexPath], collectionView: UICollectionView, viewController: UIViewController? = nil) {
+        var paired = FOPairedIndexPath.pairedIndexPaths(items, indexPaths: indexPaths).sort{$0 > $1}
+        var (i, p) = FOPairedIndexPath.unpairedIndexPaths(paired)
         
-        for (index, indexPath) in indexPaths.enumerate() {
-            if let section = sectionAtIndex(indexPath.section), item = items.safe(index) {
-                item.link(section, viewController: viewController)
-                section.items?.insert(item, atIndex: indexPath.row)
-                registerClassesForItems(items, collectionView: collectionView)
-            }
-        }
+        (i, p) = privateInsertItems(i, atIndexPaths: p, collectionView: collectionView, viewController: viewController)
+
+        paired = FOPairedIndexPath.pairedIndexPaths(i, indexPaths: p).sort{$0 < $1}
+        (i, p) = FOPairedIndexPath.unpairedIndexPaths(paired)
+        
+        (i, p) = privateInsertItems(i, atIndexPaths: p, collectionView: collectionView, viewController: viewController)
+        
+        assert(i.count == 0, "unable to insert items \(i) at indexPaths \(p)")
 
         keyCache.removeAll(keepCapacity: true)
+    }
+    
+    private func privateInsertItems(items: [FOCollectionItem], atIndexPaths indexPaths: [NSIndexPath], collectionView: UICollectionView, viewController: UIViewController? = nil) -> ([FOCollectionItem], [NSIndexPath]) {
+        var unsafeItems = [FOCollectionItem]()
+        var unsafeIndexPaths = [NSIndexPath]()
+
+        for (index, indexPath) in indexPaths.enumerate() {
+            if let section = sectionAtIndex(indexPath.section) {
+                if let item = items.safe(index), count = section.items?.count {
+                    if indexPath.row <= count {
+                        item.link(section, viewController: viewController)
+                        section.items?.insert(item, atIndex: indexPath.row)
+                        registerClassesForItems(items, collectionView: collectionView)
+                    } else {
+                        unsafeItems.append(item)
+                        unsafeIndexPaths.append(indexPath)
+                    }
+                }
+            }
+        }
+        
+        return (unsafeItems, unsafeIndexPaths)
     }
 
     public func deleteItemsAtIndexPaths(var indexPaths: [NSIndexPath], collectionView: UICollectionView) {
@@ -58,7 +82,7 @@ public class FOCollectionViewDataSource: NSObject {
         
         keyCache.removeAll(keepCapacity: true)
     }
-    
+        
     private func registerClassesForSections(sections: [FOCollectionSection]?, collectionView: UICollectionView) {
         guard sections != nil
             else {return}

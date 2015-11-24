@@ -68,7 +68,7 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     // MARK: - Utility
         
-    func layoutCellForIndexPath(indexPath: NSIndexPath) -> UICollectionViewCell? {
+    public func layoutCellForIndexPath(indexPath: NSIndexPath) -> UICollectionViewCell? {
         var cell: UICollectionViewCell? = nil
         
         if let item = dataSource.itemAtIndexPath(indexPath) {
