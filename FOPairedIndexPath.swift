@@ -8,17 +8,19 @@
 
 import Foundation
 
-class FOPairedIndexPath: Equatable {
+// Sorts by index path with a paired object.
+
+class FOPairedIndexPath<T: AnyObject>: Equatable {
     
-    let object: FOCollectionItem!
+    let object: T!
     let indexPath: NSIndexPath!
     
-    init(object: FOCollectionItem, indexPath: NSIndexPath) {
+    init(object: T, indexPath: NSIndexPath) {
         self.object = object
         self.indexPath = indexPath
     }
     
-    class func pairedIndexPaths(objects: [FOCollectionItem], indexPaths: [NSIndexPath]) -> [FOPairedIndexPath] {
+    class func pairedIndexPaths(objects: [T], indexPaths: [NSIndexPath]) -> [FOPairedIndexPath<T>] {
         assert(objects.count == indexPaths.count, "attempting to created pairedIndexPaths with \(objects.count) data and \(indexPaths.count) indexPaths")
         
         var result = [FOPairedIndexPath]()
@@ -30,8 +32,8 @@ class FOPairedIndexPath: Equatable {
         return result
     }
     
-    class func unpairedIndexPaths(pairedIndexPaths: [FOPairedIndexPath]) -> ([FOCollectionItem], [NSIndexPath]) {
-        var unpairedObjects = [FOCollectionItem]()
+    class func unpairedIndexPaths(pairedIndexPaths: [FOPairedIndexPath]) -> ([T], [NSIndexPath]) {
+        var unpairedObjects = [T]()
         var unpairedIndexPaths = [NSIndexPath]()
         
         for pairedIndexPath in pairedIndexPaths {
@@ -44,15 +46,15 @@ class FOPairedIndexPath: Equatable {
     
 }
 
-func ==(lhs: FOPairedIndexPath, rhs: FOPairedIndexPath) -> Bool {
+func ==<T>(lhs: FOPairedIndexPath<T>, rhs: FOPairedIndexPath<T>) -> Bool {
     return lhs.indexPath == rhs.indexPath
 }
 
-func <(lhs: FOPairedIndexPath, rhs: FOPairedIndexPath) -> Bool {
+func <<T>(lhs: FOPairedIndexPath<T>, rhs: FOPairedIndexPath<T>) -> Bool {
     return lhs.indexPath < rhs.indexPath
 }
 
-func >(lhs: FOPairedIndexPath, rhs: FOPairedIndexPath) -> Bool {
+func ><T>(lhs: FOPairedIndexPath<T>, rhs: FOPairedIndexPath<T>) -> Bool {
     return lhs.indexPath > rhs.indexPath
 }
 

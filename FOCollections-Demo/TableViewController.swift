@@ -20,11 +20,10 @@ class TableViewController: FOTableViewController {
         insertSections(sections(), indexes: NSIndexSet(index: 0), completion: {print("done2")})
         insertItems([item()], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)], completion: {print("done3")})
         insertItems([item()], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)], completion: {print("done3")})
-        insertItems([item()], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)], completion: {print("done3")})
-        deleteItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)], completion: {print("doneD")})
         deleteItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)], completion: {print("doneD")})
         deleteItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)], completion: {print("doneD")})
         loadSections(sections(), completion: {print("done4")})
+        appendItems([], toSectionAtIndex: <#T##Int#>)
     }
     
     func sections() -> [FOTableSection] {

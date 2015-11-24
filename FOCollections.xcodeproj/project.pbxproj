@@ -24,8 +24,6 @@
 		4C4921521BFD3FEB001511AC /* FOCollections.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4921511BFD3FEB001511AC /* FOCollections.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4C4921591BFD3FEB001511AC /* FOCollections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C49214F1BFD3FEB001511AC /* FOCollections.framework */; };
 		4C4921601BFD3FEB001511AC /* FOCollectionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49215F1BFD3FEB001511AC /* FOCollectionsTests.swift */; };
-		4C4921641BFD3FEB001511AC /* FOCollections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C49214F1BFD3FEB001511AC /* FOCollections.framework */; };
-		4C4921651BFD3FEB001511AC /* FOCollections.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C49214F1BFD3FEB001511AC /* FOCollections.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C49216C1BFD401B001511AC /* FOCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520791BFA34CA00D01CC1 /* FOCollectionViewController.swift */; };
 		4C49216D1BFD401B001511AC /* FOCollectionViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75207A1BFA34CA00D01CC1 /* FOCollectionViewController+Delegate.swift */; };
 		4C49216E1BFD401B001511AC /* FOCollectionViewController+DelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C75207B1BFA34CA00D01CC1 /* FOCollectionViewController+DelegateFlowLayout.swift */; };
@@ -93,28 +91,7 @@
 			remoteGlobalIDString = 4C7AEC021BF5027A001A2636;
 			remoteInfo = FOCollectionsDemo;
 		};
-		4C4921621BFD3FEB001511AC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4C7AEBFB1BF5027A001A2636 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4C49214E1BFD3FEB001511AC;
-			remoteInfo = FOCollections;
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		4C7AEC401BF50326001A2636 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				4C4921651BFD3FEB001511AC /* FOCollections.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4C49214F1BFD3FEB001511AC /* FOCollections.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FOCollections.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,7 +154,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C4921641BFD3FEB001511AC /* FOCollections.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,12 +327,10 @@
 				4C7AEBFF1BF5027A001A2636 /* Sources */,
 				4C7AEC001BF5027A001A2636 /* Frameworks */,
 				4C7AEC011BF5027A001A2636 /* Resources */,
-				4C7AEC401BF50326001A2636 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4C4921631BFD3FEB001511AC /* PBXTargetDependency */,
 			);
 			name = FOCollectionsDemo;
 			productName = "FOCollections-Demo";
@@ -534,11 +508,6 @@
 			isa = PBXTargetDependency;
 			target = 4C7AEC021BF5027A001A2636 /* FOCollectionsDemo */;
 			targetProxy = 4C49215C1BFD3FEB001511AC /* PBXContainerItemProxy */;
-		};
-		4C4921631BFD3FEB001511AC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4C49214E1BFD3FEB001511AC /* FOCollections */;
-			targetProxy = 4C4921621BFD3FEB001511AC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -727,7 +696,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FOCollections-Demo",
@@ -745,7 +713,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FOCollections-Demo",

@@ -84,7 +84,7 @@ public class FOTableViewController: UITableViewController {
     }
     
     // queued if completion block given
-    public func insertSections(sections: [FOTableSection], indexes: NSIndexSet, completion: (() -> ())? = nil) {
+    public func insertSections(sections: [FOTableSection], indexes: NSIndexSet, completion: (() -> ())? = {}) {
         let work = {
             self.dataSource.insertSections(sections, atIndexes: indexes, tableView: self.tableView)
             self.tableView.insertSections(indexes, withRowAnimation: .Fade)
@@ -98,7 +98,7 @@ public class FOTableViewController: UITableViewController {
     }
     
     // queued if completion block given
-    public func deleteSectionsAtIndexes(indexes: NSIndexSet, completion: (() -> ())? = nil) {
+    public func deleteSectionsAtIndexes(indexes: NSIndexSet, completion: (() -> ())? = {}) {
         let work = {
             self.dataSource.deleteSectionsAtIndexes(indexes, tableView: self.tableView)
             self.tableView.deleteSections(indexes, withRowAnimation: .Fade)
@@ -112,7 +112,7 @@ public class FOTableViewController: UITableViewController {
     }
     
     // queued if completion block given
-    public func insertItems(items: [FOTableItem], indexPaths: [NSIndexPath], completion: (() -> ())? = nil) {
+    public func insertItems(items: [FOTableItem], indexPaths: [NSIndexPath], completion: (() -> ())? = {}) {
         let work = {
             self.dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: self.tableView)
             self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
@@ -126,7 +126,7 @@ public class FOTableViewController: UITableViewController {
     }
     
     // queued if completion block given
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], completion: (() -> ())? = nil) {
+    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], completion: (() -> ())? = {}) {
         let work = {
             self.dataSource.deleteItemsAtIndexPaths(indexPaths, tableView: self.tableView)
             self.tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
@@ -140,7 +140,7 @@ public class FOTableViewController: UITableViewController {
     }
     
     // queued if completion block given
-    public func appendItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, completion: (() -> ())? = nil) {
+    public func appendItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, completion: (() -> ())? = {}) {
         let work = {
             let location = self.tableView(self.tableView, numberOfRowsInSection: sectionIndex)
             let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)

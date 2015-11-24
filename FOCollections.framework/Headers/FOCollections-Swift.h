@@ -146,6 +146,7 @@ SWIFT_CLASS("_TtC13FOCollections26FOCollectionViewController")
 - (void)deleteSectionsAtIndexes:(NSIndexSet * __nonnull)indexes completion:(void (^ __nullable)(BOOL))completion;
 - (void)insertItems:(NSArray<FOCollectionItem *> * __nonnull)items indexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths completion:(void (^ __nullable)(BOOL))completion;
 - (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths completion:(void (^ __nullable)(BOOL))completion;
+- (void)appendItems:(NSArray<FOCollectionItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex completion:(void (^ __nullable)(BOOL))completion;
 - (void)loadSections:(NSArray<FOCollectionSection *> * __nonnull)sections completion:(void (^ __nullable)(BOOL))completion;
 - (void)nextPageForSection:(NSInteger)section collectionView:(UICollectionView * __nonnull)collectionView;
 - (FOCollectionItem * __nonnull)pagingItemForSection:(FOCollectionSection * __nonnull)section;
@@ -259,6 +260,7 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
 - (void)deleteSectionsAtIndexes:(NSIndexSet * __nonnull)indexes completion:(void (^ __nullable)(void))completion;
 - (void)insertItems:(NSArray<FOTableItem *> * __nonnull)items indexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths completion:(void (^ __nullable)(void))completion;
 - (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths completion:(void (^ __nullable)(void))completion;
+- (void)appendItems:(NSArray<FOTableItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex completion:(void (^ __nullable)(void))completion;
 - (void)loadSections:(NSArray<FOTableSection *> * __nonnull)sections completion:(void (^ __nullable)(void))completion;
 - (void)nextPageForSection:(NSInteger)section tableView:(UITableView * __nonnull)tableView;
 - (FOTableItem * __nonnull)pagingItemForSection:(FOTableSection * __nonnull)section;
@@ -344,6 +346,10 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewDataSource")
 ///
 /// <ul><li></li></ul>
 - (void)tableView:(UITableView * __nonnull)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath * __nonnull)indexPath;
+@end
+
+
+@interface NSIndexPath (SWIFT_EXTENSION(FOCollections))
 @end
 
 #pragma clang diagnostic pop

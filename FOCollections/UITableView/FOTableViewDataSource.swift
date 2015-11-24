@@ -33,18 +33,49 @@ public class FOTableViewDataSource: NSObject {
         }
     }
     
-    public func insertItems(items: [FOTableItem], var atIndexPaths indexPaths: [NSIndexPath], tableView: UITableView, viewController: UIViewController? = nil) {
-        indexPaths.sortInPlace{$0.item > $1.item}
+    public func insertItems(items: [FOTableItem], atIndexPaths indexPaths: [NSIndexPath], tableView: UITableView, viewController: UIViewController? = nil) {
+        // sort decreasing
+        var paired = FOPairedIndexPath.pairedIndexPaths(items, indexPaths: indexPaths).sort{$0 > $1}
+        var (i, p) = FOPairedIndexPath.unpairedIndexPaths(paired)
+        
+        // insert items within current range, returns out-of-range items
+        (i, p) = privateInsertItems(i, atIndexPaths: p, tableView: tableView, viewController: viewController)
+        
+        // sort increasing
+        paired = FOPairedIndexPath.pairedIndexPaths(i, indexPaths: p).sort{$0 < $1}
+        (i, p) = FOPairedIndexPath.unpairedIndexPaths(paired)
+        
+        // insert again
+        (i, p) = privateInsertItems(i, atIndexPaths: p, tableView: tableView, viewController: viewController)
+        
+        // if items remain throw exception
+        assert(i.count == 0, "unable to insert items \(i) at indexPaths \(p)")
+        
+        keyCache.removeAll(keepCapacity: true)
+    }
+    
+    // Inserts items within current data range. Returns uninserted items.
+    
+    private func privateInsertItems(items: [FOTableItem], atIndexPaths indexPaths: [NSIndexPath], tableView: UITableView, viewController: UIViewController? = nil) -> ([FOTableItem], [NSIndexPath]) {
+        var unsafeItems = [FOTableItem]()
+        var unsafeIndexPaths = [NSIndexPath]()
         
         for (index, indexPath) in indexPaths.enumerate() {
-            if let section = sectionAtIndex(indexPath.section), item = items.safe(index) {
-                item.link(section, viewController: viewController)
-                section.items?.insert(item, atIndex: indexPath.row)
-                registerClassesForItems(items, tableView: tableView)
+            if let section = sectionAtIndex(indexPath.section) {
+                if let item = items.safe(index), count = section.items?.count {
+                    if indexPath.row <= count {
+                        item.link(section, viewController: viewController)
+                        section.items?.insert(item, atIndex: indexPath.row)
+                        registerClassesForItems(items, tableView: tableView)
+                    } else {
+                        unsafeItems.append(item)
+                        unsafeIndexPaths.append(indexPath)
+                    }
+                }
             }
         }
         
-        keyCache.removeAll(keepCapacity: true)
+        return (unsafeItems, unsafeIndexPaths)
     }
     
     public func deleteItemsAtIndexPaths(var indexPaths: [NSIndexPath], tableView: UITableView) {

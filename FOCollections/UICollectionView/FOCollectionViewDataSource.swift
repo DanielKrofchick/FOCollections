@@ -34,21 +34,27 @@ public class FOCollectionViewDataSource: NSObject {
     }
     
     public func insertItems(items: [FOCollectionItem], atIndexPaths indexPaths: [NSIndexPath], collectionView: UICollectionView, viewController: UIViewController? = nil) {
+        // sort decreasing
         var paired = FOPairedIndexPath.pairedIndexPaths(items, indexPaths: indexPaths).sort{$0 > $1}
         var (i, p) = FOPairedIndexPath.unpairedIndexPaths(paired)
         
+        // insert items within current range, returns out-of-range items
         (i, p) = privateInsertItems(i, atIndexPaths: p, collectionView: collectionView, viewController: viewController)
 
+        // sort increasing
         paired = FOPairedIndexPath.pairedIndexPaths(i, indexPaths: p).sort{$0 < $1}
         (i, p) = FOPairedIndexPath.unpairedIndexPaths(paired)
         
+        // insert again
         (i, p) = privateInsertItems(i, atIndexPaths: p, collectionView: collectionView, viewController: viewController)
         
+        // if items remain throw exception
         assert(i.count == 0, "unable to insert items \(i) at indexPaths \(p)")
 
         keyCache.removeAll(keepCapacity: true)
     }
     
+    // Inserts items within current data range. Returns uninserted items.
     private func privateInsertItems(items: [FOCollectionItem], atIndexPaths indexPaths: [NSIndexPath], collectionView: UICollectionView, viewController: UIViewController? = nil) -> ([FOCollectionItem], [NSIndexPath]) {
         var unsafeItems = [FOCollectionItem]()
         var unsafeIndexPaths = [NSIndexPath]()
