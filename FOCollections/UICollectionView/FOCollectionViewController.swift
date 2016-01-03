@@ -85,7 +85,12 @@ public class FOCollectionViewController: UICollectionViewController {
 
     // queued if completion block given
     public func deleteSectionsAtIndexes(indexes: NSIndexSet, completion: ((finished: Bool) -> ())? = {finished in}) {
+        deleteSections({return indexes}, completion: completion)
+    }
+
+    public func deleteSections(indexBlock: (() -> NSIndexSet), completion: ((finished: Bool) -> ())? = {finished in}) {
         let work = {
+            let indexes = indexBlock()
             self.dataSource.deleteSectionsAtIndexes(indexes, collectionView: self.collectionView!)
             self.collectionView?.deleteSections(indexes)
         }
@@ -99,9 +104,15 @@ public class FOCollectionViewController: UICollectionViewController {
     
     // queued if completion block given
     public func insertItems(items: [FOCollectionItem], indexPaths: [NSIndexPath], completion: ((finished: Bool) -> ())? = {finished in}) {
+        insertItems(items, indexPathsBlock: {return indexPaths}, completion: completion)
+    }
+    
+    public func insertItems(items: [FOCollectionItem], indexPathsBlock: (() -> [NSIndexPath]?), completion: ((finished: Bool) -> ())? = {finished in}) {
         let work = {
-            self.dataSource.insertItems(items, atIndexPaths: indexPaths, collectionView: self.collectionView!, viewController: self)
-            self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+            if let indexPaths = indexPathsBlock() {
+                self.dataSource.insertItems(items, atIndexPaths: indexPaths, collectionView: self.collectionView!, viewController: self)
+                self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+            }
         }
         
         if completion != nil {
@@ -111,11 +122,17 @@ public class FOCollectionViewController: UICollectionViewController {
         }
     }
     
-    // queued if completion block given
     public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], completion: ((finished: Bool) -> ())? = {finished in}) {
+        deleteItems({return indexPaths}, completion: completion)
+    }
+    
+    // queued if completion block given
+    public func deleteItems(indexPathsBlock: (() -> [NSIndexPath]?), completion: ((finished: Bool) -> ())? = {finished in}) {
         let work = {
-            self.dataSource.deleteItemsAtIndexPaths(indexPaths, collectionView: self.collectionView!)
-            self.collectionView?.deleteItemsAtIndexPaths(indexPaths)
+            if let indexPaths = indexPathsBlock() {
+                self.dataSource.deleteItemsAtIndexPaths(indexPaths, collectionView: self.collectionView!)
+                self.collectionView?.deleteItemsAtIndexPaths(indexPaths)
+            }
         }
         
         if completion != nil {
@@ -127,29 +144,18 @@ public class FOCollectionViewController: UICollectionViewController {
     
     // queued if completion block given
     public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, completion: ((finished: Bool) -> ())? = {finished in}) {
-        let work = {
+        insertItems(items, indexPathsBlock: {
             if let location = self.collectionView?.numberOfItemsInSection(sectionIndex) {
-                let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
-                self.insertItems(items, indexPaths: indexPaths)
+                return NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
+            } else {
+                return nil
             }
-        }
-        
-        if completion != nil {
-            performQueuedBatchUpdates({work()}, completion: completion)
-        } else {
-            work()
-        }
+        }, completion: completion)
     }
     
     // queued
-    public func loadSections(sections: [FOCollectionSection], completion: ((finished: Bool) -> ())?) {
-        performQueuedBatchUpdates({
-            let deleteIndexes = NSIndexSet(indexesInRange: NSMakeRange(0, self.dataSource.numberOfSectionsInCollectionView(self.collectionView!)))
-            let insertIndexes = NSIndexSet(indexesInRange: NSMakeRange(0, sections.count))
-            
-            self.deleteSectionsAtIndexes(deleteIndexes)
-            self.insertSections(sections, indexes: insertIndexes)
-        }, completion: completion)
+    public func clearAllItems(completion: ((finished: Bool) -> ())?) {
+        deleteSections({return NSIndexSet(indexesInRange: NSMakeRange(0, self.dataSource.numberOfSectionsInCollectionView(self.collectionView!)))}, completion: completion)
     }
     
     // queued
@@ -161,12 +167,12 @@ public class FOCollectionViewController: UICollectionViewController {
                 if pagingState == .Paging && !self.pagingItemExistsForSection(section) {
                     // ADD
                     if let lastIndexPath = self.dataSource.afterLastIndexPathForSectionIndex(0) {
-                        self.insertItems([self.pagingItemForSection(section)], indexPaths: [lastIndexPath])
+                        self.insertItems([self.pagingItemForSection(section)], indexPaths: [lastIndexPath], completion: nil)
                     }
                 } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) && self.pagingItemExistsForSection(section) {
                     // REMOVE
                     if let lastIndexPath = self.dataSource.lastIndexPathForSectionIndex(0) {
-                        self.deleteItemsAtIndexPaths([lastIndexPath])
+                        self.deleteItemsAtIndexPaths([lastIndexPath], completion: nil)
                     }
                 }
             }

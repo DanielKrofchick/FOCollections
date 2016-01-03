@@ -15,11 +15,23 @@ class CollectionViewController: FOCollectionViewController {
         
         collectionView?.backgroundColor = UIColor.orangeColor()
         
-        loadSections(sections(), completion: {finished in print("done1")})
         insertSections(sections(), indexes: NSIndexSet(index: 0), completion: {finished in print("done2")})
-        insertItems([item()], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)], completion: {finished in print("done3")})
-        loadSections(sections(), completion: {finished in print("done4")})
-        appendItems([item(), item(), item()], toSectionAtIndex: 0, completion: {finished in print("done5")})
+//        clearAllItems({finished in print("done1")})
+        insertSections(sections(), indexes: NSIndexSet(index: 0), completion: {finished in print("done2")})
+//        clearAllItems({finished in print("done1")})
+//        insertSections(sections(), indexes: NSIndexSet(index: 0), completion: {finished in print("done2")})
+//        clearAllItems({finished in print("done1")})
+//        insertSections(sections(), indexes: NSIndexSet(index: 0), completion: {finished in print("done2")})
+//        insertSections(sections(), indexes: NSIndexSet(index: 0), completion: {finished in print("done2")})
+//        insertSections(sections(), indexes: NSIndexSet(index: 0), completion: {finished in print("done2")})
+//        insertItems([item()], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)], completion: {finished in print("done3")})
+//        insertItems([item()], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)], completion: {finished in print("done3")})
+//        insertItems([item()], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)], completion: {finished in print("done3")})
+//        insertItems([item()], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)], completion: {finished in print("done3")})
+//        appendItems([item(), item(), item()], toSectionAtIndex: 0, completion: {finished in print("done5")})
+//        appendItems([item(), item(), item()], toSectionAtIndex: 1, completion: {finished in print("done5")})
+//        appendItems([item(), item(), item()], toSectionAtIndex: 0, completion: {finished in print("done5")})
+//        appendItems([item(), item(), item()], toSectionAtIndex: 1, completion: {finished in print("done5")})
     }
     
     func sections() -> [FOCollectionSection] {

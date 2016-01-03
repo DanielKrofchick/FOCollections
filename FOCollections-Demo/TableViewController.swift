@@ -23,7 +23,6 @@ class TableViewController: FOTableViewController {
         deleteItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)], completion: {print("doneD")})
         deleteItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)], completion: {print("doneD")})
         loadSections(sections(), completion: {print("done4")})
-        appendItems([], toSectionAtIndex: <#T##Int#>)
     }
     
     func sections() -> [FOTableSection] {
