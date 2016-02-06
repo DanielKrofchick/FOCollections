@@ -104,12 +104,12 @@ public class FOCollectionViewController: UICollectionViewController {
     
     // queued if completion block given
     public func insertItems(items: [FOCollectionItem], indexPaths: [NSIndexPath], completion: ((finished: Bool) -> ())? = {finished in}) {
-        insertItems(items, indexPathsBlock: {return indexPaths}, completion: completion)
+        insertItems({return items}, indexPathsBlock: {return indexPaths}, completion: completion)
     }
     
-    public func insertItems(items: [FOCollectionItem], indexPathsBlock: (() -> [NSIndexPath]?), completion: ((finished: Bool) -> ())? = {finished in}) {
+    public func insertItems(itemsBlock: (() -> [FOCollectionItem]?), indexPathsBlock: (() -> [NSIndexPath]?), completion: ((finished: Bool) -> ())? = {finished in}) {
         let work = {
-            if let indexPaths = indexPathsBlock() {
+            if let indexPaths = indexPathsBlock(), items = itemsBlock() {
                 self.dataSource.insertItems(items, atIndexPaths: indexPaths, collectionView: self.collectionView!, viewController: self)
                 self.collectionView?.insertItemsAtIndexPaths(indexPaths)
             }
@@ -144,7 +144,7 @@ public class FOCollectionViewController: UICollectionViewController {
     
     // queued if completion block given
     public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, completion: ((finished: Bool) -> ())? = {finished in}) {
-        insertItems(items, indexPathsBlock: {
+        insertItems({return items}, indexPathsBlock: {
             if let location = self.collectionView?.numberOfItemsInSection(sectionIndex) {
                 return NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
             } else {
@@ -162,9 +162,9 @@ public class FOCollectionViewController: UICollectionViewController {
     public func setPagingState(pagingState: PagingState, sectionIndex: Int, completion: ((finished: Bool) -> ())?) {
         performQueuedBatchUpdates({
             if let section = self.dataSource.sectionAtIndex(sectionIndex) {
-                section.pagingState = pagingState
-                
-                if pagingState == .Paging && !self.pagingItemExistsForSection(section) {
+                if section.pagingState == pagingState {
+                    completion
+                } else if pagingState == .Paging && !self.pagingItemExistsForSection(section) {
                     // ADD
                     if let lastIndexPath = self.dataSource.afterLastIndexPathForSectionIndex(0) {
                         self.insertItems([self.pagingItemForSection(section)], indexPaths: [lastIndexPath], completion: nil)
@@ -175,6 +175,8 @@ public class FOCollectionViewController: UICollectionViewController {
                         self.deleteItemsAtIndexPaths([lastIndexPath], completion: nil)
                     }
                 }
+                
+                section.pagingState = pagingState
             }
         }, completion: completion)
     }
