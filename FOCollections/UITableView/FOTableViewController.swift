@@ -54,7 +54,7 @@ public class FOTableViewController: UITableViewController {
         
     // MARK: Modification
     
-    func tableUpdate(updates: (() -> ()), duration: NSTimeInterval, completion: (() -> ())?) {
+    func tableUpdate(update: (() -> ()), duration: NSTimeInterval, completion: (() -> ())?) {
         UIView.beginAnimations("FOTableViewController", context: nil)
         UIView.setAnimationDuration(duration)
         CATransaction.begin()
@@ -62,21 +62,15 @@ public class FOTableViewController: UITableViewController {
             completion?()
         }
         tableView.beginUpdates()
-        updates()
+        update()
         tableView.endUpdates()
         CATransaction.commit()
         UIView.commitAnimations()
     }
 
-    public func performQueuedWork(work: (() -> ())) {
-        queue.addOperation(NSBlockOperation(block: {
-            work()
-        }))
-    }
-    
-    public func performQueuedBatchUpdates(updates: (() -> ()), completion: (() -> ())?) {
+    public func queueUpdate(update: (() -> ()), completion: (() -> ())?) {
         queue.addOperation(FOCompletionOperation(work: { (operation) -> Void in
-            self.tableUpdate(updates, duration: self.updateDuration, completion: { () -> () in
+            self.tableUpdate(update, duration: self.updateDuration, completion: { () -> () in
                 completion?()
                 operation.finish()
             })
@@ -91,9 +85,10 @@ public class FOTableViewController: UITableViewController {
         }
         
         if completion != nil {
-            performQueuedBatchUpdates({work()}, completion: completion)
+            queueUpdate({work()}, completion: completion)
         } else {
             work()
+            completion?()
         }
     }
     
@@ -105,9 +100,10 @@ public class FOTableViewController: UITableViewController {
         }
         
         if completion != nil {
-            performQueuedBatchUpdates({work()}, completion: completion)
+            queueUpdate({work()}, completion: completion)
         } else {
             work()
+            completion?()
         }
     }
     
@@ -119,9 +115,10 @@ public class FOTableViewController: UITableViewController {
         }
         
         if completion != nil {
-            performQueuedBatchUpdates({work()}, completion: completion)
+            queueUpdate({work()}, completion: completion)
         } else {
             work()
+            completion?()
         }
     }
     
@@ -133,9 +130,10 @@ public class FOTableViewController: UITableViewController {
         }
         
         if completion != nil {
-            performQueuedBatchUpdates({work()}, completion: completion)
+            queueUpdate({work()}, completion: completion)
         } else {
             work()
+            completion?()
         }
     }
     
@@ -148,15 +146,16 @@ public class FOTableViewController: UITableViewController {
         }
         
         if completion != nil {
-            performQueuedBatchUpdates({work()}, completion: completion)
+            queueUpdate({work()}, completion: completion)
         } else {
             work()
+            completion?()
         }
     }
     
     // queued
     public func loadSections(sections: [FOTableSection], completion: (() -> ())?) {
-        performQueuedBatchUpdates({
+        queueUpdate({
             let deleteIndexes = NSIndexSet(indexesInRange: NSMakeRange(0, self.dataSource.numberOfSectionsInTableView(self.tableView)))
             let insertIndexes = NSIndexSet(indexesInRange: NSMakeRange(0, sections.count))
             
@@ -167,7 +166,7 @@ public class FOTableViewController: UITableViewController {
     
     // queued
     public func setPagingState(pagingState: PagingState, sectionIndex: Int, completion: (() -> ())?) {
-        performQueuedBatchUpdates({
+        queueUpdate({
             if let section = self.dataSource.sectionAtIndex(sectionIndex) {
                 section.pagingState = pagingState
                 
@@ -203,7 +202,7 @@ public class FOTableViewController: UITableViewController {
     }
     
     func checkForPaging() {
-        performQueuedBatchUpdates({
+        queueUpdate({
             if self.dataSource.sectionsForPagingState(.Paging).count > 0 {
                 return
             }

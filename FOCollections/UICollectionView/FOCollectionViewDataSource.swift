@@ -15,9 +15,13 @@ public class FOCollectionViewDataSource: NSObject {
     
     // MARK: Modification
     
-    public func insertSections(sections: [FOCollectionSection], atIndexes indexes: NSIndexSet, collectionView: UICollectionView, viewController: UIViewController? = nil) {
+    public func insertSections(sections: [FOCollectionSection]?, atIndexes indexes: NSIndexSet, collectionView: UICollectionView, viewController: UIViewController? = nil) {
+        guard sections != nil else {
+            return
+        }
+        
         indexes.enumerateIndexesUsingBlock { (index, stop) -> Void in
-            if let section = sections.safe(index) {
+            if let section = sections!.safe(index) {
                 section.linkItems(viewController)
                 self.sections.insert(section, atIndex: index)
                 self.registerClassesForItems(section.items, collectionView: collectionView)
