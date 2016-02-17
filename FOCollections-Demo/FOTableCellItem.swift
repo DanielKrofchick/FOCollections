@@ -11,7 +11,9 @@ import UIKit
 class FOTableCellItem: FOTableItem {
     
     override func configure(cell: UITableViewCell, tableView: UITableView, indexPath: NSIndexPath) {
-        cell.contentView.backgroundColor = UIColor.blueColor()
+        if let color = data as? UIColor {
+            cell.contentView.backgroundColor = color
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

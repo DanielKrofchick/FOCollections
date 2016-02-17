@@ -22,7 +22,7 @@ public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
     public func setExtras(tableView: UITableView, indexPath: NSIndexPath, extras: [NSObject: AnyObject]){}
     
     override public func isEqual(o: AnyObject?) -> Bool {
-        if let o = o as? FOCollectionItem {
+        if let o = o as? FOTableItem {
             if o.data == nil && data == nil {
                 return o.identifier == identifier
             } else if o.data != nil && data != nil {

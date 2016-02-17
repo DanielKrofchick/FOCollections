@@ -34,19 +34,7 @@ public class FOTableViewDataSource: NSObject {
     }
     
     public func insertItems(items: [FOTableItem], atIndexPaths indexPaths: [NSIndexPath], tableView: UITableView, viewController: UIViewController? = nil) {
-        // sort decreasing
-        var paired = FOPairedIndexPath.pairedIndexPaths(items, indexPaths: indexPaths).sort{$0 > $1}
-        var (i, p) = FOPairedIndexPath.unpairedIndexPaths(paired)
-        
-        // insert items within current range, returns out-of-range items
-        (i, p) = privateInsertItems(i, atIndexPaths: p, tableView: tableView, viewController: viewController)
-        
-        // sort increasing
-        paired = FOPairedIndexPath.pairedIndexPaths(i, indexPaths: p).sort{$0 < $1}
-        (i, p) = FOPairedIndexPath.unpairedIndexPaths(paired)
-        
-        // insert again
-        (i, p) = privateInsertItems(i, atIndexPaths: p, tableView: tableView, viewController: viewController)
+        let (i, p) = privateInsertItems(items, atIndexPaths: indexPaths, tableView: tableView, viewController: viewController)
         
         // if items remain throw exception
         assert(i.count == 0, "unable to insert items \(i) at indexPaths \(p)")
@@ -134,12 +122,14 @@ public class FOTableViewDataSource: NSObject {
         }
     }
     
-    func afterLastIndexPathForSectionIndex(section: Int) -> NSIndexPath? {
-        if let lastIndexPath = lastIndexPathForSectionIndex(section) {
-            return NSIndexPath(forItem: lastIndexPath.item + 1, inSection: lastIndexPath.section)
-        } else {
-            return nil
-        }
+    func pagingIndexPath(section: FOTableSection) -> NSIndexPath? {
+        let item = pagingItemForSection(section)
+        
+        return indexPathsForItem(item).first
+    }
+    
+    public func pagingItemForSection(section: FOTableSection) -> FOTableItem {
+        return FOTablePagingItem(section: section)
     }
     
     // MARK: - Lookup    

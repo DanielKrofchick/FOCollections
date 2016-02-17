@@ -63,7 +63,6 @@ public class FOCollectionViewController: UICollectionViewController {
         }, queue: dispatch_get_main_queue()))
     }
     
-    // queued with completion block
     public func insertSections(sections: [FOCollectionSection]?, indexes: NSIndexSet) {
         if let sections = sections, collectionView = collectionView {
             dataSource.insertSections(sections, atIndexes: indexes, collectionView: collectionView, viewController: self)
@@ -71,7 +70,6 @@ public class FOCollectionViewController: UICollectionViewController {
         }
     }
 
-    // queued with completion block
     public func deleteSectionsAtIndexes(indexes: NSIndexSet) {
         if let collectionView = collectionView {
             dataSource.deleteSectionsAtIndexes(indexes, collectionView: collectionView)
@@ -79,7 +77,6 @@ public class FOCollectionViewController: UICollectionViewController {
         }
     }
     
-    // queued with completion block
     public func insertItems(items: [FOCollectionItem]?, indexPaths: [NSIndexPath]?) {
         if let items = items, indexPaths = indexPaths, collectionView = collectionView {
             dataSource.insertItems(items, atIndexPaths: indexPaths, collectionView: collectionView, viewController: self)
@@ -87,15 +84,13 @@ public class FOCollectionViewController: UICollectionViewController {
         }
     }
     
-    // queued with completion block
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath]?, completion: ((finished: Bool) -> ())? = nil) {
+    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath]?) {
         if let indexPaths = indexPaths, collectionView = collectionView {
             dataSource.deleteItemsAtIndexPaths(indexPaths, collectionView: collectionView)
             collectionView.deleteItemsAtIndexPaths(indexPaths)
         }
     }
-    
-    // queued with completion block
+
     public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int) {
         if let collectionView = collectionView {
             if let section = dataSource.sectionAtIndex(sectionIndex) {
@@ -111,7 +106,6 @@ public class FOCollectionViewController: UICollectionViewController {
         }
     }
     
-    // queued with completion block
     public func clearAllItems() {
         if let collectionView = collectionView {
             let indexes = NSIndexSet(indexesInRange: NSMakeRange(0, dataSource.numberOfSectionsInCollectionView(collectionView)))
@@ -119,7 +113,6 @@ public class FOCollectionViewController: UICollectionViewController {
         }
     }
     
-    // queued
     public func setPagingState(pagingState: PagingState, sectionIndex: Int) {
         if let section = dataSource.sectionAtIndex(sectionIndex) {
             let pagingIndexPath = dataSource.pagingIndexPath(section)
@@ -135,7 +128,7 @@ public class FOCollectionViewController: UICollectionViewController {
             } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) {
                 // REMOVE
                 if let pagingIndexPath = pagingIndexPath {
-                    deleteItemsAtIndexPaths([pagingIndexPath], completion: nil)
+                    deleteItemsAtIndexPaths([pagingIndexPath])
                 }
             }
             
@@ -183,16 +176,15 @@ public class FOCollectionViewController: UICollectionViewController {
                     }
                 }
             }
-        }, completion: {
-            [weak self]
-            finished in
-            if nextPageIndex != NSNotFound {
-                if let collectionView = self?.collectionView {
-                    self?.nextPageForSection(nextPageIndex, collectionView: collectionView)
+            }, completion: {
+                [weak self]
+                finished in
+                if nextPageIndex != NSNotFound {
+                    if let collectionView = self?.collectionView {
+                        self?.nextPageForSection(nextPageIndex, collectionView: collectionView)
+                    }
                 }
-            }
-        })
+            })
     }
     
 }
-

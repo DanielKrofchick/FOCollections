@@ -15,7 +15,7 @@ class FOTablePagingItem: FOTableItem {
     init(section: FOTableSection) {
         super.init()
         
-        identifier = "pagingItem-\(section)"
+        identifier = "pagingItem-\(section.identifier)"
         reuseIdentifier = tablePagingItemReuseIdentifier
         cellClass = UITableViewCell.self
     }
