@@ -11,7 +11,9 @@ import UIKit
 class FOCollectionCellItem: FOCollectionItem {
     
     override func configure(cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: NSIndexPath) {
-        cell.contentView.backgroundColor = UIColor.blueColor()
+        if let color = data as? UIColor {
+            cell.contentView.backgroundColor = color
+        }
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {

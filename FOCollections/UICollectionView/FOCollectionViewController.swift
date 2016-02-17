@@ -63,8 +63,8 @@ public class FOCollectionViewController: UICollectionViewController {
         }, queue: dispatch_get_main_queue()))
     }
     
-    // queued if completion block given
-    public func insertSections(sections: [FOCollectionSection]?, indexes: NSIndexSet, completion: ((finished: Bool) -> ())? = {finished in}) {
+    // queued with completion block
+    public func insertSections(sections: [FOCollectionSection]?, indexes: NSIndexSet, completion: ((finished: Bool) -> ())? = nil) {
         let work = {
             [weak self] in
             if let sections = sections, collectionView = self?.collectionView {
@@ -76,8 +76,8 @@ public class FOCollectionViewController: UICollectionViewController {
         process(work: work, completion: completion)
     }
 
-    // queued if completion block given
-    public func deleteSectionsAtIndexes(indexes: NSIndexSet, completion: ((finished: Bool) -> ())? = {finished in}) {
+    // queued with completion block
+    public func deleteSectionsAtIndexes(indexes: NSIndexSet, completion: ((finished: Bool) -> ())? = nil) {
         let work = {
             [weak self] in
             if let collectionView = self?.collectionView {
@@ -89,8 +89,8 @@ public class FOCollectionViewController: UICollectionViewController {
         process(work: work, completion: completion)
     }
     
-    // queued if completion block given
-    public func insertItems(items: [FOCollectionItem]?, indexPaths: [NSIndexPath]?, completion: ((finished: Bool) -> ())? = {finished in}) {
+    // queued with completion block
+    public func insertItems(items: [FOCollectionItem]?, indexPaths: [NSIndexPath]?, completion: ((finished: Bool) -> ())? = nil) {
         let work = {
             [weak self] in
             if let items = items, indexPaths = indexPaths, collectionView = self?.collectionView {
@@ -102,8 +102,8 @@ public class FOCollectionViewController: UICollectionViewController {
         process(work: work, completion: completion)
     }
     
-    // queued if completion block given
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath]?, completion: ((finished: Bool) -> ())? = {finished in}) {
+    // queued with completion block
+    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath]?, completion: ((finished: Bool) -> ())? = nil) {
         let work = {
             [weak self] in
             if let indexPaths = indexPaths, collectionView = self?.collectionView {
@@ -115,21 +115,29 @@ public class FOCollectionViewController: UICollectionViewController {
         process(work: work, completion: completion)
     }
     
-    // queued if completion block given
-    public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, completion: ((finished: Bool) -> ())? = {finished in}) {
+    // queued with completion block
+    public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, completion: ((finished: Bool) -> ())? = nil) {
         let work = {
             [weak self] in
-            if let location = self?.collectionView?.numberOfItemsInSection(sectionIndex) {
-                let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
-                self?.insertItems(items, indexPaths: indexPaths)
+            if let collectionView = self?.collectionView, dataSource = self?.dataSource {
+                if let section = dataSource.sectionAtIndex(sectionIndex) {
+                    var location = collectionView.numberOfItemsInSection(sectionIndex)
+                    
+                    if dataSource.pagingIndexPath(section) != nil {
+                        location--
+                    }
+                    
+                    let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
+                    self?.insertItems(items, indexPaths: indexPaths)
+                }
             }
         }
         
         process(work: work, completion: completion)
     }
     
-    // queued
-    public func clearAllItems(completion: ((finished: Bool) -> ())? = {finished in}) {
+    // queued with completion block
+    public func clearAllItems(completion: ((finished: Bool) -> ())? = nil) {
         let work = {
             [weak self] in
             if let collectionView = self?.collectionView, dataSource = self?.dataSource {
@@ -142,30 +150,33 @@ public class FOCollectionViewController: UICollectionViewController {
     }
     
     // queued
-    public func setPagingState(pagingState: PagingState, sectionIndex: Int, completion: ((finished: Bool) -> ())? = {finished in}) {
+    public func setPagingState(pagingState: PagingState, sectionIndex: Int, completion: ((finished: Bool) -> ())? = nil) {
+        print("set: \(pagingState)")
+        
         let work = {
             [weak self] in
             if let dataSource = self?.dataSource {
                 if let section = dataSource.sectionAtIndex(sectionIndex) {
-                    if let pagingItemExists = self?.pagingItemExistsForSection(section) {
-                        if section.pagingState == pagingState {
-                            completion
-                        } else if pagingState == .Paging && !pagingItemExists {
-                            // ADD
-                            if let pagingItem = self?.pagingItemForSection(section) {
-                                if let lastIndexPath = dataSource.afterLastIndexPathForSectionIndex(0) {
-                                    self?.insertItems([pagingItem], indexPaths: [lastIndexPath], completion: nil)
-                                }
-                            }
-                        } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) && pagingItemExists {
-                            // REMOVE
-                            if let lastIndexPath = dataSource.lastIndexPathForSectionIndex(0) {
-                                self?.deleteItemsAtIndexPaths([lastIndexPath], completion: nil)
-                            }
+                    let pagingIndexPath = dataSource.pagingIndexPath(section)
+
+                    if section.pagingState == pagingState {
+                        completion
+                    } else if pagingState == .Paging && pagingIndexPath == nil {
+                        // ADD
+                        if var pagingIndexPath = dataSource.lastIndexPathForSectionIndex(sectionIndex) {
+                            pagingIndexPath = NSIndexPath(forRow: pagingIndexPath.row + 1, inSection: pagingIndexPath.section)
+                            let pagingItem = dataSource.pagingItemForSection(section)
+                            self?.insertItems([pagingItem], indexPaths: [pagingIndexPath], completion: nil)
                         }
-                        
-                        section.pagingState = pagingState
+                    } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) {
+                        // REMOVE
+                        if let pagingIndexPath = pagingIndexPath {
+                            self?.deleteItemsAtIndexPaths([pagingIndexPath], completion: nil)
+                        }
                     }
+                    
+                    print("old: \(section.pagingState) new: \(pagingState)")
+                    section.pagingState = pagingState
                 }
             }
         }
@@ -198,6 +209,8 @@ public class FOCollectionViewController: UICollectionViewController {
     }
     
     func checkForPaging() {
+        var nextPageIndex = NSNotFound
+        
         queueUpdate({
             [weak self] in
             
@@ -212,23 +225,22 @@ public class FOCollectionViewController: UICollectionViewController {
                             let distance = CGRectGetMaxY(rect) - (collectionView.contentOffset.y) - (collectionView.frame.size.height)
                             
                             if distance < self?.pagingThreshold {
-                                self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex, completion: { (finished) -> () in
-                                    self?.nextPageForSection(notPaging.firstIndex, collectionView: collectionView)
-                                })
+                                self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
+                                nextPageIndex = notPaging.firstIndex
                             }
                         }
                     }
                 }
             }
-        }, completion: nil)
-    }
-        
-    public func pagingItemForSection(section: FOCollectionSection) -> FOCollectionItem {
-        return FOCollectionPagingItem(section: section)
-    }
-    
-    func pagingItemExistsForSection(section: FOCollectionSection) -> Bool {
-        return section.items?.filter({$0.reuseIdentifier == collectionPagingItemReuseIdentifier}).first != nil
+        }, completion: {
+            [weak self]
+            finished in
+            if nextPageIndex != NSNotFound {
+                if let collectionView = self?.collectionView {
+                    self?.nextPageForSection(nextPageIndex, collectionView: collectionView)
+                }
+            }
+        })
     }
     
 }
