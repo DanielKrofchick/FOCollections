@@ -64,131 +64,82 @@ public class FOCollectionViewController: UICollectionViewController {
     }
     
     // queued with completion block
-    public func insertSections(sections: [FOCollectionSection]?, indexes: NSIndexSet, completion: ((finished: Bool) -> ())? = nil) {
-        let work = {
-            [weak self] in
-            if let sections = sections, collectionView = self?.collectionView {
-                self?.dataSource.insertSections(sections, atIndexes: indexes, collectionView: collectionView, viewController: self)
-                collectionView.insertSections(indexes)
-            }
+    public func insertSections(sections: [FOCollectionSection]?, indexes: NSIndexSet) {
+        if let sections = sections, collectionView = collectionView {
+            dataSource.insertSections(sections, atIndexes: indexes, collectionView: collectionView, viewController: self)
+            collectionView.insertSections(indexes)
         }
-        
-        process(work: work, completion: completion)
     }
 
     // queued with completion block
-    public func deleteSectionsAtIndexes(indexes: NSIndexSet, completion: ((finished: Bool) -> ())? = nil) {
-        let work = {
-            [weak self] in
-            if let collectionView = self?.collectionView {
-                self?.dataSource.deleteSectionsAtIndexes(indexes, collectionView: collectionView)
-                collectionView.deleteSections(indexes)
-            }
+    public func deleteSectionsAtIndexes(indexes: NSIndexSet) {
+        if let collectionView = collectionView {
+            dataSource.deleteSectionsAtIndexes(indexes, collectionView: collectionView)
+            collectionView.deleteSections(indexes)
         }
-        
-        process(work: work, completion: completion)
     }
     
     // queued with completion block
-    public func insertItems(items: [FOCollectionItem]?, indexPaths: [NSIndexPath]?, completion: ((finished: Bool) -> ())? = nil) {
-        let work = {
-            [weak self] in
-            if let items = items, indexPaths = indexPaths, collectionView = self?.collectionView {
-                self?.dataSource.insertItems(items, atIndexPaths: indexPaths, collectionView: collectionView, viewController: self)
-                collectionView.insertItemsAtIndexPaths(indexPaths)
-            }
+    public func insertItems(items: [FOCollectionItem]?, indexPaths: [NSIndexPath]?) {
+        if let items = items, indexPaths = indexPaths, collectionView = collectionView {
+            dataSource.insertItems(items, atIndexPaths: indexPaths, collectionView: collectionView, viewController: self)
+            collectionView.insertItemsAtIndexPaths(indexPaths)
         }
-        
-        process(work: work, completion: completion)
     }
     
     // queued with completion block
     public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath]?, completion: ((finished: Bool) -> ())? = nil) {
-        let work = {
-            [weak self] in
-            if let indexPaths = indexPaths, collectionView = self?.collectionView {
-                self?.dataSource.deleteItemsAtIndexPaths(indexPaths, collectionView: collectionView)
-                collectionView.deleteItemsAtIndexPaths(indexPaths)
-            }
+        if let indexPaths = indexPaths, collectionView = collectionView {
+            dataSource.deleteItemsAtIndexPaths(indexPaths, collectionView: collectionView)
+            collectionView.deleteItemsAtIndexPaths(indexPaths)
         }
-        
-        process(work: work, completion: completion)
     }
     
     // queued with completion block
-    public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, completion: ((finished: Bool) -> ())? = nil) {
-        let work = {
-            [weak self] in
-            if let collectionView = self?.collectionView, dataSource = self?.dataSource {
-                if let section = dataSource.sectionAtIndex(sectionIndex) {
-                    var location = collectionView.numberOfItemsInSection(sectionIndex)
-                    
-                    if dataSource.pagingIndexPath(section) != nil {
-                        location--
-                    }
-                    
-                    let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
-                    self?.insertItems(items, indexPaths: indexPaths)
+    public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int) {
+        if let collectionView = collectionView {
+            if let section = dataSource.sectionAtIndex(sectionIndex) {
+                var location = collectionView.numberOfItemsInSection(sectionIndex)
+                
+                if dataSource.pagingIndexPath(section) != nil {
+                    location--
                 }
+                
+                let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
+                insertItems(items, indexPaths: indexPaths)
             }
         }
-        
-        process(work: work, completion: completion)
     }
     
     // queued with completion block
-    public func clearAllItems(completion: ((finished: Bool) -> ())? = nil) {
-        let work = {
-            [weak self] in
-            if let collectionView = self?.collectionView, dataSource = self?.dataSource {
-                let indexes = NSIndexSet(indexesInRange: NSMakeRange(0, dataSource.numberOfSectionsInCollectionView(collectionView)))
-                self?.deleteSectionsAtIndexes(indexes)
-            }
+    public func clearAllItems() {
+        if let collectionView = collectionView {
+            let indexes = NSIndexSet(indexesInRange: NSMakeRange(0, dataSource.numberOfSectionsInCollectionView(collectionView)))
+            deleteSectionsAtIndexes(indexes)
         }
-        
-        process(work: work, completion: completion)
     }
     
     // queued
-    public func setPagingState(pagingState: PagingState, sectionIndex: Int, completion: ((finished: Bool) -> ())? = nil) {
-        print("set: \(pagingState)")
-        
-        let work = {
-            [weak self] in
-            if let dataSource = self?.dataSource {
-                if let section = dataSource.sectionAtIndex(sectionIndex) {
-                    let pagingIndexPath = dataSource.pagingIndexPath(section)
+    public func setPagingState(pagingState: PagingState, sectionIndex: Int) {
+        if let section = dataSource.sectionAtIndex(sectionIndex) {
+            let pagingIndexPath = dataSource.pagingIndexPath(section)
 
-                    if section.pagingState == pagingState {
-                        completion
-                    } else if pagingState == .Paging && pagingIndexPath == nil {
-                        // ADD
-                        if var pagingIndexPath = dataSource.lastIndexPathForSectionIndex(sectionIndex) {
-                            pagingIndexPath = NSIndexPath(forRow: pagingIndexPath.row + 1, inSection: pagingIndexPath.section)
-                            let pagingItem = dataSource.pagingItemForSection(section)
-                            self?.insertItems([pagingItem], indexPaths: [pagingIndexPath], completion: nil)
-                        }
-                    } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) {
-                        // REMOVE
-                        if let pagingIndexPath = pagingIndexPath {
-                            self?.deleteItemsAtIndexPaths([pagingIndexPath], completion: nil)
-                        }
-                    }
-                    
-                    print("old: \(section.pagingState) new: \(pagingState)")
-                    section.pagingState = pagingState
+            if section.pagingState == pagingState {
+            } else if pagingState == .Paging && pagingIndexPath == nil {
+                // ADD
+                if var pagingIndexPath = dataSource.lastIndexPathForSectionIndex(sectionIndex) {
+                    pagingIndexPath = NSIndexPath(forRow: pagingIndexPath.row + 1, inSection: pagingIndexPath.section)
+                    let pagingItem = dataSource.pagingItemForSection(section)
+                    insertItems([pagingItem], indexPaths: [pagingIndexPath])
+                }
+            } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) {
+                // REMOVE
+                if let pagingIndexPath = pagingIndexPath {
+                    deleteItemsAtIndexPaths([pagingIndexPath], completion: nil)
                 }
             }
-        }
-        
-        process(work: work, completion: completion)
-    }
-    
-    private func process(work work: (()->()), completion: ((finished: Bool)->())?) {
-        if completion == nil {
-            work()
-        } else {
-            queueUpdate({work()}, completion: completion)
+            
+            section.pagingState = pagingState
         }
     }
     

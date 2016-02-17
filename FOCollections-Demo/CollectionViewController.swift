@@ -42,6 +42,7 @@ class CollectionViewController: FOCollectionViewController {
         queueUpdate({[weak self] in self?.setPagingState(.Paging, sectionIndex: 0)})
         queueUpdate({[weak self] in self?.setPagingState(.Finished, sectionIndex: 0)})
         queueUpdate({[weak self] in self?.setPagingState(.NotPaging, sectionIndex: 0)})
+        queueUpdate({[weak self] in self?.clearAllItems()})
     }
     
     override func viewDidLayoutSubviews() {
@@ -81,7 +82,7 @@ class CollectionViewController: FOCollectionViewController {
         item.identifier = NSUUID().UUIDString
         item.reuseIdentifier = "itemReuseIdentifier"
         item.cellClass = UICollectionViewCell.self
-        item.columns = 1 //Int(arc4random_uniform(2) + 1)
+        item.columns = 1 //Int(arc4random_uniform(3) + 1)
         
         return item
     }
