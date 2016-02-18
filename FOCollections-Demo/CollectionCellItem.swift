@@ -1,5 +1,5 @@
 //
-//  FOCollectionCellItem.swift
+//  CollectionCellItem.swift
 //  FOCollections
 //
 //  Created by Xiao Ma on 2015-11-20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FOCollectionCellItem: FOCollectionItem {
+class CollectionCellItem: FOCollectionItem {
     
     override func configure(cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: NSIndexPath) {
         if let color = data as? UIColor {

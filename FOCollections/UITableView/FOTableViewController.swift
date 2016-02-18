@@ -22,7 +22,7 @@ public class FOTableViewController: UITableViewController {
         super.viewDidLoad()
         
         queue.qualityOfService = NSQualityOfService.UserInitiated
-        queue.name = "TableViewController"
+        queue.name = "FOTableViewController"
         queue.maxConcurrentOperationCount = 1
         
         view.backgroundColor = UIColor.whiteColor()
@@ -82,7 +82,7 @@ public class FOTableViewController: UITableViewController {
     }
     
     public func insertSections(sections: [FOTableSection], indexes: NSIndexSet) {
-        self.dataSource.insertSections(sections, atIndexes: indexes, tableView: self.tableView)
+        self.dataSource.insertSections(sections, atIndexes: indexes, tableView: self.tableView, viewController: self)
         self.tableView.insertSections(indexes, withRowAnimation: .Fade)
     }
     
@@ -92,7 +92,7 @@ public class FOTableViewController: UITableViewController {
     }
     
     public func insertItems(items: [FOTableItem], indexPaths: [NSIndexPath]) {
-        self.dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: self.tableView)
+        self.dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: self.tableView, viewController: self)
         self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
     }
     

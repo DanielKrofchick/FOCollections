@@ -1,5 +1,5 @@
 //
-//  FOTableCellItem.swift
+//  TableCellItem.swift
 //  FOCollections
 //
 //  Created by Daniel Krofchick on 2015-11-23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FOTableCellItem: FOTableItem {
+class TableCellItem: FOTableItem {
     
     override func configure(cell: UITableViewCell, tableView: UITableView, indexPath: NSIndexPath) {
         if let color = data as? UIColor {

@@ -15,7 +15,7 @@ public class FOTableViewDataSource: NSObject {
     
     // MARK: Modification
     
-    public func insertSections(sections: [FOTableSection], atIndexes indexes: NSIndexSet, tableView: UITableView, viewController: UIViewController? = nil) {
+    public func insertSections(sections: [FOTableSection], atIndexes indexes: NSIndexSet, tableView: UITableView, viewController: UIViewController) {
         indexes.enumerateIndexesUsingBlock { (index, stop) -> Void in
             if let section = sections.safe(index) {
                 section.linkItems(viewController)
@@ -33,7 +33,7 @@ public class FOTableViewDataSource: NSObject {
         }
     }
     
-    public func insertItems(items: [FOTableItem], atIndexPaths indexPaths: [NSIndexPath], tableView: UITableView, viewController: UIViewController? = nil) {
+    public func insertItems(items: [FOTableItem], atIndexPaths indexPaths: [NSIndexPath], tableView: UITableView, viewController: UIViewController) {
         let (i, p) = privateInsertItems(items, atIndexPaths: indexPaths, tableView: tableView, viewController: viewController)
         
         // if items remain throw exception
@@ -44,7 +44,7 @@ public class FOTableViewDataSource: NSObject {
     
     // Inserts items within current data range. Returns uninserted items.
     
-    private func privateInsertItems(items: [FOTableItem], atIndexPaths indexPaths: [NSIndexPath], tableView: UITableView, viewController: UIViewController? = nil) -> ([FOTableItem], [NSIndexPath]) {
+    private func privateInsertItems(items: [FOTableItem], atIndexPaths indexPaths: [NSIndexPath], tableView: UITableView, viewController: UIViewController) -> ([FOTableItem], [NSIndexPath]) {
         var unsafeItems = [FOTableItem]()
         var unsafeIndexPaths = [NSIndexPath]()
         

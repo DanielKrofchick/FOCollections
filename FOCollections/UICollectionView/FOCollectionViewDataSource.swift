@@ -15,7 +15,7 @@ public class FOCollectionViewDataSource: NSObject {
     
     // MARK: Modification
     
-    public func insertSections(sections: [FOCollectionSection]?, atIndexes indexes: NSIndexSet, collectionView: UICollectionView, viewController: UIViewController? = nil) {
+    public func insertSections(sections: [FOCollectionSection]?, atIndexes indexes: NSIndexSet, collectionView: UICollectionView, viewController: UIViewController) {
         guard sections != nil else {
             return
         }
@@ -37,7 +37,7 @@ public class FOCollectionViewDataSource: NSObject {
         }
     }
     
-    public func insertItems(items: [FOCollectionItem], atIndexPaths indexPaths: [NSIndexPath], collectionView: UICollectionView, viewController: UIViewController? = nil) {
+    public func insertItems(items: [FOCollectionItem], atIndexPaths indexPaths: [NSIndexPath], collectionView: UICollectionView, viewController: UIViewController) {
         let (i, p) = privateInsertItems(items, atIndexPaths: indexPaths, collectionView: collectionView, viewController: viewController)
         
         // if items remain throw exception
@@ -47,7 +47,7 @@ public class FOCollectionViewDataSource: NSObject {
     }
     
     // Inserts items within current data range. Returns uninserted items.
-    private func privateInsertItems(items: [FOCollectionItem], atIndexPaths indexPaths: [NSIndexPath], collectionView: UICollectionView, viewController: UIViewController? = nil) -> ([FOCollectionItem], [NSIndexPath]) {
+    private func privateInsertItems(items: [FOCollectionItem], atIndexPaths indexPaths: [NSIndexPath], collectionView: UICollectionView, viewController: UIViewController) -> ([FOCollectionItem], [NSIndexPath]) {
         var unsafeItems = [FOCollectionItem]()
         var unsafeIndexPaths = [NSIndexPath]()
 

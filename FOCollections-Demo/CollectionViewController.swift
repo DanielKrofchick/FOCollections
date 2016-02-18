@@ -10,21 +10,16 @@ import UIKit
 
 class CollectionViewController: FOCollectionViewController {
     
-    let refresh = UIButton(type: .System)
-
+    convenience init() {
+        self.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView?.backgroundColor = UIColor.orangeColor()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "play")
         
-        refresh.addTarget(self, action: "refreshTap", forControlEvents: .TouchUpInside)
-        refresh.backgroundColor = UIColor.yellowColor()
-        view.addSubview(refresh)
-        
-        play()
-    }
-    
-    func refreshTap() {
         play()
     }
     
@@ -39,23 +34,13 @@ class CollectionViewController: FOCollectionViewController {
         queueUpdate({[weak self] in self?.appendItems(self!.items(UIColor.purpleColor(), items: 3), toSectionAtIndex: 0)})
         queueUpdate({[weak self] in self?.setPagingState(.Paging, sectionIndex: 0)})
         queueUpdate({[weak self] in self?.setPagingState(.Disabled, sectionIndex: 0)})
-//        queueUpdate({[weak self] in self?.setPagingState(.Paging, sectionIndex: 0)})
-//        queueUpdate({[weak self] in self?.setPagingState(.Finished, sectionIndex: 0)})
-//        queueUpdate({[weak self] in self?.setPagingState(.NotPaging, sectionIndex: 0)})
-//        queueUpdate({[weak self] in self?.clearAllItems()})
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        let s = CGSize(width: 50, height: 50)
-        let BI = CGFloat(20)
-    
-        refresh.frame = CGRect(x: (view.frame.width - s.width) / 2.0, y: view.frame.height - s.height - BI, width: s.width, height: s.height)
+        queueUpdate({[weak self] in self?.setPagingState(.Paging, sectionIndex: 0)})
+        queueUpdate({[weak self] in self?.setPagingState(.Finished, sectionIndex: 0)})
+        queueUpdate({[weak self] in self?.setPagingState(.NotPaging, sectionIndex: 0)})
     }
     
     func section(color: UIColor = UIColor.blueColor(), items: Int = 8) -> FOCollectionSection {
-        let section = FOCollectionSectionItem()
+        let section = CollectionSectionItem()
         
         section.identifier = NSUUID().UUIDString
         section.pagingState = .Disabled
@@ -76,7 +61,7 @@ class CollectionViewController: FOCollectionViewController {
     }
     
     func item(color: UIColor = UIColor.blueColor()) -> FOCollectionItem {
-        let item = FOCollectionCellItem()
+        let item = CollectionCellItem()
         
         item.data = color
         item.identifier = NSUUID().UUIDString

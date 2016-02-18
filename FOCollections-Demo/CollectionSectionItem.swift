@@ -1,5 +1,5 @@
 //
-//  FOCollectionSectionItem.swift
+//  CollectionSectionItem.swift
 //  FOCollections
 //
 //  Created by Xiao Ma on 2015-11-20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FOCollectionSectionItem: FOCollectionSection {
+class CollectionSectionItem: FOCollectionSection {
 
     var edgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     var minimumLineSpacing = CGFloat(5)

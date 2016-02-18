@@ -16,7 +16,6 @@ extension FOCollectionViewController  {
         return dataSource.itemAtIndexPath(indexPath) as? UICollectionViewDelegate
     }
     
-    
     override public func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, shouldHighlightItemAtIndexPath: indexPath) {
             return value

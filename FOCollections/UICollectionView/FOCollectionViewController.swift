@@ -21,7 +21,7 @@ public class FOCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         queue.qualityOfService = NSQualityOfService.UserInitiated
-        queue.name = "CollectionViewController"
+        queue.name = "FOCollectionViewController"
         queue.maxConcurrentOperationCount = 1
         
         view.backgroundColor = UIColor.whiteColor()

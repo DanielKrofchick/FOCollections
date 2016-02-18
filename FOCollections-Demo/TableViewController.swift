@@ -18,17 +18,11 @@ class TableViewController: FOTableViewController {
         tableView.backgroundColor = UIColor.orangeColor()
         updateDuration = 0.5
         
-        refresh.addTarget(self, action: "refreshTap", forControlEvents: .TouchUpInside)
-        refresh.backgroundColor = UIColor.yellowColor()
-        view.addSubview(refresh)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "play")
         
         play()
     }
     
-    func refreshTap() {
-        play()
-    }
-
     func play() {
         queueUpdate({[weak self] in self?.clearAllItems()})
         
@@ -43,16 +37,6 @@ class TableViewController: FOTableViewController {
         queueUpdate({[weak self] in self?.setPagingState(.Paging, sectionIndex: 0)})
         queueUpdate({[weak self] in self?.setPagingState(.Finished, sectionIndex: 0)})
         queueUpdate({[weak self] in self?.setPagingState(.NotPaging, sectionIndex: 0)})
-        queueUpdate({[weak self] in self?.clearAllItems()})
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        let s = CGSize(width: 50, height: 50)
-        let BI = CGFloat(20)
-        
-        refresh.frame = CGRect(x: (view.frame.width - s.width) / 2.0, y: view.frame.height - s.height - BI, width: s.width, height: s.height)
     }
     
     func section(color: UIColor = UIColor.blueColor(), items: Int = 4) -> FOTableSection {
@@ -76,7 +60,7 @@ class TableViewController: FOTableViewController {
     }
     
     func item(color: UIColor = UIColor.blueColor()) -> FOTableItem {
-        let item = FOTableCellItem()
+        let item = TableCellItem()
         
         item.data = color
         item.identifier = NSUUID().UUIDString
