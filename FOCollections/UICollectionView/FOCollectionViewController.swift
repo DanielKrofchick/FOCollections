@@ -153,43 +153,31 @@ public class FOCollectionViewController: UICollectionViewController {
     }
     
     func checkForPaging() {
-        var nextPageIndex = NSNotFound
-        
-        // check outside so we don't force a UI update
         if dataSource.sectionsForPagingState(.Paging).count > 0 {
             return
         }
         
-        queueUpdate({
-            [weak self] in
+        let notPaging = dataSource.sectionsForPagingState(.NotPaging)
 
-            if self?.dataSource.sectionsForPagingState(.Paging).count > 0 {
-                return
-            }
-
-            if let notPaging = self?.dataSource.sectionsForPagingState(.NotPaging), collectionView = self?.collectionView {
-                if notPaging.count > 0 {
-                    if let indexPath = self?.dataSource.lastIndexPathForSectionIndex(notPaging.firstIndex) {
-                        if let rect = collectionView.layoutAttributesForItemAtIndexPath(indexPath)?.frame {
-                            let distance = CGRectGetMaxY(rect) - (collectionView.contentOffset.y) - (collectionView.frame.size.height)
-                            
-                            if distance < self?.pagingThreshold {
-                                self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
-                                nextPageIndex = notPaging.firstIndex
+        if notPaging.count > 0 {
+            if let indexPath = dataSource.lastIndexPathForSectionIndex(notPaging.firstIndex), collectionView = collectionView {
+                if let rect = collectionView.layoutAttributesForItemAtIndexPath(indexPath)?.frame {
+                    let distance = CGRectGetMaxY(rect) - (collectionView.contentOffset.y) - (collectionView.frame.size.height)
+                    
+                    if distance < pagingThreshold {
+                        queueUpdate({
+                            [weak self] in
+                            self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
+                        }, completion: {
+                            [weak self] finished in
+                            if let collectionView = self?.collectionView {
+                                self?.nextPageForSection(notPaging.firstIndex, collectionView: collectionView)
                             }
-                        }
+                        })
                     }
                 }
             }
-            }, completion: {
-                [weak self]
-                finished in
-                if nextPageIndex != NSNotFound {
-                    if let collectionView = self?.collectionView {
-                        self?.nextPageForSection(nextPageIndex, collectionView: collectionView)
-                    }
-                }
-            })
+        }
     }
     
 }

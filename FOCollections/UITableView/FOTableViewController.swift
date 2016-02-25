@@ -159,43 +159,30 @@ public class FOTableViewController: UITableViewController {
     }
     
     func checkForPaging() {
-        var nextPageIndex = NSNotFound
-        
-        // check outside so we don't force a UI update
         if dataSource.sectionsForPagingState(.Paging).count > 0 {
             return
         }
         
-        queueUpdate({
-            [weak self] in
-
-            if self?.dataSource.sectionsForPagingState(.Paging).count > 0 {
-                return
-            }
-
-            if let notPaging = self?.dataSource.sectionsForPagingState(.NotPaging) {
-                if notPaging.count > 0 {
-                    if let indexPath = self?.dataSource.lastIndexPathForSectionIndex(notPaging.firstIndex) {
-                        if let rect = self?.tableView.rectForRowAtIndexPath(indexPath), tableView = self?.tableView {
-                            let distance = CGRectGetMaxY(rect) - tableView.contentOffset.y - tableView.frame.size.height
-                            
-                            if distance < self?.pagingThreshold {
-                                self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
-                                nextPageIndex = notPaging.firstIndex
-                            }
+        let notPaging = dataSource.sectionsForPagingState(.NotPaging)
+        
+        if notPaging.count > 0 {
+            if let indexPath = dataSource.lastIndexPathForSectionIndex(notPaging.firstIndex) {
+                let rect = tableView.rectForRowAtIndexPath(indexPath)
+                let distance = CGRectGetMaxY(rect) - tableView.contentOffset.y - tableView.frame.size.height
+                
+                if distance < pagingThreshold {
+                    queueUpdate({
+                        [weak self] in
+                        self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
+                    }, completion: {
+                        [weak self] in
+                        if let tableView = self?.tableView {
+                            self?.nextPageForSection(notPaging.firstIndex, tableView: tableView)
                         }
-                    }
+                    })
                 }
             }
-            }, completion: {
-                [weak self]
-                finished in
-                if nextPageIndex != NSNotFound {
-                    if let tableView = self?.tableView {
-                        self?.nextPageForSection(nextPageIndex, tableView: tableView)
-                    }
-                }
-            })
+        }
     }
     
 }
