@@ -1,0 +1,10 @@
+framework module FOCollections {
+  umbrella header "FOCollections.h"
+
+  export *
+  module * { export * }
+}
+
+module FOCollections.Swift {
+    header "FOCollections-Swift.h"
+}

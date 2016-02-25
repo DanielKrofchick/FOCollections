@@ -244,6 +244,26 @@ extension FOTableViewController {
     **/
      
     //MARK:- utils
+    
+    public func layoutCellForIndexPath(indexPath: NSIndexPath) -> UITableViewCell? {
+        var cell: UITableViewCell? = nil
+        
+        if let item = dataSource.itemAtIndexPath(indexPath) {
+            if let cellClass = item.cellClass {
+                if let key = NSStringFromClass(cellClass).componentsSeparatedByString(".").last {
+                    cell = layoutCellCache[key]
+                    
+                    if cell == nil && cellClass is UITableViewCell.Type {
+                        cell = (cellClass as! UITableViewCell.Type).init()
+                        layoutCellCache[key] = cell
+                    }
+                }
+            }
+        }
+        
+        return cell
+    }
+    
     private func delegateWithIndexPath(indexPath: NSIndexPath) -> UITableViewDelegate? {
         return dataSource.itemAtIndexPath(indexPath) as? UITableViewDelegate
     }

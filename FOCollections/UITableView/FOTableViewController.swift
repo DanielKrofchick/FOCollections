@@ -12,8 +12,8 @@ public class FOTableViewController: UITableViewController {
 
     public let dataSource = FOTableViewDataSource()
     public var pagingThreshold = CGFloat(1000)
-     var cellSizeCache = [String: CGFloat]()
-     var layoutCellCache = [String: UITableViewCell]()
+    var cellSizeCache = [String: CGFloat]()
+    var layoutCellCache = [String: UITableViewCell]()
     private var pagingTimer: NSTimer?
     var queue = NSOperationQueue()                              // All table UI updates are performed on this queue to serialize animations
     public var updateDuration = NSTimeInterval(0.5)
