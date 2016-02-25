@@ -161,13 +161,18 @@ public class FOTableViewController: UITableViewController {
     func checkForPaging() {
         var nextPageIndex = NSNotFound
         
+        // check outside so we don't force a UI update
+        if dataSource.sectionsForPagingState(.Paging).count > 0 {
+            return
+        }
+        
         queueUpdate({
             [weak self] in
-            
+
             if self?.dataSource.sectionsForPagingState(.Paging).count > 0 {
                 return
             }
-            
+
             if let notPaging = self?.dataSource.sectionsForPagingState(.NotPaging) {
                 if notPaging.count > 0 {
                     if let indexPath = self?.dataSource.lastIndexPathForSectionIndex(notPaging.firstIndex) {
