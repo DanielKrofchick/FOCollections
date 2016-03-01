@@ -150,6 +150,7 @@ SWIFT_CLASS("_TtC13FOCollections26FOCollectionViewController")
 - (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * __nullable)indexPaths;
 - (void)appendItems:(NSArray<FOCollectionItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex;
 - (void)clearAllItems;
+- (void)refreshVisibleCells;
 - (void)nextPageForSection:(NSInteger)section collectionView:(UICollectionView * __nonnull)collectionView;
 - (nonnull instancetype)initWithCollectionViewLayout:(UICollectionViewLayout * __nonnull)layout OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
@@ -272,6 +273,7 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
 - (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths;
 - (void)appendItems:(NSArray<FOTableItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex;
 - (void)clearAllItems;
+- (void)refreshVisibleCells;
 - (void)nextPageForSection:(NSInteger)section tableView:(UITableView * __nonnull)tableView;
 - (nonnull instancetype)initWithStyle:(UITableViewStyle)style OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;

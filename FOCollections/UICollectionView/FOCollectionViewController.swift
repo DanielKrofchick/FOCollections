@@ -136,6 +136,16 @@ public class FOCollectionViewController: UICollectionViewController {
         }
     }
     
+    public func refreshVisibleCells() {
+        if let collectionView = collectionView {
+            for indexPath in collectionView.indexPathsForVisibleItems() {
+                if let cell = collectionView.cellForItemAtIndexPath(indexPath), item = dataSource.itemAtIndexPath(indexPath) {
+                    item.configure(cell, collectionView: collectionView, indexPath: indexPath)
+                }
+            }
+        }
+    }
+    
     // MARK: Paging
     
     // Implemented by subclass

@@ -82,23 +82,23 @@ public class FOTableViewController: UITableViewController {
     }
     
     public func insertSections(sections: [FOTableSection], indexes: NSIndexSet) {
-        self.dataSource.insertSections(sections, atIndexes: indexes, tableView: self.tableView, viewController: self)
-        self.tableView.insertSections(indexes, withRowAnimation: .Fade)
+        dataSource.insertSections(sections, atIndexes: indexes, tableView: tableView, viewController: self)
+        tableView.insertSections(indexes, withRowAnimation: .Fade)
     }
     
     public func deleteSectionsAtIndexes(indexes: NSIndexSet) {
-        self.dataSource.deleteSectionsAtIndexes(indexes, tableView: self.tableView)
-        self.tableView.deleteSections(indexes, withRowAnimation: .Fade)
+        dataSource.deleteSectionsAtIndexes(indexes, tableView: tableView)
+        tableView.deleteSections(indexes, withRowAnimation: .Fade)
     }
     
     public func insertItems(items: [FOTableItem], indexPaths: [NSIndexPath]) {
-        self.dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: self.tableView, viewController: self)
-        self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
+        dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: tableView, viewController: self)
+        tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
     }
     
     public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath]) {
-        self.dataSource.deleteItemsAtIndexPaths(indexPaths, tableView: self.tableView)
-        self.tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
+        dataSource.deleteItemsAtIndexPaths(indexPaths, tableView: tableView)
+        tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)
     }
     
     public func appendItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int) {
@@ -139,6 +139,16 @@ public class FOTableViewController: UITableViewController {
             }
             
             section.pagingState = pagingState
+        }
+    }
+    
+    public func refreshVisibleCells() {
+        if let indexPaths = tableView.indexPathsForVisibleRows {
+            for indexPath in indexPaths {
+                if let cell = tableView.cellForRowAtIndexPath(indexPath), item = dataSource.itemAtIndexPath(indexPath) {
+                    item.configure(cell, tableView: tableView, indexPath: indexPath)
+                }
+            }
         }
     }
 
