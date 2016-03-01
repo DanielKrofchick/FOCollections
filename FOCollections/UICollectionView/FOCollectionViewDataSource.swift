@@ -239,5 +239,57 @@ extension FOCollectionViewDataSource: SequenceType {
         return nil
     }
     
+    public func indexPathForIndex(index: Int) -> NSIndexPath? {
+        var i = 0
+        
+        for (s, section) in sections.enumerate() {
+            if i <= index {
+                if let items = section.items {
+                    if let _ = items.safe(index - i) {
+                        return NSIndexPath(forRow: index - i, inSection: s)
+                    } else {
+                        i += items.count
+                    }
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    public func indexForIndexPath(indexPath: NSIndexPath) -> Int? {
+        var i = 0
+        
+        for (index, section) in sections.enumerate() {
+            if let items = section.items {
+                if index < indexPath.section {
+                    i += items.count
+                } else if index == indexPath.section && items.count > indexPath.row {
+                    return i + indexPath.row
+                } else {
+                    return nil
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    public func previousIndexPath(indexPath: NSIndexPath) -> NSIndexPath? {
+        if let index = indexForIndexPath(indexPath) {
+            return indexPathForIndex(index - 1)
+        }
+        
+        return nil
+    }
+    
+    public func nextIndexPath(indexPath: NSIndexPath) -> NSIndexPath? {
+        if let index = indexForIndexPath(indexPath) {
+            return indexPathForIndex(index + 1)
+        }
+        
+        return nil
+    }
+    
 }
 

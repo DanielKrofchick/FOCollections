@@ -218,6 +218,9 @@ SWIFT_CLASS("_TtC13FOCollections26FOCollectionViewDataSource")
 
 
 @interface FOCollectionViewDataSource (SWIFT_EXTENSION(FOCollections))
+- (NSIndexPath * __nullable)indexPathForIndex:(NSInteger)index;
+- (NSIndexPath * __nullable)previousIndexPath:(NSIndexPath * __nonnull)indexPath;
+- (NSIndexPath * __nullable)nextIndexPath:(NSIndexPath * __nonnull)indexPath;
 @end
 
 @class UITableViewCell;
@@ -339,6 +342,10 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewDataSource")
 
 
 @interface FOTableViewDataSource (SWIFT_EXTENSION(FOCollections))
+- (FOTableItem * __nullable)itemAtIndex:(NSInteger)index;
+- (NSIndexPath * __nullable)indexPathForIndex:(NSInteger)index;
+- (NSIndexPath * __nullable)previousIndexPath:(NSIndexPath * __nonnull)indexPath;
+- (NSIndexPath * __nullable)nextIndexPath:(NSIndexPath * __nonnull)indexPath;
 @end
 
 
