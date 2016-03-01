@@ -207,4 +207,34 @@ public class FOTableViewDataSource: NSObject {
     
 }
 
+extension FOTableViewDataSource: SequenceType {
+
+    public typealias Generator = AnyGenerator<FOTableItem>
+    
+    public func generate() -> Generator {
+        var index = Int(0)
+        return anyGenerator { () -> FOTableItem? in
+            return self.itemAtIndex(index++)
+        }
+    }
+    
+    func itemAtIndex(index: Int) -> FOTableItem? {
+        var i = 0
+        
+        for section in sections {
+            if i <= index {
+                if let items = section.items {
+                    if let item = items.safe(index - i) {
+                        return item
+                    } else {
+                        i += items.count
+                    }
+                }
+            }
+        }
+        
+        return nil
+    }
+
+}
 

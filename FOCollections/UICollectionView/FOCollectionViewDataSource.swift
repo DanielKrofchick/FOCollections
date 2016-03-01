@@ -210,3 +210,34 @@ public class FOCollectionViewDataSource: NSObject {
     
 }
 
+extension FOCollectionViewDataSource: SequenceType {
+    
+    public typealias Generator = AnyGenerator<FOCollectionItem>
+    
+    public func generate() -> Generator {
+        var index = Int(0)
+        return anyGenerator { () -> FOCollectionItem? in
+            return self.itemAtIndex(index++)
+        }
+    }
+    
+    func itemAtIndex(index: Int) -> FOCollectionItem? {
+        var i = 0
+        
+        for section in sections {
+            if i <= index {
+                if let items = section.items {
+                    if let item = items.safe(index - i) {
+                        return item
+                    } else {
+                        i += items.count
+                    }
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+}
+

@@ -216,6 +216,10 @@ SWIFT_CLASS("_TtC13FOCollections26FOCollectionViewDataSource")
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView * __nonnull)collectionView;
 @end
 
+
+@interface FOCollectionViewDataSource (SWIFT_EXTENSION(FOCollections))
+@end
+
 @class UITableViewCell;
 @class UITableView;
 @class FOTableSection;
@@ -331,6 +335,10 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewDataSource")
 - (NSArray<NSIndexPath *> * __nullable)indexPathsForData:(id __nonnull)data;
 - (NSArray<UITableViewCell *> * __nonnull)cellsForItem:(FOTableItem * __nonnull)item tableView:(UITableView * __nonnull)tableView;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface FOTableViewDataSource (SWIFT_EXTENSION(FOCollections))
 @end
 
 
