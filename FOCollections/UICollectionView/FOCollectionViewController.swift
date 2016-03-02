@@ -63,6 +63,10 @@ public class FOCollectionViewController: UICollectionViewController {
         }, queue: dispatch_get_main_queue()))
     }
     
+    public func queueWork(work: (() -> ())) {
+        queue.addOperation(NSBlockOperation(block: work))
+    }
+    
     public func insertSections(sections: [FOCollectionSection]?, indexes: NSIndexSet) {
         if let sections = sections, collectionView = collectionView {
             dataSource.insertSections(sections, atIndexes: indexes, collectionView: collectionView, viewController: self)

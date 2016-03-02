@@ -8,8 +8,9 @@
 
 import UIKit
 
-public class FOTableViewController: UITableViewController {
+public class FOTableViewController: UIViewController, UITableViewDelegate {
 
+    public var tableView = UITableView()
     public let dataSource = FOTableViewDataSource()
     public var pagingThreshold = CGFloat(1000)
     var cellSizeCache = [String: CGFloat]()
@@ -30,6 +31,13 @@ public class FOTableViewController: UITableViewController {
         tableView.backgroundColor = UIColor.whiteColor()
         tableView.dataSource = dataSource
         tableView.delegate = self
+        view.addSubview(tableView)
+    }
+    
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.frame = view.bounds
     }
     
     override public func viewDidAppear(animated: Bool) {
@@ -79,6 +87,10 @@ public class FOTableViewController: UITableViewController {
                 operation.finish()
             })
         }, queue: dispatch_get_main_queue()))
+    }
+    
+    public func queueWork(work: (() -> ())) {
+        queue.addOperation(NSBlockOperation(block: work))
     }
     
     public func insertSections(sections: [FOTableSection], indexes: NSIndexSet) {

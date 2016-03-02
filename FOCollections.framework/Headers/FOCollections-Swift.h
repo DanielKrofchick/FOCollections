@@ -258,15 +258,18 @@ SWIFT_CLASS("_TtC13FOCollections14FOTableSection")
 @class FOTableViewDataSource;
 
 SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
-@interface FOTableViewController : UITableViewController
+@interface FOTableViewController : UIViewController <UIScrollViewDelegate, UITableViewDelegate>
+@property (nonatomic, strong) UITableView * __nonnull tableView;
 @property (nonatomic, readonly, strong) FOTableViewDataSource * __nonnull dataSource;
 @property (nonatomic) CGFloat pagingThreshold;
 @property (nonatomic) NSTimeInterval updateDuration;
 - (void)viewDidLoad;
+- (void)viewDidLayoutSubviews;
 - (void)viewDidAppear:(BOOL)animated;
 - (void)viewDidDisappear:(BOOL)animated;
 - (void)willTransitionToTraitCollection:(UITraitCollection * __nonnull)newCollection withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> __nonnull)coordinator;
 - (void)queueUpdate:(void (^ __nonnull)(void))update completion:(void (^ __nullable)(void))completion;
+- (void)queueWork:(void (^ __nonnull)(void))work;
 - (void)insertSections:(NSArray<FOTableSection *> * __nonnull)sections indexes:(NSIndexSet * __nonnull)indexes;
 - (void)deleteSectionsAtIndexes:(NSIndexSet * __nonnull)indexes;
 - (void)insertItems:(NSArray<FOTableItem *> * __nonnull)items indexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths;
@@ -275,7 +278,6 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
 - (void)clearAllItems;
 - (void)refreshVisibleCells;
 - (void)nextPageForSection:(NSInteger)section tableView:(UITableView * __nonnull)tableView;
-- (nonnull instancetype)initWithStyle:(UITableViewStyle)style OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
