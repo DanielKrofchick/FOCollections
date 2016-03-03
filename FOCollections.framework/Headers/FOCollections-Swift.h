@@ -144,6 +144,7 @@ SWIFT_CLASS("_TtC13FOCollections26FOCollectionViewController")
 - (void)viewDidDisappear:(BOOL)animated;
 - (void)willTransitionToTraitCollection:(UITraitCollection * __nonnull)newCollection withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> __nonnull)coordinator;
 - (void)queueUpdate:(void (^ __nonnull)(void))update completion:(void (^ __nullable)(BOOL))completion;
+- (void)queueWork:(void (^ __nonnull)(void))work;
 - (void)insertSections:(NSArray<FOCollectionSection *> * __nullable)sections indexes:(NSIndexSet * __nonnull)indexes;
 - (void)deleteSectionsAtIndexes:(NSIndexSet * __nonnull)indexes;
 - (void)insertItems:(NSArray<FOCollectionItem *> * __nullable)items indexPaths:(NSArray<NSIndexPath *> * __nullable)indexPaths;
@@ -270,12 +271,12 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
 - (void)willTransitionToTraitCollection:(UITraitCollection * __nonnull)newCollection withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> __nonnull)coordinator;
 - (void)queueUpdate:(void (^ __nonnull)(void))update completion:(void (^ __nullable)(void))completion;
 - (void)queueWork:(void (^ __nonnull)(void))work;
-- (void)insertSections:(NSArray<FOTableSection *> * __nonnull)sections indexes:(NSIndexSet * __nonnull)indexes;
-- (void)deleteSectionsAtIndexes:(NSIndexSet * __nonnull)indexes;
-- (void)insertItems:(NSArray<FOTableItem *> * __nonnull)items indexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths;
-- (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths;
-- (void)appendItems:(NSArray<FOTableItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex;
-- (void)clearAllItems;
+- (void)insertSections:(NSArray<FOTableSection *> * __nonnull)sections indexes:(NSIndexSet * __nonnull)indexes animation:(UITableViewRowAnimation)animation;
+- (void)deleteSectionsAtIndexes:(NSIndexSet * __nonnull)indexes animation:(UITableViewRowAnimation)animation;
+- (void)insertItems:(NSArray<FOTableItem *> * __nonnull)items indexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths animation:(UITableViewRowAnimation)animation;
+- (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths animation:(UITableViewRowAnimation)animation;
+- (void)appendItems:(NSArray<FOTableItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex animation:(UITableViewRowAnimation)animation;
+- (void)clearAllItems:(UITableViewRowAnimation)animation;
 - (void)refreshVisibleCells;
 - (void)nextPageForSection:(NSInteger)section tableView:(UITableView * __nonnull)tableView;
 - (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
