@@ -10,7 +10,7 @@ import UIKit
 
 public class FOTableViewController: UIViewController, UITableViewDelegate {
 
-    public var tableView = UITableView()
+    public var tableView: UITableView!
     public let dataSource = FOTableViewDataSource()
     public var pagingThreshold = CGFloat(1000)
     var cellSizeCache = [String: CGFloat]()
@@ -19,19 +19,33 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     var queue = NSOperationQueue()                              // All table UI updates are performed on this queue to serialize animations
     public var updateDuration = NSTimeInterval(0.5)
     
+    public convenience init(frame: CGRect, style: UITableViewStyle) {
+        self.init(nibName: nil, bundle: nil)
+        
+        createTableView(frame: frame, style: style)
+    }
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.whiteColor()
         
         queue.qualityOfService = NSQualityOfService.UserInitiated
         queue.name = "FOTableViewController"
         queue.maxConcurrentOperationCount = 1
         
-        view.backgroundColor = UIColor.whiteColor()
+        if tableView == nil {
+            createTableView()
+        }
         
         tableView.backgroundColor = UIColor.whiteColor()
         tableView.dataSource = dataSource
         tableView.delegate = self
         view.addSubview(tableView)
+    }
+    
+    private func createTableView(frame frame: CGRect = CGRectZero, style: UITableViewStyle = .Plain) {
+        tableView = UITableView(frame: CGRectZero, style: style)
     }
     
     public override func viewDidLayoutSubviews() {
@@ -62,8 +76,6 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     // MARK: Modification
     
     func tableUpdate(update: (() -> ()), duration: NSTimeInterval, completion: (() -> ())?) {
-//        UIView.beginAnimations("FOTableViewController", context: nil)
-//        UIView.setAnimationDuration(duration)
         CATransaction.begin()
         CATransaction.setCompletionBlock {
             completion?()
@@ -72,7 +84,6 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         update()
         tableView.endUpdates()
         CATransaction.commit()
-//        UIView.commitAnimations()
     }
 
     public func queueUpdate(update: (() -> ()), completion: (() -> ())? = nil) {
@@ -93,27 +104,35 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         queue.addOperation(NSBlockOperation(block: work))
     }
     
-    public func insertSections(sections: [FOTableSection], indexes: NSIndexSet, animation: UITableViewRowAnimation = .Fade) {
+    public func insertSections(sections: [FOTableSection], indexes: NSIndexSet, animation: UITableViewRowAnimation? = .Fade) {
         dataSource.insertSections(sections, atIndexes: indexes, tableView: tableView, viewController: self)
-        tableView.insertSections(indexes, withRowAnimation: animation)
+        if let animation = animation {
+            tableView.insertSections(indexes, withRowAnimation: animation)
+        }
     }
     
-    public func deleteSectionsAtIndexes(indexes: NSIndexSet, animation: UITableViewRowAnimation = .Fade) {
+    public func deleteSectionsAtIndexes(indexes: NSIndexSet, animation: UITableViewRowAnimation? = .Fade) {
         dataSource.deleteSectionsAtIndexes(indexes, tableView: tableView)
-        tableView.deleteSections(indexes, withRowAnimation: animation)
+        if let animation = animation {
+            tableView.deleteSections(indexes, withRowAnimation: animation)
+        }
     }
     
-    public func insertItems(items: [FOTableItem], indexPaths: [NSIndexPath], animation: UITableViewRowAnimation = .Fade) {
+    public func insertItems(items: [FOTableItem], indexPaths: [NSIndexPath], animation: UITableViewRowAnimation? = .Fade) {
         dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: tableView, viewController: self)
-        tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+        if let animation = animation {
+            tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+        }
     }
     
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], animation: UITableViewRowAnimation = .Fade) {
+    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], animation: UITableViewRowAnimation? = .Fade) {
         dataSource.deleteItemsAtIndexPaths(indexPaths, tableView: tableView)
-        tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+        if let animation = animation {
+            tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+        }
     }
     
-    public func appendItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation = .Fade) {
+    public func appendItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation? = .Fade) {
         if let section = dataSource.sectionAtIndex(sectionIndex) {
             var location = tableView.numberOfRowsInSection(sectionIndex)
             
@@ -126,7 +145,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-    public func clearAllItems(animation: UITableViewRowAnimation = .Fade) {
+    public func clearAllItems(animation: UITableViewRowAnimation? = .Fade) {
         let indexes = NSIndexSet(indexesInRange: NSMakeRange(0, dataSource.numberOfSectionsInTableView(tableView)))
         deleteSectionsAtIndexes(indexes, animation: animation)
     }

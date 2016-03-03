@@ -9,25 +9,6 @@
         <scene sceneID="DRU-7J-7Me">
             <objects>
                 <tableViewController id="Kai-Zr-JvF" customClass="MenuController" customModule="FOCollections" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="uGv-ND-7Vq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="7uH-64-cTU">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7uH-64-cTU" id="7Zl-nQ-7VT">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Kai-Zr-JvF" id="YWo-S2-5mJ"/>
-                            <outlet property="delegate" destination="Kai-Zr-JvF" id="yRh-8X-RuP"/>
-                        </connections>
-                    </tableView>
                     <navigationItem key="navigationItem" title="Demo" id="Gd7-wW-gYH"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZv-GO-4PH" userLabel="First Responder" sceneMemberID="firstResponder"/>
