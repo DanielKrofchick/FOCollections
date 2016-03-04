@@ -125,16 +125,6 @@ public class FOCollectionViewDataSource: NSObject {
         }
     }
     
-    func pagingIndexPath(section: FOCollectionSection) -> NSIndexPath? {
-        let item = pagingItemForSection(section)
-
-        return indexPathsForItem(item).first
-    }
-    
-    public func pagingItemForSection(section: FOCollectionSection) -> FOCollectionItem {
-        return FOCollectionPagingItem(section: section)
-    }
-    
     // MARK: - Lookup
     func keyForItemAtIndexPath(indexPath: NSIndexPath) -> String? {
         if let key = keyCache[indexPath] {

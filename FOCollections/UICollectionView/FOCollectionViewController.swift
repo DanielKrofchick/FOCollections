@@ -100,7 +100,7 @@ public class FOCollectionViewController: UICollectionViewController {
             if let section = dataSource.sectionAtIndex(sectionIndex) {
                 var location = collectionView.numberOfItemsInSection(sectionIndex)
                 
-                if dataSource.pagingIndexPath(section) != nil {
+                if pagingIndexPath(section) != nil {
                     location--
                 }
                 
@@ -119,25 +119,35 @@ public class FOCollectionViewController: UICollectionViewController {
     
     public func setPagingState(pagingState: PagingState, sectionIndex: Int) {
         if let section = dataSource.sectionAtIndex(sectionIndex) {
-            let pagingIndexPath = dataSource.pagingIndexPath(section)
+            let indexPath = pagingIndexPath(section)
 
             if section.pagingState == pagingState {
-            } else if pagingState == .Paging && pagingIndexPath == nil {
+            } else if pagingState == .Paging && indexPath == nil {
                 // ADD
                 if var pagingIndexPath = dataSource.lastIndexPathForSectionIndex(sectionIndex) {
                     pagingIndexPath = NSIndexPath(forRow: pagingIndexPath.row + 1, inSection: pagingIndexPath.section)
-                    let pagingItem = dataSource.pagingItemForSection(section)
+                    let pagingItem = pagingItemForSection(section)
                     insertItems([pagingItem], indexPaths: [pagingIndexPath])
                 }
             } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) {
                 // REMOVE
-                if let pagingIndexPath = pagingIndexPath {
+                if let pagingIndexPath = indexPath {
                     deleteItemsAtIndexPaths([pagingIndexPath])
                 }
             }
             
             section.pagingState = pagingState
         }
+    }
+    
+    func pagingIndexPath(section: FOCollectionSection) -> NSIndexPath? {
+        let item = pagingItemForSection(section)
+        
+        return dataSource.indexPathsForItem(item).first
+    }
+    
+    public func pagingItemForSection(section: FOCollectionSection) -> FOCollectionItem {
+        return FOCollectionPagingItem(section: section)
     }
     
     public func refreshVisibleCells() {

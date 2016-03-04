@@ -151,6 +151,7 @@ SWIFT_CLASS("_TtC13FOCollections26FOCollectionViewController")
 - (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * __nullable)indexPaths;
 - (void)appendItems:(NSArray<FOCollectionItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex;
 - (void)clearAllItems;
+- (FOCollectionItem * __nonnull)pagingItemForSection:(FOCollectionSection * __nonnull)section;
 - (void)refreshVisibleCells;
 - (void)nextPageForSection:(NSInteger)section collectionView:(UICollectionView * __nonnull)collectionView;
 - (nonnull instancetype)initWithCollectionViewLayout:(UICollectionViewLayout * __nonnull)layout OBJC_DESIGNATED_INITIALIZER;
@@ -200,7 +201,6 @@ SWIFT_CLASS("_TtC13FOCollections26FOCollectionViewDataSource")
 - (void)deleteSectionsAtIndexes:(NSIndexSet * __nonnull)indexes collectionView:(UICollectionView * __nonnull)collectionView;
 - (void)insertItems:(NSArray<FOCollectionItem *> * __nonnull)items atIndexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths collectionView:(UICollectionView * __nonnull)collectionView viewController:(UIViewController * __nonnull)viewController;
 - (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths collectionView:(UICollectionView * __nonnull)collectionView;
-- (FOCollectionItem * __nonnull)pagingItemForSection:(FOCollectionSection * __nonnull)section;
 - (FOCollectionSection * __nullable)sectionAtIndex:(NSInteger)index;
 - (FOCollectionItem * __nullable)itemAtIndexPath:(NSIndexPath * __nonnull)indexPath;
 - (id __nullable)dataAtIndexPath:(NSIndexPath * __nonnull)indexPath;
@@ -260,10 +260,11 @@ SWIFT_CLASS("_TtC13FOCollections14FOTableSection")
 
 SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
 @interface FOTableViewController : UIViewController <UIScrollViewDelegate, UITableViewDelegate>
-@property (nonatomic, strong) UITableView * __nonnull tableView;
+@property (nonatomic, strong) UITableView * __null_unspecified tableView;
 @property (nonatomic, readonly, strong) FOTableViewDataSource * __nonnull dataSource;
 @property (nonatomic) CGFloat pagingThreshold;
 @property (nonatomic) NSTimeInterval updateDuration;
+- (nonnull instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style;
 - (void)viewDidLoad;
 - (void)viewDidLayoutSubviews;
 - (void)viewDidAppear:(BOOL)animated;
@@ -271,12 +272,7 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
 - (void)willTransitionToTraitCollection:(UITraitCollection * __nonnull)newCollection withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> __nonnull)coordinator;
 - (void)queueUpdate:(void (^ __nonnull)(void))update completion:(void (^ __nullable)(void))completion;
 - (void)queueWork:(void (^ __nonnull)(void))work;
-- (void)insertSections:(NSArray<FOTableSection *> * __nonnull)sections indexes:(NSIndexSet * __nonnull)indexes animation:(UITableViewRowAnimation)animation;
-- (void)deleteSectionsAtIndexes:(NSIndexSet * __nonnull)indexes animation:(UITableViewRowAnimation)animation;
-- (void)insertItems:(NSArray<FOTableItem *> * __nonnull)items indexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths animation:(UITableViewRowAnimation)animation;
-- (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths animation:(UITableViewRowAnimation)animation;
-- (void)appendItems:(NSArray<FOTableItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex animation:(UITableViewRowAnimation)animation;
-- (void)clearAllItems:(UITableViewRowAnimation)animation;
+- (FOTableItem * __nonnull)pagingItemForSection:(FOTableSection * __nonnull)section;
 - (void)refreshVisibleCells;
 - (void)nextPageForSection:(NSInteger)section tableView:(UITableView * __nonnull)tableView;
 - (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
@@ -334,7 +330,6 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewDataSource")
 - (void)deleteSectionsAtIndexes:(NSIndexSet * __nonnull)indexes tableView:(UITableView * __nonnull)tableView;
 - (void)insertItems:(NSArray<FOTableItem *> * __nonnull)items atIndexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths tableView:(UITableView * __nonnull)tableView viewController:(UIViewController * __nonnull)viewController;
 - (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths tableView:(UITableView * __nonnull)tableView;
-- (FOTableItem * __nonnull)pagingItemForSection:(FOTableSection * __nonnull)section;
 - (FOTableSection * __nullable)sectionAtIndex:(NSInteger)index;
 - (FOTableItem * __nullable)itemAtIndexPath:(NSIndexPath * __nonnull)indexPath;
 - (id __nullable)dataAtIndexPath:(NSIndexPath * __nonnull)indexPath;

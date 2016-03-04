@@ -136,7 +136,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         if let section = dataSource.sectionAtIndex(sectionIndex) {
             var location = tableView.numberOfRowsInSection(sectionIndex)
             
-            if dataSource.pagingIndexPath(section) != nil {
+            if pagingIndexPath(section) != nil {
                 location--
             }
             
@@ -152,25 +152,35 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     
     public func setPagingState(pagingState: PagingState, sectionIndex: Int, animation: UITableViewRowAnimation = .Fade) {
         if let section = dataSource.sectionAtIndex(sectionIndex) {
-            let pagingIndexPath = dataSource.pagingIndexPath(section)
+            let indexPath = pagingIndexPath(section)
 
             if section.pagingState == pagingState {
-            } else if pagingState == .Paging && pagingIndexPath == nil {
+            } else if pagingState == .Paging && indexPath == nil {
                 // ADD
                 if var pagingIndexPath = dataSource.lastIndexPathForSectionIndex(sectionIndex) {
                     pagingIndexPath = NSIndexPath(forRow: pagingIndexPath.row + 1, inSection: pagingIndexPath.section)
-                    let pagingItem = dataSource.pagingItemForSection(section)
+                    let pagingItem = pagingItemForSection(section)
                     insertItems([pagingItem], indexPaths: [pagingIndexPath], animation: animation)
                 }
             } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) {
                 // REMOVE
-                if let pagingIndexPath = pagingIndexPath {
+                if let pagingIndexPath = indexPath {
                     deleteItemsAtIndexPaths([pagingIndexPath], animation: animation)
                 }
             }
             
             section.pagingState = pagingState
         }
+    }
+    
+    func pagingIndexPath(section: FOTableSection) -> NSIndexPath? {
+        let item = pagingItemForSection(section)
+        
+        return dataSource.indexPathsForItem(item).first
+    }
+    
+    public func pagingItemForSection(section: FOTableSection) -> FOTableItem {
+        return FOTablePagingItem(section: section)
     }
     
     public func refreshVisibleCells() {

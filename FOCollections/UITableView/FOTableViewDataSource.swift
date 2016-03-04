@@ -122,16 +122,6 @@ public class FOTableViewDataSource: NSObject {
         }
     }
     
-    func pagingIndexPath(section: FOTableSection) -> NSIndexPath? {
-        let item = pagingItemForSection(section)
-        
-        return indexPathsForItem(item).first
-    }
-    
-    public func pagingItemForSection(section: FOTableSection) -> FOTableItem {
-        return FOTablePagingItem(section: section)
-    }
-    
     // MARK: - Lookup    
     func keyForItemAtIndexPath(indexPath: NSIndexPath) -> String? {
         if let key = keyCache[indexPath] {
