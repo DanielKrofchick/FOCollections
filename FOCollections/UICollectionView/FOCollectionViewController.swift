@@ -110,6 +110,19 @@ public class FOCollectionViewController: UICollectionViewController {
         }
     }
     
+    public func prependItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int) {
+        if let section = dataSource.sectionAtIndex(sectionIndex) {
+            var location = 0
+            
+            if pagingIndexPath(section) != nil {
+                location++
+            }
+            
+            let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
+            insertItems(items, indexPaths: indexPaths)
+        }
+    }
+    
     public func clearAllItems() {
         if let collectionView = collectionView {
             let indexes = NSIndexSet(indexesInRange: NSMakeRange(0, dataSource.numberOfSectionsInCollectionView(collectionView)))

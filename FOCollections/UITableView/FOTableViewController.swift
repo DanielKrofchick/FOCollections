@@ -143,6 +143,20 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
             insertItems(items, indexPaths: indexPaths, animation: animation)
         }
     }
+
+    public func prependItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation? = .Fade) {
+        if let section = dataSource.sectionAtIndex(sectionIndex) {
+            pagingIndexPath(section)
+            var location = 0
+            
+            if pagingIndexPath(section) != nil {
+                location++
+            }
+            
+            let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
+            insertItems(items, indexPaths: indexPaths, animation: animation)
+        }
+    }
     
     public func clearAllItems(animation: UITableViewRowAnimation? = .Fade) {
         let indexes = NSIndexSet(indexesInRange: NSMakeRange(0, dataSource.numberOfSectionsInTableView(tableView)))

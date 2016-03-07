@@ -37,6 +37,8 @@ class CollectionViewController: FOCollectionViewController {
         queueUpdate({[weak self] in self?.setPagingState(.Paging, sectionIndex: 0)})
         queueUpdate({[weak self] in self?.setPagingState(.Finished, sectionIndex: 0)})
         queueUpdate({[weak self] in self?.setPagingState(.NotPaging, sectionIndex: 0)})
+        queueUpdate({[weak self] in self?.setPagingState(.Paging, sectionIndex: 0)})
+        queueUpdate({[weak self] in self?.prependItems(self!.items(UIColor.greenColor(), items: 3), toSectionAtIndex: 0)})
     }
     
     func section(color: UIColor = UIColor.blueColor(), items: Int = 8) -> FOCollectionSection {
