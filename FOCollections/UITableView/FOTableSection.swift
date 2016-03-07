@@ -13,6 +13,7 @@ public class FOTableSection: NSObject {
     public var items: [FOTableItem]? = nil
     public var identifier: String? = nil                                           // Unique item ID
     public var pagingState: PagingState = .Disabled
+    public var pagingDirection: PagingDirection = .Down
     
     func linkItems(viewController: UIViewController?) {
         items?.forEach{

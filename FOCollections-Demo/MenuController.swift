@@ -17,7 +17,6 @@ class MenuController: FOTableViewController {
         super.viewDidLoad()
         
         tableView.backgroundColor = UIColor.orangeColor()
-        updateDuration = 0.5
         
         loadData()
     }

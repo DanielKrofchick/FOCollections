@@ -16,7 +16,6 @@ class TableViewController: FOTableViewController {
         super.viewDidLoad()
         
         tableView.backgroundColor = UIColor.orangeColor()
-        updateDuration = 0.5
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "play")
         
@@ -61,6 +60,7 @@ class TableViewController: FOTableViewController {
         section.identifier = NSUUID().UUIDString
         section.pagingState = .Disabled
         section.items = self.items(color, items: items)
+        section.pagingDirection = .Down
         
         return section
     }

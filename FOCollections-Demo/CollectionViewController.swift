@@ -46,6 +46,7 @@ class CollectionViewController: FOCollectionViewController {
         section.pagingState = .Disabled
         section.columns = 8
         section.items = self.items(color, items: items)
+        section.pagingDirection = .Up
         
         return section
     }

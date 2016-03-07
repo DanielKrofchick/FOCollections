@@ -12,3 +12,9 @@ public enum PagingState: Int {
     case Paging
     case Finished
 }
+
+public enum PagingDirection: Int {
+    case Up
+    case Down
+}
+

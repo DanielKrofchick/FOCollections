@@ -124,8 +124,17 @@ public class FOCollectionViewController: UICollectionViewController {
             if section.pagingState == pagingState {
             } else if pagingState == .Paging && indexPath == nil {
                 // ADD
-                if var pagingIndexPath = dataSource.lastIndexPathForSectionIndex(sectionIndex) {
-                    pagingIndexPath = NSIndexPath(forRow: pagingIndexPath.row + 1, inSection: pagingIndexPath.section)
+                var pagingIndexPath: NSIndexPath? = nil
+                
+                if section.pagingDirection == .Down {
+                    if let p = dataSource.lastIndexPathForSectionIndex(sectionIndex) {
+                        pagingIndexPath = NSIndexPath(forRow: p.row + 1, inSection: p.section)
+                    }
+                } else if section.pagingDirection == .Up {
+                    pagingIndexPath = NSIndexPath(forItem: 0, inSection: 0)
+                }
+                
+                if let pagingIndexPath = pagingIndexPath {
                     let pagingItem = pagingItemForSection(section)
                     insertItems([pagingItem], indexPaths: [pagingIndexPath])
                 }
@@ -182,22 +191,30 @@ public class FOCollectionViewController: UICollectionViewController {
         }
         
         let notPaging = dataSource.sectionsForPagingState(.NotPaging)
-
+        
         if notPaging.count > 0 {
-            if let indexPath = dataSource.lastIndexPathForSectionIndex(notPaging.firstIndex), collectionView = collectionView {
-                if let rect = collectionView.layoutAttributesForItemAtIndexPath(indexPath)?.frame {
-                    let distance = CGRectGetMaxY(rect) - (collectionView.contentOffset.y) - (collectionView.frame.size.height)
-                    
-                    if distance < pagingThreshold {
-                        queueUpdate({
-                            [weak self] in
-                            self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
-                        }, completion: {
-                            [weak self] finished in
-                            if let collectionView = self?.collectionView {
-                                self?.nextPageForSection(notPaging.firstIndex, collectionView: collectionView)
-                            }
-                        })
+            if let section = dataSource.sectionAtIndex(notPaging.firstIndex) {
+                if let indexPath = pagingIndexPath(section), collectionView = collectionView {
+                    if let rect = collectionView.layoutAttributesForItemAtIndexPath(indexPath)?.frame {
+                        var distance = CGFloat.max
+                        
+                        if section.pagingDirection == .Down {
+                            distance = CGRectGetMinY(rect) - collectionView.contentOffset.y - collectionView.frame.size.height
+                        } else if section.pagingDirection == .Up {
+                            distance = collectionView.contentOffset.y - CGRectGetMaxY(rect)
+                        }
+                        
+                        if distance < pagingThreshold {
+                            queueUpdate({
+                                [weak self] in
+                                self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
+                                }, completion: {
+                                    [weak self] finished in
+                                    if let collectionView = self?.collectionView {
+                                        self?.nextPageForSection(notPaging.firstIndex, collectionView: collectionView)
+                                    }
+                                })
+                        }
                     }
                 }
             }
