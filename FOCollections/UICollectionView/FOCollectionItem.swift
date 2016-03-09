@@ -20,9 +20,9 @@ public class FOCollectionItem: NSObject, UICollectionViewDelegateFlowLayout {
     
     public func configure(cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: NSIndexPath){}
     // Gets the reource identified by key
-    public func getResource(forKey key: String, collectionView: UICollectionView, indexPath: NSIndexPath, completion: ((resource: AnyObject, result: AnyObject) -> ())) -> NSOperation? {return nil}
+    public func getResource(forKey key: String, collectionView: UICollectionView, indexPath: NSIndexPath, completion: ((resource: AnyObject?, result: AnyObject?) -> ())) -> NSOperation? {return nil}
     // Populates the cell with the resource identified by key. IndexPath may have changed with async call, do not rely on it.
-    public func setResource(resource: AnyObject, result: AnyObject, forKey key: String, collectionView: UICollectionView, indexPath: NSIndexPath){}
+    public func setResource(resource: AnyObject?, result: AnyObject?, forKey key: String, collectionView: UICollectionView, indexPath: NSIndexPath){}
     // The item produces a unique key per resource
     public func resourceKeys() -> [String]{return [String]()}
     
@@ -38,6 +38,20 @@ public class FOCollectionItem: NSObject, UICollectionViewDelegateFlowLayout {
         }
         
         return operations
+    }
+    
+    public func cells() -> [UICollectionViewCell] {
+        var cells = [UICollectionViewCell]()
+        
+        if let viewController = viewController as? FOCollectionViewController {
+            for indexPath in viewController.dataSource.indexPathsForItem(self) {
+                if let cell = viewController.collectionView?.cellForItemAtIndexPath(indexPath) {
+                    cells.append(cell)
+                }
+            }
+        }
+        
+        return cells
     }
 
     override public func isEqual(o: AnyObject?) -> Bool {

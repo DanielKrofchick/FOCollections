@@ -111,10 +111,11 @@ SWIFT_CLASS("_TtC13FOCollections16FOCollectionItem")
 @property (nonatomic, weak) FOCollectionSection * __nullable section;
 @property (nonatomic, weak) UIViewController * __nullable viewController;
 - (void)configure:(UICollectionViewCell * __nonnull)cell collectionView:(UICollectionView * __nonnull)collectionView indexPath:(NSIndexPath * __nonnull)indexPath;
-- (NSOperation * __nullable)getResourceForKey:(NSString * __nonnull)key collectionView:(UICollectionView * __nonnull)collectionView indexPath:(NSIndexPath * __nonnull)indexPath completion:(void (^ __nonnull)(id __nonnull, id __nonnull))completion;
-- (void)setResource:(id __nonnull)resource result:(id __nonnull)result forKey:(NSString * __nonnull)key collectionView:(UICollectionView * __nonnull)collectionView indexPath:(NSIndexPath * __nonnull)indexPath;
+- (NSOperation * __nullable)getResourceForKey:(NSString * __nonnull)key collectionView:(UICollectionView * __nonnull)collectionView indexPath:(NSIndexPath * __nonnull)indexPath completion:(void (^ __nonnull)(id __nullable, id __nullable))completion;
+- (void)setResource:(id __nullable)resource result:(id __nullable)result forKey:(NSString * __nonnull)key collectionView:(UICollectionView * __nonnull)collectionView indexPath:(NSIndexPath * __nonnull)indexPath;
 - (NSArray<NSString *> * __nonnull)resourceKeys;
 - (NSArray<NSOperation *> * __nonnull)getResources:(UICollectionView * __nonnull)collectionView indexPath:(NSIndexPath * __nonnull)indexPath;
+- (NSArray<UICollectionViewCell *> * __nonnull)cells;
 - (BOOL)isEqual:(id __nullable)o;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -150,6 +151,7 @@ SWIFT_CLASS("_TtC13FOCollections26FOCollectionViewController")
 - (void)insertItems:(NSArray<FOCollectionItem *> * __nullable)items indexPaths:(NSArray<NSIndexPath *> * __nullable)indexPaths;
 - (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * __nullable)indexPaths;
 - (void)appendItems:(NSArray<FOCollectionItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex;
+- (void)prependItems:(NSArray<FOCollectionItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex;
 - (void)clearAllItems;
 - (FOCollectionItem * __nonnull)pagingItemForSection:(FOCollectionSection * __nonnull)section;
 - (void)refreshVisibleCells;
@@ -238,10 +240,11 @@ SWIFT_CLASS("_TtC13FOCollections11FOTableItem")
 @property (nonatomic, weak) FOTableSection * __nullable section;
 @property (nonatomic, weak) UIViewController * __nullable viewController;
 - (void)configure:(UITableViewCell * __nonnull)cell tableView:(UITableView * __nonnull)tableView indexPath:(NSIndexPath * __nonnull)indexPath;
-- (NSOperation * __nullable)getResourceForKey:(NSString * __nonnull)key tableView:(UITableView * __nonnull)tableView indexPath:(NSIndexPath * __nonnull)indexPath completion:(void (^ __nonnull)(id __nonnull, id __nonnull))completion;
-- (void)setResource:(id __nonnull)resource result:(id __nonnull)result forKey:(NSString * __nonnull)key tableView:(UITableView * __nonnull)tableView indexPath:(NSIndexPath * __nonnull)indexPath;
+- (NSOperation * __nullable)getResourceForKey:(NSString * __nonnull)key tableView:(UITableView * __nonnull)tableView indexPath:(NSIndexPath * __nonnull)indexPath completion:(void (^ __nonnull)(id __nullable, id __nullable))completion;
+- (void)setResource:(id __nullable)resource result:(id __nullable)result forKey:(NSString * __nonnull)key tableView:(UITableView * __nonnull)tableView indexPath:(NSIndexPath * __nonnull)indexPath;
 - (NSArray<NSString *> * __nonnull)resourceKeys;
 - (NSArray<NSOperation *> * __nonnull)getResources:(UITableView * __nonnull)tableView indexPath:(NSIndexPath * __nonnull)indexPath;
+- (NSArray<UITableViewCell *> * __nonnull)cells;
 - (BOOL)isEqual:(id __nullable)o;
 - (NSInteger)tableView:(UITableView * __nonnull)tableView numberOfRowsInSection:(NSInteger)section;
 - (UITableViewCell * __nonnull)tableView:(UITableView * __nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * __nonnull)indexPath;
@@ -263,7 +266,6 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
 @property (nonatomic, strong) UITableView * __null_unspecified tableView;
 @property (nonatomic, readonly, strong) FOTableViewDataSource * __nonnull dataSource;
 @property (nonatomic) CGFloat pagingThreshold;
-@property (nonatomic) NSTimeInterval updateDuration;
 - (nonnull instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style;
 - (void)viewDidLoad;
 - (void)viewDidLayoutSubviews;

@@ -19,9 +19,9 @@ public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     public func configure(cell: UITableViewCell, tableView: UITableView, indexPath: NSIndexPath){}
     // Gets the reource identified by key
-    public func getResource(forKey key: String, tableView: UITableView, indexPath: NSIndexPath, completion: ((resource: AnyObject, result: AnyObject) -> ())) -> NSOperation? {return nil}
+    public func getResource(forKey key: String, tableView: UITableView, indexPath: NSIndexPath, completion: ((resource: AnyObject?, result: AnyObject?) -> ())) -> NSOperation? {return nil}
     // Populates the cell with the resource identified by key. IndexPath may have changed with async call, do not rely on it.
-    public func setResource(resource: AnyObject, result: AnyObject, forKey key: String, tableView: UITableView, indexPath: NSIndexPath){}
+    public func setResource(resource: AnyObject?, result: AnyObject?, forKey key: String, tableView: UITableView, indexPath: NSIndexPath){}
     // The item produces a unique key per resource
     public func resourceKeys() -> [String]{return [String]()}
     
@@ -39,7 +39,21 @@ public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
         return operations
     }
     
-    override public func isEqual(o: AnyObject?) -> Bool {
+    public func cells() -> [UITableViewCell] {
+        var cells = [UITableViewCell]()
+
+        if let viewController = viewController as? FOTableViewController {
+            for indexPath in viewController.dataSource.indexPathsForItem(self) {
+                if let cell = viewController.tableView.cellForRowAtIndexPath(indexPath) {
+                    cells.append(cell)
+                }
+            }
+        }
+        
+        return cells
+    }
+    
+    public override func isEqual(o: AnyObject?) -> Bool {
         if let o = o as? FOTableItem {
             if o.data == nil && data == nil {
                 return o.identifier == identifier
@@ -51,6 +65,7 @@ public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
         } else {
             return false
         }
+
     }
     
     func link(section: FOTableSection?, viewController: UIViewController?) {

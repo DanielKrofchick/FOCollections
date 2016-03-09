@@ -261,6 +261,8 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
                                 }
                             })
                     }
+                } else {
+                    setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
                 }
             }
         }

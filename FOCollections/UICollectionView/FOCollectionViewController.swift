@@ -229,6 +229,8 @@ public class FOCollectionViewController: UICollectionViewController {
                                 })
                         }
                     }
+                } else {
+                    setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
                 }
             }
         }
