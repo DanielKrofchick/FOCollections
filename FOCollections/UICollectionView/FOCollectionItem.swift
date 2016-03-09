@@ -20,7 +20,7 @@ public class FOCollectionItem: NSObject, UICollectionViewDelegateFlowLayout {
     
     public func configure(cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: NSIndexPath){}
     // Gets the reource identified by key
-    public func getResource(forKey key: String, collectionView: UICollectionView, indexPath: NSIndexPath, completion: ((resource: AnyObject?, result: AnyObject?) -> ())) -> NSOperation? {return nil}
+    public func getResource(forKey key: String, collectionView: UICollectionView, indexPath: NSIndexPath, completion: (resource: AnyObject?, result: AnyObject?) -> ()) -> NSOperation? {return nil}
     // Populates the cell with the resource identified by key. IndexPath may have changed with async call, do not rely on it.
     public func setResource(resource: AnyObject?, result: AnyObject?, forKey key: String, collectionView: UICollectionView, indexPath: NSIndexPath){}
     // The item produces a unique key per resource

@@ -135,7 +135,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         if let section = dataSource.sectionAtIndex(sectionIndex) {
             var location = tableView.numberOfRowsInSection(sectionIndex)
             
-            if pagingIndexPath(section) != nil {
+            if section.pagingDirection == .Down && pagingIndexPath(section) != nil {
                 location--
             }
             
@@ -149,7 +149,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
             pagingIndexPath(section)
             var location = 0
             
-            if pagingIndexPath(section) != nil {
+            if section.pagingDirection == .Up && pagingIndexPath(section) != nil {
                 location++
             }
             
@@ -173,8 +173,8 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
                 var pagingIndexPath: NSIndexPath? = nil
                 
                 if section.pagingDirection == .Down {
-                    if var pagingIndexPath = dataSource.lastIndexPathForSectionIndex(sectionIndex) {
-                        pagingIndexPath = NSIndexPath(forRow: pagingIndexPath.row + 1, inSection: pagingIndexPath.section)
+                    if let p = dataSource.lastIndexPathForSectionIndex(sectionIndex) {
+                        pagingIndexPath = NSIndexPath(forRow: p.row + 1, inSection: p.section)
                     }
                 } else if section.pagingDirection == .Up {
                     pagingIndexPath = NSIndexPath(forItem: 0, inSection: 0)
@@ -218,7 +218,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     // MARK: Paging
     
     // Implemented by subclass
-    public func nextPageForSection(section: Int, tableView: UITableView) {
+    public func nextPageForSection(section: FOTableSection, tableView: UITableView) {
     }
     
     func startPagingTimer() {
@@ -232,6 +232,11 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     }
     
     func checkForPaging() {
+        addPagingCellIfNeeded()
+        triggerPagingIfNeeded()
+    }
+    
+    func addPagingCellIfNeeded() {
         if dataSource.sectionsForPagingState(.Paging).count > 0 {
             return
         }
@@ -240,29 +245,41 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         
         if notPaging.count > 0 {
             if let section = dataSource.sectionAtIndex(notPaging.firstIndex) {
-                if let indexPath = pagingIndexPath(section) {
-                    let rect = tableView.rectForRowAtIndexPath(indexPath)
-                    var distance = CGFloat.max
-                    
-                    if section.pagingDirection == .Down {
-                        distance = CGRectGetMinY(rect) - tableView.contentOffset.y - tableView.frame.size.height
-                    } else if section.pagingDirection == .Up {
-                        distance = tableView.contentOffset.y - CGRectGetMaxY(rect)
-                    }
-                    
-                    if distance < pagingThreshold {
-                        queueUpdate({
-                            [weak self] in
-                            self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
-                            }, completion: {
-                                [weak self] in
-                                if let tableView = self?.tableView {
-                                    self?.nextPageForSection(notPaging.firstIndex, tableView: tableView)
-                                }
-                            })
-                    }
-                } else {
-                    setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
+                if pagingIndexPath(section) == nil {
+                    queueUpdate({
+                        [weak self] in
+                        self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
+                    })
+                }
+            }
+        }
+    }
+    
+    func triggerPagingIfNeeded() {
+        if dataSource.sectionsForPagingState(.PagingAndFetching).firstIndex != NSNotFound {
+            return
+        }
+        
+        let sectionIndex = dataSource.sectionsForPagingState(.Paging).firstIndex
+        
+        if sectionIndex == NSNotFound {
+            return
+        }
+        
+        if let section = dataSource.sectionAtIndex(sectionIndex) {
+            if let indexPath = pagingIndexPath(section) {
+                let rect = tableView.rectForRowAtIndexPath(indexPath)
+                var distance = CGFloat.max
+                
+                if section.pagingDirection == .Down {
+                    distance = CGRectGetMinY(rect) - tableView.contentOffset.y - tableView.frame.size.height
+                } else if section.pagingDirection == .Up {
+                    distance = tableView.contentOffset.y - CGRectGetMaxY(rect)
+                }
+                
+                if distance < pagingThreshold {
+                    section.pagingState = .PagingAndFetching
+                    nextPageForSection(section, tableView: tableView)
                 }
             }
         }

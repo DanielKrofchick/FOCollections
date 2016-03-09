@@ -10,6 +10,7 @@ public enum PagingState: Int {
     case Disabled
     case NotPaging
     case Paging
+    case PagingAndFetching
     case Finished
 }
 

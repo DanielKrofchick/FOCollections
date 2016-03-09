@@ -22,7 +22,7 @@ public class FOCollectionSection: NSObject, UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func itemAtIndex(index: Int) -> FOCollectionItem? {
+    public func itemAtIndex(index: Int) -> FOCollectionItem? {
         return items?.safe(index)
     }
     
@@ -54,6 +54,10 @@ public class FOCollectionSection: NSObject, UICollectionViewDelegateFlowLayout {
         }
         
         return indexPaths
+    }
+    
+    public func pageFetchComplete() {
+        pagingState = .Paging
     }
     
 }

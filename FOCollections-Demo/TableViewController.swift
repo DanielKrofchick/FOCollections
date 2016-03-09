@@ -25,23 +25,23 @@ class TableViewController: FOTableViewController {
     func play() {
         queueUpdate({[weak self] in self?.clearAllItems()})
 
-        queueUpdate({[weak self] in self?.insertSections([self!.section(items: 0)], indexes: NSIndexSet(index: 0))})
-        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.redColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.orangeColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.yellowColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.greenColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.blueColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.purpleColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.brownColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.blackColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
+//        queueUpdate({[weak self] in self?.insertSections([self!.section(items: 0)], indexes: NSIndexSet(index: 0))})
+//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.redColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
+//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.orangeColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
+//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.yellowColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
+//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.greenColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
+//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.blueColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
+//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.purpleColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
+//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.brownColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
+//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.blackColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
+//        
+//        queueUpdate({[weak self] in
+//            for (index, item) in self!.dataSource.enumerate() {
+//                print("index: \(index) color: \(item.data)")
+//            }
+//        })
         
-        queueUpdate({[weak self] in
-            for (index, item) in self!.dataSource.enumerate() {
-                print("index: \(index) color: \(item.data)")
-            }
-        })
-        
-//        queueUpdate({[weak self] in self?.insertSections([self!.section()], indexes: NSIndexSet(index: 0))})
+        queueUpdate({[weak self] in self?.insertSections([self!.section()], indexes: NSIndexSet(index: 0))})
 //        queueUpdate({[weak self] in self?.deleteSectionsAtIndexes(NSIndexSet(index: 0))})
 //        queueUpdate({[weak self] in self?.insertSections([self!.section(UIColor.brownColor())], indexes: NSIndexSet(index: 0))})
 //        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.yellowColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
@@ -58,9 +58,9 @@ class TableViewController: FOTableViewController {
         let section = FOTableSection()
         
         section.identifier = NSUUID().UUIDString
-        section.pagingState = .Disabled
+        section.pagingState = .NotPaging
         section.items = self.items(color, items: items)
-        section.pagingDirection = .Down
+        section.pagingDirection = .Up
         
         return section
     }
@@ -87,6 +87,10 @@ class TableViewController: FOTableViewController {
         
         return item
     }
-
+    
+    override func nextPageForSection(section: FOTableSection, tableView: UITableView) {
+        print("\(__FUNCTION__)")
+    }
+    
 }
 

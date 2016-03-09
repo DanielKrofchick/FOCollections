@@ -125,6 +125,8 @@ SWIFT_CLASS("_TtC13FOCollections19FOCollectionSection")
 @interface FOCollectionSection : NSObject <UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, copy) NSArray<FOCollectionItem *> * __nullable items;
 @property (nonatomic, copy) NSString * __nullable identifier;
+- (FOCollectionItem * __nullable)itemAtIndex:(NSInteger)index;
+- (void)pageFetchComplete;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -155,7 +157,7 @@ SWIFT_CLASS("_TtC13FOCollections26FOCollectionViewController")
 - (void)clearAllItems;
 - (FOCollectionItem * __nonnull)pagingItemForSection:(FOCollectionSection * __nonnull)section;
 - (void)refreshVisibleCells;
-- (void)nextPageForSection:(NSInteger)section collectionView:(UICollectionView * __nonnull)collectionView;
+- (void)nextPageForSection:(FOCollectionSection * __nonnull)section collectionView:(UICollectionView * __nonnull)collectionView;
 - (nonnull instancetype)initWithCollectionViewLayout:(UICollectionViewLayout * __nonnull)layout OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
@@ -256,6 +258,8 @@ SWIFT_CLASS("_TtC13FOCollections14FOTableSection")
 @interface FOTableSection : NSObject
 @property (nonatomic, copy) NSArray<FOTableItem *> * __nullable items;
 @property (nonatomic, copy) NSString * __nullable identifier;
+- (FOTableItem * __nullable)itemAtIndex:(NSInteger)index;
+- (void)pageFetchComplete;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -276,7 +280,7 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
 - (void)queueWork:(void (^ __nonnull)(void))work;
 - (FOTableItem * __nonnull)pagingItemForSection:(FOTableSection * __nonnull)section;
 - (void)refreshVisibleCells;
-- (void)nextPageForSection:(NSInteger)section tableView:(UITableView * __nonnull)tableView;
+- (void)nextPageForSection:(FOTableSection * __nonnull)section tableView:(UITableView * __nonnull)tableView;
 - (nonnull instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil bundle:(NSBundle * __nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * __nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end

@@ -13,13 +13,13 @@ public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
     public var data: AnyObject? = nil                                              // Data cargo
     public var identifier: String? = nil                                           // Unique item ID
     public var reuseIdentifier: String? = nil                                      // collectionView reuseIdentifier
-    public var cellClass: AnyClass? = nil                                          // View Class to register with the collectionView
+    public var cellClass: AnyClass? = nil                                          // View Class to register with the collectionViews
     weak public var section: FOTableSection?                                       // Weak reference to section
     weak public var viewController: UIViewController? = nil
     
     public func configure(cell: UITableViewCell, tableView: UITableView, indexPath: NSIndexPath){}
     // Gets the reource identified by key
-    public func getResource(forKey key: String, tableView: UITableView, indexPath: NSIndexPath, completion: ((resource: AnyObject?, result: AnyObject?) -> ())) -> NSOperation? {return nil}
+    public func getResource(forKey key: String, tableView: UITableView, indexPath: NSIndexPath, completion: (resource: AnyObject?, result: AnyObject?) -> ()) -> NSOperation? {return nil}
     // Populates the cell with the resource identified by key. IndexPath may have changed with async call, do not rely on it.
     public func setResource(resource: AnyObject?, result: AnyObject?, forKey key: String, tableView: UITableView, indexPath: NSIndexPath){}
     // The item produces a unique key per resource

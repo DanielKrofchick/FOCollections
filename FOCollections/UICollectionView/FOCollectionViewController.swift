@@ -100,7 +100,7 @@ public class FOCollectionViewController: UICollectionViewController {
             if let section = dataSource.sectionAtIndex(sectionIndex) {
                 var location = collectionView.numberOfItemsInSection(sectionIndex)
                 
-                if pagingIndexPath(section) != nil {
+                if section.pagingDirection == .Down && pagingIndexPath(section) != nil {
                     location--
                 }
                 
@@ -114,7 +114,7 @@ public class FOCollectionViewController: UICollectionViewController {
         if let section = dataSource.sectionAtIndex(sectionIndex) {
             var location = 0
             
-            if pagingIndexPath(section) != nil {
+            if section.pagingDirection == .Up && pagingIndexPath(section) != nil {
                 location++
             }
             
@@ -185,7 +185,7 @@ public class FOCollectionViewController: UICollectionViewController {
     // MARK: Paging
     
     // Implemented by subclass
-    public func nextPageForSection(section: Int, collectionView: UICollectionView) {
+    public func nextPageForSection(section: FOCollectionSection, collectionView: UICollectionView) {
     }
     
     func startPagingTimer() {
@@ -199,6 +199,11 @@ public class FOCollectionViewController: UICollectionViewController {
     }
     
     func checkForPaging() {
+        addPagingCellIfNeeded()
+        triggerPagingIfNeeded()
+    }
+    
+    func addPagingCellIfNeeded() {
         if dataSource.sectionsForPagingState(.Paging).count > 0 {
             return
         }
@@ -207,30 +212,42 @@ public class FOCollectionViewController: UICollectionViewController {
         
         if notPaging.count > 0 {
             if let section = dataSource.sectionAtIndex(notPaging.firstIndex) {
-                if let indexPath = pagingIndexPath(section), collectionView = collectionView {
-                    if let rect = collectionView.layoutAttributesForItemAtIndexPath(indexPath)?.frame {
-                        var distance = CGFloat.max
-                        
-                        if section.pagingDirection == .Down {
-                            distance = CGRectGetMinY(rect) - collectionView.contentOffset.y - collectionView.frame.size.height
-                        } else if section.pagingDirection == .Up {
-                            distance = collectionView.contentOffset.y - CGRectGetMaxY(rect)
-                        }
-                        
-                        if distance < pagingThreshold {
-                            queueUpdate({
-                                [weak self] in
-                                self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
-                                }, completion: {
-                                    [weak self] finished in
-                                    if let collectionView = self?.collectionView {
-                                        self?.nextPageForSection(notPaging.firstIndex, collectionView: collectionView)
-                                    }
-                                })
-                        }
+                if pagingIndexPath(section) == nil {
+                    queueUpdate({
+                        [weak self] in
+                        self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
+                    })
+                }
+            }
+        }
+    }
+    
+    func triggerPagingIfNeeded() {
+        if dataSource.sectionsForPagingState(.PagingAndFetching).firstIndex != NSNotFound {
+            return
+        }
+        
+        let sectionIndex = dataSource.sectionsForPagingState(.Paging).firstIndex
+        
+        if sectionIndex == NSNotFound {
+            return
+        }
+        
+        if let section = dataSource.sectionAtIndex(sectionIndex) {
+            if let indexPath = pagingIndexPath(section), collectionView = collectionView {
+                if let rect = collectionView.layoutAttributesForItemAtIndexPath(indexPath)?.frame {
+                    var distance = CGFloat.max
+                    
+                    if section.pagingDirection == .Down {
+                        distance = CGRectGetMinY(rect) - collectionView.contentOffset.y - collectionView.frame.size.height
+                    } else if section.pagingDirection == .Up {
+                        distance = collectionView.contentOffset.y - CGRectGetMaxY(rect)
                     }
-                } else {
-                    setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
+                    
+                    if distance < pagingThreshold {
+                        section.pagingState = .PagingAndFetching
+                        nextPageForSection(section, collectionView: collectionView)
+                    }
                 }
             }
         }

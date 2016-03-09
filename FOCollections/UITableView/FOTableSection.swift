@@ -21,7 +21,7 @@ public class FOTableSection: NSObject {
         }
     }
     
-    func itemAtIndex(index: Int) -> FOTableItem? {
+    public func itemAtIndex(index: Int) -> FOTableItem? {
         return items?.safe(index)
     }
     
@@ -54,5 +54,9 @@ public class FOTableSection: NSObject {
         
         return indexPaths
     }
-
+    
+    public func pageFetchComplete() {
+        pagingState = .Paging
+    }
+    
 }
