@@ -148,13 +148,13 @@ SWIFT_CLASS("_TtC13FOCollections26FOCollectionViewController")
 - (void)willTransitionToTraitCollection:(UITraitCollection * __nonnull)newCollection withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> __nonnull)coordinator;
 - (void)queueUpdate:(void (^ __nonnull)(void))update completion:(void (^ __nullable)(BOOL))completion;
 - (void)queueWork:(void (^ __nonnull)(void))work;
-- (void)insertSections:(NSArray<FOCollectionSection *> * __nullable)sections indexes:(NSIndexSet * __nonnull)indexes;
-- (void)deleteSectionsAtIndexes:(NSIndexSet * __nonnull)indexes;
-- (void)insertItems:(NSArray<FOCollectionItem *> * __nullable)items indexPaths:(NSArray<NSIndexPath *> * __nullable)indexPaths;
-- (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * __nullable)indexPaths;
-- (void)appendItems:(NSArray<FOCollectionItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex;
-- (void)prependItems:(NSArray<FOCollectionItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex;
-- (void)clearAllItems;
+- (void)insertSections:(NSArray<FOCollectionSection *> * __nullable)sections indexes:(NSIndexSet * __nonnull)indexes animated:(BOOL)animated;
+- (void)deleteSectionsAtIndexes:(NSIndexSet * __nonnull)indexes animated:(BOOL)animated;
+- (void)insertItems:(NSArray<FOCollectionItem *> * __nullable)items indexPaths:(NSArray<NSIndexPath *> * __nullable)indexPaths animated:(BOOL)animated;
+- (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * __nullable)indexPaths animated:(BOOL)animated;
+- (void)appendItems:(NSArray<FOCollectionItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex animated:(BOOL)animated;
+- (void)prependItems:(NSArray<FOCollectionItem *> * __nonnull)items toSectionAtIndex:(NSInteger)sectionIndex animated:(BOOL)animated;
+- (void)clearAllItems:(BOOL)animated;
 - (FOCollectionItem * __nonnull)pagingItemForSection:(FOCollectionSection * __nonnull)section;
 - (void)refreshVisibleCells;
 - (void)nextPageForSection:(FOCollectionSection * __nonnull)section collectionView:(UICollectionView * __nonnull)collectionView;
@@ -278,6 +278,7 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
 - (void)willTransitionToTraitCollection:(UITraitCollection * __nonnull)newCollection withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> __nonnull)coordinator;
 - (void)queueUpdate:(void (^ __nonnull)(void))update completion:(void (^ __nullable)(void))completion;
 - (void)queueWork:(void (^ __nonnull)(void))work;
+- (void)insertItemsWithFixedOffset:(NSArray<FOTableItem *> * __nonnull)items indexPaths:(NSArray<NSIndexPath *> * __nonnull)indexPaths;
 - (FOTableItem * __nonnull)pagingItemForSection:(FOTableSection * __nonnull)section;
 - (void)refreshVisibleCells;
 - (void)nextPageForSection:(FOTableSection * __nonnull)section tableView:(UITableView * __nonnull)tableView;

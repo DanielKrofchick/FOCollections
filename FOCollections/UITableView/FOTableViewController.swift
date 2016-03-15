@@ -117,6 +117,29 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         }
     }
     
+    public func insertItemsWithFixedOffset(items: [FOTableItem], indexPaths: [NSIndexPath]) {
+        let oldIndexPath = tableView.indexPathsForVisibleRows?.last
+        var oldItem: FOTableItem? = nil
+        var beforeRect: CGRect? = nil
+        var contentOffset = tableView.contentOffset
+        
+        if let oldIndexPath = oldIndexPath {
+            oldItem = dataSource.itemAtIndexPath(oldIndexPath)
+            beforeRect = tableView.rectForRowAtIndexPath(oldIndexPath)
+        }
+        
+        dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: tableView, viewController: self)
+        tableView.reloadData()
+        
+        if let oldItem = oldItem, beforeRect = beforeRect, newIndexPath = dataSource.indexPathsForItem(oldItem).last {
+            let afterRect = tableView.rectForRowAtIndexPath(newIndexPath)
+            let diff = afterRect.origin.y - beforeRect.origin.y
+            
+            contentOffset.y += diff
+            tableView.contentOffset = contentOffset
+        }
+    }
+    
     public func insertItems(items: [FOTableItem], indexPaths: [NSIndexPath], animation: UITableViewRowAnimation? = .Fade) {
         dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: tableView, viewController: self)
         if let animation = animation {
@@ -144,7 +167,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         }
     }
 
-    public func prependItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation? = .Fade) {
+    public func prependItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation? = .Fade, fixedOffset: Bool = false) {
         if let section = dataSource.sectionAtIndex(sectionIndex) {
             pagingIndexPath(section)
             var location = 0
@@ -154,7 +177,12 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
             }
             
             let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
-            insertItems(items, indexPaths: indexPaths, animation: animation)
+
+            if fixedOffset {
+                insertItemsWithFixedOffset(items, indexPaths: indexPaths)
+            } else {
+                insertItems(items, indexPaths: indexPaths, animation: animation)
+            }
         }
     }
     

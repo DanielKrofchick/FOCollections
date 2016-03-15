@@ -67,35 +67,43 @@ public class FOCollectionViewController: UICollectionViewController {
         queue.addOperation(NSBlockOperation(block: work))
     }
     
-    public func insertSections(sections: [FOCollectionSection]?, indexes: NSIndexSet) {
+    public func insertSections(sections: [FOCollectionSection]?, indexes: NSIndexSet, animated: Bool = true) {
         if let sections = sections, collectionView = collectionView {
             dataSource.insertSections(sections, atIndexes: indexes, collectionView: collectionView, viewController: self)
-            collectionView.insertSections(indexes)
+            if animated {   
+                collectionView.insertSections(indexes)
+            }
         }
     }
 
-    public func deleteSectionsAtIndexes(indexes: NSIndexSet) {
+    public func deleteSectionsAtIndexes(indexes: NSIndexSet, animated: Bool = true) {
         if let collectionView = collectionView {
             dataSource.deleteSectionsAtIndexes(indexes, collectionView: collectionView)
-            collectionView.deleteSections(indexes)
+            if animated {
+                collectionView.deleteSections(indexes)
+            }
         }
     }
     
-    public func insertItems(items: [FOCollectionItem]?, indexPaths: [NSIndexPath]?) {
+    public func insertItems(items: [FOCollectionItem]?, indexPaths: [NSIndexPath]?, animated: Bool = true) {
         if let items = items, indexPaths = indexPaths, collectionView = collectionView {
             dataSource.insertItems(items, atIndexPaths: indexPaths, collectionView: collectionView, viewController: self)
-            collectionView.insertItemsAtIndexPaths(indexPaths)
+            if animated {
+                collectionView.insertItemsAtIndexPaths(indexPaths)
+            }
         }
     }
     
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath]?) {
+    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath]?, animated: Bool = true) {
         if let indexPaths = indexPaths, collectionView = collectionView {
             dataSource.deleteItemsAtIndexPaths(indexPaths, collectionView: collectionView)
-            collectionView.deleteItemsAtIndexPaths(indexPaths)
+            if animated {
+                collectionView.deleteItemsAtIndexPaths(indexPaths)
+            }
         }
     }
 
-    public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int) {
+    public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, animated: Bool = true) {
         if let collectionView = collectionView {
             if let section = dataSource.sectionAtIndex(sectionIndex) {
                 var location = collectionView.numberOfItemsInSection(sectionIndex)
@@ -105,12 +113,12 @@ public class FOCollectionViewController: UICollectionViewController {
                 }
                 
                 let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
-                insertItems(items, indexPaths: indexPaths)
+                insertItems(items, indexPaths: indexPaths, animated: animated)
             }
         }
     }
     
-    public func prependItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int) {
+    public func prependItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, animated: Bool = true) {
         if let section = dataSource.sectionAtIndex(sectionIndex) {
             var location = 0
             
@@ -119,18 +127,18 @@ public class FOCollectionViewController: UICollectionViewController {
             }
             
             let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
-            insertItems(items, indexPaths: indexPaths)
+            insertItems(items, indexPaths: indexPaths, animated: animated)
         }
     }
     
-    public func clearAllItems() {
+    public func clearAllItems(animated: Bool = true) {
         if let collectionView = collectionView {
             let indexes = NSIndexSet(indexesInRange: NSMakeRange(0, dataSource.numberOfSectionsInCollectionView(collectionView)))
-            deleteSectionsAtIndexes(indexes)
+            deleteSectionsAtIndexes(indexes, animated: animated)
         }
     }
     
-    public func setPagingState(pagingState: PagingState, sectionIndex: Int) {
+    public func setPagingState(pagingState: PagingState, sectionIndex: Int, animated: Bool = true) {
         if let section = dataSource.sectionAtIndex(sectionIndex) {
             let indexPath = pagingIndexPath(section)
 
@@ -149,12 +157,12 @@ public class FOCollectionViewController: UICollectionViewController {
                 
                 if let pagingIndexPath = pagingIndexPath {
                     let pagingItem = pagingItemForSection(section)
-                    insertItems([pagingItem], indexPaths: [pagingIndexPath])
+                    insertItems([pagingItem], indexPaths: [pagingIndexPath], animated: animated)
                 }
             } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) {
                 // REMOVE
                 if let pagingIndexPath = indexPath {
-                    deleteItemsAtIndexPaths([pagingIndexPath])
+                    deleteItemsAtIndexPaths([pagingIndexPath], animated: animated)
                 }
             }
             
