@@ -16,7 +16,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     var cellSizeCache = [String: CGFloat]()
     var layoutCellCache = [String: UITableViewCell]()
     var pagingTimer: NSTimer?
-    var queue = NSOperationQueue()                              // All table UI updates are performed on this queue to serialize animations
+    public var queue = NSOperationQueue()                              // All table UI updates are performed on this queue to serialize animations
     
     public convenience init(frame: CGRect, style: UITableViewStyle) {
         self.init(nibName: nil, bundle: nil)

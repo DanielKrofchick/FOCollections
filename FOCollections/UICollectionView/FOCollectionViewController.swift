@@ -15,7 +15,7 @@ public class FOCollectionViewController: UICollectionViewController {
     var cellSizeCache = [String: CGSize]()
     var layoutCellCache = [String: UICollectionViewCell]()
     private var pagingTimer: NSTimer?
-    var queue = NSOperationQueue()                              // All table UI updates are performed on this queue to serialize animations
+    public var queue = NSOperationQueue()                              // All table UI updates are performed on this queue to serialize animations
     
     override public func viewDidLoad() {
         super.viewDidLoad()

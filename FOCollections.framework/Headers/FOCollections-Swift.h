@@ -131,6 +131,7 @@ SWIFT_CLASS("_TtC13FOCollections19FOCollectionSection")
 @end
 
 @class FOCollectionViewDataSource;
+@class NSOperationQueue;
 @class UITraitCollection;
 @protocol UIViewControllerTransitionCoordinator;
 @class NSIndexSet;
@@ -142,6 +143,7 @@ SWIFT_CLASS("_TtC13FOCollections26FOCollectionViewController")
 @interface FOCollectionViewController : UICollectionViewController
 @property (nonatomic, readonly, strong) FOCollectionViewDataSource * __nonnull dataSource;
 @property (nonatomic) CGFloat pagingThreshold;
+@property (nonatomic, strong) NSOperationQueue * __nonnull queue;
 - (void)viewDidLoad;
 - (void)viewDidAppear:(BOOL)animated;
 - (void)viewDidDisappear:(BOOL)animated;
@@ -270,6 +272,7 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
 @property (nonatomic, strong) UITableView * __null_unspecified tableView;
 @property (nonatomic, readonly, strong) FOTableViewDataSource * __nonnull dataSource;
 @property (nonatomic) CGFloat pagingThreshold;
+@property (nonatomic, strong) NSOperationQueue * __nonnull queue;
 - (nonnull instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style;
 - (void)viewDidLoad;
 - (void)viewDidLayoutSubviews;
