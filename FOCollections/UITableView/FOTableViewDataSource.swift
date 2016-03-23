@@ -79,9 +79,7 @@ public class FOTableViewDataSource: NSObject {
     public func appendItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, tableView: UITableView, viewController: UIViewController) -> [NSIndexPath]? {
         var indexPaths: [NSIndexPath]? = nil
         
-        if let section = sectionAtIndex(sectionIndex) {
-            var location = tableView.numberOfRowsInSection(sectionIndex)
-            
+        if let section = sectionAtIndex(sectionIndex), var location = section.items?.count {
             if let viewController = viewController as? FOTableViewController {
                 if section.pagingDirection == .Down && viewController.pagingIndexPath(section) != nil {
                     location -= 1

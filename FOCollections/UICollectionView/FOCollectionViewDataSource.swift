@@ -82,9 +82,7 @@ public class FOCollectionViewDataSource: NSObject {
     public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, collectionView: UICollectionView, viewController: UIViewController) -> [NSIndexPath]? {
         var indexPaths: [NSIndexPath]? = nil
 
-        if let section = sectionAtIndex(sectionIndex) {
-            var location = collectionView.numberOfItemsInSection(sectionIndex)
-            
+        if let section = sectionAtIndex(sectionIndex), var location = section.items?.count  {
             if let viewController = viewController as? FOCollectionViewController {
                 if section.pagingDirection == .Down && viewController.pagingIndexPath(section) != nil {
                     location -= 1
