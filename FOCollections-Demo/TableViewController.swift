@@ -17,7 +17,7 @@ class TableViewController: FOTableViewController {
         
         tableView.backgroundColor = UIColor.orangeColor()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "play")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: #selector(TableViewController.play))
         
         play()
     }
@@ -89,7 +89,7 @@ class TableViewController: FOTableViewController {
     }
     
     override func nextPageForSection(section: FOTableSection, tableView: UITableView) {
-        print("\(__FUNCTION__)")
+        print("\(#function)")
     }
     
 }

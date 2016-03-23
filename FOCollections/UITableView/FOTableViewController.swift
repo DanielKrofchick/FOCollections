@@ -159,7 +159,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
             var location = tableView.numberOfRowsInSection(sectionIndex)
             
             if section.pagingDirection == .Down && pagingIndexPath(section) != nil {
-                location--
+                location -= 1
             }
             
             let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
@@ -173,7 +173,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
             var location = 0
             
             if section.pagingDirection == .Up && pagingIndexPath(section) != nil {
-                location++
+                location += 1
             }
             
             let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
@@ -250,7 +250,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     }
     
     func startPagingTimer() {
-        pagingTimer = NSTimer(timeInterval: 0.2, target: self, selector: Selector("checkForPaging"), userInfo: nil, repeats: true)
+        pagingTimer = NSTimer(timeInterval: 0.2, target: self, selector: #selector(FOTableViewController.checkForPaging), userInfo: nil, repeats: true)
         pagingTimer?.tolerance = 0.05
         NSRunLoop.currentRunLoop().addTimer(pagingTimer!, forMode: NSRunLoopCommonModes)
     }

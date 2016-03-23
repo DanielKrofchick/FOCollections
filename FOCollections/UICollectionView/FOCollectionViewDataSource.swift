@@ -69,10 +69,8 @@ public class FOCollectionViewDataSource: NSObject {
         return (unsafeItems, unsafeIndexPaths)
     }
 
-    public func deleteItemsAtIndexPaths(var indexPaths: [NSIndexPath], collectionView: UICollectionView) {
-        indexPaths.sortInPlace{$0.item > $1.item}
-        
-        for indexPath in indexPaths {
+    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], collectionView: UICollectionView) {
+        for indexPath in indexPaths.sort({$0.item > $1.item}) {
             if let section = sectionAtIndex(indexPath.section) {
                 section.items?.removeAtIndex(indexPath.item)
             }
@@ -206,8 +204,9 @@ extension FOCollectionViewDataSource: SequenceType {
     
     public func generate() -> Generator {
         var index = Int(0)
-        return anyGenerator { () -> FOCollectionItem? in
-            return self.itemAtIndex(index++)
+        return AnyGenerator { () -> FOCollectionItem? in
+            index += 1
+            return self.itemAtIndex(index)
         }
     }
     

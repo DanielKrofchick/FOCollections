@@ -66,10 +66,8 @@ public class FOTableViewDataSource: NSObject {
         return (unsafeItems, unsafeIndexPaths)
     }
     
-    public func deleteItemsAtIndexPaths(var indexPaths: [NSIndexPath], tableView: UITableView) {
-        indexPaths.sortInPlace{$0.item > $1.item}
-        
-        for indexPath in indexPaths {
+    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], tableView: UITableView) {
+        for indexPath in indexPaths.sort({$0.item > $1.item}) {
             if let section = sectionAtIndex(indexPath.section) {
                 section.items?.removeAtIndex(indexPath.item)
             }
@@ -203,8 +201,9 @@ extension FOTableViewDataSource: SequenceType {
     
     public func generate() -> Generator {
         var index = Int(0)
-        return anyGenerator { () -> FOTableItem? in
-            return self.itemAtIndex(index++)
+        return AnyGenerator { () -> FOTableItem? in
+            index += 1
+            return self.itemAtIndex(index)
         }
     }
     

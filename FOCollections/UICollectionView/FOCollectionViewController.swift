@@ -109,7 +109,7 @@ public class FOCollectionViewController: UICollectionViewController {
                 var location = collectionView.numberOfItemsInSection(sectionIndex)
                 
                 if section.pagingDirection == .Down && pagingIndexPath(section) != nil {
-                    location--
+                    location -= 1
                 }
                 
                 let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
@@ -123,7 +123,7 @@ public class FOCollectionViewController: UICollectionViewController {
             var location = 0
             
             if section.pagingDirection == .Up && pagingIndexPath(section) != nil {
-                location++
+                location += 1
             }
             
             let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
@@ -197,7 +197,7 @@ public class FOCollectionViewController: UICollectionViewController {
     }
     
     func startPagingTimer() {
-        pagingTimer = NSTimer(timeInterval: 0.2, target: self, selector: Selector("checkForPaging"), userInfo: nil, repeats: true)
+        pagingTimer = NSTimer(timeInterval: 0.2, target: self, selector: #selector(FOCollectionViewController.checkForPaging), userInfo: nil, repeats: true)
         pagingTimer?.tolerance = 0.05
         NSRunLoop.currentRunLoop().addTimer(pagingTimer!, forMode: NSRunLoopCommonModes)
     }

@@ -18,7 +18,7 @@ class CollectionViewController: FOCollectionViewController {
         super.viewDidLoad()
         
         collectionView?.backgroundColor = UIColor.orangeColor()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "play")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: #selector(CollectionViewController.play))
         
         play()
     }
@@ -76,7 +76,7 @@ class CollectionViewController: FOCollectionViewController {
     }
     
     override func nextPageForSection(section: FOCollectionSection, collectionView: UICollectionView) {
-        print("\(__FUNCTION__)")
+        print("\(#function)")
     }
 
 }

@@ -118,7 +118,7 @@ extension FOTableViewController {
 
     public func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         if let configurator = delegateWithIndexPath(indexPath) {
-            if configurator.respondsToSelector(Selector("tableView:willSelectRowAtIndexPath:")) {
+            if configurator.respondsToSelector(#selector(UITableViewDelegate.tableView(_:willSelectRowAtIndexPath:))) {
                 return configurator.tableView?(tableView, willSelectRowAtIndexPath: indexPath)
             }
         }
@@ -128,7 +128,7 @@ extension FOTableViewController {
     
     public func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         if let configurator = delegateWithIndexPath(indexPath) {
-            if configurator.respondsToSelector(Selector("tableView:willDeselectRowAtIndexPath:")) {
+            if configurator.respondsToSelector(#selector(UITableViewDelegate.tableView(_:willDeselectRowAtIndexPath:))) {
                 return configurator.tableView?(tableView, willDeselectRowAtIndexPath: indexPath)
             }
         }
@@ -154,7 +154,7 @@ extension FOTableViewController {
     
     public func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
         if let configurator = delegateWithIndexPath(indexPath) {
-            if configurator.respondsToSelector(Selector("tableView:titleForDeleteConfirmationButtonForRowAtIndexPath:")) {
+            if configurator.respondsToSelector(#selector(UITableViewDelegate.tableView(_:titleForDeleteConfirmationButtonForRowAtIndexPath:))) {
                 return configurator.tableView?(tableView, titleForDeleteConfirmationButtonForRowAtIndexPath: indexPath)
             }
         }
@@ -164,7 +164,7 @@ extension FOTableViewController {
     
     public func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         if let configurator = delegateWithIndexPath(indexPath) {
-            if configurator.respondsToSelector(Selector("tableView:editActionsForRowAtIndexPath:")) {
+            if configurator.respondsToSelector(#selector(UITableViewDelegate.tableView(_:editActionsForRowAtIndexPath:))) {
                 return configurator.tableView?(tableView, editActionsForRowAtIndexPath: indexPath)
             }
         }

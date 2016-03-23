@@ -13,7 +13,7 @@ extension NSIndexPath {
     class func indexPathsForItemsInRange(range: NSRange, section: Int) -> [NSIndexPath] {
         var result = [NSIndexPath]()
         
-        for (var i = range.location; i < NSMaxRange(range); i++) {
+        for i in range.location ..< NSMaxRange(range) {
             result.append(NSIndexPath(forItem: i, inSection: section))
         }
         
