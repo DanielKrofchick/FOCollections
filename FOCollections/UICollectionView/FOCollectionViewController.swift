@@ -46,7 +46,7 @@ public class FOCollectionViewController: UICollectionViewController {
     override public func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
         
-        cellSizeCache.removeAll()
+        cellSizeCache.removeAll(keepCapacity: true)
         collectionView?.collectionViewLayout.invalidateLayout()
     }
         
@@ -97,15 +97,8 @@ public class FOCollectionViewController: UICollectionViewController {
 
     public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int) {
         if let collectionView = collectionView {
-            if let section = dataSource.sectionAtIndex(sectionIndex) {
-                var location = collectionView.numberOfItemsInSection(sectionIndex)
-                
-                if section.pagingDirection == .Down && pagingIndexPath(section) != nil {
-                    location -= 1
-                }
-                
-                let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
-                insertItems(items, indexPaths: indexPaths)
+            if let indexPaths = dataSource.appendItems(items, toSectionAtIndex: sectionIndex, collectionView: collectionView, viewController: self) {
+                collectionView.insertItemsAtIndexPaths(indexPaths)
             }
         }
     }
@@ -130,35 +123,15 @@ public class FOCollectionViewController: UICollectionViewController {
         }
     }
     
-    public func setPagingState(pagingState: PagingState, sectionIndex: Int, animated: Bool = true) {
-        if let section = dataSource.sectionAtIndex(sectionIndex) {
-            let indexPath = pagingIndexPath(section)
-
-            if section.pagingState == pagingState {
-            } else if pagingState == .Paging && indexPath == nil {
-                // ADD
-                var pagingIndexPath: NSIndexPath? = nil
-                
-                if section.pagingDirection == .Down {
-                    if let p = dataSource.lastIndexPathForSectionIndex(sectionIndex) {
-                        pagingIndexPath = NSIndexPath(forRow: p.row + 1, inSection: p.section)
-                    }
-                } else if section.pagingDirection == .Up {
-                    pagingIndexPath = NSIndexPath(forItem: 0, inSection: 0)
-                }
-                
-                if let pagingIndexPath = pagingIndexPath {
-                    let pagingItem = pagingItemForSection(section)
-                    insertItems([pagingItem], indexPaths: [pagingIndexPath])
-                }
-            } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) {
-                // REMOVE
-                if let pagingIndexPath = indexPath {
-                    deleteItemsAtIndexPaths([pagingIndexPath])
+    public func setPagingState(pagingState: PagingState, sectionIndex: Int) {
+        if let collectionView = collectionView {
+            if let indexPath = dataSource.setPagingState(pagingState, sectionIndex: sectionIndex, collectionView: collectionView, viewController: self) {
+                if pagingState == .Paging {
+                    collectionView.insertItemsAtIndexPaths([indexPath])
+                } else {
+                    collectionView.deleteItemsAtIndexPaths([indexPath])
                 }
             }
-            
-            section.pagingState = pagingState
         }
     }
     

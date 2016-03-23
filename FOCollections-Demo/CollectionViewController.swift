@@ -27,18 +27,18 @@ class CollectionViewController: FOCollectionViewController {
         queueUpdate({[weak self] in self?.clearAllItems()})
         
         queueUpdate({[weak self] in self?.insertSections([self!.section(UIColor.blueColor())], indexes: NSIndexSet(index: 0))})
-//        queueUpdate({[weak self] in self?.deleteSectionsAtIndexes(NSIndexSet(index: 0))})
-//        queueUpdate({[weak self] in self?.insertSections([self!.section(UIColor.brownColor())], indexes: NSIndexSet(index: 0))})
-//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.yellowColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-//        queueUpdate({[weak self] in self?.deleteItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])})
-//        queueUpdate({[weak self] in self?.appendItems(self!.items(UIColor.purpleColor(), items: 3), toSectionAtIndex: 0)})
-//        queueUpdate({[weak self] in self?.setPagingState(.Paging, sectionIndex: 0)})
-//        queueUpdate({[weak self] in self?.setPagingState(.Disabled, sectionIndex: 0)})
-//        queueUpdate({[weak self] in self?.setPagingState(.Paging, sectionIndex: 0)})
-//        queueUpdate({[weak self] in self?.setPagingState(.Finished, sectionIndex: 0)})
-//        queueUpdate({[weak self] in self?.setPagingState(.NotPaging, sectionIndex: 0)})
-//        queueUpdate({[weak self] in self?.setPagingState(.Paging, sectionIndex: 0)})
-//        queueUpdate({[weak self] in self?.prependItems(self!.items(UIColor.greenColor(), items: 3), toSectionAtIndex: 0)})
+        queueUpdate({[weak self] in self?.deleteSectionsAtIndexes(NSIndexSet(index: 0))})
+        queueUpdate({[weak self] in self?.insertSections([self!.section(UIColor.brownColor())], indexes: NSIndexSet(index: 0))})
+        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.yellowColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
+        queueUpdate({[weak self] in self?.deleteItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])})
+        queueUpdate({[weak self] in self?.appendItems(self!.items(UIColor.purpleColor(), items: 3), toSectionAtIndex: 0)})
+        queueUpdate({[weak self] in self?.setPagingState(.Paging, sectionIndex: 0)})
+        queueUpdate({[weak self] in self?.setPagingState(.Disabled, sectionIndex: 0)})
+        queueUpdate({[weak self] in self?.setPagingState(.Paging, sectionIndex: 0)})
+        queueUpdate({[weak self] in self?.setPagingState(.Finished, sectionIndex: 0)})
+        queueUpdate({[weak self] in self?.setPagingState(.NotPaging, sectionIndex: 0)})
+        queueUpdate({[weak self] in self?.setPagingState(.Paging, sectionIndex: 0)})
+        queueUpdate({[weak self] in self?.prependItems(self!.items(UIColor.greenColor(), items: 3), toSectionAtIndex: 0)})
     }
     
     func section(color: UIColor = UIColor.blueColor(), items: Int = 8) -> FOCollectionSection {
@@ -48,7 +48,7 @@ class CollectionViewController: FOCollectionViewController {
         section.pagingState = .NotPaging
         section.columns = 8
         section.items = self.items(color, items: items)
-        section.pagingDirection = .Up
+        section.pagingDirection = .Down
         
         return section
     }

@@ -21,7 +21,7 @@ public class FOCollectionViewDataSource: NSObject {
         }
         
         indexes.enumerateIndexesUsingBlock { (index, stop) -> Void in
-            if let section = sections!.safe(index) {
+            if let section = sections?.safe(index) {
                 section.linkItems(viewController)
                 self.sections.insert(section, atIndex: index)
                 self.registerClassesForItems(section.items, collectionView: collectionView)
@@ -78,7 +78,95 @@ public class FOCollectionViewDataSource: NSObject {
         
         keyCache.removeAll(keepCapacity: true)
     }
+    
+    public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, collectionView: UICollectionView, viewController: UIViewController) -> [NSIndexPath]? {
+        var indexPaths: [NSIndexPath]? = nil
+
+        if let section = sectionAtIndex(sectionIndex) {
+            var location = collectionView.numberOfItemsInSection(sectionIndex)
+            
+            if let viewController = viewController as? FOCollectionViewController {
+                if section.pagingDirection == .Down && viewController.pagingIndexPath(section) != nil {
+                    location -= 1
+                }
+            }
+            
+            indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
+            
+            if let indexPaths = indexPaths {
+                insertItems(items, atIndexPaths: indexPaths, collectionView: collectionView, viewController: viewController)
+            }
+        }
         
+        return indexPaths
+    }
+    
+    public func prependItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, collectionView: UICollectionView, viewController: UIViewController) -> [NSIndexPath]? {
+        var indexPaths: [NSIndexPath]? = nil
+        
+        if let section = sectionAtIndex(sectionIndex) {
+            var location = 0
+            
+            if let viewController = viewController as? FOCollectionViewController {
+                if section.pagingDirection == .Up && viewController.pagingIndexPath(section) != nil {
+                    location += 1
+                }
+            }
+            
+            indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
+            
+            if let indexPaths = indexPaths {
+                insertItems(items, atIndexPaths: indexPaths, collectionView: collectionView, viewController: viewController)
+            }
+        }
+        
+        return indexPaths
+    }
+    
+    public func clearAllItems(collectionView: UICollectionView) -> NSIndexSet? {
+        let indexes = NSIndexSet(indexesInRange: NSMakeRange(0, numberOfSectionsInCollectionView(collectionView)))
+        deleteSectionsAtIndexes(indexes, collectionView: collectionView)
+        
+        return indexes.count == 0 ? nil : indexes
+    }
+    
+    public func setPagingState(pagingState: PagingState, sectionIndex: Int, collectionView: UICollectionView, viewController: UIViewController) -> NSIndexPath? {
+        var pagingIndexPath: NSIndexPath? = nil
+        
+        if let section = sectionAtIndex(sectionIndex), viewController = viewController as? FOCollectionViewController {
+            pagingIndexPath = viewController.pagingIndexPath(section)
+            
+            if section.pagingState == pagingState {
+                pagingIndexPath = nil
+            } else if pagingState == .Paging && pagingIndexPath == nil {
+                // ADD
+                if section.pagingDirection == .Down {
+                    if let p = lastIndexPathForSectionIndex(sectionIndex) {
+                        pagingIndexPath = NSIndexPath(forRow: p.row + 1, inSection: p.section)
+                    }
+                } else if section.pagingDirection == .Up {
+                    pagingIndexPath = NSIndexPath(forItem: 0, inSection: 0)
+                }
+                
+                if let pagingIndexPath = pagingIndexPath {
+                    let pagingItem = viewController.pagingItemForSection(section)
+                    insertItems([pagingItem], atIndexPaths: [pagingIndexPath], collectionView: collectionView, viewController: viewController)
+                }
+            } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) {
+                // REMOVE
+                if let pagingIndexPath = pagingIndexPath {
+                    deleteItemsAtIndexPaths([pagingIndexPath], collectionView: collectionView)
+                }
+            } else {
+                pagingIndexPath = nil
+            }
+            
+            section.pagingState = pagingState
+        }
+        
+        return pagingIndexPath
+    }
+    
     private func registerClassesForSections(sections: [FOCollectionSection]?, collectionView: UICollectionView) {
         guard sections != nil
             else {return}

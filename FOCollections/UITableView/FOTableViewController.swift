@@ -68,7 +68,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     override public func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
         
-        cellSizeCache.removeAll()
+        cellSizeCache.removeAll(keepCapacity: true)
         tableView.reloadData()
     }
         

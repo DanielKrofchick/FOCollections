@@ -35,7 +35,15 @@ extension FOTableViewController {
     }
 
     public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, heightForRowAtIndexPath: indexPath) {
+        let key = dataSource.keyForItemAtIndexPath(indexPath)
+        
+        if key != nil && cellSizeCache[key!] != nil {
+            return cellSizeCache[key!]!
+        } else if let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, heightForRowAtIndexPath: indexPath) {
+            if key != nil {
+                cellSizeCache[key!] = value
+            }
+            
             return value
         } else {
             return 0
