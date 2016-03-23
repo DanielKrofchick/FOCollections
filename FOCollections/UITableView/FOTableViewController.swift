@@ -103,18 +103,14 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         queue.addOperation(NSBlockOperation(block: work))
     }
     
-    public func insertSections(sections: [FOTableSection], indexes: NSIndexSet, animation: UITableViewRowAnimation? = .Fade) {
+    public func insertSections(sections: [FOTableSection], indexes: NSIndexSet, animation: UITableViewRowAnimation = .Fade) {
         dataSource.insertSections(sections, atIndexes: indexes, tableView: tableView, viewController: self)
-        if let animation = animation {
-            tableView.insertSections(indexes, withRowAnimation: animation)
-        }
+        tableView.insertSections(indexes, withRowAnimation: animation)
     }
     
-    public func deleteSectionsAtIndexes(indexes: NSIndexSet, animation: UITableViewRowAnimation? = .Fade) {
+    public func deleteSectionsAtIndexes(indexes: NSIndexSet, animation: UITableViewRowAnimation = .Fade) {
         dataSource.deleteSectionsAtIndexes(indexes, tableView: tableView)
-        if let animation = animation {
-            tableView.deleteSections(indexes, withRowAnimation: animation)
-        }
+        tableView.deleteSections(indexes, withRowAnimation: animation)
     }
     
     public func insertItemsWithFixedOffset(items: [FOTableItem], indexPaths: [NSIndexPath]) {
@@ -140,86 +136,41 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-    public func insertItems(items: [FOTableItem], indexPaths: [NSIndexPath], animation: UITableViewRowAnimation? = .Fade) {
+    public func insertItems(items: [FOTableItem], indexPaths: [NSIndexPath], animation: UITableViewRowAnimation = .Fade) {
         dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: tableView, viewController: self)
-        if let animation = animation {
+        tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+    }
+    
+    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], animation: UITableViewRowAnimation = .Fade) {
+        dataSource.deleteItemsAtIndexPaths(indexPaths, tableView: tableView)
+        tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+    }
+    
+    public func appendItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation = .Fade) {
+        if let indexPaths = dataSource.appendItems(items, toSectionAtIndex: sectionIndex, tableView: tableView, viewController: self) {
+            tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+        }
+    }
+
+    public func prependItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation = .Fade, fixedOffset: Bool = false) {
+        if let indexPaths = dataSource.prependItems(items, toSectionAtIndex: sectionIndex, tableView: tableView, viewController: self) {
             tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
         }
     }
     
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], animation: UITableViewRowAnimation? = .Fade) {
-        dataSource.deleteItemsAtIndexPaths(indexPaths, tableView: tableView)
-        if let animation = animation {
-            tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+    public func clearAllItems(animation: UITableViewRowAnimation = .Fade) {
+        if let indexes = dataSource.clearAllItems(tableView) {
+            tableView.deleteSections(indexes, withRowAnimation: animation)
         }
-    }
-    
-    public func appendItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation? = .Fade) {
-        if let section = dataSource.sectionAtIndex(sectionIndex) {
-            var location = tableView.numberOfRowsInSection(sectionIndex)
-            
-            if section.pagingDirection == .Down && pagingIndexPath(section) != nil {
-                location -= 1
-            }
-            
-            let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
-            insertItems(items, indexPaths: indexPaths, animation: animation)
-        }
-    }
-
-    public func prependItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation? = .Fade, fixedOffset: Bool = false) {
-        if let section = dataSource.sectionAtIndex(sectionIndex) {
-            pagingIndexPath(section)
-            var location = 0
-            
-            if section.pagingDirection == .Up && pagingIndexPath(section) != nil {
-                location += 1
-            }
-            
-            let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
-
-            if fixedOffset {
-                insertItemsWithFixedOffset(items, indexPaths: indexPaths)
-            } else {
-                insertItems(items, indexPaths: indexPaths, animation: animation)
-            }
-        }
-    }
-    
-    public func clearAllItems(animation: UITableViewRowAnimation? = .Fade) {
-        let indexes = NSIndexSet(indexesInRange: NSMakeRange(0, dataSource.numberOfSectionsInTableView(tableView)))
-        deleteSectionsAtIndexes(indexes, animation: animation)
     }
     
     public func setPagingState(pagingState: PagingState, sectionIndex: Int, animation: UITableViewRowAnimation = .Fade) {
-        if let section = dataSource.sectionAtIndex(sectionIndex) {
-            let indexPath = pagingIndexPath(section)
-
-            if section.pagingState == pagingState {
-            } else if pagingState == .Paging && indexPath == nil {
-                // ADD
-                var pagingIndexPath: NSIndexPath? = nil
-                
-                if section.pagingDirection == .Down {
-                    if let p = dataSource.lastIndexPathForSectionIndex(sectionIndex) {
-                        pagingIndexPath = NSIndexPath(forRow: p.row + 1, inSection: p.section)
-                    }
-                } else if section.pagingDirection == .Up {
-                    pagingIndexPath = NSIndexPath(forItem: 0, inSection: 0)
-                }
-                
-                if let pagingIndexPath = pagingIndexPath {
-                    let pagingItem = pagingItemForSection(section)
-                    insertItems([pagingItem], indexPaths: [pagingIndexPath], animation: animation)
-                }
-            } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) {
-                // REMOVE
-                if let pagingIndexPath = indexPath {
-                    deleteItemsAtIndexPaths([pagingIndexPath], animation: animation)
-                }
+        if let indexPath = dataSource.setPagingState(pagingState, sectionIndex: sectionIndex, tableView: tableView, viewController: self) {
+            if pagingState == .Paging {
+                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: animation)
+            } else {
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: animation)
             }
-            
-            section.pagingState = pagingState
         }
     }
     
