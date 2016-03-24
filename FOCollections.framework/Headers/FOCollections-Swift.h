@@ -293,7 +293,6 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
 - (void)queueWork:(void (^ _Nonnull)(void))work;
 - (void)insertSections:(NSArray<FOTableSection *> * _Nonnull)sections indexes:(NSIndexSet * _Nonnull)indexes animation:(UITableViewRowAnimation)animation;
 - (void)deleteSectionsAtIndexes:(NSIndexSet * _Nonnull)indexes animation:(UITableViewRowAnimation)animation;
-- (void)insertItemsWithFixedOffset:(NSArray<FOTableItem *> * _Nonnull)items indexPaths:(NSArray<NSIndexPath *> * _Nonnull)indexPaths;
 - (void)insertItems:(NSArray<FOTableItem *> * _Nonnull)items indexPaths:(NSArray<NSIndexPath *> * _Nonnull)indexPaths animation:(UITableViewRowAnimation)animation;
 - (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * _Nonnull)indexPaths animation:(UITableViewRowAnimation)animation;
 - (void)appendItems:(NSArray<FOTableItem *> * _Nonnull)items toSectionAtIndex:(NSInteger)sectionIndex animation:(UITableViewRowAnimation)animation;

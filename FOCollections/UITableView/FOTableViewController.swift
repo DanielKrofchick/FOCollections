@@ -113,29 +113,6 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         tableView.deleteSections(indexes, withRowAnimation: animation)
     }
     
-    public func insertItemsWithFixedOffset(items: [FOTableItem], indexPaths: [NSIndexPath]) {
-        let oldIndexPath = tableView.indexPathsForVisibleRows?.last
-        var oldItem: FOTableItem? = nil
-        var beforeRect: CGRect? = nil
-        var contentOffset = tableView.contentOffset
-        
-        if let oldIndexPath = oldIndexPath {
-            oldItem = dataSource.itemAtIndexPath(oldIndexPath)
-            beforeRect = tableView.rectForRowAtIndexPath(oldIndexPath)
-        }
-        
-        dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: tableView, viewController: self)
-        tableView.reloadData()
-        
-        if let oldItem = oldItem, beforeRect = beforeRect, newIndexPath = dataSource.indexPathsForItem(oldItem).last {
-            let afterRect = tableView.rectForRowAtIndexPath(newIndexPath)
-            let diff = afterRect.origin.y - beforeRect.origin.y
-            
-            contentOffset.y += diff
-            tableView.contentOffset = contentOffset
-        }
-    }
-    
     public func insertItems(items: [FOTableItem], indexPaths: [NSIndexPath], animation: UITableViewRowAnimation = .Fade) {
         dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: tableView, viewController: self)
         tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
@@ -154,7 +131,20 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
 
     public func prependItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation = .Fade, fixedOffset: Bool = false) {
         if let indexPaths = dataSource.prependItems(items, toSectionAtIndex: sectionIndex, tableView: tableView, viewController: self) {
-            tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+            if fixedOffset {`
+                let iSize = tableView.contentSize
+                
+                tableView.reloadData()
+                
+                let fSize = tableView.contentSize
+                let fOffset = tableView.contentOffset
+                
+                // Force layout to prevent tableView from setting offset after we do here
+                tableView.layoutIfNeeded()
+                tableView.contentOffset = CGPoint(x: fOffset.x, y: fOffset.y + fSize.height - iSize.height)
+            } else {
+                tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+            }
         }
     }
     
