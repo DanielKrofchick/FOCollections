@@ -264,4 +264,8 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         }
     }
     
+    public func clearCellSizeCache(keepCapacity: Bool = true) {
+        cellSizeCache.removeAll(keepCapacity: keepCapacity)
+    }
+    
 }

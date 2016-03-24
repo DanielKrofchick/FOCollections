@@ -226,4 +226,8 @@ public class FOCollectionViewController: UICollectionViewController {
         }
     }
     
+    public func clearCellSizeCache(keepCapacity: Bool = true) {
+        cellSizeCache.removeAll(keepCapacity: keepCapacity)
+    }
+    
 }

@@ -166,6 +166,7 @@ SWIFT_CLASS("_TtC13FOCollections26FOCollectionViewController")
 - (FOCollectionItem * _Nonnull)pagingItemForSection:(FOCollectionSection * _Nonnull)section;
 - (void)refreshVisibleCells;
 - (void)nextPageForSection:(FOCollectionSection * _Nonnull)section collectionView:(UICollectionView * _Nonnull)collectionView;
+- (void)clearCellSizeCache:(BOOL)keepCapacity;
 - (nonnull instancetype)initWithCollectionViewLayout:(UICollectionViewLayout * _Nonnull)layout OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
@@ -301,6 +302,7 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
 - (FOTableItem * _Nonnull)pagingItemForSection:(FOTableSection * _Nonnull)section;
 - (void)refreshVisibleCells;
 - (void)nextPageForSection:(FOTableSection * _Nonnull)section tableView:(UITableView * _Nonnull)tableView;
+- (void)clearCellSizeCache:(BOOL)keepCapacity;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
