@@ -129,22 +129,24 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         }
     }
 
-    public func prependItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation = .Fade, fixedOffset: Bool = false) {
+    public func prependItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation = .Fade) {
         if let indexPaths = dataSource.prependItems(items, toSectionAtIndex: sectionIndex, tableView: tableView, viewController: self) {
-            if fixedOffset {`
-                let iSize = tableView.contentSize
-                
-                tableView.reloadData()
-                
-                let fSize = tableView.contentSize
-                let fOffset = tableView.contentOffset
-                
-                // Force layout to prevent tableView from setting offset after we do here
-                tableView.layoutIfNeeded()
-                tableView.contentOffset = CGPoint(x: fOffset.x, y: fOffset.y + fSize.height - iSize.height)
-            } else {
-                tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
-            }
+            tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+        }
+    }
+    
+    public func prependItemsWithFixedOffset(items: [FOTableItem], toSectionAtIndex sectionIndex: Int) {
+        if let _ = dataSource.prependItems(items, toSectionAtIndex: sectionIndex, tableView: tableView, viewController: self) {
+            let iSize = tableView.contentSize
+            
+            tableView.reloadData()
+            
+            let fSize = tableView.contentSize
+            let fOffset = tableView.contentOffset
+            
+            // Force layout to prevent tableView from setting offset after we do here
+            tableView.layoutIfNeeded()
+            tableView.contentOffset = CGPoint(x: fOffset.x, y: fOffset.y + fSize.height - iSize.height)
         }
     }
     

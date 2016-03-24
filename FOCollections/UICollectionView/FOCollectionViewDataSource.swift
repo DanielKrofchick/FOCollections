@@ -291,8 +291,9 @@ extension FOCollectionViewDataSource: SequenceType {
     public func generate() -> Generator {
         var index = Int(0)
         return AnyGenerator { () -> FOCollectionItem? in
+            let item = self.itemAtIndex(index)
             index += 1
-            return self.itemAtIndex(index)
+            return item
         }
     }
     

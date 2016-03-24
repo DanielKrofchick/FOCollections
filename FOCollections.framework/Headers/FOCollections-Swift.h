@@ -296,7 +296,8 @@ SWIFT_CLASS("_TtC13FOCollections21FOTableViewController")
 - (void)insertItems:(NSArray<FOTableItem *> * _Nonnull)items indexPaths:(NSArray<NSIndexPath *> * _Nonnull)indexPaths animation:(UITableViewRowAnimation)animation;
 - (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> * _Nonnull)indexPaths animation:(UITableViewRowAnimation)animation;
 - (void)appendItems:(NSArray<FOTableItem *> * _Nonnull)items toSectionAtIndex:(NSInteger)sectionIndex animation:(UITableViewRowAnimation)animation;
-- (void)prependItems:(NSArray<FOTableItem *> * _Nonnull)items toSectionAtIndex:(NSInteger)sectionIndex animation:(UITableViewRowAnimation)animation fixedOffset:(BOOL)fixedOffset;
+- (void)prependItems:(NSArray<FOTableItem *> * _Nonnull)items toSectionAtIndex:(NSInteger)sectionIndex animation:(UITableViewRowAnimation)animation;
+- (void)prependItemsWithFixedOffset:(NSArray<FOTableItem *> * _Nonnull)items toSectionAtIndex:(NSInteger)sectionIndex;
 - (void)clearAllItems:(UITableViewRowAnimation)animation;
 - (FOTableItem * _Nonnull)pagingItemForSection:(FOTableSection * _Nonnull)section;
 - (void)refreshVisibleCells;
