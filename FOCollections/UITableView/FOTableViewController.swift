@@ -17,6 +17,8 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     var layoutCellCache = [String: UITableViewCell]()
     var pagingTimer: NSTimer?
     public var queue = NSOperationQueue()                              // All table UI updates are performed on this queue to serialize animations
+    public var clearsSelectionOnViewWillAppear = true
+    public var clearCellInsets = false
     
     public convenience init(frame: CGRect, style: UITableViewStyle) {
         self.init(nibName: nil, bundle: nil)
@@ -51,6 +53,11 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         super.viewDidLayoutSubviews()
         
         tableView.frame = view.bounds
+
+        if clearCellInsets {
+            tableView.layoutMargins = UIEdgeInsetsZero
+            tableView.separatorInset = UIEdgeInsetsZero
+        }
     }
     
     override public func viewDidAppear(animated: Bool) {
@@ -63,6 +70,18 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         super.viewDidDisappear(animated)
         
         stopPagingTimer()
+    }
+    
+    public override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if clearsSelectionOnViewWillAppear {
+            if let indexPaths = tableView.indexPathsForSelectedRows {
+                for indexPath in indexPaths {
+                    tableView.deselectRowAtIndexPath(indexPath, animated: animated)
+                }
+            }
+        }
     }
     
     override public func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {

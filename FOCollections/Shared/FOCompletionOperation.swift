@@ -52,6 +52,20 @@ class FOCompletionOperation: NSOperation {
         }
     }
     
+    private var _ready: Bool = true;
+    override var ready: Bool {
+        get {
+            return _ready && super.ready
+        }
+        set {
+            if _ready != newValue {
+                willChangeValueForKey("isReady")
+                _ready = newValue
+                didChangeValueForKey("isReady")
+            }
+        }
+    }
+    
     override func main() {
         if cancelled {
             finish()
