@@ -29,6 +29,13 @@ public class FOCollectionViewDataSource: NSObject {
             }
         }
     }
+    
+    public func appendSection(section: FOCollectionSection, collectionView: UICollectionView, viewController: UIViewController) {
+        section.linkItems(viewController)
+        self.sections.append(section)
+        self.registerClassesForItems(section.items, collectionView: collectionView)
+        self.keyCache.removeAll(keepCapacity: true)
+    }
 
     public func deleteSectionsAtIndexes(indexes: NSIndexSet, collectionView: UICollectionView) {
         indexes.enumerateIndexesWithOptions(NSEnumerationOptions.Reverse) { (index, stop) -> Void in

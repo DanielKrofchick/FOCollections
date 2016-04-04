@@ -26,6 +26,13 @@ public class FOTableViewDataSource: NSObject {
         }
     }
     
+    public func appendSection(section: FOTableSection, tableView: UITableView, viewController: UIViewController) {
+        section.linkItems(viewController)
+        sections.append(section)
+        registerClassesForItems(section.items, tableView: tableView)
+        keyCache.removeAll(keepCapacity: true)
+    }
+    
     public func deleteSectionsAtIndexes(indexes: NSIndexSet, tableView: UITableView) {
         indexes.enumerateIndexesWithOptions(NSEnumerationOptions.Reverse) { (index, stop) -> Void in
             self.sections.removeAtIndex(index)
