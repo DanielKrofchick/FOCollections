@@ -200,6 +200,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
             for indexPath in indexPaths {
                 if let cell = tableView.cellForRowAtIndexPath(indexPath), item = dataSource.itemAtIndexPath(indexPath) {
                     item.configure(cell, tableView: tableView, indexPath: indexPath)
+                    cell.setNeedsLayout()
                 }
             }
         }
