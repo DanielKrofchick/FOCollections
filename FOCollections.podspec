@@ -9,11 +9,10 @@ Pod::Spec.new do |s|
     }
   s.author       = { "Daniel Krofchick" => "krofchick@gmail.com" }
   s.ios.deployment_target = '8.0'
-  s.source_files = 'FOCollections/**/*.{h,m,swift}'
-  s.resource_bundles = {
-      'FOCollections' => ['FOCollections/Assets/*.png']
+  s.source       = {
+      :git => "https://github.com/DanielKrofchick/FOCollections.git",
+      :tag => "0.1"
   }
-  s.source       = { :git => "https://github.com/DanielKrofchick/FOCollections.git", :tag => "0.1" }
-  s.source_files = "Output/FOCollections-Debug-iphoneuniversal/FOCollections.framework"
+  s.source_files = 'FOCollections/**/*.{d,h,m,swift}'
 
 end
