@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
     }
   s.author       = { "Daniel Krofchick" => "krofchick@gmail.com" }
   s.ios.deployment_target = '8.0'
-  s.source_files = 'FOCollections/**/*'
+  s.source_files = './**/*.{d,h,m,swift}'
   s.resource_bundles = {
       'FOCollections' => ['FOCollections/Assets/*.png']
   }
