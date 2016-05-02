@@ -17,7 +17,7 @@ public class FOCollectionViewController: UICollectionViewController {
     private var pagingTimer: NSTimer?
     public var queue = NSOperationQueue()                              // All table UI updates are performed on this queue to serialize animations
     
-    override init(collectionViewLayout layout: UICollectionViewLayout) {
+    public override init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(collectionViewLayout: layout)
         
         privateInit()
