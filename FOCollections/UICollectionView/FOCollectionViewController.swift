@@ -17,18 +17,35 @@ public class FOCollectionViewController: UICollectionViewController {
     private var pagingTimer: NSTimer?
     public var queue = NSOperationQueue()                              // All table UI updates are performed on this queue to serialize animations
     
-    override public func viewDidLoad() {
-        super.viewDidLoad()
+    override init(collectionViewLayout layout: UICollectionViewLayout) {
+        super.init(collectionViewLayout: layout)
         
+        privateInit()
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        privateInit()
+    }
+    
+    func privateInit() {
         queue.qualityOfService = NSQualityOfService.UserInitiated
         queue.name = "FOCollectionViewController"
         queue.maxConcurrentOperationCount = 1
+        queue.suspended = true
+    }
+    
+    override public func viewDidLoad() {
+        super.viewDidLoad()
         
         view.backgroundColor = UIColor.whiteColor()
         
         collectionView?.backgroundColor = UIColor.whiteColor()
         collectionView?.dataSource = dataSource
         collectionView?.delegate = self
+        
+        queue.suspended = false
     }
     
     override public func viewDidAppear(animated: Bool) {

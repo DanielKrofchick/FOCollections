@@ -24,6 +24,30 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         self.init(nibName: nil, bundle: nil)
         
         createTableView(frame: frame, style: style)
+        privateInit()
+    }
+    
+    required override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        privateInit()
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        privateInit()
+    }
+    
+    func privateInit() {
+        queue.qualityOfService = NSQualityOfService.UserInitiated
+        queue.name = "FOTableViewController"
+        queue.maxConcurrentOperationCount = 1
+        queue.suspended = true
+        
+        if tableView == nil {
+            createTableView()
+        }
     }
     
     override public func viewDidLoad() {
@@ -31,18 +55,12 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         
         view.backgroundColor = UIColor.whiteColor()
         
-        queue.qualityOfService = NSQualityOfService.UserInitiated
-        queue.name = "FOTableViewController"
-        queue.maxConcurrentOperationCount = 1
-        
-        if tableView == nil {
-            createTableView()
-        }
-        
         tableView.backgroundColor = UIColor.whiteColor()
         tableView.dataSource = dataSource
         tableView.delegate = self
         view.addSubview(tableView)
+        
+        queue.suspended = false
     }
     
     private func createTableView(frame frame: CGRect = CGRectZero, style: UITableViewStyle = .Plain) {
