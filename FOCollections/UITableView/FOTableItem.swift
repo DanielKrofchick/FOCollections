@@ -52,6 +52,16 @@ public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         return cells
     }
+
+    public func indexPaths() -> [NSIndexPath] {
+        var indexPaths = [NSIndexPath]()
+        
+        if let viewController = viewController as? FOTableViewController {
+            indexPaths = viewController.dataSource.indexPathsForItem(self)
+        }
+        
+        return indexPaths
+    }
     
     public override func isEqual(o: AnyObject?) -> Bool {
         if let o = o as? FOTableItem {

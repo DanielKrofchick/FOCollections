@@ -8,12 +8,14 @@
 
 import UIKit
 
-public class FOTableSection: NSObject {
+public class FOTableSection: NSObject, UITableViewDelegate {
     
     public var items: [FOTableItem]? = nil
     public var identifier: String? = nil                                           // Unique item ID
     public var pagingState: PagingState = .Disabled
     public var pagingDirection: PagingDirection = .Down
+    public var header: UIView? = nil
+    public var footer: UIView? = nil
     
     func linkItems(viewController: UIViewController?) {
         items?.forEach{
@@ -57,6 +59,38 @@ public class FOTableSection: NSObject {
     
     public func pageFetchComplete() {
         pagingState = .Paging
+    }
+    
+    public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if let headerS = header?.sizeThatFits(CGSize(width: tableView.frame.width, height: CGFloat.max)) {
+            header?.frame = CGRect(x: 0, y: 0, width: headerS.width, height: headerS.height)
+        }
+        
+        return header
+    }
+    
+    public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if let headerS = header?.sizeThatFits(CGSize(width: tableView.frame.width, height: CGFloat.max)) {
+            header?.frame = CGRect(x: 0, y: 0, width: headerS.width, height: headerS.height)
+        }
+        
+        return header?.frame.height ?? 0
+    }
+    
+    public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if let footerS = footer?.sizeThatFits(CGSize(width: tableView.frame.width, height: CGFloat.max)) {
+            footer?.frame = CGRect(x: 0, y: 0, width: footerS.width, height: footerS.height)
+        }
+        
+        return footer
+    }
+    
+    public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if let footerS = footer?.sizeThatFits(CGSize(width: tableView.frame.width, height: CGFloat.max)) {
+            footer?.frame = CGRect(x: 0, y: 0, width: footerS.width, height: footerS.height)
+        }
+        
+        return footer?.frame.height ?? 0
     }
     
 }
