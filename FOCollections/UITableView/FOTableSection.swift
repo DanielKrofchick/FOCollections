@@ -80,7 +80,7 @@ public class FOTableSection: NSObject, UITableViewDelegate {
     }
     
     public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        sizeView(header, tableView: tableView)
+        sizeView(footer, tableView: tableView)
         
         return footer?.frame.height ?? 0
     }
@@ -88,7 +88,7 @@ public class FOTableSection: NSObject, UITableViewDelegate {
     private func sizeView(view: UIView?, tableView: UITableView) {
         if let view = view {
             let size = view.sizeThatFits(CGSize(width: tableView.frame.width, height: CGFloat.max))
-            view.frame = CGRect(origin: view.frame.origin, size: size)
+            view.frame = CGRect(origin: view.frame.origin, size: CGSize(width: tableView.frame.width, height: size.height))
         }
     }
     

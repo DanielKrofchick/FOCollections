@@ -9,7 +9,7 @@
 import UIKit
 
 public class FOTableViewController: UIViewController, UITableViewDelegate {
-
+    
     public var tableView: UITableView!
     public let dataSource = FOTableViewDataSource()
     public var pagingThreshold = CGFloat(1000)
@@ -19,6 +19,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     public var queue = NSOperationQueue()                              // All table UI updates are performed on this queue to serialize animations
     public var clearsSelectionOnViewWillAppear = true
     public var clearCellInsets = false
+    public var defaultSeparatorInset = UIEdgeInsetsZero                // Preserve access to insets for cell layout purposes when setting 'clearCellInsets' = true
     
     public convenience init(frame: CGRect, style: UITableViewStyle) {
         self.init(nibName: nil, bundle: nil)
@@ -60,6 +61,8 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         tableView.delegate = self
         view.addSubview(tableView)
         
+        defaultSeparatorInset = tableView.separatorInset
+        
         queue.suspended = false
     }
     
@@ -71,7 +74,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         super.viewDidLayoutSubviews()
         
         tableView.frame = view.bounds
-
+        
         if clearCellInsets {
             tableView.layoutMargins = UIEdgeInsetsZero
             tableView.separatorInset = UIEdgeInsetsZero
@@ -108,7 +111,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         cellSizeCache.removeAll(keepCapacity: true)
         tableView.reloadData()
     }
-        
+    
     // MARK: Modification
     
     func tableUpdate(update: (() -> ()), completion: (() -> ())?) {
@@ -121,7 +124,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         tableView.endUpdates()
         CATransaction.commit()
     }
-
+    
     public func queueUpdate(update: (() -> ()), completion: (() -> ())? = nil) {
         queue.addOperation(FOCompletionOperation(work: {[weak self] (operation) -> Void in
             if self == nil {
@@ -133,7 +136,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
                 completion?()
                 operation.finish()
             })
-        }, queue: dispatch_get_main_queue()))
+            }, queue: dispatch_get_main_queue()))
     }
     
     public func queueWork(work: (() -> ())) {
@@ -165,7 +168,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
             tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
         }
     }
-
+    
     public func prependItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation = .Fade) {
         if let indexPaths = dataSource.prependItems(items, toSectionAtIndex: sectionIndex, tableView: tableView, viewController: self) {
             tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
@@ -223,7 +226,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
             }
         }
     }
-
+    
     // MARK: Paging
     
     // Implemented by subclass
@@ -258,7 +261,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
                     queueUpdate({
                         [weak self] in
                         self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
-                    })
+                        })
                 }
             }
         }
