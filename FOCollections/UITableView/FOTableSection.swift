@@ -62,35 +62,34 @@ public class FOTableSection: NSObject, UITableViewDelegate {
     }
     
     public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let headerS = header?.sizeThatFits(CGSize(width: tableView.frame.width, height: CGFloat.max)) {
-            header?.frame = CGRect(x: 0, y: 0, width: headerS.width, height: headerS.height)
-        }
+        sizeView(header, tableView: tableView)
         
         return header
     }
     
     public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if let headerS = header?.sizeThatFits(CGSize(width: tableView.frame.width, height: CGFloat.max)) {
-            header?.frame = CGRect(x: 0, y: 0, width: headerS.width, height: headerS.height)
-        }
+        sizeView(header, tableView: tableView)
         
         return header?.frame.height ?? 0
     }
     
     public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if let footerS = footer?.sizeThatFits(CGSize(width: tableView.frame.width, height: CGFloat.max)) {
-            footer?.frame = CGRect(x: 0, y: 0, width: footerS.width, height: footerS.height)
-        }
+        sizeView(footer, tableView: tableView)
         
         return footer
     }
     
     public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if let footerS = footer?.sizeThatFits(CGSize(width: tableView.frame.width, height: CGFloat.max)) {
-            footer?.frame = CGRect(x: 0, y: 0, width: footerS.width, height: footerS.height)
-        }
+        sizeView(header, tableView: tableView)
         
         return footer?.frame.height ?? 0
+    }
+    
+    private func sizeView(view: UIView?, tableView: UITableView) {
+        if let view = view {
+            let size = view.sizeThatFits(CGSize(width: tableView.frame.width, height: CGFloat.max))
+            view.frame = CGRect(origin: view.frame.origin, size: size)
+        }
     }
     
 }
