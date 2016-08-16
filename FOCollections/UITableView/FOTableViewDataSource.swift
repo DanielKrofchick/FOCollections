@@ -10,7 +10,7 @@ import UIKit
 
 public class FOTableViewDataSource: NSObject {
     
-    private(set) var sections = [FOTableSection]()
+    public private(set) var sections = [FOTableSection]()
     private var keyCache = [NSIndexPath: String]()
     
     // MARK: Modification
@@ -238,11 +238,23 @@ public class FOTableViewDataSource: NSObject {
         return itemAtIndexPath(indexPath)?.data
     }
     
-    public func indexesForSection(section: FOTableSection) -> NSIndexSet {
+    public func indexesForSection(section section: FOTableSection) -> NSIndexSet {
         let indexSet = NSMutableIndexSet()
         
         for (index, s) in sections.enumerate() {
             if section == s {
+                indexSet.addIndex(index)
+            }
+        }
+        
+        return indexSet
+    }
+    
+    public func indexesForSection(identifier identifier: String) -> NSIndexSet {
+        let indexSet = NSMutableIndexSet()
+        
+        for (index, s) in sections.enumerate() {
+            if identifier == s.identifier {
                 indexSet.addIndex(index)
             }
         }

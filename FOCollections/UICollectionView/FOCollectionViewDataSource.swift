@@ -10,7 +10,7 @@ import UIKit
 
 public class FOCollectionViewDataSource: NSObject {
 
-    private(set) var sections = [FOCollectionSection]()
+    public private(set) var sections = [FOCollectionSection]()
     private var keyCache = [NSIndexPath: String]()
     
     // MARK: Modification
@@ -241,11 +241,23 @@ public class FOCollectionViewDataSource: NSObject {
         return itemAtIndexPath(indexPath)?.data
     }
 
-    public func indexesForSection(section: FOCollectionSection) -> NSIndexSet {
+    public func indexesForSection(section section: FOCollectionSection) -> NSIndexSet {
         let indexSet = NSMutableIndexSet()
         
         for (index, s) in sections.enumerate() {
             if section == s {
+                indexSet.addIndex(index)
+            }
+        }
+        
+        return indexSet
+    }
+    
+    public func indexesForSection(identifier identifier: String) -> NSIndexSet {
+        let indexSet = NSMutableIndexSet()
+        
+        for (index, s) in sections.enumerate() {
+            if identifier == s.identifier {
                 indexSet.addIndex(index)
             }
         }
