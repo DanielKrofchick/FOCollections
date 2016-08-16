@@ -16,8 +16,9 @@ public class FOTableViewDataSource: NSObject {
     // MARK: Modification
     
     public func insertSections(sections: [FOTableSection], atIndexes indexes: NSIndexSet, tableView: UITableView, viewController: UIViewController) {
-        indexes.enumerateIndexesUsingBlock { (index, stop) -> Void in
-            if let section = sections.safe(index) {
+        indexes.enumerate().forEach {
+            i, index in
+            if let section = sections.safe(i) {
                 section.linkItems(viewController)
                 self.sections.insert(section, atIndex: index)
                 self.registerClassesForItems(section.items, tableView: tableView)

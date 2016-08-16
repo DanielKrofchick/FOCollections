@@ -20,8 +20,9 @@ public class FOCollectionViewDataSource: NSObject {
             return
         }
         
-        indexes.enumerateIndexesUsingBlock { (index, stop) -> Void in
-            if let section = sections?.safe(index) {
+        indexes.enumerate().forEach {
+            i, index in
+            if let section = sections?.safe(i) {
                 section.linkItems(viewController)
                 self.sections.insert(section, atIndex: index)
                 self.registerClassesForItems(section.items, collectionView: collectionView)
