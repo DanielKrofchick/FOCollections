@@ -142,6 +142,13 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     public func queueWork(work: (() -> ())) {
         queue.addOperation(NSBlockOperation(block: work))
     }
+
+    public func queueWorkWithCompletion(work: ((operation: FOCompletionOperation) -> ()), queue: dispatch_queue_t = dispatch_get_global_queue(0, 0)) {
+        self.queue.addOperation(FOCompletionOperation(work: { (operation) in
+            work(operation: operation)
+            }, queue: queue)
+        )
+    }
     
     public func insertSections(sections: [FOTableSection], indexes: NSIndexSet, animation: UITableViewRowAnimation = .Fade) {
         dataSource.insertSections(sections, atIndexes: indexes, tableView: tableView, viewController: self)

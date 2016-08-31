@@ -8,16 +8,16 @@
 
 import Foundation
 
-class FOCompletionOperation: NSOperation {
+public class FOCompletionOperation: NSOperation {
     
     private var queue: dispatch_queue_t?
     private var work: ((operation: FOCompletionOperation) -> Void)? = nil
 
-    convenience init(work: ((operation: FOCompletionOperation) -> Void)?, queue: dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    public convenience init(work: ((operation: FOCompletionOperation) -> Void)?, queue: dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
         self.init(queue: queue, work: work)
     }
     
-    convenience init(queue: dispatch_queue_t?, work: ((operation: FOCompletionOperation) -> Void)?) {
+    public convenience init(queue: dispatch_queue_t?, work: ((operation: FOCompletionOperation) -> Void)?) {
         self.init()
         
         self.queue = queue
@@ -25,7 +25,7 @@ class FOCompletionOperation: NSOperation {
     }
 
     private var _executing: Bool = false
-    override var executing: Bool {
+    override public var executing: Bool {
         get {
             return _executing
         }
@@ -39,7 +39,7 @@ class FOCompletionOperation: NSOperation {
     }
     
     private var _finished: Bool = false;
-    override var finished: Bool {
+    override public var finished: Bool {
         get {
             return _finished
         }
@@ -53,7 +53,7 @@ class FOCompletionOperation: NSOperation {
     }
     
     private var _ready: Bool = true;
-    override var ready: Bool {
+    override public var ready: Bool {
         get {
             return _ready && super.ready
         }
@@ -66,7 +66,7 @@ class FOCompletionOperation: NSOperation {
         }
     }
     
-    override func main() {
+    override public func main() {
         if cancelled {
             finish()
             return
