@@ -15,6 +15,7 @@ public class FOCollectionItem: NSObject, UICollectionViewDelegateFlowLayout {
     public var reuseIdentifier: String? = nil                                      // collectionView reuseIdentifier
     public var cellClass: AnyClass? = nil                                          // View Class to register with the collectionView
     public var columns = Int(1)                                                    // Columns spanned by the item, depends on layout
+    public var operations = [NSOperation]()                                        // Operations returned from getResources are stored here and cancelled on cell didEndDisplaying
     public weak var section: FOCollectionSection?                                  // Weak reference to section
     public weak var viewController: UIViewController? = nil                        // Weak reference to viewController
     

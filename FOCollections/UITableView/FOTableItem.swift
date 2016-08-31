@@ -14,6 +14,7 @@ public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
     public var identifier: String? = nil                                           // Unique item ID
     public var reuseIdentifier: String? = nil                                      // collectionView reuseIdentifier
     public var cellClass: AnyClass? = nil                                          // View Class to register with the collectionViews
+    public var operations = [NSOperation]()                                        // Operations returned from getResources are stored here and cancelled on cell didEndDisplaying
     weak public var section: FOTableSection?                                       // Weak reference to section
     weak public var viewController: UIViewController? = nil
     

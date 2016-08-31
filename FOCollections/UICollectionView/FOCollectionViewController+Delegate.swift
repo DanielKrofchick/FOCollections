@@ -65,6 +65,10 @@ extension FOCollectionViewController  {
     }
     
     override public func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if let item = dataSource.itemAtIndexPath(indexPath) {
+            item.operations.forEach{$0.cancel()}
+            item.operations.removeAll()
+        }
         delegateWithIndexPath(indexPath)?.collectionView?(collectionView, didEndDisplayingCell: cell, forItemAtIndexPath: indexPath)
     }
     

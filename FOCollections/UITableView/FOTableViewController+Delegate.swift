@@ -29,6 +29,10 @@ extension FOTableViewController {
     }
     
     public func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if let item = dataSource.itemAtIndexPath(indexPath) {
+            item.operations.forEach{$0.cancel()}
+            item.operations.removeAll()
+        }
         delegateWithIndexPath(indexPath)?.tableView?(tableView, didEndDisplayingCell: cell, forRowAtIndexPath: indexPath)
     }
     
