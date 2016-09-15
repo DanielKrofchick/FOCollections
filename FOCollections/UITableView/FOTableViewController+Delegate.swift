@@ -11,11 +11,22 @@ import UIKit
 extension FOTableViewController {
     
     public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
         if clearCellInsets {
             cell.layoutMargins = UIEdgeInsetsZero
             cell.separatorInset = UIEdgeInsetsZero
         }
+        
+        // delay one cycle to allow cell to finish being created
+        dispatch_async(dispatch_get_main_queue(), {
+            dispatch_async(dispatch_get_main_queue(), {
+                dispatch_async(dispatch_get_main_queue(), {
+                    [weak self] in
+                    if let item = self?.dataSource.itemAtIndexPath(indexPath) {
+                        item.operations += item.getResources(tableView, indexPath: indexPath)
+                    }
+                    })
+            })
+        })
         
         delegateWithIndexPath(indexPath)?.tableView?(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
     }
