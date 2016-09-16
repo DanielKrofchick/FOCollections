@@ -24,7 +24,7 @@ extension FOTableViewController {
                     if let item = self?.dataSource.itemAtIndexPath(indexPath) {
                         item.operations += item.getResources(tableView, indexPath: indexPath)
                     }
-                    })
+                })
             })
         })
         

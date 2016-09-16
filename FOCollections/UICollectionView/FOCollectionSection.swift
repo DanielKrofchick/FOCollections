@@ -16,7 +16,7 @@ public class FOCollectionSection: NSObject, UICollectionViewDelegateFlowLayout {
     public var pagingDirection: PagingDirection = .Down
     public var columns: Int? = nil
     
-    func linkItems(viewController: UIViewController?) {
+    public func linkItems(viewController: UIViewController?) {
         items?.forEach{
             $0.link(self, viewController: viewController)
         }

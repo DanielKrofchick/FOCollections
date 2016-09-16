@@ -17,7 +17,7 @@ public class FOTableSection: NSObject, UITableViewDelegate {
     public var header: UIView? = nil
     public var footer: UIView? = nil
     
-    func linkItems(viewController: UIViewController?) {
+    public func linkItems(viewController: UIViewController?) {
         items?.forEach{
             $0.link(self, viewController: viewController)
         }
