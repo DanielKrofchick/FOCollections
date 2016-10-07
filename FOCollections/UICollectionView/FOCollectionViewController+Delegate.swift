@@ -57,6 +57,18 @@ extension FOCollectionViewController  {
     }
     
     override public func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        // delay one cycle to allow cell to finish being created
+        dispatch_async(dispatch_get_main_queue(), {
+            dispatch_async(dispatch_get_main_queue(), {
+                dispatch_async(dispatch_get_main_queue(), {
+                    [weak self] in
+                    if let item = self?.dataSource.itemAtIndexPath(indexPath) {
+                        item.operations += item.getResources(collectionView, indexPath: indexPath)
+                    }
+                })
+            })
+        })
+        
         delegateWithIndexPath(indexPath)?.collectionView?(collectionView, willDisplayCell: cell, forItemAtIndexPath: indexPath)
     }
     
