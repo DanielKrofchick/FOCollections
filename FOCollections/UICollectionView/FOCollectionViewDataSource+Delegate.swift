@@ -21,13 +21,6 @@ extension FOCollectionViewDataSource: UICollectionViewDataSource {
             if let reuseIdentifier = item.reuseIdentifier {
                 cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
                 item.configure(cell!, collectionView: collectionView, indexPath: indexPath)
-                
-                // delay one cycle to allow cell to finish being created
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-                        item.operations += item.getResources(collectionView, indexPath: indexPath)
-                    })
-                })
             }
         }
         
