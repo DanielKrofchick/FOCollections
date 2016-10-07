@@ -214,8 +214,8 @@ extension FOTableViewController {
         delegateWithIndexPath(indexPath)?.tableView?(tableView, willBeginEditingRowAtIndexPath: indexPath)
     }
     
-    public func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath?) {
-        delegateWithIndexPath(indexPath!)?.tableView?(tableView, didEndEditingRowAtIndexPath: indexPath)
+    public func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
+        delegateWithIndexPath(indexPath)?.tableView?(tableView, didEndEditingRowAtIndexPath: indexPath)
     }
 
     /**
