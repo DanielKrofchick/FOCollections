@@ -314,12 +314,15 @@ public class FOCollectionViewDataSource: NSObject {
         return count
     }
     
-    public func equalData(dataSource: FOTableViewDataSource) -> Bool {
+    public func equalData(sections: [FOCollectionSection]) -> Bool {
         var equal = true
         
-        if count() == dataSource.count() {
-            for i in 0..<dataSource.count() {
-                if dataSource.itemAtIndex(i) != itemAtIndex(i) {
+        let new = FOCollectionViewDataSource()
+        new.sections = sections
+        
+        if count() == new.count() {
+            for i in 0..<new.count() {
+                if new.itemAtIndex(i) != itemAtIndex(i) {
                     equal = false
                     break
                 }
