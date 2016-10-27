@@ -299,6 +299,35 @@ public class FOTableViewDataSource: NSObject {
         return cells
     }
     
+    public func count() -> Int {
+        var count = Int(0)
+        
+        for section in sections {
+            if let items = section.items {
+                count += items.count
+            }
+        }
+        
+        return count
+    }
+    
+    public func equalData(dataSource: FOTableViewDataSource) -> Bool {
+        var equal = true
+
+        if count() == dataSource.count() {
+            for i in 0..<dataSource.count() {
+                if dataSource.itemAtIndex(i) != itemAtIndex(i) {
+                    equal = false
+                    break
+                }
+            }
+        } else {
+            equal = false
+        }
+        
+        return equal
+    }
+    
 }
 
 extension FOTableViewDataSource: SequenceType {
