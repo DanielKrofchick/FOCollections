@@ -10,13 +10,13 @@ import UIKit
 
 class CollectionCellItem: FOCollectionItem {
     
-    override func configure(cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: NSIndexPath) {
+    override func configure(_ cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: IndexPath) {
         if let color = data as? UIColor {
             cell.contentView.backgroundColor = color
         }
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         if let width = widthForCollectionView(collectionView, indexPath: indexPath) {
             return CGSize(width: width, height: width)
         } else {

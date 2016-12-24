@@ -20,11 +20,11 @@ class FOCollectionPagingItem: FOCollectionItem {
         cellClass = UICollectionViewCell.self
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         var width = collectionView.frame.size.width
         
-        if let collectionViewLayout = collectionViewLayout as? UICollectionViewFlowLayout, viewController = viewController as? UICollectionViewDelegateFlowLayout {
-            if let sectionInsets = viewController.collectionView?(collectionView, layout: collectionViewLayout, insetForSectionAtIndex: indexPath.section) {
+        if let collectionViewLayout = collectionViewLayout as? UICollectionViewFlowLayout, let viewController = viewController as? UICollectionViewDelegateFlowLayout {
+            if let sectionInsets = viewController.collectionView?(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section) {
                 width = collectionView.frame.size.width - sectionInsets.left - sectionInsets.right
             }
         }
@@ -32,8 +32,8 @@ class FOCollectionPagingItem: FOCollectionItem {
         return CGSize(width: width, height: 44)
     }
     
-    override func configure(cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: NSIndexPath) {
-        cell.contentView.backgroundColor = UIColor.redColor()
+    override func configure(_ cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: IndexPath) {
+        cell.contentView.backgroundColor = UIColor.red
     }
 
 }

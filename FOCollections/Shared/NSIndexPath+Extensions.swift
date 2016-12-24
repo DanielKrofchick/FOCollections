@@ -8,13 +8,13 @@
 
 import Foundation
 
-extension NSIndexPath {
+extension IndexPath {
     
-    class func indexPathsForItemsInRange(range: NSRange, section: Int) -> [NSIndexPath] {
-        var result = [NSIndexPath]()
+    static func indexPathsForItemsInRange(_ range: NSRange, section: Int) -> [IndexPath] {
+        var result = [IndexPath]()
         
         for i in range.location ..< NSMaxRange(range) {
-            result.append(NSIndexPath(forItem: i, inSection: section))
+            result.append(IndexPath(item: i, section: section))
         }
         
         return result

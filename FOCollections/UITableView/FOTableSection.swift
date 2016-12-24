@@ -8,32 +8,32 @@
 
 import UIKit
 
-public class FOTableSection: NSObject, UITableViewDelegate {
+open class FOTableSection: NSObject, UITableViewDelegate {
     
-    public var items: [FOTableItem]? = nil
-    public var identifier: String? = nil                                           // Unique item ID
-    public var pagingState: PagingState = .Disabled
-    public var pagingDirection: PagingDirection = .Down
-    public var header: UIView? = nil
-    public var footer: UIView? = nil
+    open var items: [FOTableItem]? = nil
+    open var identifier: String? = nil                                           // Unique item ID
+    open var pagingState: PagingState = .disabled
+    open var pagingDirection: PagingDirection = .down
+    open var header: UIView? = nil
+    open var footer: UIView? = nil
     
-    public func linkItems(viewController: UIViewController?) {
+    open func linkItems(_ viewController: UIViewController?) {
         items?.forEach{
             $0.link(self, viewController: viewController)
         }
     }
     
-    public func itemAtIndex(index: Int) -> FOTableItem? {
+    open func itemAtIndex(_ index: Int) -> FOTableItem? {
         return items?.safe(index)
     }
     
-    func indexPathsForItem(item: FOTableItem, section: Int) -> [NSIndexPath] {
-        var indexPaths = [NSIndexPath]()
+    func indexPathsForItem(_ item: FOTableItem, section: Int) -> [IndexPath] {
+        var indexPaths = [IndexPath]()
         
         if let items = items {
-            for (itemIndex, i) in items.enumerate() {
+            for (itemIndex, i) in items.enumerated() {
                 if item.isEqual(i) {
-                    indexPaths.append(NSIndexPath(forItem: itemIndex, inSection: section))
+                    indexPaths.append(IndexPath(item: itemIndex, section: section))
                 }
             }
         }
@@ -41,14 +41,14 @@ public class FOTableSection: NSObject, UITableViewDelegate {
         return indexPaths
     }
     
-    func indexPathsForData(data: AnyObject, section: Int) -> [NSIndexPath] {
-        var indexPaths = [NSIndexPath]()
+    func indexPathsForData(_ data: AnyObject, section: Int) -> [IndexPath] {
+        var indexPaths = [IndexPath]()
         
         if let items = items {
-            for (itemIndex, item) in items.enumerate() {
+            for (itemIndex, item) in items.enumerated() {
                 if item.data != nil {
-                    if item.data!.isEqual(data) {
-                        indexPaths.append(NSIndexPath(forItem: itemIndex, inSection: section))
+                    if (item.data! as AnyObject).isEqual(data) {
+                        indexPaths.append(IndexPath(item: itemIndex, section: section))
                     }
                 }
             }
@@ -57,37 +57,37 @@ public class FOTableSection: NSObject, UITableViewDelegate {
         return indexPaths
     }
     
-    public func pageFetchComplete() {
-        pagingState = .Paging
+    open func pageFetchComplete() {
+        pagingState = .paging
     }
     
-    public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         sizeView(header, tableView: tableView)
         
         return header
     }
     
-    public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         sizeView(header, tableView: tableView)
         
         return header?.frame.height ?? 0
     }
     
-    public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         sizeView(footer, tableView: tableView)
         
         return footer
     }
     
-    public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         sizeView(footer, tableView: tableView)
         
         return footer?.frame.height ?? 0
     }
     
-    private func sizeView(view: UIView?, tableView: UITableView) {
+    fileprivate func sizeView(_ view: UIView?, tableView: UITableView) {
         if let view = view {
-            let size = view.sizeThatFits(CGSize(width: tableView.frame.width, height: CGFloat.max))
+            let size = view.sizeThatFits(CGSize(width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
             view.frame = CGRect(origin: view.frame.origin, size: CGSize(width: tableView.frame.width, height: size.height))
         }
     }

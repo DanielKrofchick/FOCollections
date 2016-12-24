@@ -8,82 +8,82 @@
 
 import Foundation
 
-class FOCompletionOperation: NSOperation {
+class FOCompletionOperation: Operation {
     
-    private var queue: dispatch_queue_t?
-    private var work: ((operation: FOCompletionOperation) -> Void)? = nil
+    fileprivate var queue: DispatchQueue?
+    fileprivate var work: ((_ operation: FOCompletionOperation) -> Void)? = nil
 
-    convenience init(work: ((operation: FOCompletionOperation) -> Void)?, queue: dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    convenience init(work: ((_ operation: FOCompletionOperation) -> Void)?, queue: DispatchQueue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)) {
         self.init(queue: queue, work: work)
     }
     
-    convenience init(queue: dispatch_queue_t?, work: ((operation: FOCompletionOperation) -> Void)?) {
+    convenience init(queue: DispatchQueue?, work: ((_ operation: FOCompletionOperation) -> Void)?) {
         self.init()
         
         self.queue = queue
         self.work = work
     }
 
-    private var _executing: Bool = false
-    override var executing: Bool {
+    fileprivate var _executing: Bool = false
+    override var isExecuting: Bool {
         get {
             return _executing
         }
         set {
             if _executing != newValue {
-                willChangeValueForKey("isExecuting")
+                willChangeValue(forKey: "isExecuting")
                 _executing = newValue
-                didChangeValueForKey("isExecuting")
+                didChangeValue(forKey: "isExecuting")
             }
         }
     }
     
-    private var _finished: Bool = false;
-    override var finished: Bool {
+    fileprivate var _finished: Bool = false;
+    override var isFinished: Bool {
         get {
             return _finished
         }
         set {
             if _finished != newValue {
-                willChangeValueForKey("isFinished")
+                willChangeValue(forKey: "isFinished")
                 _finished = newValue
-                didChangeValueForKey("isFinished")
+                didChangeValue(forKey: "isFinished")
             }
         }
     }
     
-    private var _ready: Bool = true;
-    override var ready: Bool {
+    fileprivate var _ready: Bool = true;
+    override var isReady: Bool {
         get {
-            return _ready && super.ready
+            return _ready && super.isReady
         }
         set {
             if _ready != newValue {
-                willChangeValueForKey("isReady")
+                willChangeValue(forKey: "isReady")
                 _ready = newValue
-                didChangeValueForKey("isReady")
+                didChangeValue(forKey: "isReady")
             }
         }
     }
     
     override func main() {
-        if cancelled {
+        if isCancelled {
             finish()
             return
         }
         
         if queue != nil {
-            dispatch_async(queue!, { () -> Void in
-                self.work?(operation: self)
+            queue!.async(execute: { () -> Void in
+                self.work?(self)
             })
         } else {
-            work?(operation: self)
+            work?(self)
         }
     }
     
     func finish() {
-        executing = false
-        finished = true
+        isExecuting = false
+        isFinished = true
     }
     
 }

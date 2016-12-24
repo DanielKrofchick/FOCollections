@@ -8,26 +8,26 @@
 
 import UIKit
 
-public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
+open class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
     
-    public var data: AnyObject? = nil                                              // Data cargo
-    public var identifier: String? = nil                                           // Unique item ID
-    public var reuseIdentifier: String? = nil                                      // collectionView reuseIdentifier
-    public var cellClass: AnyClass? = nil                                          // View Class to register with the collectionViews
-    public var operations = [NSOperation]()                                        // Operations returned from getResources are stored here and cancelled on cell didEndDisplaying
-    weak public var section: FOTableSection?                                       // Weak reference to section
-    weak public var viewController: UIViewController? = nil
+    open var data: Any? = nil                                              // Data cargo
+    open var identifier: String? = nil                                           // Unique item ID
+    open var reuseIdentifier: String? = nil                                      // collectionView reuseIdentifier
+    open var cellClass: AnyClass? = nil                                          // View Class to register with the collectionViews
+    open var operations = [Operation]()                                        // Operations returned from getResources are stored here and cancelled on cell didEndDisplaying
+    weak open var section: FOTableSection?                                       // Weak reference to section
+    weak open var viewController: UIViewController? = nil
     
-    public func configure(cell: UITableViewCell, tableView: UITableView, indexPath: NSIndexPath){}
+    open func configure(_ cell: UITableViewCell, tableView: UITableView, indexPath: IndexPath){}
     // Gets the reource identified by key
-    public func getResource(forKey key: String, tableView: UITableView, indexPath: NSIndexPath, completion: (resource: AnyObject?, result: AnyObject?) -> ()) -> NSOperation? {return nil}
+    open func getResource(forKey key: String, tableView: UITableView, indexPath: IndexPath, completion: (_ resource: AnyObject?, _ result: AnyObject?) -> ()) -> Operation? {return nil}
     // Populates the cell with the resource identified by key. IndexPath may have changed with async call, do not rely on it.
-    public func setResource(resource: AnyObject?, result: AnyObject?, forKey key: String, tableView: UITableView, indexPath: NSIndexPath){}
+    open func setResource(_ resource: AnyObject?, result: AnyObject?, forKey key: String, tableView: UITableView, indexPath: IndexPath){}
     // The item produces a unique key per resource
-    public func resourceKeys() -> [String]{return [String]()}
+    open func resourceKeys() -> [String]{return [String]()}
     
-    public func getResources(tableView: UITableView, indexPath: NSIndexPath) -> [NSOperation] {
-        var operations = [NSOperation]()
+    open func getResources(_ tableView: UITableView, indexPath: IndexPath) -> [Operation] {
+        var operations = [Operation]()
         
         for key in resourceKeys() {
             if let operation = getResource(forKey: key, tableView: tableView, indexPath: indexPath, completion: {[weak self] (resource, result) -> () in
@@ -40,12 +40,12 @@ public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
         return operations
     }
     
-    public func cells() -> [UITableViewCell] {
+    open func cells() -> [UITableViewCell] {
         var cells = [UITableViewCell]()
 
         if let viewController = viewController as? FOTableViewController {
             for indexPath in viewController.dataSource.indexPathsForItem(self) {
-                if let cell = viewController.tableView.cellForRowAtIndexPath(indexPath) {
+                if let cell = viewController.tableView.cellForRow(at: indexPath) {
                     cells.append(cell)
                 }
             }
@@ -54,8 +54,8 @@ public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
         return cells
     }
 
-    public func indexPaths() -> [NSIndexPath] {
-        var indexPaths = [NSIndexPath]()
+    open func indexPaths() -> [IndexPath] {
+        var indexPaths = [IndexPath]()
         
         if let viewController = viewController as? FOTableViewController {
             indexPaths = viewController.dataSource.indexPathsForItem(self)
@@ -64,12 +64,12 @@ public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
         return indexPaths
     }
     
-    public override func isEqual(o: AnyObject?) -> Bool {
+    open override func isEqual(_ o: Any?) -> Bool {
         if let o = o as? FOTableItem {
             if o.data == nil && data == nil {
                 return o.identifier == identifier
             } else if o.data != nil && data != nil {
-                return (o.identifier == identifier) && o.data!.isEqual(data!)
+                return (o.identifier == identifier) && (o.data! as AnyObject).isEqual(data!)
             } else {
                 return false
             }
@@ -79,13 +79,13 @@ public class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
 
     }
     
-    func link(section: FOTableSection?, viewController: UIViewController?) {
+    func link(_ section: FOTableSection?, viewController: UIViewController?) {
         self.section = section
         self.viewController = viewController
     }
     
     // Dummy protocol definitions. These are not implemented by FOTableItem
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {return 0}
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {return UITableViewCell()}
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {return 0}
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {return UITableViewCell()}
     
 }

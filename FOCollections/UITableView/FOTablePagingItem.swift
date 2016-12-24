@@ -20,13 +20,13 @@ class FOTablePagingItem: FOTableItem {
         cellClass = UITableViewCell.self
     }
 
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return CGFloat(44)
     }
     
-    override func configure(cell: UITableViewCell, tableView: UITableView, indexPath: NSIndexPath) {
-        cell.contentView.backgroundColor = UIColor.greenColor()
-        cell.selectionStyle = .None
+    override func configure(_ cell: UITableViewCell, tableView: UITableView, indexPath: IndexPath) {
+        cell.contentView.backgroundColor = UIColor.green
+        cell.selectionStyle = .none
     }
     
 }

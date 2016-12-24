@@ -10,23 +10,23 @@ import UIKit
 
 class MenuItem: FOTableItem {
     
-    override func configure(cell: UITableViewCell, tableView: UITableView, indexPath: NSIndexPath) {
+    override func configure(_ cell: UITableViewCell, tableView: UITableView, indexPath: IndexPath) {
         //[title, color]
-        if let data = data as? [AnyObject] {
-            if let color = data.first as? UIColor {
+        if let data = data as? [String: Any] {
+            if let color = data["color"] as? UIColor {
                 cell.backgroundColor = color
             }
-            if let text = data.safe(1) as? String {
+            if let text = data["text"] as? String {
                 cell.textLabel?.text = text
             }
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return 50.0
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         if identifier == tableIdentifier {
             viewController?.navigationController?.pushViewController(TableViewController(), animated: true)
         } else if identifier == collectionIdentifier {

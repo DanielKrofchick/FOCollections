@@ -8,31 +8,31 @@
 
 import UIKit
 
-public class FOCollectionSection: NSObject, UICollectionViewDelegateFlowLayout {
+open class FOCollectionSection: NSObject, UICollectionViewDelegateFlowLayout {
 
-    public var items: [FOCollectionItem]? = nil
-    public var identifier: String? = nil                                           // Unique item ID
-    public var pagingState: PagingState = .Disabled
-    public var pagingDirection: PagingDirection = .Down
-    public var columns: Int? = nil
+    open var items: [FOCollectionItem]? = nil
+    open var identifier: String? = nil                                           // Unique item ID
+    open var pagingState: PagingState = .disabled
+    open var pagingDirection: PagingDirection = .down
+    open var columns: Int? = nil
     
-    public func linkItems(viewController: UIViewController?) {
+    open func linkItems(_ viewController: UIViewController?) {
         items?.forEach{
             $0.link(self, viewController: viewController)
         }
     }
     
-    public func itemAtIndex(index: Int) -> FOCollectionItem? {
+    open func itemAtIndex(_ index: Int) -> FOCollectionItem? {
         return items?.safe(index)
     }
     
-    func indexPathsForItem(item: FOCollectionItem, section: Int) -> [NSIndexPath] {
-        var indexPaths = [NSIndexPath]()
+    func indexPathsForItem(_ item: FOCollectionItem, section: Int) -> [IndexPath] {
+        var indexPaths = [IndexPath]()
         
         if let items = items {
-            for (itemIndex, i) in items.enumerate() {
+            for (itemIndex, i) in items.enumerated() {
                 if item.isEqual(i) {
-                    indexPaths.append(NSIndexPath(forItem: itemIndex, inSection: section))
+                    indexPaths.append(IndexPath(item: itemIndex, section: section))
                 }
             }
         }
@@ -40,14 +40,14 @@ public class FOCollectionSection: NSObject, UICollectionViewDelegateFlowLayout {
         return indexPaths
     }
     
-    func indexPathsForData(data: AnyObject, section: Int) -> [NSIndexPath] {
-        var indexPaths = [NSIndexPath]()
+    func indexPathsForData(_ data: AnyObject, section: Int) -> [IndexPath] {
+        var indexPaths = [IndexPath]()
         
         if let items = items {
-            for (itemIndex, item) in items.enumerate() {
+            for (itemIndex, item) in items.enumerated() {
                 if item.data != nil {
                     if item.data!.isEqual(data) {
-                        indexPaths.append(NSIndexPath(forItem: itemIndex, inSection: section))
+                        indexPaths.append(IndexPath(item: itemIndex, section: section))
                     }
                 }
             }
@@ -56,8 +56,8 @@ public class FOCollectionSection: NSObject, UICollectionViewDelegateFlowLayout {
         return indexPaths
     }
     
-    public func pageFetchComplete() {
-        pagingState = .Paging
+    open func pageFetchComplete() {
+        pagingState = .paging
     }
     
 }

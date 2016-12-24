@@ -12,55 +12,55 @@ import UIKit
 
 extension FOCollectionViewController  {
     
-    private func delegateWithIndexPath(indexPath: NSIndexPath) -> UICollectionViewDelegate? {
+    fileprivate func delegateWithIndexPath(_ indexPath: IndexPath) -> UICollectionViewDelegate? {
         return dataSource.itemAtIndexPath(indexPath) as? UICollectionViewDelegate
     }
     
-    override public func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, shouldHighlightItemAtIndexPath: indexPath) {
+    override open func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, shouldHighlightItemAt: indexPath) {
             return value
         } else {
             return true
         }
     }
     
-    override public func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, didHighlightItemAtIndexPath: indexPath)
+    override open func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, didHighlightItemAt: indexPath)
     }
     
-    override public func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
-        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, didUnhighlightItemAtIndexPath: indexPath)
+    override open func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, didUnhighlightItemAt: indexPath)
     }
     
-    override public func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, shouldSelectItemAtIndexPath: indexPath) {
+    override open func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, shouldSelectItemAt: indexPath) {
             return value
         } else {
             return true
         }
     }
     
-    override public func collectionView(collectionView: UICollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, shouldDeselectItemAtIndexPath: indexPath) {
+    override open func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, shouldDeselectItemAt: indexPath) {
             return value
         } else {
             return true
         }
     }
     
-    override public func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, didSelectItemAtIndexPath: indexPath)
+    override open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, didSelectItemAt: indexPath)
     }
     
-    override public func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, didDeselectItemAtIndexPath: indexPath)
+    override open func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, didDeselectItemAt: indexPath)
     }
     
-    override public func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        // delay one cycle to allow cell to finish being created
-        dispatch_async(dispatch_get_main_queue(), {
-            dispatch_async(dispatch_get_main_queue(), {
-                dispatch_async(dispatch_get_main_queue(), {
+    override open func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        // delayopenone cycle to allow cell to finish being created
+        DispatchQueue.main.async(execute: {
+            DispatchQueue.main.async(execute: {
+                DispatchQueue.main.async(execute: {
                     [weak self] in
                     if let item = self?.dataSource.itemAtIndexPath(indexPath) {
                         item.operations += item.getResources(collectionView, indexPath: indexPath)
@@ -69,43 +69,43 @@ extension FOCollectionViewController  {
             })
         })
         
-        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, willDisplayCell: cell, forItemAtIndexPath: indexPath)
+        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, willDisplay: cell, forItemAt: indexPath)
     }
     
-    override public func collectionView(collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, atIndexPath indexPath: NSIndexPath) {
-        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, willDisplaySupplementaryView: view, forElementKind: elementKind, atIndexPath: indexPath)
+    override open func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, willDisplaySupplementaryView: view, forElementKind: elementKind, at: indexPath)
     }
     
-    override public func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    override open func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let item = dataSource.itemAtIndexPath(indexPath) {
             item.operations.forEach{$0.cancel()}
             item.operations.removeAll()
         }
-        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, didEndDisplayingCell: cell, forItemAtIndexPath: indexPath)
+        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, didEndDisplaying: cell, forItemAt: indexPath)
     }
     
-    override public func collectionView(collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, atIndexPath indexPath: NSIndexPath) {
-        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, didEndDisplayingSupplementaryView: view, forElementOfKind: elementKind, atIndexPath: indexPath)
+    override open func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, didEndDisplayingSupplementaryView: view, forElementOfKind: elementKind, at: indexPath)
     }
     
-    override public func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, shouldShowMenuForItemAtIndexPath: indexPath) {
+    override open func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+        if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, shouldShowMenuForItemAt: indexPath) {
             return value
         } else {
             return false
         }
     }
     
-    override public func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, canPerformAction: action, forItemAtIndexPath: indexPath, withSender: sender) {
+    override open func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, canPerformAction: action, forItemAt: indexPath, withSender: sender) {
             return value
         } else {
             return false
         }
     }
     
-    override public func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, performAction: action, forItemAtIndexPath: indexPath, withSender: sender)
+    override open func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+        delegateWithIndexPath(indexPath)?.collectionView?(collectionView, performAction: action, forItemAt: indexPath, withSender: sender)
     }
     
     /**
@@ -114,8 +114,8 @@ extension FOCollectionViewController  {
     **/
 
     @available(iOS 9.0, *)
-    override public func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, canFocusItemAtIndexPath: indexPath) {
+    override open func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, canFocusItemAt: indexPath) {
             return value
         } else {
             return true

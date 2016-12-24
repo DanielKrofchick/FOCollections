@@ -10,7 +10,7 @@ extension Array {
     
     // Safely lookup an index that might be out of bounds,
     // returning nil if it does not exist
-    func safe(index: Int) -> Element? {
+    func safe(_ index: Int) -> Element? {
         if 0 <= index && index < count {
             return self[index]
         } else {

@@ -16,29 +16,29 @@ class MenuController: FOTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.backgroundColor = UIColor.orangeColor()
+        tableView.backgroundColor = UIColor.orange
         
         loadData()
     }
     
     func loadData() {
-        queueUpdate({[weak self] in self?.insertSections([self!.section()], indexes: NSIndexSet(index: 0))})
-        queueUpdate({[weak self] in self?.insertItems([self!.tableItem(), self!.collectionItem()], indexPaths: [NSIndexPath(forItem: 0, inSection: 0), NSIndexPath(forItem: 1, inSection: 0)])})
+        queueUpdate({[weak self] in self?.insertSections([self!.section()], indexes: IndexSet(integer: 0))})
+        queueUpdate({[weak self] in self?.insertItems([self!.tableItem(), self!.collectionItem()], indexPaths: [IndexPath(item: 0, section: 0), IndexPath(item: 1, section: 0)])})
     }
     
     func section() -> FOTableSection {
         let section = FOTableSection()
         
-        section.identifier = NSUUID().UUIDString
+        section.identifier = UUID().uuidString
         section.items = [FOTableItem]()
         
         return section
     }
     
-    func item(color: UIColor = UIColor.blueColor(), text: String = "", identifier: String = NSUUID().UUIDString) -> FOTableItem {
+    func item(_ color: UIColor = UIColor.blue, text: String = "", identifier: String = UUID().uuidString) -> FOTableItem {
         let item = MenuItem()
         
-        item.data = [color, text]
+        item.data = ["color": color, "text": text]
         item.identifier = identifier
         item.reuseIdentifier = "itemReuseIdentifier"
         item.cellClass = UITableViewCell.self
@@ -47,11 +47,11 @@ class MenuController: FOTableViewController {
     }
     
     func tableItem() -> FOTableItem {
-        return item(UIColor.redColor(), text: "Table View", identifier: tableIdentifier)
+        return item(UIColor.red, text: "Table View", identifier: tableIdentifier)
     }
 
     func collectionItem() -> FOTableItem {
-        return item(UIColor.greenColor(), text: "Collection View", identifier: collectionIdentifier)
+        return item(UIColor.green, text: "Collection View", identifier: collectionIdentifier)
     }
     
 }

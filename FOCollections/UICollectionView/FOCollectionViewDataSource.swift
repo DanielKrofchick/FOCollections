@@ -8,63 +8,63 @@
 
 import UIKit
 
-public class FOCollectionViewDataSource: NSObject {
+open class FOCollectionViewDataSource: NSObject {
 
-    public private(set) var sections = [FOCollectionSection]()
-    private var keyCache = [NSIndexPath: String]()
+    open fileprivate(set) var sections = [FOCollectionSection]()
+    fileprivate var keyCache = [IndexPath: String]()
     
     // MARK: Modification
     
-    public func insertSections(sections: [FOCollectionSection]?, atIndexes indexes: NSIndexSet, collectionView: UICollectionView, viewController: UIViewController) {
+    open func insertSections(_ sections: [FOCollectionSection]?, atIndexes indexes: IndexSet, collectionView: UICollectionView, viewController: UIViewController) {
         guard sections != nil else {
             return
         }
         
-        indexes.enumerate().forEach {
+        indexes.enumerated().forEach {
             i, index in
             if let section = sections?.safe(i) {
                 section.linkItems(viewController)
-                self.sections.insert(section, atIndex: index)
+                self.sections.insert(section, at: index)
                 self.registerClassesForItems(section.items, collectionView: collectionView)
-                self.keyCache.removeAll(keepCapacity: true)
+                self.keyCache.removeAll(keepingCapacity: true)
             }
         }
     }
     
-    public func appendSection(section: FOCollectionSection, collectionView: UICollectionView, viewController: UIViewController) {
+    open func appendSection(_ section: FOCollectionSection, collectionView: UICollectionView, viewController: UIViewController) {
         section.linkItems(viewController)
         self.sections.append(section)
         self.registerClassesForItems(section.items, collectionView: collectionView)
-        self.keyCache.removeAll(keepCapacity: true)
+        self.keyCache.removeAll(keepingCapacity: true)
     }
 
-    public func deleteSectionsAtIndexes(indexes: NSIndexSet, collectionView: UICollectionView) {
-        indexes.enumerateIndexesWithOptions(NSEnumerationOptions.Reverse) { (index, stop) -> Void in
-            self.sections.removeAtIndex(index)
-            self.keyCache.removeAll(keepCapacity: true)
+    open func deleteSectionsAtIndexes(_ indexes: IndexSet, collectionView: UICollectionView) {
+        (indexes as NSIndexSet).enumerate(options: NSEnumerationOptions.reverse) { (index, stop) -> Void in
+            self.sections.remove(at: index)
+            self.keyCache.removeAll(keepingCapacity: true)
         }
     }
     
-    public func insertItems(items: [FOCollectionItem], atIndexPaths indexPaths: [NSIndexPath], collectionView: UICollectionView, viewController: UIViewController) {
+    open func insertItems(_ items: [FOCollectionItem], atIndexPaths indexPaths: [IndexPath], collectionView: UICollectionView, viewController: UIViewController) {
         let (i, p) = privateInsertItems(items, atIndexPaths: indexPaths, collectionView: collectionView, viewController: viewController)
         
         // if items remain throw exception
         assert(i.count == 0, "unable to insert items \(i) at indexPaths \(p)")
         
-        keyCache.removeAll(keepCapacity: true)
+        keyCache.removeAll(keepingCapacity: true)
     }
     
     // Inserts items within current data range. Returns uninserted items.
-    private func privateInsertItems(items: [FOCollectionItem], atIndexPaths indexPaths: [NSIndexPath], collectionView: UICollectionView, viewController: UIViewController) -> ([FOCollectionItem], [NSIndexPath]) {
+    fileprivate func privateInsertItems(_ items: [FOCollectionItem], atIndexPaths indexPaths: [IndexPath], collectionView: UICollectionView, viewController: UIViewController) -> ([FOCollectionItem], [IndexPath]) {
         var unsafeItems = [FOCollectionItem]()
-        var unsafeIndexPaths = [NSIndexPath]()
+        var unsafeIndexPaths = [IndexPath]()
 
-        for (index, indexPath) in indexPaths.enumerate() {
+        for (index, indexPath) in indexPaths.enumerated() {
             if let section = sectionAtIndex(indexPath.section) {
-                if let item = items.safe(index), count = section.items?.count {
+                if let item = items.safe(index), let count = section.items?.count {
                     if indexPath.row <= count {
                         item.link(section, viewController: viewController)
-                        section.items?.insert(item, atIndex: indexPath.row)
+                        section.items?.insert(item, at: indexPath.row)
                         registerClassesForItems(items, collectionView: collectionView)
                     } else {
                         unsafeItems.append(item)
@@ -77,27 +77,27 @@ public class FOCollectionViewDataSource: NSObject {
         return (unsafeItems, unsafeIndexPaths)
     }
 
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], collectionView: UICollectionView) {
-        for indexPath in indexPaths.sort({$0.item > $1.item}) {
+    open func deleteItemsAtIndexPaths(_ indexPaths: [IndexPath], collectionView: UICollectionView) {
+        for indexPath in indexPaths.sorted(by: {$0.item > $1.item}) {
             if let section = sectionAtIndex(indexPath.section) {
-                section.items?.removeAtIndex(indexPath.item)
+                section.items?.remove(at: indexPath.item)
             }
         }
         
-        keyCache.removeAll(keepCapacity: true)
+        keyCache.removeAll(keepingCapacity: true)
     }
     
-    public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, collectionView: UICollectionView, viewController: UIViewController) -> [NSIndexPath]? {
-        var indexPaths: [NSIndexPath]? = nil
+    open func appendItems(_ items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, collectionView: UICollectionView, viewController: UIViewController) -> [IndexPath]? {
+        var indexPaths: [IndexPath]? = nil
 
         if let section = sectionAtIndex(sectionIndex), var location = section.items?.count  {
             if let viewController = viewController as? FOCollectionViewController {
-                if section.pagingDirection == .Down && viewController.pagingIndexPath(section) != nil {
+                if section.pagingDirection == .down && viewController.pagingIndexPath(section) != nil {
                     location -= 1
                 }
             }
             
-            indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
+            indexPaths = IndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
             
             if let indexPaths = indexPaths {
                 insertItems(items, atIndexPaths: indexPaths, collectionView: collectionView, viewController: viewController)
@@ -107,19 +107,19 @@ public class FOCollectionViewDataSource: NSObject {
         return indexPaths
     }
     
-    public func prependItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, collectionView: UICollectionView, viewController: UIViewController) -> [NSIndexPath]? {
-        var indexPaths: [NSIndexPath]? = nil
+    open func prependItems(_ items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, collectionView: UICollectionView, viewController: UIViewController) -> [IndexPath]? {
+        var indexPaths: [IndexPath]? = nil
         
         if let section = sectionAtIndex(sectionIndex) {
             var location = 0
             
             if let viewController = viewController as? FOCollectionViewController {
-                if section.pagingDirection == .Up && viewController.pagingIndexPath(section) != nil {
+                if section.pagingDirection == .up && viewController.pagingIndexPath(section) != nil {
                     location += 1
                 }
             }
             
-            indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
+            indexPaths = IndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
             
             if let indexPaths = indexPaths {
                 insertItems(items, atIndexPaths: indexPaths, collectionView: collectionView, viewController: viewController)
@@ -129,36 +129,36 @@ public class FOCollectionViewDataSource: NSObject {
         return indexPaths
     }
     
-    public func clearAllItems(collectionView: UICollectionView) -> NSIndexSet? {
-        let indexes = NSIndexSet(indexesInRange: NSMakeRange(0, numberOfSectionsInCollectionView(collectionView)))
+    open func clearAllItems(_ collectionView: UICollectionView) -> IndexSet? {
+        let indexes = IndexSet(integersIn: NSMakeRange(0, numberOfSections(in: collectionView)).toRange()!)
         deleteSectionsAtIndexes(indexes, collectionView: collectionView)
         
         return indexes.count == 0 ? nil : indexes
     }
     
-    public func setPagingState(pagingState: PagingState, sectionIndex: Int, collectionView: UICollectionView, viewController: UIViewController) -> NSIndexPath? {
-        var pagingIndexPath: NSIndexPath? = nil
+    open func setPagingState(_ pagingState: PagingState, sectionIndex: Int, collectionView: UICollectionView, viewController: UIViewController) -> IndexPath? {
+        var pagingIndexPath: IndexPath? = nil
         
-        if let section = sectionAtIndex(sectionIndex), viewController = viewController as? FOCollectionViewController {
+        if let section = sectionAtIndex(sectionIndex), let viewController = viewController as? FOCollectionViewController {
             pagingIndexPath = viewController.pagingIndexPath(section)
             
             if section.pagingState == pagingState {
                 pagingIndexPath = nil
-            } else if pagingState == .Paging && pagingIndexPath == nil {
+            } else if pagingState == .paging && pagingIndexPath == nil {
                 // ADD
-                if section.pagingDirection == .Down {
+                if section.pagingDirection == .down {
                     if let p = lastIndexPathForSectionIndex(sectionIndex) {
-                        pagingIndexPath = NSIndexPath(forRow: p.row + 1, inSection: p.section)
+                        pagingIndexPath = IndexPath(row: p.row + 1, section: p.section)
                     }
-                } else if section.pagingDirection == .Up {
-                    pagingIndexPath = NSIndexPath(forItem: 0, inSection: 0)
+                } else if section.pagingDirection == .up {
+                    pagingIndexPath = IndexPath(item: 0, section: 0)
                 }
                 
                 if let pagingIndexPath = pagingIndexPath {
                     let pagingItem = viewController.pagingItemForSection(section)
                     insertItems([pagingItem], atIndexPaths: [pagingIndexPath], collectionView: collectionView, viewController: viewController)
                 }
-            } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) {
+            } else if (pagingState == .notPaging || pagingState == .disabled || pagingState == .finished) {
                 // REMOVE
                 if let pagingIndexPath = pagingIndexPath {
                     deleteItemsAtIndexPaths([pagingIndexPath], collectionView: collectionView)
@@ -173,7 +173,7 @@ public class FOCollectionViewDataSource: NSObject {
         return pagingIndexPath
     }
     
-    private func registerClassesForSections(sections: [FOCollectionSection]?, collectionView: UICollectionView) {
+    fileprivate func registerClassesForSections(_ sections: [FOCollectionSection]?, collectionView: UICollectionView) {
         guard sections != nil
             else {return}
         
@@ -184,41 +184,41 @@ public class FOCollectionViewDataSource: NSObject {
         }
     }
     
-    private func registerClassesForItems(items: [FOCollectionItem]?, collectionView: UICollectionView) {
+    fileprivate func registerClassesForItems(_ items: [FOCollectionItem]?, collectionView: UICollectionView) {
         guard items != nil
             else {return}
         
         for item in items! {
-            if let cellClass = item.cellClass, reuseIdentifier = item.reuseIdentifier {
-                collectionView.registerClass(cellClass, forCellWithReuseIdentifier: reuseIdentifier)
+            if let cellClass = item.cellClass, let reuseIdentifier = item.reuseIdentifier {
+                collectionView.register(cellClass, forCellWithReuseIdentifier: reuseIdentifier)
             }
         }
     }
     
     // MARK: - PAGING
     
-    func sectionsForPagingState(pagingState: PagingState) -> NSIndexSet {
+    func sectionsForPagingState(_ pagingState: PagingState) -> IndexSet {
         let result = NSMutableIndexSet()
         
-        for (index, section) in sections.enumerate() {
+        for (index, section) in sections.enumerated() {
             if section.pagingState == pagingState {
-                result.addIndex(index)
+                result.add(index)
             }
         }
         
-        return result
+        return result as IndexSet
     }
     
-    func lastIndexPathForSectionIndex(section: Int) -> NSIndexPath? {
+    func lastIndexPathForSectionIndex(_ section: Int) -> IndexPath? {
         if let items = sectionAtIndex(section)?.items {
-            return NSIndexPath(forItem: items.count - 1, inSection: section)
+            return IndexPath(item: items.count - 1, section: section)
         } else {
             return nil
         }
     }
     
     // MARK: - Lookup
-    func keyForItemAtIndexPath(indexPath: NSIndexPath) -> String? {
+    func keyForItemAtIndexPath(_ indexPath: IndexPath) -> String? {
         if let key = keyCache[indexPath] {
             return key
         } else if let item = itemAtIndexPath(indexPath) {
@@ -230,67 +230,67 @@ public class FOCollectionViewDataSource: NSObject {
         }
     }
     
-    public func sectionAtIndex(index: NSInteger) -> FOCollectionSection? {
+    open func sectionAtIndex(_ index: NSInteger) -> FOCollectionSection? {
         return sections.safe(index)
     }
     
-    public func itemAtIndexPath(indexPath: NSIndexPath) -> FOCollectionItem? {
+    open func itemAtIndexPath(_ indexPath: IndexPath) -> FOCollectionItem? {
         return sectionAtIndex(indexPath.section)?.itemAtIndex(indexPath.row)
     }
     
-    public func dataAtIndexPath(indexPath: NSIndexPath) -> AnyObject? {
+    open func dataAtIndexPath(_ indexPath: IndexPath) -> AnyObject? {
         return itemAtIndexPath(indexPath)?.data
     }
 
-    public func indexesForSection(section section: FOCollectionSection) -> NSIndexSet {
+    open func indexesForSection(section: FOCollectionSection) -> IndexSet {
         let indexSet = NSMutableIndexSet()
         
-        for (index, s) in sections.enumerate() {
+        for (index, s) in sections.enumerated() {
             if section == s {
-                indexSet.addIndex(index)
+                indexSet.add(index)
             }
         }
         
-        return indexSet
+        return indexSet as IndexSet
     }
     
-    public func indexesForSection(identifier identifier: String) -> NSIndexSet {
+    open func indexesForSection(identifier: String) -> IndexSet {
         let indexSet = NSMutableIndexSet()
         
-        for (index, s) in sections.enumerate() {
+        for (index, s) in sections.enumerated() {
             if identifier == s.identifier {
-                indexSet.addIndex(index)
+                indexSet.add(index)
             }
         }
         
-        return indexSet
+        return indexSet as IndexSet
     }
     
-    public func indexPathsForItem(item: FOCollectionItem) -> [NSIndexPath] {
-        var indexPaths = [NSIndexPath]()
+    open func indexPathsForItem(_ item: FOCollectionItem) -> [IndexPath] {
+        var indexPaths = [IndexPath]()
         
-        for (sectionIndex, section) in sections.enumerate() {
-            indexPaths.appendContentsOf(section.indexPathsForItem(item, section: sectionIndex))
+        for (sectionIndex, section) in sections.enumerated() {
+            indexPaths.append(contentsOf: section.indexPathsForItem(item, section: sectionIndex))
         }
         
         return indexPaths
     }
     
-    public func indexPathsForData(data: AnyObject) -> [NSIndexPath]? {
-        var indexPaths = [NSIndexPath]()
+    open func indexPathsForData(_ data: AnyObject) -> [IndexPath]? {
+        var indexPaths = [IndexPath]()
         
-        for (sectionIndex, section) in sections.enumerate() {
-            indexPaths.appendContentsOf(section.indexPathsForData(data, section: sectionIndex))
+        for (sectionIndex, section) in sections.enumerated() {
+            indexPaths.append(contentsOf: section.indexPathsForData(data, section: sectionIndex))
         }
         
         return indexPaths
     }
     
-    public func cellsForItem(item: FOCollectionItem, collectionView: UICollectionView) -> [UICollectionViewCell] {
+    open func cellsForItem(_ item: FOCollectionItem, collectionView: UICollectionView) -> [UICollectionViewCell] {
         var cells = [UICollectionViewCell]()
         
-        for cell in collectionView.visibleCells() {
-            if let indexPath = collectionView.indexPathForCell(cell ) {
+        for cell in collectionView.visibleCells {
+            if let indexPath = collectionView.indexPath(for: cell ) {
                 if let foundItem = itemAtIndexPath(indexPath) {
                     if item == foundItem {
                         cells.append(cell)
@@ -302,7 +302,7 @@ public class FOCollectionViewDataSource: NSObject {
         return cells
     }
     
-    public func count() -> Int {
+    open func count() -> Int {
         var count = Int(0)
         
         for section in sections {
@@ -314,7 +314,7 @@ public class FOCollectionViewDataSource: NSObject {
         return count
     }
     
-    public func equalData(sections: [FOCollectionSection]) -> Bool {
+    open func equalData(_ sections: [FOCollectionSection]) -> Bool {
         var equal = true
         
         let new = FOCollectionViewDataSource()
@@ -336,20 +336,20 @@ public class FOCollectionViewDataSource: NSObject {
     
 }
 
-extension FOCollectionViewDataSource: SequenceType {
+extension FOCollectionViewDataSource: Sequence {
     
-    public typealias Generator = AnyGenerator<FOCollectionItem>
+    public typealias Iterator = AnyIterator<FOCollectionItem>
     
-    public func generate() -> Generator {
+    public func makeIterator() -> Iterator {
         var index = Int(0)
-        return AnyGenerator { () -> FOCollectionItem? in
+        return AnyIterator { () -> FOCollectionItem? in
             let item = self.itemAtIndex(index)
             index += 1
             return item
         }
     }
     
-    func itemAtIndex(index: Int) -> FOCollectionItem? {
+    func itemAtIndex(_ index: Int) -> FOCollectionItem? {
         var i = 0
         
         for section in sections {
@@ -367,14 +367,14 @@ extension FOCollectionViewDataSource: SequenceType {
         return nil
     }
     
-    public func indexPathForIndex(index: Int) -> NSIndexPath? {
+    public func indexPathForIndex(_ index: Int) -> IndexPath? {
         var i = 0
         
-        for (s, section) in sections.enumerate() {
+        for (s, section) in sections.enumerated() {
             if i <= index {
                 if let items = section.items {
                     if let _ = items.safe(index - i) {
-                        return NSIndexPath(forRow: index - i, inSection: s)
+                        return IndexPath(row: index - i, section: s)
                     } else {
                         i += items.count
                     }
@@ -385,10 +385,10 @@ extension FOCollectionViewDataSource: SequenceType {
         return nil
     }
     
-    public func indexForIndexPath(indexPath: NSIndexPath) -> Int? {
+    public func indexForIndexPath(_ indexPath: IndexPath) -> Int? {
         var i = 0
         
-        for (index, section) in sections.enumerate() {
+        for (index, section) in sections.enumerated() {
             if let items = section.items {
                 if index < indexPath.section {
                     i += items.count
@@ -403,7 +403,7 @@ extension FOCollectionViewDataSource: SequenceType {
         return nil
     }
     
-    public func previousIndexPath(indexPath: NSIndexPath) -> NSIndexPath? {
+    public func previousIndexPath(_ indexPath: IndexPath) -> IndexPath? {
         if let index = indexForIndexPath(indexPath) {
             return indexPathForIndex(index - 1)
         }
@@ -411,7 +411,7 @@ extension FOCollectionViewDataSource: SequenceType {
         return nil
     }
     
-    public func nextIndexPath(indexPath: NSIndexPath) -> NSIndexPath? {
+    public func nextIndexPath(_ indexPath: IndexPath) -> IndexPath? {
         if let index = indexForIndexPath(indexPath) {
             return indexPathForIndex(index + 1)
         }

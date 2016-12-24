@@ -13,28 +13,28 @@ import Foundation
 class FOPairedIndexPath<T: AnyObject>: Equatable {
     
     let object: T!
-    let indexPath: NSIndexPath!
+    let indexPath: IndexPath!
     
-    init(object: T, indexPath: NSIndexPath) {
+    init(object: T, indexPath: IndexPath) {
         self.object = object
         self.indexPath = indexPath
     }
     
-    class func pairedIndexPaths(objects: [T], indexPaths: [NSIndexPath]) -> [FOPairedIndexPath<T>] {
+    class func pairedIndexPaths(_ objects: [T], indexPaths: [IndexPath]) -> [FOPairedIndexPath<T>] {
         assert(objects.count == indexPaths.count, "attempting to created pairedIndexPaths with \(objects.count) data and \(indexPaths.count) indexPaths")
         
         var result = [FOPairedIndexPath]()
         
-        for (index, object) in objects.enumerate() {
+        for (index, object) in objects.enumerated() {
             result.append(FOPairedIndexPath(object: object, indexPath: indexPaths[index]))
         }
         
         return result
     }
     
-    class func unpairedIndexPaths(pairedIndexPaths: [FOPairedIndexPath]) -> ([T], [NSIndexPath]) {
+    class func unpairedIndexPaths(_ pairedIndexPaths: [FOPairedIndexPath]) -> ([T], [IndexPath]) {
         var unpairedObjects = [T]()
-        var unpairedIndexPaths = [NSIndexPath]()
+        var unpairedIndexPaths = [IndexPath]()
         
         for pairedIndexPath in pairedIndexPaths {
             unpairedObjects.append(pairedIndexPath.object)
@@ -51,17 +51,17 @@ func ==<T>(lhs: FOPairedIndexPath<T>, rhs: FOPairedIndexPath<T>) -> Bool {
 }
 
 func <<T>(lhs: FOPairedIndexPath<T>, rhs: FOPairedIndexPath<T>) -> Bool {
-    return lhs.indexPath < rhs.indexPath
+    return lhs.indexPath.compare(rhs.indexPath) == .orderedAscending
 }
 
 func ><T>(lhs: FOPairedIndexPath<T>, rhs: FOPairedIndexPath<T>) -> Bool {
-    return lhs.indexPath > rhs.indexPath
+    return lhs.indexPath.compare(rhs.indexPath) == .orderedDescending
 }
 
-private func <(lhs: NSIndexPath, rhs: NSIndexPath) -> Bool {
+private func <(lhs: IndexPath, rhs: IndexPath) -> Bool {
     return lhs.section < rhs.section || (lhs.section == rhs.section && lhs.item < rhs.item)
 }
 
-private func >(lhs: NSIndexPath, rhs: NSIndexPath) -> Bool {
+private func >(lhs: IndexPath, rhs: IndexPath) -> Bool {
     return lhs.section > rhs.section || (lhs.section == rhs.section && lhs.item > rhs.item)
 }

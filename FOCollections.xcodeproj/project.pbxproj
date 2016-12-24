@@ -345,11 +345,11 @@
 				TargetAttributes = {
 					4C49214E1BFD3FEB001511AC = {
 						CreatedOnToolsVersion = 7.1.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 					4C4921571BFD3FEB001511AC = {
 						CreatedOnToolsVersion = 7.1.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 						TestTargetID = 4C7AEC021BF5027A001A2636;
 					};
 					4C4921801BFD4044001511AC = {
@@ -357,7 +357,7 @@
 					};
 					4C7AEC021BF5027A001A2636 = {
 						CreatedOnToolsVersion = 7.1.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -547,7 +547,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = FO.FOCollections;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -570,7 +570,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = FO.FOCollections;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -583,7 +583,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = FO.FOCollectionsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FOCollections.app/FOCollections";
 			};
 			name = Debug;
@@ -595,7 +595,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = FO.FOCollectionsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FOCollections.app/FOCollections";
 			};
 			name = Release;
@@ -720,7 +720,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "FO.FOCollections-Demo";
 				PRODUCT_NAME = FOCollections;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -738,7 +738,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "FO.FOCollections-Demo";
 				PRODUCT_NAME = FOCollections;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -8,60 +8,60 @@
 
 import UIKit
 
-public class FOTableViewDataSource: NSObject {
+open class FOTableViewDataSource: NSObject {
     
-    public private(set) var sections = [FOTableSection]()
-    private var keyCache = [NSIndexPath: String]()
+    open fileprivate(set) var sections = [FOTableSection]()
+    fileprivate var keyCache = [IndexPath: String]()
     
     // MARK: Modification
     
-    public func insertSections(sections: [FOTableSection], atIndexes indexes: NSIndexSet, tableView: UITableView, viewController: UIViewController) {
-        indexes.enumerate().forEach {
+    open func insertSections(_ sections: [FOTableSection], atIndexes indexes: IndexSet, tableView: UITableView, viewController: UIViewController) {
+        indexes.enumerated().forEach {
             i, index in
             if let section = sections.safe(i) {
                 section.linkItems(viewController)
-                self.sections.insert(section, atIndex: index)
+                self.sections.insert(section, at: index)
                 self.registerClassesForItems(section.items, tableView: tableView)
-                self.keyCache.removeAll(keepCapacity: true)
+                self.keyCache.removeAll(keepingCapacity: true)
             }
         }
     }
     
-    public func appendSection(section: FOTableSection, tableView: UITableView, viewController: UIViewController) {
+    open func appendSection(_ section: FOTableSection, tableView: UITableView, viewController: UIViewController) {
         section.linkItems(viewController)
         sections.append(section)
         registerClassesForItems(section.items, tableView: tableView)
-        keyCache.removeAll(keepCapacity: true)
+        keyCache.removeAll(keepingCapacity: true)
     }
     
-    public func deleteSectionsAtIndexes(indexes: NSIndexSet, tableView: UITableView) {
-        indexes.enumerateIndexesWithOptions(NSEnumerationOptions.Reverse) { (index, stop) -> Void in
-            self.sections.removeAtIndex(index)
-            self.keyCache.removeAll(keepCapacity: true)
+    open func deleteSectionsAtIndexes(_ indexes: IndexSet, tableView: UITableView) {
+        (indexes as NSIndexSet).enumerate(options: NSEnumerationOptions.reverse) { (index, stop) -> Void in
+            self.sections.remove(at: index)
+            self.keyCache.removeAll(keepingCapacity: true)
         }
     }
     
-    public func insertItems(items: [FOTableItem], atIndexPaths indexPaths: [NSIndexPath], tableView: UITableView, viewController: UIViewController) {
+    open func insertItems(_ items: [FOTableItem], atIndexPaths indexPaths: [IndexPath], tableView: UITableView, viewController: UIViewController) {
         let (i, p) = privateInsertItems(items, atIndexPaths: indexPaths, tableView: tableView, viewController: viewController)
         
         // if items remain throw exception
         assert(i.count == 0, "unable to insert items \(i) at indexPaths \(p)")
         
-        keyCache.removeAll(keepCapacity: true)
+        keyCache.removeAll(keepingCapacity: true)
     }
     
     // Inserts items within current data range. Returns uninserted items.
     
-    private func privateInsertItems(items: [FOTableItem], atIndexPaths indexPaths: [NSIndexPath], tableView: UITableView, viewController: UIViewController) -> ([FOTableItem], [NSIndexPath]) {
+    fileprivate func privateInsertItems(_ items: [FOTableItem], atIndexPaths indexPaths: [IndexPath], tableView: UITableView, viewController: UIViewController) -> ([FOTableItem], [IndexPath]) {
         var unsafeItems = [FOTableItem]()
-        var unsafeIndexPaths = [NSIndexPath]()
+        var unsafeIndexPaths = [IndexPath]()
         
-        for (index, indexPath) in indexPaths.enumerate() {
+        for (index, indexPath) in indexPaths.enumerated() {
             if let section = sectionAtIndex(indexPath.section) {
-                if let item = items.safe(index), count = section.items?.count {
+                if let item = items.safe(index), let count = section.items?.count {
                     if indexPath.row <= count {
                         item.link(section, viewController: viewController)
-                        section.items?.insert(item, atIndex: indexPath.row)
+                        section.items?.insert(item, at: indexPath.row)
                         registerClassesForItems(items, tableView: tableView)
                     } else {
                         unsafeItems.append(item)
@@ -74,27 +74,27 @@ public class FOTableViewDataSource: NSObject {
         return (unsafeItems, unsafeIndexPaths)
     }
     
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], tableView: UITableView) {
-        for indexPath in indexPaths.sort({$0.item > $1.item}) {
+    open func deleteItemsAtIndexPaths(_ indexPaths: [IndexPath], tableView: UITableView) {
+        for indexPath in indexPaths.sorted(by: {$0.item > $1.item}) {
             if let section = sectionAtIndex(indexPath.section) {
-                section.items?.removeAtIndex(indexPath.item)
+                section.items?.remove(at: indexPath.item)
             }
         }
         
-        keyCache.removeAll(keepCapacity: true)
+        keyCache.removeAll(keepingCapacity: true)
     }
     
-    public func appendItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, tableView: UITableView, viewController: UIViewController) -> [NSIndexPath]? {
-        var indexPaths: [NSIndexPath]? = nil
+    open func appendItems(_ items: [FOTableItem], toSectionAtIndex sectionIndex: Int, tableView: UITableView, viewController: UIViewController) -> [IndexPath]? {
+        var indexPaths: [IndexPath]? = nil
         
         if let section = sectionAtIndex(sectionIndex), var location = section.items?.count {
             if let viewController = viewController as? FOTableViewController {
-                if section.pagingDirection == .Down && viewController.pagingIndexPath(section) != nil {
+                if section.pagingDirection == .down && viewController.pagingIndexPath(section) != nil {
                     location -= 1
                 }
             }
             
-            indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
+            indexPaths = IndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
             
             if let indexPaths = indexPaths {
                 insertItems(items, atIndexPaths: indexPaths, tableView: tableView, viewController: viewController)
@@ -104,19 +104,19 @@ public class FOTableViewDataSource: NSObject {
         return indexPaths
     }
     
-    public func prependItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, tableView: UITableView, viewController: UIViewController) -> [NSIndexPath]? {
-        var indexPaths: [NSIndexPath]? = nil
+    open func prependItems(_ items: [FOTableItem], toSectionAtIndex sectionIndex: Int, tableView: UITableView, viewController: UIViewController) -> [IndexPath]? {
+        var indexPaths: [IndexPath]? = nil
         
         if let section = sectionAtIndex(sectionIndex) {
             var location = 0
             
             if let viewController = viewController as? FOTableViewController {
-                if section.pagingDirection == .Up && viewController.pagingIndexPath(section) != nil {
+                if section.pagingDirection == .up && viewController.pagingIndexPath(section) != nil {
                     location += 1
                 }
             }
             
-            indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
+            indexPaths = IndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
             
             if let indexPaths = indexPaths {
                 insertItems(items, atIndexPaths: indexPaths, tableView: tableView, viewController: viewController)
@@ -126,36 +126,36 @@ public class FOTableViewDataSource: NSObject {
         return indexPaths
     }
     
-    public func clearAllItems(tableView: UITableView) -> NSIndexSet? {
-        let indexes = NSIndexSet(indexesInRange: NSMakeRange(0, numberOfSectionsInTableView(tableView)))
+    open func clearAllItems(_ tableView: UITableView) -> IndexSet? {
+        let indexes = IndexSet(integersIn: NSMakeRange(0, numberOfSections(in: tableView)).toRange()!)
         deleteSectionsAtIndexes(indexes, tableView: tableView)
         
         return indexes.count == 0 ? nil : indexes
     }
     
-    public func setPagingState(pagingState: PagingState, sectionIndex: Int, tableView: UITableView, viewController: UIViewController) -> NSIndexPath? {
-        var pagingIndexPath: NSIndexPath? = nil
+    open func setPagingState(_ pagingState: PagingState, sectionIndex: Int, tableView: UITableView, viewController: UIViewController) -> IndexPath? {
+        var pagingIndexPath: IndexPath? = nil
         
-        if let section = sectionAtIndex(sectionIndex), viewController = viewController as? FOTableViewController {
+        if let section = sectionAtIndex(sectionIndex), let viewController = viewController as? FOTableViewController {
             pagingIndexPath = viewController.pagingIndexPath(section)
             
             if section.pagingState == pagingState {
                 pagingIndexPath = nil
-            } else if pagingState == .Paging && pagingIndexPath == nil {
+            } else if pagingState == .paging && pagingIndexPath == nil {
                 // ADD
-                if section.pagingDirection == .Down {
+                if section.pagingDirection == .down {
                     if let p = lastIndexPathForSectionIndex(sectionIndex) {
-                        pagingIndexPath = NSIndexPath(forRow: p.row + 1, inSection: p.section)
+                        pagingIndexPath = IndexPath(row: p.row + 1, section: p.section)
                     }
-                } else if section.pagingDirection == .Up {
-                    pagingIndexPath = NSIndexPath(forItem: 0, inSection: 0)
+                } else if section.pagingDirection == .up {
+                    pagingIndexPath = IndexPath(item: 0, section: 0)
                 }
                 
                 if let pagingIndexPath = pagingIndexPath {
                     let pagingItem = viewController.pagingItemForSection(section)
                     insertItems([pagingItem], atIndexPaths: [pagingIndexPath], tableView: tableView, viewController: viewController)
                 }
-            } else if (pagingState == .NotPaging || pagingState == .Disabled || pagingState == .Finished) {
+            } else if (pagingState == .notPaging || pagingState == .disabled || pagingState == .finished) {
                 // REMOVE
                 if let pagingIndexPath = pagingIndexPath {
                     deleteItemsAtIndexPaths([pagingIndexPath], tableView: tableView)
@@ -170,7 +170,7 @@ public class FOTableViewDataSource: NSObject {
         return pagingIndexPath
     }
         
-    private func registerClassesForSections(sections: [FOTableSection]?, tableView: UITableView) {
+    fileprivate func registerClassesForSections(_ sections: [FOTableSection]?, tableView: UITableView) {
         guard sections != nil
             else {return}
         
@@ -181,41 +181,41 @@ public class FOTableViewDataSource: NSObject {
         }
     }
     
-    private func registerClassesForItems(items: [FOTableItem]?, tableView: UITableView) {
+    fileprivate func registerClassesForItems(_ items: [FOTableItem]?, tableView: UITableView) {
         guard items != nil
             else {return}
         
         for item in items! {
-            if let cellClass = item.cellClass, reuseIdentifier = item.reuseIdentifier {
-                tableView.registerClass(cellClass, forCellReuseIdentifier: reuseIdentifier)
+            if let cellClass = item.cellClass, let reuseIdentifier = item.reuseIdentifier {
+                tableView.register(cellClass, forCellReuseIdentifier: reuseIdentifier)
             }
         }
     }
     
     // MARK: - PAGING
     
-    func sectionsForPagingState(pagingState: PagingState) -> NSIndexSet {
+    func sectionsForPagingState(_ pagingState: PagingState) -> IndexSet {
         let result = NSMutableIndexSet()
         
-        for (index, section) in sections.enumerate() {
+        for (index, section) in sections.enumerated() {
             if section.pagingState == pagingState {
-                result.addIndex(index)
+                result.add(index)
             }
         }
         
-        return result
+        return result as IndexSet
     }
     
-    func lastIndexPathForSectionIndex(section: Int) -> NSIndexPath? {
+    func lastIndexPathForSectionIndex(_ section: Int) -> IndexPath? {
         if let items = sectionAtIndex(section)?.items {
-            return NSIndexPath(forItem: items.count - 1, inSection: section)
+            return IndexPath(item: items.count - 1, section: section)
         } else {
             return nil
         }
     }
     
     // MARK: - Lookup    
-    func keyForItemAtIndexPath(indexPath: NSIndexPath) -> String? {
+    func keyForItemAtIndexPath(_ indexPath: IndexPath) -> String? {
         if let key = keyCache[indexPath] {
             return key
         } else if let item = itemAtIndexPath(indexPath) {
@@ -227,67 +227,67 @@ public class FOTableViewDataSource: NSObject {
         }
     }
     
-    public func sectionAtIndex(index: NSInteger) -> FOTableSection? {
+    open func sectionAtIndex(_ index: NSInteger) -> FOTableSection? {
         return sections.safe(index)
     }
     
-    public func itemAtIndexPath(indexPath: NSIndexPath) -> FOTableItem? {
+    open func itemAtIndexPath(_ indexPath: IndexPath) -> FOTableItem? {
         return sectionAtIndex(indexPath.section)?.itemAtIndex(indexPath.row)
     }
     
-    public func dataAtIndexPath(indexPath: NSIndexPath) -> AnyObject? {
+    open func dataAtIndexPath(_ indexPath: IndexPath) -> Any? {
         return itemAtIndexPath(indexPath)?.data
     }
     
-    public func indexesForSection(section section: FOTableSection) -> NSIndexSet {
+    open func indexesForSection(section: FOTableSection) -> IndexSet {
         let indexSet = NSMutableIndexSet()
         
-        for (index, s) in sections.enumerate() {
+        for (index, s) in sections.enumerated() {
             if section == s {
-                indexSet.addIndex(index)
+                indexSet.add(index)
             }
         }
         
-        return indexSet
+        return indexSet as IndexSet
     }
     
-    public func indexesForSection(identifier identifier: String) -> NSIndexSet {
+    open func indexesForSection(identifier: String) -> IndexSet {
         let indexSet = NSMutableIndexSet()
         
-        for (index, s) in sections.enumerate() {
+        for (index, s) in sections.enumerated() {
             if identifier == s.identifier {
-                indexSet.addIndex(index)
+                indexSet.add(index)
             }
         }
         
-        return indexSet
+        return indexSet as IndexSet
     }
     
-    public func indexPathsForItem(item: FOTableItem) -> [NSIndexPath] {
-        var indexPaths = [NSIndexPath]()
+    open func indexPathsForItem(_ item: FOTableItem) -> [IndexPath] {
+        var indexPaths = [IndexPath]()
         
-        for (sectionIndex, section) in sections.enumerate() {
-            indexPaths.appendContentsOf(section.indexPathsForItem(item, section: sectionIndex))
+        for (sectionIndex, section) in sections.enumerated() {
+            indexPaths.append(contentsOf: section.indexPathsForItem(item, section: sectionIndex))
         }
         
         return indexPaths
     }
     
-    public func indexPathsForData(data: AnyObject) -> [NSIndexPath]? {
-        var indexPaths = [NSIndexPath]()
+    open func indexPathsForData(_ data: AnyObject) -> [IndexPath]? {
+        var indexPaths = [IndexPath]()
         
-        for (sectionIndex, section) in sections.enumerate() {
-            indexPaths.appendContentsOf(section.indexPathsForData(data, section: sectionIndex))
+        for (sectionIndex, section) in sections.enumerated() {
+            indexPaths.append(contentsOf: section.indexPathsForData(data, section: sectionIndex))
         }
         
         return indexPaths
     }
     
-    public func cellsForItem(item: FOTableItem, tableView: UITableView) -> [UITableViewCell] {
+    open func cellsForItem(_ item: FOTableItem, tableView: UITableView) -> [UITableViewCell] {
         var cells = [UITableViewCell]()
         
         for cell in tableView.visibleCells {
-            if let indexPath = tableView.indexPathForCell(cell ) {
+            if let indexPath = tableView.indexPath(for: cell ) {
                 if let foundItem = itemAtIndexPath(indexPath) {
                     if item == foundItem {
                         cells.append(cell)
@@ -299,7 +299,7 @@ public class FOTableViewDataSource: NSObject {
         return cells
     }
     
-    public func count() -> Int {
+    open func count() -> Int {
         var count = Int(0)
         
         for section in sections {
@@ -311,7 +311,7 @@ public class FOTableViewDataSource: NSObject {
         return count
     }
     
-    public func equalData(sections: [FOTableSection]) -> Bool {
+    open func equalData(_ sections: [FOTableSection]) -> Bool {
         var equal = true
         
         let new = FOTableViewDataSource()
@@ -333,20 +333,20 @@ public class FOTableViewDataSource: NSObject {
     
 }
 
-extension FOTableViewDataSource: SequenceType {
+extension FOTableViewDataSource: Sequence {
 
-    public typealias Generator = AnyGenerator<FOTableItem>
+    public typealias Iterator = AnyIterator<FOTableItem>
     
-    public func generate() -> Generator {
+    public func makeIterator() -> Iterator {
         var index = Int(0)
-        return AnyGenerator { () -> FOTableItem? in
+        return AnyIterator { () -> FOTableItem? in
             let item = self.itemAtIndex(index)
             index += 1
             return item
         }
     }
     
-    public func itemAtIndex(index: Int) -> FOTableItem? {
+    public func itemAtIndex(_ index: Int) -> FOTableItem? {
         var i = 0
         
         for section in sections {
@@ -364,14 +364,14 @@ extension FOTableViewDataSource: SequenceType {
         return nil
     }
     
-    public func indexPathForIndex(index: Int) -> NSIndexPath? {
+    public func indexPathForIndex(_ index: Int) -> IndexPath? {
         var i = 0
         
-        for (s, section) in sections.enumerate() {
+        for (s, section) in sections.enumerated() {
             if i <= index {
                 if let items = section.items {
                     if let _ = items.safe(index - i) {
-                        return NSIndexPath(forRow: index - i, inSection: s)
+                        return IndexPath(row: index - i, section: s)
                     } else {
                         i += items.count
                     }
@@ -382,10 +382,10 @@ extension FOTableViewDataSource: SequenceType {
         return nil
     }
     
-    public func indexForIndexPath(indexPath: NSIndexPath) -> Int? {
+    public func indexForIndexPath(_ indexPath: IndexPath) -> Int? {
         var i = 0
         
-        for (index, section) in sections.enumerate() {
+        for (index, section) in sections.enumerated() {
             if let items = section.items {
                 if index < indexPath.section {
                     i += items.count
@@ -400,7 +400,7 @@ extension FOTableViewDataSource: SequenceType {
         return nil
     }
     
-    public func previousIndexPath(indexPath: NSIndexPath) -> NSIndexPath? {
+    public func previousIndexPath(_ indexPath: IndexPath) -> IndexPath? {
         if let index = indexForIndexPath(indexPath) {
             return indexPathForIndex(index - 1)
         }
@@ -408,7 +408,7 @@ extension FOTableViewDataSource: SequenceType {
         return nil
     }
 
-    public func nextIndexPath(indexPath: NSIndexPath) -> NSIndexPath? {
+    public func nextIndexPath(_ indexPath: IndexPath) -> IndexPath? {
         if let index = indexForIndexPath(indexPath) {
             return indexPathForIndex(index + 1)
         }

@@ -7,15 +7,15 @@
 //
 
 public enum PagingState: Int {
-    case Disabled
-    case NotPaging
-    case Paging
-    case PagingAndFetching
-    case Finished
+    case disabled
+    case notPaging
+    case paging
+    case pagingAndFetching
+    case finished
 }
 
 public enum PagingDirection: Int {
-    case Up
-    case Down
+    case up
+    case down
 }
 

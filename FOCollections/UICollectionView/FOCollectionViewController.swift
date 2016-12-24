@@ -8,14 +8,14 @@
 
 import UIKit
 
-public class FOCollectionViewController: UICollectionViewController {
+open class FOCollectionViewController: UICollectionViewController {
 
-    public let dataSource = FOCollectionViewDataSource()
-    public var pagingThreshold = CGFloat(1000)
+    open let dataSource = FOCollectionViewDataSource()
+    open var pagingThreshold = CGFloat(1000)
     var cellSizeCache = [String: CGSize]()
     var layoutCellCache = [String: UICollectionViewCell]()
-    private var pagingTimer: NSTimer?
-    public var queue = NSOperationQueue()                              // All table UI updates are performed on this queue to serialize animations
+    fileprivate var pagingTimer: Timer?
+    open var queue = OperationQueue()                              // All table UI updates are performed on this queue to serialize animations
     
     public override init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(collectionViewLayout: layout)
@@ -30,142 +30,142 @@ public class FOCollectionViewController: UICollectionViewController {
     }
     
     func privateInit() {
-        queue.qualityOfService = NSQualityOfService.UserInitiated
+        queue.qualityOfService = QualityOfService.userInitiated
         queue.name = "FOCollectionViewController"
         queue.maxConcurrentOperationCount = 1
-        queue.suspended = true
+        queue.isSuspended = true
     }
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         
-        collectionView?.backgroundColor = UIColor.whiteColor()
+        collectionView?.backgroundColor = UIColor.white
         collectionView?.dataSource = dataSource
         collectionView?.delegate = self
         
-        queue.suspended = false
+        queue.isSuspended = false
     }
     
-    override public func viewDidAppear(animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         startPagingTimer()
     }
     
-    override public func viewDidDisappear(animated: Bool) {
+    override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         stopPagingTimer()
     }
     
-    override public func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+    override open func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
         
-        cellSizeCache.removeAll(keepCapacity: true)
+        cellSizeCache.removeAll(keepingCapacity: true)
         collectionView?.collectionViewLayout.invalidateLayout()
     }
         
     // MARK: Modification
 
-    public func queueUpdate(update: (() -> ()), completion: ((finished: Bool) -> ())? = nil) {
+    open func queueUpdate(_ update: @escaping (() -> ()), completion: ((_ finished: Bool) -> ())? = nil) {
         queue.addOperation(FOCompletionOperation(work: {[weak self] (operation) -> Void in
             self?.collectionView?.performBatchUpdates({
                 update()
             }, completion: { (finished) -> Void in
-                completion?(finished: finished)
+                completion?(finished)
                 operation.finish()
             })
-        }, queue: dispatch_get_main_queue()))
+        }, queue: DispatchQueue.main))
     }
     
-    public func queueWork(work: (() -> ())) {
-        queue.addOperation(NSBlockOperation(block: work))
+    open func queueWork(_ work: @escaping (() -> ())) {
+        queue.addOperation(BlockOperation(block: work))
     }
         
-    public func insertSections(sections: [FOCollectionSection]?, indexes: NSIndexSet) {
-        if let sections = sections, collectionView = collectionView {
+    open func insertSections(_ sections: [FOCollectionSection]?, indexes: IndexSet) {
+        if let sections = sections, let collectionView = collectionView {
             dataSource.insertSections(sections, atIndexes: indexes, collectionView: collectionView, viewController: self)
             collectionView.insertSections(indexes)
         }
     }
 
-    public func deleteSectionsAtIndexes(indexes: NSIndexSet) {
+    open func deleteSectionsAtIndexes(_ indexes: IndexSet) {
         if let collectionView = collectionView {
             dataSource.deleteSectionsAtIndexes(indexes, collectionView: collectionView)
             collectionView.deleteSections(indexes)
         }
     }
     
-    public func insertItems(items: [FOCollectionItem]?, indexPaths: [NSIndexPath]?) {
-        if let items = items, indexPaths = indexPaths, collectionView = collectionView {
+    open func insertItems(_ items: [FOCollectionItem]?, indexPaths: [IndexPath]?) {
+        if let items = items, let indexPaths = indexPaths, let collectionView = collectionView {
             dataSource.insertItems(items, atIndexPaths: indexPaths, collectionView: collectionView, viewController: self)
-            collectionView.insertItemsAtIndexPaths(indexPaths)
+            collectionView.insertItems(at: indexPaths)
         }
     }
     
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath]?) {
-        if let indexPaths = indexPaths, collectionView = collectionView {
+    open func deleteItemsAtIndexPaths(_ indexPaths: [IndexPath]?) {
+        if let indexPaths = indexPaths, let collectionView = collectionView {
             dataSource.deleteItemsAtIndexPaths(indexPaths, collectionView: collectionView)
-            collectionView.deleteItemsAtIndexPaths(indexPaths)
+            collectionView.deleteItems(at: indexPaths)
         }
     }
 
-    public func appendItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int) {
+    open func appendItems(_ items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int) {
         if let collectionView = collectionView {
             if let indexPaths = dataSource.appendItems(items, toSectionAtIndex: sectionIndex, collectionView: collectionView, viewController: self) {
-                collectionView.insertItemsAtIndexPaths(indexPaths)
+                collectionView.insertItems(at: indexPaths)
             }
         }
     }
     
-    public func prependItems(items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int) {
+    open func prependItems(_ items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int) {
         if let section = dataSource.sectionAtIndex(sectionIndex) {
             var location = 0
             
-            if section.pagingDirection == .Up && pagingIndexPath(section) != nil {
+            if section.pagingDirection == .up && pagingIndexPath(section) != nil {
                 location += 1
             }
             
-            let indexPaths = NSIndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
+            let indexPaths = IndexPath.indexPathsForItemsInRange(NSMakeRange(location, items.count), section: sectionIndex)
             insertItems(items, indexPaths: indexPaths)
         }
     }
     
-    public func clearAllItems() {
+    open func clearAllItems() {
         if let collectionView = collectionView {
-            let indexes = NSIndexSet(indexesInRange: NSMakeRange(0, dataSource.numberOfSectionsInCollectionView(collectionView)))
+            let indexes = IndexSet(integersIn: NSMakeRange(0, dataSource.numberOfSections(in: collectionView)).toRange()!)
             deleteSectionsAtIndexes(indexes)
         }
     }
     
-    public func setPagingState(pagingState: PagingState, sectionIndex: Int) {
+    open func setPagingState(_ pagingState: PagingState, sectionIndex: Int) {
         if let collectionView = collectionView {
             if let indexPath = dataSource.setPagingState(pagingState, sectionIndex: sectionIndex, collectionView: collectionView, viewController: self) {
-                if pagingState == .Paging {
-                    collectionView.insertItemsAtIndexPaths([indexPath])
+                if pagingState == .paging {
+                    collectionView.insertItems(at: [indexPath])
                 } else {
-                    collectionView.deleteItemsAtIndexPaths([indexPath])
+                    collectionView.deleteItems(at: [indexPath])
                 }
             }
         }
     }
     
-    func pagingIndexPath(section: FOCollectionSection) -> NSIndexPath? {
+    func pagingIndexPath(_ section: FOCollectionSection) -> IndexPath? {
         let item = pagingItemForSection(section)
         
         return dataSource.indexPathsForItem(item).first
     }
     
-    public func pagingItemForSection(section: FOCollectionSection) -> FOCollectionItem {
+    open func pagingItemForSection(_ section: FOCollectionSection) -> FOCollectionItem {
         return FOCollectionPagingItem(section: section)
     }
     
-    public func refreshVisibleCells() {
+    open func refreshVisibleCells() {
         if let collectionView = collectionView {
-            for indexPath in collectionView.indexPathsForVisibleItems() {
-                if let cell = collectionView.cellForItemAtIndexPath(indexPath), item = dataSource.itemAtIndexPath(indexPath) {
+            for indexPath in collectionView.indexPathsForVisibleItems {
+                if let cell = collectionView.cellForItem(at: indexPath), let item = dataSource.itemAtIndexPath(indexPath) {
                     item.configure(cell, collectionView: collectionView, indexPath: indexPath)
                 }
             }
@@ -175,13 +175,13 @@ public class FOCollectionViewController: UICollectionViewController {
     // MARK: Paging
     
     // Implemented by subclass
-    public func nextPageForSection(section: FOCollectionSection, collectionView: UICollectionView) {
+    open func nextPageForSection(_ section: FOCollectionSection, collectionView: UICollectionView) {
     }
     
     func startPagingTimer() {
-        pagingTimer = NSTimer(timeInterval: 0.2, target: self, selector: #selector(FOCollectionViewController.checkForPaging), userInfo: nil, repeats: true)
+        pagingTimer = Timer(timeInterval: 0.2, target: self, selector: #selector(FOCollectionViewController.checkForPaging), userInfo: nil, repeats: true)
         pagingTimer?.tolerance = 0.05
-        NSRunLoop.currentRunLoop().addTimer(pagingTimer!, forMode: NSRunLoopCommonModes)
+        RunLoop.current.add(pagingTimer!, forMode: RunLoopMode.commonModes)
     }
 
     func stopPagingTimer() {
@@ -194,18 +194,18 @@ public class FOCollectionViewController: UICollectionViewController {
     }
     
     func addPagingCellIfNeeded() {
-        if dataSource.sectionsForPagingState(.Paging).count > 0 {
+        if dataSource.sectionsForPagingState(.paging).count > 0 {
             return
         }
         
-        let notPaging = dataSource.sectionsForPagingState(.NotPaging)
+        let notPaging = dataSource.sectionsForPagingState(.notPaging)
         
-        if notPaging.count > 0 {
-            if let section = dataSource.sectionAtIndex(notPaging.firstIndex) {
+        if let data = notPaging.first {
+            if let section = dataSource.sectionAtIndex(data) {
                 if pagingIndexPath(section) == nil {
                     queueUpdate({
                         [weak self] in
-                        self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
+                        self?.setPagingState(.paging, sectionIndex: data)
                     })
                 }
             }
@@ -213,29 +213,31 @@ public class FOCollectionViewController: UICollectionViewController {
     }
     
     func triggerPagingIfNeeded() {
-        if dataSource.sectionsForPagingState(.PagingAndFetching).firstIndex != NSNotFound {
+        if dataSource.sectionsForPagingState(.pagingAndFetching).first != NSNotFound {
             return
         }
         
-        let sectionIndex = dataSource.sectionsForPagingState(.Paging).firstIndex
+        guard let sectionIndex = dataSource.sectionsForPagingState(.paging).first else {
+            return
+        }
         
         if sectionIndex == NSNotFound {
             return
         }
         
         if let section = dataSource.sectionAtIndex(sectionIndex) {
-            if let indexPath = pagingIndexPath(section), collectionView = collectionView {
-                if let rect = collectionView.layoutAttributesForItemAtIndexPath(indexPath)?.frame {
-                    var distance = CGFloat.max
+            if let indexPath = pagingIndexPath(section), let collectionView = collectionView {
+                if let rect = collectionView.layoutAttributesForItem(at: indexPath)?.frame {
+                    var distance = CGFloat.greatestFiniteMagnitude
                     
-                    if section.pagingDirection == .Down {
-                        distance = CGRectGetMinY(rect) - collectionView.contentOffset.y - collectionView.frame.size.height
-                    } else if section.pagingDirection == .Up {
-                        distance = collectionView.contentOffset.y - CGRectGetMaxY(rect)
+                    if section.pagingDirection == .down {
+                        distance = rect.minY - collectionView.contentOffset.y - collectionView.frame.size.height
+                    } else if section.pagingDirection == .up {
+                        distance = collectionView.contentOffset.y - rect.maxY
                     }
                     
                     if distance < pagingThreshold {
-                        section.pagingState = .PagingAndFetching
+                        section.pagingState = .pagingAndFetching
                         nextPageForSection(section, collectionView: collectionView)
                     }
                 }
@@ -243,8 +245,8 @@ public class FOCollectionViewController: UICollectionViewController {
         }
     }
     
-    public func clearCellSizeCache(keepCapacity: Bool = true) {
-        cellSizeCache.removeAll(keepCapacity: keepCapacity)
+    open func clearCellSizeCache(_ keepCapacity: Bool = true) {
+        cellSizeCache.removeAll(keepingCapacity: keepCapacity)
     }
     
 }

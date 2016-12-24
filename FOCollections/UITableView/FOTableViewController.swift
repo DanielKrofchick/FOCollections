@@ -8,18 +8,18 @@
 
 import UIKit
 
-public class FOTableViewController: UIViewController, UITableViewDelegate {
+open class FOTableViewController: UIViewController, UITableViewDelegate {
     
-    public var tableView: UITableView!
-    public let dataSource = FOTableViewDataSource()
-    public var pagingThreshold = CGFloat(1000)
+    open var tableView: UITableView!
+    open let dataSource = FOTableViewDataSource()
+    open var pagingThreshold = CGFloat(1000)
     var cellSizeCache = [String: CGFloat]()
     var layoutCellCache = [String: UITableViewCell]()
-    var pagingTimer: NSTimer?
-    public var queue = NSOperationQueue()                              // All table UI updates are performed on this queue to serialize animations
-    public var clearsSelectionOnViewWillAppear = true
-    public var clearCellInsets = false
-    public var defaultSeparatorInset = UIEdgeInsetsZero                // Preserve access to insets for cell layout purposes when setting 'clearCellInsets' = true
+    var pagingTimer: Timer?
+    open var queue = OperationQueue()                              // All table UI updates are performed on this queue to serialize animations
+    open var clearsSelectionOnViewWillAppear = true
+    open var clearCellInsets = false
+    open var defaultSeparatorInset = UIEdgeInsets.zero                // Preserve access to insets for cell layout purposes when setting 'clearCellInsets' = true
     
     public convenience init(frame: CGRect, style: UITableViewStyle) {
         self.init(nibName: nil, bundle: nil)
@@ -28,7 +28,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         privateInit()
     }
     
-    required override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    required override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
         privateInit()
@@ -41,80 +41,80 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     }
     
     func privateInit() {
-        queue.qualityOfService = NSQualityOfService.UserInitiated
+        queue.qualityOfService = QualityOfService.userInitiated
         queue.name = "FOTableViewController"
         queue.maxConcurrentOperationCount = 1
-        queue.suspended = true
+        queue.isSuspended = true
         
         if tableView == nil {
             createTableView()
         }
     }
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         
-        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.backgroundColor = UIColor.white
         tableView.dataSource = dataSource
         tableView.delegate = self
         view.addSubview(tableView)
         
         defaultSeparatorInset = tableView.separatorInset
         
-        queue.suspended = false
+        queue.isSuspended = false
     }
     
-    private func createTableView(frame frame: CGRect = CGRectZero, style: UITableViewStyle = .Plain) {
-        tableView = UITableView(frame: CGRectZero, style: style)
+    fileprivate func createTableView(frame: CGRect = CGRect.zero, style: UITableViewStyle = .plain) {
+        tableView = UITableView(frame: CGRect.zero, style: style)
     }
     
-    public override func viewDidLayoutSubviews() {
+    open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         tableView.frame = view.bounds
         
         if clearCellInsets {
-            tableView.layoutMargins = UIEdgeInsetsZero
-            tableView.separatorInset = UIEdgeInsetsZero
+            tableView.layoutMargins = UIEdgeInsets.zero
+            tableView.separatorInset = UIEdgeInsets.zero
         }
     }
     
-    override public func viewDidAppear(animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         startPagingTimer()
     }
     
-    override public func viewDidDisappear(animated: Bool) {
+    override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         stopPagingTimer()
     }
     
-    public override func viewWillAppear(animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if clearsSelectionOnViewWillAppear {
             if let indexPaths = tableView.indexPathsForSelectedRows {
                 for indexPath in indexPaths {
-                    tableView.deselectRowAtIndexPath(indexPath, animated: animated)
+                    tableView.deselectRow(at: indexPath, animated: animated)
                 }
             }
         }
     }
     
-    override public func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+    override open func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
         
-        cellSizeCache.removeAll(keepCapacity: true)
+        cellSizeCache.removeAll(keepingCapacity: true)
         tableView.reloadData()
     }
     
     // MARK: Modification
     
-    func tableUpdate(update: (() -> ()), completion: (() -> ())?) {
+    func tableUpdate(_ update: (() -> ()), completion: (() -> ())?) {
         CATransaction.begin()
         CATransaction.setCompletionBlock {
             completion?()
@@ -125,7 +125,7 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         CATransaction.commit()
     }
     
-    public func queueUpdate(update: (() -> ()), completion: (() -> ())? = nil) {
+    open func queueUpdate(_ update: @escaping (() -> ()), completion: (() -> ())? = nil) {
         queue.addOperation(FOCompletionOperation(work: {[weak self] (operation) -> Void in
             if self == nil {
                 operation.finish()
@@ -136,46 +136,46 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
                 completion?()
                 operation.finish()
             })
-            }, queue: dispatch_get_main_queue()))
+            }, queue: DispatchQueue.main))
     }
     
-    public func queueWork(work: (() -> ())) {
-        queue.addOperation(NSBlockOperation(block: work))
+    open func queueWork(_ work: @escaping (() -> ())) {
+        queue.addOperation(BlockOperation(block: work))
     }
     
-    public func insertSections(sections: [FOTableSection], indexes: NSIndexSet, animation: UITableViewRowAnimation = .Fade) {
+    open func insertSections(_ sections: [FOTableSection], indexes: IndexSet, animation: UITableViewRowAnimation = .fade) {
         dataSource.insertSections(sections, atIndexes: indexes, tableView: tableView, viewController: self)
-        tableView.insertSections(indexes, withRowAnimation: animation)
+        tableView.insertSections(indexes, with: animation)
     }
     
-    public func deleteSectionsAtIndexes(indexes: NSIndexSet, animation: UITableViewRowAnimation = .Fade) {
+    open func deleteSectionsAtIndexes(_ indexes: IndexSet, animation: UITableViewRowAnimation = .fade) {
         dataSource.deleteSectionsAtIndexes(indexes, tableView: tableView)
-        tableView.deleteSections(indexes, withRowAnimation: animation)
+        tableView.deleteSections(indexes, with: animation)
     }
     
-    public func insertItems(items: [FOTableItem], indexPaths: [NSIndexPath], animation: UITableViewRowAnimation = .Fade) {
+    open func insertItems(_ items: [FOTableItem], indexPaths: [IndexPath], animation: UITableViewRowAnimation = .fade) {
         dataSource.insertItems(items, atIndexPaths: indexPaths, tableView: tableView, viewController: self)
-        tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+        tableView.insertRows(at: indexPaths, with: animation)
     }
     
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], animation: UITableViewRowAnimation = .Fade) {
+    open func deleteItemsAtIndexPaths(_ indexPaths: [IndexPath], animation: UITableViewRowAnimation = .fade) {
         dataSource.deleteItemsAtIndexPaths(indexPaths, tableView: tableView)
-        tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+        tableView.deleteRows(at: indexPaths, with: animation)
     }
     
-    public func appendItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation = .Fade) {
+    open func appendItems(_ items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation = .fade) {
         if let indexPaths = dataSource.appendItems(items, toSectionAtIndex: sectionIndex, tableView: tableView, viewController: self) {
-            tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+            tableView.insertRows(at: indexPaths, with: animation)
         }
     }
     
-    public func prependItems(items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation = .Fade) {
+    open func prependItems(_ items: [FOTableItem], toSectionAtIndex sectionIndex: Int, animation: UITableViewRowAnimation = .fade) {
         if let indexPaths = dataSource.prependItems(items, toSectionAtIndex: sectionIndex, tableView: tableView, viewController: self) {
-            tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+            tableView.insertRows(at: indexPaths, with: animation)
         }
     }
     
-    public func prependItemsWithFixedOffset(items: [FOTableItem], toSectionAtIndex sectionIndex: Int) {
+    open func prependItemsWithFixedOffset(_ items: [FOTableItem], toSectionAtIndex sectionIndex: Int) {
         if let _ = dataSource.prependItems(items, toSectionAtIndex: sectionIndex, tableView: tableView, viewController: self) {
             let iSize = tableView.contentSize
             
@@ -190,36 +190,36 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-    public func clearAllItems(animation: UITableViewRowAnimation = .Fade) {
+    open func clearAllItems(_ animation: UITableViewRowAnimation = .fade) {
         if let indexes = dataSource.clearAllItems(tableView) {
-            tableView.deleteSections(indexes, withRowAnimation: animation)
+            tableView.deleteSections(indexes, with: animation)
         }
     }
     
-    public func setPagingState(pagingState: PagingState, sectionIndex: Int, animation: UITableViewRowAnimation = .Fade) {
+    open func setPagingState(_ pagingState: PagingState, sectionIndex: Int, animation: UITableViewRowAnimation = .fade) {
         if let indexPath = dataSource.setPagingState(pagingState, sectionIndex: sectionIndex, tableView: tableView, viewController: self) {
-            if pagingState == .Paging {
-                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: animation)
+            if pagingState == .paging {
+                tableView.insertRows(at: [indexPath], with: animation)
             } else {
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: animation)
+                tableView.deleteRows(at: [indexPath], with: animation)
             }
         }
     }
     
-    func pagingIndexPath(section: FOTableSection) -> NSIndexPath? {
+    func pagingIndexPath(_ section: FOTableSection) -> IndexPath? {
         let item = pagingItemForSection(section)
         
         return dataSource.indexPathsForItem(item).first
     }
     
-    public func pagingItemForSection(section: FOTableSection) -> FOTableItem {
+    open func pagingItemForSection(_ section: FOTableSection) -> FOTableItem {
         return FOTablePagingItem(section: section)
     }
     
-    public func refreshVisibleCells() {
+    open func refreshVisibleCells() {
         if let indexPaths = tableView.indexPathsForVisibleRows {
             for indexPath in indexPaths {
-                if let cell = tableView.cellForRowAtIndexPath(indexPath), item = dataSource.itemAtIndexPath(indexPath) {
+                if let cell = tableView.cellForRow(at: indexPath), let item = dataSource.itemAtIndexPath(indexPath) {
                     item.configure(cell, tableView: tableView, indexPath: indexPath)
                     cell.setNeedsLayout()
                 }
@@ -230,13 +230,13 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     // MARK: Paging
     
     // Implemented by subclass
-    public func nextPageForSection(section: FOTableSection, tableView: UITableView) {
+    open func nextPageForSection(_ section: FOTableSection, tableView: UITableView) {
     }
     
     func startPagingTimer() {
-        pagingTimer = NSTimer(timeInterval: 0.2, target: self, selector: #selector(FOTableViewController.checkForPaging), userInfo: nil, repeats: true)
+        pagingTimer = Timer(timeInterval: 0.2, target: self, selector: #selector(FOTableViewController.checkForPaging), userInfo: nil, repeats: true)
         pagingTimer?.tolerance = 0.05
-        NSRunLoop.currentRunLoop().addTimer(pagingTimer!, forMode: NSRunLoopCommonModes)
+        RunLoop.current.add(pagingTimer!, forMode: RunLoopMode.commonModes)
     }
     
     func stopPagingTimer() {
@@ -249,30 +249,30 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
     }
     
     func addPagingCellIfNeeded() {
-        if dataSource.sectionsForPagingState(.Paging).count > 0 {
+        if dataSource.sectionsForPagingState(.paging).count > 0 {
             return
         }
         
-        let notPaging = dataSource.sectionsForPagingState(.NotPaging)
+        let notPaging = dataSource.sectionsForPagingState(.notPaging)
         
-        if notPaging.count > 0 {
-            if let section = dataSource.sectionAtIndex(notPaging.firstIndex) {
+        if let data = notPaging.first, let section = dataSource.sectionAtIndex(data) {
                 if pagingIndexPath(section) == nil {
                     queueUpdate({
                         [weak self] in
-                        self?.setPagingState(.Paging, sectionIndex: notPaging.firstIndex)
+                        self?.setPagingState(.paging, sectionIndex: data)
                         })
-                }
             }
         }
     }
     
     func triggerPagingIfNeeded() {
-        if dataSource.sectionsForPagingState(.PagingAndFetching).firstIndex != NSNotFound {
+        if dataSource.sectionsForPagingState(.pagingAndFetching).first != NSNotFound {
             return
         }
         
-        let sectionIndex = dataSource.sectionsForPagingState(.Paging).firstIndex
+        guard let sectionIndex = dataSource.sectionsForPagingState(.paging).first else {
+            return
+        }
         
         if sectionIndex == NSNotFound {
             return
@@ -280,25 +280,25 @@ public class FOTableViewController: UIViewController, UITableViewDelegate {
         
         if let section = dataSource.sectionAtIndex(sectionIndex) {
             if let indexPath = pagingIndexPath(section) {
-                let rect = tableView.rectForRowAtIndexPath(indexPath)
-                var distance = CGFloat.max
+                let rect = tableView.rectForRow(at: indexPath)
+                var distance = CGFloat.greatestFiniteMagnitude
                 
-                if section.pagingDirection == .Down {
-                    distance = CGRectGetMinY(rect) - tableView.contentOffset.y - tableView.frame.size.height
-                } else if section.pagingDirection == .Up {
-                    distance = tableView.contentOffset.y - CGRectGetMaxY(rect)
+                if section.pagingDirection == .down {
+                    distance = rect.minY - tableView.contentOffset.y - tableView.frame.size.height
+                } else if section.pagingDirection == .up {
+                    distance = tableView.contentOffset.y - rect.maxY
                 }
                 
                 if distance < pagingThreshold {
-                    section.pagingState = .PagingAndFetching
+                    section.pagingState = .pagingAndFetching
                     nextPageForSection(section, tableView: tableView)
                 }
             }
         }
     }
     
-    public func clearCellSizeCache(keepCapacity: Bool = true) {
-        cellSizeCache.removeAll(keepCapacity: keepCapacity)
+    public func clearCellSizeCache(_ keepCapacity: Bool = true) {
+        cellSizeCache.removeAll(keepingCapacity: keepCapacity)
     }
     
 }
