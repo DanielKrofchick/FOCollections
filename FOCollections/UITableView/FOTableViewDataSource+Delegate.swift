@@ -10,11 +10,11 @@ import UIKit
 
 extension FOTableViewDataSource: UITableViewDataSource {
     
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sectionAtIndex(section)?.items?.count ?? 0
     }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: UITableViewCell? = nil
         
         if let item = itemAtIndexPath(indexPath) {
@@ -27,19 +27,19 @@ extension FOTableViewDataSource: UITableViewDataSource {
         return cell == nil ? UITableViewCell() : cell!
     }
     
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
-    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return delegateWithSectionIndex(section)?.tableView?(tableView, titleForHeaderInSection: section)
     }
 
-    public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    open func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return delegateWithSectionIndex(section)?.tableView?(tableView, titleForFooterInSection: section)
     }
 
-    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, canEditRowAt: indexPath) {
             return value
         } else {
@@ -47,7 +47,7 @@ extension FOTableViewDataSource: UITableViewDataSource {
         }
     }
 
-    public func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         if let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, canMoveRowAt: indexPath) {
             return value
         } else {
@@ -63,7 +63,7 @@ extension FOTableViewDataSource: UITableViewDataSource {
     }
     **/
 
-    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         delegateWithIndexPath(indexPath)?.tableView?(tableView, commit: editingStyle, forRowAt: indexPath)
     }
     

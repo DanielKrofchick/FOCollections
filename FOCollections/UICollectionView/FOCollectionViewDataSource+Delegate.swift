@@ -10,11 +10,11 @@ import UIKit
 
 extension FOCollectionViewDataSource: UICollectionViewDataSource {
     
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sectionAtIndex(section)?.items?.count ?? 0
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell? = nil
         
         if let item = itemAtIndexPath(indexPath) {
@@ -27,7 +27,7 @@ extension FOCollectionViewDataSource: UICollectionViewDataSource {
         return cell == nil ? UICollectionViewCell() : cell!
     }
     
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+    open func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sections.count 
     }
 
