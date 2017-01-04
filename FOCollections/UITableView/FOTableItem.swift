@@ -20,7 +20,7 @@ open class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     open func configure(_ cell: UITableViewCell, tableView: UITableView, indexPath: IndexPath){}
     // Gets the reource identified by key
-    open func getResource(forKey key: String, tableView: UITableView, indexPath: IndexPath, completion: (_ resource: AnyObject?, _ result: AnyObject?) -> ()) -> Operation? {return nil}
+    open func getResource(forKey key: String, tableView: UITableView, indexPath: IndexPath, completion: @escaping (_ resource: AnyObject?, _ result: AnyObject?) -> ()) -> Operation? {return nil}
     // Populates the cell with the resource identified by key. IndexPath may have changed with async call, do not rely on it.
     open func setResource(_ resource: AnyObject?, result: AnyObject?, forKey key: String, tableView: UITableView, indexPath: IndexPath){}
     // The item produces a unique key per resource
