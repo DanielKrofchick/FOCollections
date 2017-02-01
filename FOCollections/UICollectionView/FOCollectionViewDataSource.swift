@@ -286,6 +286,18 @@ open class FOCollectionViewDataSource: NSObject {
         return indexPaths
     }
     
+    open func indexPathsFor(sectionAtIndex index: Int) -> [IndexPath] {
+        var indexPaths = [IndexPath]()
+        
+        let items = sectionAtIndex(index)?.items?.count ?? 0
+        
+        for itemIndex in 0..<items {
+            indexPaths.append(IndexPath(item: itemIndex, section: index))
+        }
+        
+        return indexPaths
+    }
+    
     open func cellsForItem(_ item: FOCollectionItem, collectionView: UICollectionView) -> [UICollectionViewCell] {
         var cells = [UICollectionViewCell]()
         

@@ -245,8 +245,17 @@ open class FOCollectionViewController: UICollectionViewController {
         }
     }
     
-    open func clearCellSizeCache(_ keepCapacity: Bool = true) {
-        cellSizeCache.removeAll(keepingCapacity: keepCapacity)
+    open func clearCellSizeCache(indexPaths: [IndexPath]? = nil, keepCapacity: Bool = true) {
+        if let indexPaths = indexPaths {
+            indexPaths.forEach {
+                (indexPath) in
+                if let key = dataSource.keyForItemAtIndexPath(indexPath) {
+                    cellSizeCache[key] = nil
+                }
+            }
+        } else {
+            cellSizeCache.removeAll(keepingCapacity: keepCapacity)
+        }
     }
     
 }
