@@ -30,10 +30,6 @@ open class FOCollectionViewController: UICollectionViewController {
     }
     
     func privateInit() {
-        if #available(iOS 10.0, *) {
-            collectionView?.isPrefetchingEnabled = false
-        }
-        
         queue.qualityOfService = QualityOfService.userInitiated
         queue.name = "FOCollectionViewController"
         queue.maxConcurrentOperationCount = 1
@@ -42,6 +38,10 @@ open class FOCollectionViewController: UICollectionViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 10.0, *) {
+            collectionView?.isPrefetchingEnabled = false
+        }
         
         view.backgroundColor = UIColor.white
         
