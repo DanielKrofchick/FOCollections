@@ -266,18 +266,14 @@ open class FOTableViewController: UIViewController, UITableViewDelegate {
     }
     
     func triggerPagingIfNeeded() {
-        if dataSource.sectionsForPagingState(.pagingAndFetching).first != NSNotFound {
+        if dataSource.sectionsForPagingState(.pagingAndFetching).first != nil {
             return
         }
         
         guard let sectionIndex = dataSource.sectionsForPagingState(.paging).first else {
             return
         }
-        
-        if sectionIndex == NSNotFound {
-            return
-        }
-        
+                
         if let section = dataSource.sectionAtIndex(sectionIndex) {
             if let indexPath = pagingIndexPath(section) {
                 let rect = tableView.rectForRow(at: indexPath)

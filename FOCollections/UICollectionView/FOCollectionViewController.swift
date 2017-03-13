@@ -217,15 +217,11 @@ open class FOCollectionViewController: UICollectionViewController {
     }
     
     func triggerPagingIfNeeded() {
-        if dataSource.sectionsForPagingState(.pagingAndFetching).first != NSNotFound {
+        if dataSource.sectionsForPagingState(.pagingAndFetching).first != nil {
             return
         }
         
         guard let sectionIndex = dataSource.sectionsForPagingState(.paging).first else {
-            return
-        }
-        
-        if sectionIndex == NSNotFound {
             return
         }
         
