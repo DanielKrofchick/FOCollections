@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
   s.source       = {
       :git => "https://github.com/DanielKrofchick/FOCollections.git",
-      :tag => "0.2.0"
+      :tag => "0.2.1"
   }
   s.source_files = 'FOCollections/**/*.{d,h,m,swift}'
 
