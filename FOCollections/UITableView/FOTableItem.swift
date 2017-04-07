@@ -69,7 +69,15 @@ open class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
             if o.data == nil && data == nil {
                 return o.identifier == identifier
             } else if o.data != nil && data != nil {
-                return (o.identifier == identifier) && (o.data! as AnyObject).isEqual(data!)
+                let idEqual = o.identifier == identifier
+                var dataEqual = false
+                if let d = o.data, let data = data {
+                    dataEqual = (d as AnyObject).isEqual(data)
+                }
+                if let d = o.data as? Equality, let data = data as? Equality {
+                    dataEqual = d.isEqual(data)
+                }
+                return idEqual && dataEqual
             } else {
                 return false
             }
@@ -88,4 +96,8 @@ open class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {return 0}
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {return UITableViewCell()}
     
+}
+
+public protocol Equality {
+    func isEqual(_ obj: Any?) -> Bool
 }
