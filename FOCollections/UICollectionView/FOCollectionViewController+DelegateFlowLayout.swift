@@ -88,10 +88,10 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     fileprivate func delegateWithIndexPath(_ indexPath: IndexPath) -> UICollectionViewDelegateFlowLayout? {
-        return dataSource.itemAtIndexPath(indexPath) as? UICollectionViewDelegateFlowLayout
+        return dataSource.itemAtIndexPath(indexPath)
     }
     
     fileprivate func delegateWithSectionIndex(_ index: Int) -> UICollectionViewDelegateFlowLayout? {
-        return dataSource.sectionAtIndex(index) as? UICollectionViewDelegateFlowLayout
+        return dataSource.sectionAtIndex(index)
     }
 }

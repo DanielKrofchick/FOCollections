@@ -74,7 +74,7 @@ extension FOTableViewDataSource: UITableViewDataSource {
     
      //MARK:- utils
     fileprivate func delegateWithIndexPath(_ indexPath: IndexPath) -> UITableViewDataSource? {
-        return itemAtIndexPath(indexPath) as? UITableViewDataSource
+        return itemAtIndexPath(indexPath)
     }
     
     fileprivate func delegateWithSectionIndex(_ sectionIndex: Int) -> UITableViewDataSource? {

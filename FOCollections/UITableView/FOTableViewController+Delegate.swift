@@ -296,10 +296,10 @@ extension FOTableViewController {
     }
     
     fileprivate func delegateWithIndexPath(_ indexPath: IndexPath) -> UITableViewDelegate? {
-        return dataSource.itemAtIndexPath(indexPath) as? UITableViewDelegate
+        return dataSource.itemAtIndexPath(indexPath)
     }
     
     fileprivate func delegateWithSectionIndex(_ sectionIndex: Int) -> UITableViewDelegate? {
-        return dataSource.sectionAtIndex(sectionIndex) as? UITableViewDelegate
+        return dataSource.sectionAtIndex(sectionIndex)
     }
 }

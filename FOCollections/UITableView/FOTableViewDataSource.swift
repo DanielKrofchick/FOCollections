@@ -219,7 +219,7 @@ open class FOTableViewDataSource: NSObject {
         if let key = keyCache[indexPath] {
             return key
         } else if let item = itemAtIndexPath(indexPath) {
-            let key = "\(item.identifier)-\(indexPath.section)-\(indexPath.row)"
+            let key = "\(String(describing: item.identifier))-\(indexPath.section)-\(indexPath.row)"
             keyCache[indexPath] = key
             return key
         } else {

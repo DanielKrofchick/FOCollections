@@ -15,7 +15,7 @@ class FOCollectionPagingItem: FOCollectionItem {
     init(section: FOCollectionSection) {
         super.init()
         
-        identifier = "pagingItem-\(section.identifier)"
+        identifier = "pagingItem-\(String(describing: section.identifier))"
         reuseIdentifier = collectionPagingItemReuseIdentifier
         cellClass = UICollectionViewCell.self
     }

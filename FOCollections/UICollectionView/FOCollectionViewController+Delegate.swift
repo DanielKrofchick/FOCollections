@@ -13,7 +13,7 @@ import UIKit
 extension FOCollectionViewController  {
     
     fileprivate func delegateWithIndexPath(_ indexPath: IndexPath) -> UICollectionViewDelegate? {
-        return dataSource.itemAtIndexPath(indexPath) as? UICollectionViewDelegate
+        return dataSource.itemAtIndexPath(indexPath)
     }
     
     override open func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
