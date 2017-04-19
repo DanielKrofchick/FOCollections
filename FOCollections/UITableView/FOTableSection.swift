@@ -11,11 +11,11 @@ import UIKit
 open class FOTableSection: NSObject, UITableViewDelegate {
     
     open var items: [FOTableItem]? = nil
-    open var identifier: String? = nil                                           // Unique item ID
+    open var identifier: String? = nil                  // Unique item ID
     open var pagingState: PagingState = .disabled
     open var pagingDirection: PagingDirection = .down
-    open var header: UIView? = nil
-    open var footer: UIView? = nil
+    open var header: UIView? = nil                      // Fixed header
+    open var footer: UIView? = nil                      // Fixed footer
     
     open func linkItems(_ viewController: UIViewController?) {
         items?.forEach{
@@ -62,27 +62,27 @@ open class FOTableSection: NSObject, UITableViewDelegate {
     }
     
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        sizeView(header, tableView: tableView)
-        
         return header
     }
     
     open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        sizeView(header, tableView: tableView)
+        let view = self.tableView(tableView, viewForHeaderInSection: section)
         
-        return header?.frame.height ?? 0
+        sizeView(view, tableView: tableView)
+        
+        return view?.frame.height ?? 0
     }
     
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        sizeView(footer, tableView: tableView)
-        
         return footer
     }
     
     open func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        sizeView(footer, tableView: tableView)
+        let view = self.tableView(tableView, viewForFooterInSection: section)
         
-        return footer?.frame.height ?? 0
+        sizeView(view, tableView: tableView)
+        
+        return view?.frame.height ?? 0
     }
     
     fileprivate func sizeView(_ view: UIView?, tableView: UITableView) {
