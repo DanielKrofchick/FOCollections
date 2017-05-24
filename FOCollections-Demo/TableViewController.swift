@@ -23,70 +23,81 @@ class TableViewController: FOTableViewController {
     }
     
     func play() {
-        queueUpdate({[weak self] in self?.clearAllItems()})
-
-//        queueUpdate({[weak self] in self?.insertSections([self!.section(items: 0)], indexes: NSIndexSet(index: 0))})
-//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.redColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.orangeColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.yellowColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.greenColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.blueColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.purpleColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.brownColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.blackColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-//        
-//        queueUpdate({[weak self] in
-//            for (index, item) in self!.dataSource.enumerate() {
-//                print("index: \(index) color: \(item.data)")
-//            }
-//        })
+        queueUpdate({
+            self.clearAllItems()
+        })
+        queueUpdate({
+            self.insertSections([self.sectionAlpha1()], indexes: IndexSet(integer: 0))
+//            self.insertSections([self.sectionBeta1()], indexes: IndexSet(integer: 1))
+        })
         
-        queueUpdate({[weak self] in self?.insertSections([self!.section()], indexes: IndexSet(integer: 0))})
-//        queueUpdate({[weak self] in self?.deleteSectionsAtIndexes(NSIndexSet(index: 0))})
-//        queueUpdate({[weak self] in self?.insertSections([self!.section(UIColor.brownColor())], indexes: NSIndexSet(index: 0))})
-//        queueUpdate({[weak self] in self?.insertItems([self!.item(UIColor.yellowColor())], indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])})
-//        queueUpdate({[weak self] in self?.deleteItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])})
-        queueUpdate({[weak self] in self?.appendItems(self!.items(UIColor.red, items: 3), toSectionAtIndex: 0)})
-        queueUpdate({[weak self] in self?.prependItems(self!.items(UIColor.purple, items: 3), toSectionAtIndex: 0)})
-        queueUpdate({[weak self] in self?.setPagingState(.paging, sectionIndex: 0)})
-        queueUpdate({[weak self] in self?.setPagingState(.disabled, sectionIndex: 0)})
-        queueUpdate({[weak self] in self?.setPagingState(.paging, sectionIndex: 0)})
-        queueUpdate({[weak self] in self?.setPagingState(.finished, sectionIndex: 0)})
-        queueUpdate({[weak self] in self?.setPagingState(.notPaging, sectionIndex: 0)})
+        queueUpdate({
+            let newSections = [
+                self.sectionAlpha2(),
+//                self.sectionBeta2(),
+            ]
+            let startPaths = self.dataSource.statePaths()
+            let endPaths = self.dataSource.statePaths(sections: newSections)
+            let updater = FOCollectionUpdater(from: startPaths, to: endPaths)
+            
+            let update0 = updater.update(index: 0)
+            let update1 = updater.update(index: 1)
+            
+            print("yello")
+        })
     }
     
-    func section(_ color: UIColor = UIColor.blue, items: Int = 4) -> FOTableSection {
+    func sectionAlpha1() -> FOTableSection {
         let section = FOTableSection()
         
-        section.identifier = UUID().uuidString
-        section.pagingState = .notPaging
-        section.items = self.items(color, items: items)
-        section.pagingDirection = .down
+        section.identifier = "Alpha"
+        section.items = [
+            TableCellItem(identifier: "A", color: .blue),
+            TableCellItem(identifier: "B", color: .blue),
+            TableCellItem(identifier: "C", color: .blue),
+        ]
         
         return section
     }
     
-    func items(_ color: UIColor = UIColor.blue, items: Int = 1) -> [FOTableItem] {
-        var r = [FOTableItem]()
+    func sectionAlpha2() -> FOTableSection {
+        let section = FOTableSection()
         
-        if items > 0 {
-            for _ in 0...items - 1 {
-                r.append(item(color))
-            }
-        }
+        section.identifier = "Alpha"
+        section.items = [
+            TableCellItem(identifier: "A", color: .blue),
+            TableCellItem(identifier: "B", color: .blue),
+            TableCellItem(identifier: "C", color: .blue),
+            TableCellItem(identifier: "D", color: .blue),
+        ]
         
-        return r
+        return section
     }
     
-    func item(_ color: UIColor = UIColor.blue) -> FOTableItem {
-        let item = TableCellItem()
+    func sectionBeta1() -> FOTableSection {
+        let section = FOTableSection()
         
-        item.data = color
-        item.identifier = UUID().uuidString
-        item.reuseIdentifier = "itemReuseIdentifier"
-        item.cellClass = UITableViewCell.self
+        section.identifier = "Beta"
+        section.items = [
+            TableCellItem(identifier: "D", color: .green),
+            TableCellItem(identifier: "E", color: .green),
+            TableCellItem(identifier: "F", color: .green),
+        ]
         
-        return item
+        return section
+    }
+    
+    func sectionBeta2() -> FOTableSection {
+        let section = FOTableSection()
+        
+        section.identifier = "Beta"
+        section.items = [
+            TableCellItem(identifier: "D", color: .green),
+            TableCellItem(identifier: "F", color: .green),
+            TableCellItem(identifier: "E", color: .green),
+        ]
+        
+        return section
     }
     
     override func nextPageForSection(_ section: FOTableSection, tableView: UITableView) {
