@@ -81,8 +81,8 @@ struct FOCollectionUpdater {
         
         var m = f
 
-        update.deletions = deleted(f, to: t, index: index)
-        update.insertions = deleted(t, to: f, index: index)
+        update.deletions = deleted(f, to: t, at: index)
+        update.insertions = deleted(t, to: f, at: index)
 
         if let deletions = update.deletions {
             m = delete(deletions, from: m)
@@ -92,12 +92,12 @@ struct FOCollectionUpdater {
             m = insert(insertions, into: m)
         }
 
-//        update.moves = moves(m, to: f)
+        update.moves = moves(m, to: t, at: index)
         
         return update
     }
     
-    func deleted(_ a: [StatePath], to b: [StatePath], index: Int) -> [StatePath] {
+    func deleted(_ a: [StatePath], to b: [StatePath], at index: Int) -> [StatePath] {
         return a.filter{
             aPath in
             return b.filter{
@@ -124,32 +124,79 @@ struct FOCollectionUpdater {
         return (a + b).sorted()
     }
     
-//
-//    func moves(_ a: [State], to b: [State]) -> [Move] {
-//        var moves = [Move]()
-//        var m = a
-//        
-//        for i in (0..<b.count).reversed() {
-//            if
-//                let bS = find(index: i, in: b),
-//                let aS = find(identifier: bS.identifier, in: m)
-//            {
-//                if aS.index != bS.index {
-//                    moves.append(Move(from: aS, to: bS))
-//                }
-//            }
-//        }
-//        
-//        return moves
-//    }
-//    
-//    func find(index: Int, in a: [State]) -> State? {
-//        return a.filter{$0.index == index}.first
-//    }
-//    
-//    func find(identifier: String, in a: [State]) -> State? {
-//        return a.filter{$0.identifier == identifier}.first
-//    }
+    func moves(_ a: [StatePath], to b: [StatePath], at index: Int) -> [Move] {
+        var moves = [Move]()
+        var m = a
+        var cont = true
+        
+        while cont {
+            cont = false
+            for i in 0..<m.count {
+                let mPath = m[i]
+                let bPath = b[i]
+                
+                if mPath != bPath {
+                    if let foundI = indexOf(b: mPath, in: b, at: index) {
+                        let foundMPath = b[foundI]
+                        let mv = Move(from: mPath, to: foundMPath)
+                        
+                        moves.append(mv)
+                        m = move(mv, in: m, at: index).sorted()
+                        cont = true
+                        break
+                    }
+                }
+            }
+        }
+        
+        return moves
+    }
+    
+    func move(_ move: Move, in a: [StatePath], at index: Int) -> [StatePath] {
+        var result = a
+        
+        if let i = indexOf(b: move.from, in: result, at: index) {
+            result.remove(at: i)
+            result.append(move.to)
+        }
+        
+        for i in 0..<result.count {
+            let path = result[i]
+            
+            if
+                path.indexPath[0..<index] == move.to.indexPath[0..<index],
+                path.indexPath[index] >= move.from.indexPath[index],
+                path.indexPath[index] <= move.to.indexPath[index],
+                path.identifierPath != move.to.identifierPath
+            {
+                var newIndexPath = path.indexPath
+                newIndexPath[index] = newIndexPath[index] - 1
+                
+                if var newIdentifierPath = move.to.identifierPath[0...index - 1] {
+                    newIdentifierPath.identifiers.append(path.identifierPath.identifiers[index])
+                    
+                    let newPath = StatePath(indexPath: newIndexPath, identifierPath: newIdentifierPath)
+                    
+                    result.remove(at: i)
+                    result.insert(newPath, at: i)
+                }
+            }
+        }
+        
+        return result
+    }
+    
+    func indexOf(b: StatePath, in a: [StatePath], at index: Int) -> Int? {
+        return a.enumerated().reduce([Int]()) { (result, element: (i: Int, aPath: StatePath)) -> [Int] in
+            var r = result
+            
+            if element.aPath.identifierPath[index] == b.identifierPath[index] {
+                r.append(element.i)
+            }
+            
+            return r
+        }.first
+    }
     
 }
 
@@ -224,7 +271,7 @@ extension StatePath: CustomStringConvertible {
 
 struct IdentifierPath {
     
-    let identifiers: [String]
+    var identifiers: [String]
     
     init(identifiers: [String]) {
         self.identifiers = identifiers

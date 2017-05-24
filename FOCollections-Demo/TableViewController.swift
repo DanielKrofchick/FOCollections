@@ -65,10 +65,9 @@ class TableViewController: FOTableViewController {
         
         section.identifier = "Alpha"
         section.items = [
-            TableCellItem(identifier: "A", color: .blue),
-            TableCellItem(identifier: "B", color: .blue),
             TableCellItem(identifier: "C", color: .blue),
-            TableCellItem(identifier: "D", color: .blue),
+            TableCellItem(identifier: "B", color: .blue),
+            TableCellItem(identifier: "A", color: .blue),
         ]
         
         return section
