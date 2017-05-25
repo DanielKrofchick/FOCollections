@@ -82,14 +82,15 @@ struct FOCollectionUpdater {
         var m = f
 
         update.deletions = deleted(f, to: t, at: index)
-        update.insertions = deleted(t, to: f, at: index)
 
         if let deletions = update.deletions {
-            m = delete(deletions, from: m)
+            m = delete(deletions, from: m, at: index)
         }
+        
+        update.insertions = deleted(t, to: m, at: index)
 
         if let insertions = update.insertions {
-            m = insert(insertions, into: m)
+            m = insert(insertions, into: m, at: index)
         }
 
         update.moves = moves(m, to: t, at: index)
@@ -107,79 +108,80 @@ struct FOCollectionUpdater {
         }
     }
     
-    func delete(_ a: [StatePath], from b: [StatePath]) -> [StatePath] {
+    func delete(_ a: [StatePath], from b: [StatePath], at index: Int) -> [StatePath] {
         var result = b
         
-        a.forEach {
+        a.forEach{
             statePath in
             if let index = result.index(of: statePath) {
                 result.remove(at: index)
             }
         }
         
+        a.forEach{
+            statePath in
+            result = shift(up: false, statePaths: result, for: statePath, atIndex: index)
+        }
+        
         return result
     }
     
-    func insert(_ a: [StatePath], into b: [StatePath]) -> [StatePath] {
-        return (a + b).sorted()
+    func insert(_ a: [StatePath], into b: [StatePath], at index: Int) -> [StatePath] {
+        var result = b
+        
+        a.forEach {
+            statePath in
+            result.append(statePath)
+            result = shift(up: true, statePaths: result, for: statePath, atIndex: index)
+        }
+                
+        return result
     }
     
     func moves(_ a: [StatePath], to b: [StatePath], at index: Int) -> [Move] {
         var moves = [Move]()
-        var m = a
-//        var cont = true
+        var m = a.sorted()
         
-//        while cont {
-//            cont = false
-            for i in 0..<m.count {
-                let mPath = m[i]
-                let bPath = b[i]
-                
-                if mPath != bPath {
-                    if let foundI = indexOf(b: mPath, in: b, at: index) {
-                        let foundMPath = b[foundI]
-                        let mv = Move(from: mPath, to: foundMPath)
-                        
-                        moves.append(mv)
-//                        m = move(mv, in: m, at: index).sorted()
-//                        cont = true
-//                        break
-                    }
+        if a.count != b.count {
+            return moves
+        }
+        
+        for i in 0..<m.count {
+            let mPath = m[i]
+            let bPath = b[i]
+            
+            if mPath != bPath {
+                if let foundI = indexOf(b: mPath, in: b, at: index) {
+                    let foundMPath = b[foundI]
+                    let mv = Move(from: mPath, to: foundMPath)
+                    
+                    moves.append(mv)
                 }
             }
-//        }
+        }
         
         return moves
     }
     
-    func move(_ move: Move, in a: [StatePath], at index: Int) -> [StatePath] {
-        var result = a
-        
-        if let i = indexOf(b: move.from, in: result, at: index) {
-            result.remove(at: i)
-            result.append(move.to)
-        }
+    // up == true (+1), up == false (-1)
+    func shift(up: Bool, statePaths: [StatePath], for statePath: StatePath, atIndex index: Int) -> [StatePath] {
+        var result = statePaths
         
         for i in 0..<result.count {
             let path = result[i]
             
             if
-                path.indexPath[0..<index] == move.to.indexPath[0..<index],
-                path.indexPath[index] >= move.from.indexPath[index],
-                path.indexPath[index] <= move.to.indexPath[index],
-                path.identifierPath != move.to.identifierPath
+                path.indexPath[0..<index] == statePath.indexPath[0..<index],
+                path.indexPath[index] >= statePath.indexPath[index],
+                path.identifierPath != statePath.identifierPath
             {
                 var newIndexPath = path.indexPath
-                newIndexPath[index] = newIndexPath[index] - 1
+                newIndexPath[index] = newIndexPath[index] + (up ? 1 : -1)
                 
-                if var newIdentifierPath = move.to.identifierPath[0...index - 1] {
-                    newIdentifierPath.identifiers.append(path.identifierPath.identifiers[index])
-                    
-                    let newPath = StatePath(indexPath: newIndexPath, identifierPath: newIdentifierPath)
-                    
-                    result.remove(at: i)
-                    result.insert(newPath, at: i)
-                }
+                let newPath = StatePath(indexPath: newIndexPath, identifierPath: path.identifierPath)
+                
+                result.remove(at: i)
+                result.insert(newPath, at: i)
             }
         }
         
