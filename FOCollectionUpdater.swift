@@ -118,10 +118,10 @@ struct FOCollectionUpdater {
             }
         }
         
-        a.forEach{
-            statePath in
-            result = shift(up: false, statePaths: result, for: statePath, atIndex: index)
-        }
+//        a.forEach{
+//            statePath in
+//            result = shift(up: false, statePaths: result, for: statePath, atIndex: index)
+//        }
         
         return result
     }
@@ -132,7 +132,7 @@ struct FOCollectionUpdater {
         a.forEach {
             statePath in
             result.append(statePath)
-            result = shift(up: true, statePaths: result, for: statePath, atIndex: index)
+//            result = shift(up: true, statePaths: result, for: statePath, atIndex: index)
         }
                 
         return result
