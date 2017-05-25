@@ -127,10 +127,10 @@ struct FOCollectionUpdater {
     func moves(_ a: [StatePath], to b: [StatePath], at index: Int) -> [Move] {
         var moves = [Move]()
         var m = a
-        var cont = true
+//        var cont = true
         
-        while cont {
-            cont = false
+//        while cont {
+//            cont = false
             for i in 0..<m.count {
                 let mPath = m[i]
                 let bPath = b[i]
@@ -141,13 +141,13 @@ struct FOCollectionUpdater {
                         let mv = Move(from: mPath, to: foundMPath)
                         
                         moves.append(mv)
-                        m = move(mv, in: m, at: index).sorted()
-                        cont = true
-                        break
+//                        m = move(mv, in: m, at: index).sorted()
+//                        cont = true
+//                        break
                     }
                 }
             }
-        }
+//        }
         
         return moves
     }

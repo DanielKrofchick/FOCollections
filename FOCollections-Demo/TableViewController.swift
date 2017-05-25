@@ -43,6 +43,32 @@ class TableViewController: FOTableViewController {
             let update0 = updater.update(index: 0)
             let update1 = updater.update(index: 1)
             
+            if
+                let deletions = update1.deletions,
+                deletions.count > 0
+            {
+                self.deleteItemsAtIndexPaths(deletions.map{$0.indexPath})
+            }
+            
+            if
+                let insertions = update1.insertions,
+                insertions.count > 0
+            {
+//                self.insertItems([], indexPaths: insertions.map{$0.indexPath})
+            }
+            
+            if
+                let moves = update1.moves,
+                moves.count > 0
+            {
+                for move in moves {
+                    self.tableView.moveRow(at: move.from.indexPath, to: move.to.indexPath)
+                }
+            }
+            
+            self.dataSource.clearAllItems(self.tableView)
+            self.dataSource.insertSections(newSections, atIndexes: IndexSet(integer: 0), tableView: self.tableView, viewController: self)
+            
             print("yello")
         })
     }
@@ -55,6 +81,9 @@ class TableViewController: FOTableViewController {
             TableCellItem(identifier: "A", color: .blue),
             TableCellItem(identifier: "B", color: .blue),
             TableCellItem(identifier: "C", color: .blue),
+            TableCellItem(identifier: "D", color: .blue),
+            TableCellItem(identifier: "E", color: .blue),
+            TableCellItem(identifier: "F", color: .blue),
         ]
         
         return section
@@ -65,9 +94,12 @@ class TableViewController: FOTableViewController {
         
         section.identifier = "Alpha"
         section.items = [
-            TableCellItem(identifier: "C", color: .blue),
+            TableCellItem(identifier: "D", color: .blue),
             TableCellItem(identifier: "B", color: .blue),
+            TableCellItem(identifier: "F", color: .blue),
+            TableCellItem(identifier: "C", color: .blue),
             TableCellItem(identifier: "A", color: .blue),
+            TableCellItem(identifier: "E", color: .blue),
         ]
         
         return section
