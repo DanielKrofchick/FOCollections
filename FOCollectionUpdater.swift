@@ -140,22 +140,18 @@ struct FOCollectionUpdater {
     
     func moves(_ a: [StatePath], to b: [StatePath], at index: Int) -> [Move] {
         var moves = [Move]()
-        var m = a.sorted()
         
         if a.count != b.count {
             return moves
         }
         
-        for i in 0..<m.count {
-            let mPath = m[i]
-            let bPath = b[i]
-            
-            if mPath != bPath {
-                if let foundI = indexOf(b: mPath, in: b, at: index) {
-                    let foundMPath = b[foundI]
-                    let mv = Move(from: mPath, to: foundMPath)
-                    
-                    moves.append(mv)
+        b.forEach {
+            bPath in
+            if let aIndex = indexOf(bPath, in: a, at: index) {
+                let aPath = a[aIndex]
+                
+                if aPath != bPath {
+                    moves.append(Move(from: aPath, to: bPath))
                 }
             }
         }
@@ -188,11 +184,11 @@ struct FOCollectionUpdater {
         return result
     }
     
-    func indexOf(b: StatePath, in a: [StatePath], at index: Int) -> Int? {
-        return a.enumerated().reduce([Int]()) { (result, element: (i: Int, aPath: StatePath)) -> [Int] in
+    func indexOf(_ path: StatePath, in paths: [StatePath], at index: Int) -> Int? {
+        return paths.enumerated().reduce([Int]()) { (result, element: (i: Int, aPath: StatePath)) -> [Int] in
             var r = result
             
-            if element.aPath.identifierPath[index] == b.identifierPath[index] {
+            if element.aPath.identifierPath[index] == path.identifierPath[index] {
                 r.append(element.i)
             }
             

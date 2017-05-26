@@ -30,10 +30,10 @@ class TableViewController: FOTableViewController {
             let sections = [
                 self.sectionAlpha1(),
                 self.sectionBeta1(),
-//                self.sectionCappa1(),
-//                self.sectionDelta1(),
-//                self.sectionElta1(),
-//                self.sectionFelta1(),
+                self.sectionCappa1(),
+                self.sectionDelta1(),
+                self.sectionElta1(),
+                self.sectionFelta1(),
             ]
             
             self.insertSections(sections, indexes: IndexSet(integersIn: 0..<sections.count))
@@ -41,15 +41,12 @@ class TableViewController: FOTableViewController {
         
         queueUpdate({
             let newSections = [
+                self.sectionFelta1(),
                 self.sectionAlpha1(),
+                self.sectionGamma1(),
+                self.sectionDelta1(),
                 self.sectionCappa1(),
-                self.sectionBeta1(),
-//                self.sectionFelta1(),
-//                self.sectionAlpha1(),
-//                self.sectionGamma1(),
-//                self.sectionDelta1(),
-//                self.sectionCappa1(),
-//                self.sectionXi1(),
+                self.sectionXi1(),
             ]
             let startPaths = self.dataSource.statePaths()
             let endPaths = self.dataSource.statePaths(sections: newSections)
