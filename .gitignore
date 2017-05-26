@@ -4,4 +4,5 @@ FOCollections.xcodeproj/xcuserdata/xiaoma.xcuserdatad/xcschemes/FOCollections-Un
 FOCollections.xcodeproj/xcuserdata/xiaoma.xcuserdatad/xcschemes/FOCollections.xcscheme
 FOCollections.xcodeproj/xcuserdata/xiaoma.xcuserdatad/xcschemes/xcschememanagement.plist
 FOCollections.framework/*
+FOCollections.xcodeproj/xcuserdata/*
 build/**
