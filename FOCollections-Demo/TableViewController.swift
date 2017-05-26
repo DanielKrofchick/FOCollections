@@ -42,7 +42,7 @@ class TableViewController: FOTableViewController {
         queueUpdate({
             let newSections = [
                 self.sectionFelta1(),
-                self.sectionAlpha1(),
+                self.sectionAlpha2(),
                 self.sectionGamma1(),
                 self.sectionDelta1(),
                 self.sectionCappa1(),
@@ -53,10 +53,10 @@ class TableViewController: FOTableViewController {
             let updater = FOCollectionUpdater(from: startPaths, to: endPaths)
             
             let update0 = updater.update(index: 0)
-            let update1 = updater.update(index: 1)
+            let update1 = updater.update(index: 1, filter: update0)
             
             self.updateSections(update: update0, newSections: newSections)
-//            self.updateItems(update: update1, newSections: newSections)
+            self.updateItems(update: update1, newSections: newSections)
             
             _ = self.dataSource.clearAllItems(self.tableView)
             self.dataSource.insertSections(newSections, atIndexes: IndexSet(integersIn: 0..<newSections.count), tableView: self.tableView, viewController: self)
@@ -141,6 +141,18 @@ class TableViewController: FOTableViewController {
         section.identifier = "Alpha"
         section.items = [
             TableCellItem(identifier: "A", color: .blue),
+        ]
+        
+        return section
+    }
+    
+    func sectionAlpha2() -> FOTableSection {
+        let section = FOTableSection()
+        
+        section.identifier = "Alpha"
+        section.items = [
+            TableCellItem(identifier: "A", color: .blue),
+            TableCellItem(identifier: "A2", color: .blue),
         ]
         
         return section

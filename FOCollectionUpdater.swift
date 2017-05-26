@@ -73,11 +73,21 @@ struct FOCollectionUpdater {
         self.to = to
     }
     
-    func update(index: Int) -> Update {
-        var update = Update()
+    func update(index: Int, filter: Update? = nil) -> Update {
+        var update = Update(index: index)
         
         let f = Array(Set(from.map{$0[0...index]!}.filter{$0 != nil}))
-        let t = Array(Set(to.map{$0[0...index]!}.filter{$0 != nil}))
+        var t = Array(Set(to.map{$0[0...index]!}.filter{$0 != nil}))
+        
+        if
+            let filter = filter,
+            let iIndexPaths = filter.insertions?.map({$0.indexPath})
+        {
+            t = t.filter({
+                (path) in
+                return !iIndexPaths.contains(path.indexPath[0...filter.index])
+            })
+        }
         
         var m = f
 
@@ -118,11 +128,6 @@ struct FOCollectionUpdater {
             }
         }
         
-//        a.forEach{
-//            statePath in
-//            result = shift(up: false, statePaths: result, for: statePath, atIndex: index)
-//        }
-        
         return result
     }
     
@@ -132,7 +137,6 @@ struct FOCollectionUpdater {
         a.forEach {
             statePath in
             result.append(statePath)
-//            result = shift(up: true, statePaths: result, for: statePath, atIndex: index)
         }
                 
         return result
@@ -159,31 +163,6 @@ struct FOCollectionUpdater {
         return moves
     }
     
-    // up == true (+1), up == false (-1)
-    func shift(up: Bool, statePaths: [StatePath], for statePath: StatePath, atIndex index: Int) -> [StatePath] {
-        var result = statePaths
-        
-        for i in 0..<result.count {
-            let path = result[i]
-            
-            if
-                path.indexPath[0..<index] == statePath.indexPath[0..<index],
-                path.indexPath[index] >= statePath.indexPath[index],
-                path.identifierPath != statePath.identifierPath
-            {
-                var newIndexPath = path.indexPath
-                newIndexPath[index] = newIndexPath[index] + (up ? 1 : -1)
-                
-                let newPath = StatePath(indexPath: newIndexPath, identifierPath: path.identifierPath)
-                
-                result.remove(at: i)
-                result.insert(newPath, at: i)
-            }
-        }
-        
-        return result
-    }
-    
     func indexOf(_ path: StatePath, in paths: [StatePath], at index: Int) -> Int? {
         return paths.enumerated().reduce([Int]()) { (result, element: (i: Int, aPath: StatePath)) -> [Int] in
             var r = result
@@ -200,10 +179,14 @@ struct FOCollectionUpdater {
 
 struct Update {
     
-    var position: Int? = nil
-    var deletions: [StatePath]? = nil
-    var insertions: [StatePath]? = nil
-    var moves: [Move]? = nil
+    let index: Int
+    var deletions: [StatePath]?
+    var insertions: [StatePath]?
+    var moves: [Move]?
+    
+    init(index: Int) {
+        self.index = index
+    }
     
 }
 
