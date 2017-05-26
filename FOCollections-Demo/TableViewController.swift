@@ -55,8 +55,8 @@ class TableViewController: FOTableViewController {
             let update0 = updater.update(index: 0)
             let update1 = updater.update(index: 1, filter: update0)
             
-            self.updateSections(update: update0, newSections: newSections)
-            self.updateItems(update: update1, newSections: newSections)
+            self.updateSections(update: update0)
+            self.updateItems(update: update1)
             
             _ = self.dataSource.clearAllItems(self.tableView)
             self.dataSource.insertSections(newSections, atIndexes: IndexSet(integersIn: 0..<newSections.count), tableView: self.tableView, viewController: self)
@@ -65,21 +65,19 @@ class TableViewController: FOTableViewController {
         })
     }
 
-    func updateSections(update: Update, newSections: [FOTableSection]) {
+    func updateSections(update: Update) {
         if
             let deletions = update.deletions,
             deletions.count > 0
         {
-            self.deleteSectionsAtIndexes(IndexSet(deletions.map{$0.indexPath[0]}))
+            tableView.deleteSections(IndexSet(deletions.map{$0.indexPath[0]}), with: .automatic)
         }
         
         if
             let insertions = update.insertions,
             insertions.count > 0
         {
-            let insertionIDs = insertions.map{$0.identifierPath.identifiers.last!}
-            let sections = newSections.filter{insertionIDs.contains($0.identifier!)}
-            self.insertSections(sections, indexes: IndexSet(insertions.map{$0.indexPath[0]}))
+            tableView.insertSections(IndexSet(insertions.map{$0.indexPath[0]}), with: .automatic)
         }
 
         if
@@ -87,28 +85,24 @@ class TableViewController: FOTableViewController {
             moves.count > 0
         {
             for move in moves {
-                self.tableView.moveSection(move.from.indexPath[0], toSection: move.to.indexPath[0])
+                tableView.moveSection(move.from.indexPath[0], toSection: move.to.indexPath[0])
             }
         }
     }
     
-    func updateItems(update: Update, newSections: [FOTableSection]) {
+    func updateItems(update: Update) {
         if
             let deletions = update.deletions,
             deletions.count > 0
         {
-            self.deleteItemsAtIndexPaths(deletions.map{$0.indexPath})
+            tableView.deleteRows(at: deletions.map{$0.indexPath}, with: .automatic)
         }
         
         if
             let insertions = update.insertions,
             insertions.count > 0
         {
-            let items = insertions.map{
-                statePath in
-                self.findItem(sections: newSections, identifier: statePath.identifierPath.identifiers.last!)
-                } as! [FOTableItem]
-            self.insertItems(items, indexPaths: insertions.map{$0.indexPath})
+            tableView.insertRows(at: insertions.map{$0.indexPath}, with: .automatic)
         }
         
         if
@@ -116,7 +110,7 @@ class TableViewController: FOTableViewController {
             moves.count > 0
         {
             for move in moves {
-                self.tableView.moveRow(at: move.from.indexPath, to: move.to.indexPath)
+                tableView.moveRow(at: move.from.indexPath, to: move.to.indexPath)
             }
         }
     }
