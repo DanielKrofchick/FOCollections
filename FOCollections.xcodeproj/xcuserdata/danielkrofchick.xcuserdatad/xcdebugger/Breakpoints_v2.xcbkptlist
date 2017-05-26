@@ -9,13 +9,125 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FOCollectionUpdater.swift"
-            timestampString = "517421793.380129"
+            filePath = "FOCollections-Demo/TableViewController.swift"
+            timestampString = "517437717.300518"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "update(index:)"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "updateSections(update:newSections:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FOCollections.TableViewController.updateSections (update : FOCollections.Update, newSections : Swift.Array&lt;FOCollections.FOTableSection&gt;) -&gt; ()"
+                  moduleName = "FOCollections"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/danielkrofchick/Documents/Figure1/Development/App/FOCollections/FOCollections/FOCollections-Demo/TableViewController.swift"
+                  timestampString = "517506333.1958"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "206">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FOCollections.TableViewController.(updateSections (update : FOCollections.Update, newSections : Swift.Array&lt;FOCollections.FOTableSection&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "FOCollections"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/danielkrofchick/Documents/Figure1/Development/App/FOCollections/FOCollections/FOCollections-Demo/TableViewController.swift"
+                  timestampString = "517506333.197794"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FOCollections-Demo/TableViewController.swift"
+            timestampString = "517437717.300518"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "updateSections(update:newSections:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FOCollections.TableViewController.updateSections (update : FOCollections.Update, newSections : Swift.Array&lt;FOCollections.FOTableSection&gt;) -&gt; ()"
+                  moduleName = "FOCollections"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/danielkrofchick/Documents/Figure1/Development/App/FOCollections/FOCollections/FOCollections-Demo/TableViewController.swift"
+                  timestampString = "517506333.201678"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "1257">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FOCollections.TableViewController.(updateSections (update : FOCollections.Update, newSections : Swift.Array&lt;FOCollections.FOTableSection&gt;) -&gt; ()).(closure #4)"
+                  moduleName = "FOCollections"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/danielkrofchick/Documents/Figure1/Development/App/FOCollections/FOCollections/FOCollections-Demo/TableViewController.swift"
+                  timestampString = "517506333.20301"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FOCollections-Demo/TableViewController.swift"
+            timestampString = "517437717.300518"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "updateSections(update:newSections:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FOCollectionUpdater.swift"
+            timestampString = "517505193.866018"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "moves(_:to:at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -76,8 +76,8 @@ struct FOCollectionUpdater {
     func update(index: Int) -> Update {
         var update = Update()
         
-        let f = from.map{$0[0...index]}.filter{$0 != nil} as! [StatePath]
-        let t = to.map{$0[0...index]}.filter{$0 != nil} as! [StatePath]
+        let f = Array(Set(from.map{$0[0...index]!}.filter{$0 != nil}))
+        let t = Array(Set(to.map{$0[0...index]!}.filter{$0 != nil}))
         
         var m = f
 
@@ -233,6 +233,15 @@ struct StatePath {
         return self[index...index]
     }
     
+}
+
+extension StatePath: Hashable {
+    
+    var hashValue: Int {
+        get {
+            return indexPath.hashValue + identifierPath.hashValue
+        }
+    }
 }
 
 extension StatePath: Equatable {
