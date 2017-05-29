@@ -31,9 +31,6 @@ class TableViewController: FOTableViewController {
                 self.sectionAlpha1(),
                 self.sectionBeta1(),
                 self.sectionCappa1(),
-                self.sectionDelta1(),
-                self.sectionElta1(),
-                self.sectionFelta1(),
             ]
             
             self.insertSections(sections, indexes: IndexSet(integersIn: 0..<sections.count))
@@ -41,12 +38,8 @@ class TableViewController: FOTableViewController {
         
         queueUpdate({
             let newSections = [
-                self.sectionFelta1(),
                 self.sectionAlpha2(),
-                self.sectionGamma1(),
-                self.sectionDelta1(),
-                self.sectionCappa1(),
-                self.sectionXi1(),
+                self.sectionCappa2(),
             ]
             let startPaths = self.dataSource.statePaths()
             let endPaths = self.dataSource.statePaths(sections: newSections)
@@ -134,7 +127,9 @@ class TableViewController: FOTableViewController {
         
         section.identifier = "Alpha"
         section.items = [
-            TableCellItem(identifier: "A", color: .blue),
+            TableCellItem(identifier: "A0", color: .blue),
+            TableCellItem(identifier: "A1", color: .blue),
+            TableCellItem(identifier: "A2", color: .blue),
         ]
         
         return section
@@ -145,7 +140,7 @@ class TableViewController: FOTableViewController {
         
         section.identifier = "Alpha"
         section.items = [
-            TableCellItem(identifier: "A", color: .blue),
+            TableCellItem(identifier: "A0", color: .blue),
             TableCellItem(identifier: "A2", color: .blue),
         ]
         
@@ -157,7 +152,9 @@ class TableViewController: FOTableViewController {
         
         section.identifier = "Beta"
         section.items = [
-            TableCellItem(identifier: "B", color: .green),
+            TableCellItem(identifier: "B0", color: .green),
+            TableCellItem(identifier: "B1", color: .green),
+            TableCellItem(identifier: "B2", color: .green),
         ]
         
         return section
@@ -168,99 +165,27 @@ class TableViewController: FOTableViewController {
         
         section.identifier = "Cappa"
         section.items = [
-            TableCellItem(identifier: "C", color: .red),
+            TableCellItem(identifier: "C0", color: .red),
+            TableCellItem(identifier: "C1", color: .red),
+            TableCellItem(identifier: "C2", color: .red),
         ]
         
         return section
     }
     
-    func sectionDelta1() -> FOTableSection {
+    func sectionCappa2() -> FOTableSection {
         let section = FOTableSection()
         
-        section.identifier = "Delta"
+        section.identifier = "Cappa"
         section.items = [
-            TableCellItem(identifier: "D", color: .yellow),
+            TableCellItem(identifier: "C0", color: .red),
+            TableCellItem(identifier: "CX", color: .red),
+            TableCellItem(identifier: "C1", color: .red),
+            TableCellItem(identifier: "C2", color: .red),
         ]
         
         return section
     }
-    
-    func sectionElta1() -> FOTableSection {
-        let section = FOTableSection()
-        
-        section.identifier = "Elta"
-        section.items = [
-            TableCellItem(identifier: "E", color: .purple),
-        ]
-        
-        return section
-    }
-
-    func sectionFelta1() -> FOTableSection {
-        let section = FOTableSection()
-        
-        section.identifier = "Felta"
-        section.items = [
-            TableCellItem(identifier: "F", color: .brown),
-        ]
-        
-        return section
-    }
-    
-    func sectionGamma1() -> FOTableSection {
-        let section = FOTableSection()
-        
-        section.identifier = "Gamma"
-        section.items = [
-            TableCellItem(identifier: "G", color: .cyan),
-        ]
-        
-        return section
-    }
-
-    func sectionXi1() -> FOTableSection {
-        let section = FOTableSection()
-        
-        section.identifier = "Xi"
-        section.items = [
-            TableCellItem(identifier: "X", color: .magenta),
-        ]
-        
-        return section
-    }
-    
-//    func sectionAlpha1() -> FOTableSection {
-//        let section = FOTableSection()
-//        
-//        section.identifier = "Alpha"
-//        section.items = [
-//            TableCellItem(identifier: "A", color: .blue),
-//            TableCellItem(identifier: "B", color: .blue),
-//            TableCellItem(identifier: "C", color: .blue),
-//            TableCellItem(identifier: "D", color: .blue),
-//            TableCellItem(identifier: "E", color: .blue),
-//            TableCellItem(identifier: "F", color: .blue),
-//        ]
-//        
-//        return section
-//    }
-//    
-//    func sectionAlpha2() -> FOTableSection {
-//        let section = FOTableSection()
-//        
-//        section.identifier = "Alpha"
-//        section.items = [
-//            TableCellItem(identifier: "F", color: .blue),
-//            TableCellItem(identifier: "A", color: .blue),
-//            TableCellItem(identifier: "G", color: .blue),
-//            TableCellItem(identifier: "D", color: .blue),
-//            TableCellItem(identifier: "C", color: .blue),
-//            TableCellItem(identifier: "X", color: .blue),
-//            
-//        ]
-//        
-//        return section
-//    }
     
     override func nextPageForSection(_ section: FOTableSection, tableView: UITableView) {
         print("\(#function)")
