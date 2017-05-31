@@ -67,20 +67,20 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     // MARK: - Utility
-        
+    
     public func layoutCellForIndexPath(_ indexPath: IndexPath) -> UICollectionViewCell? {
         var cell: UICollectionViewCell? = nil
         
-        if let item = dataSource.itemAtIndexPath(indexPath) {
-            if let cellClass = item.cellClass {
-                if let key = NSStringFromClass(cellClass).components(separatedBy: ".").last {
-                    cell = layoutCellCache[key]
-                    
-                    if cell == nil && cellClass is UICollectionViewCell.Type {
-                        cell = (cellClass as! UICollectionViewCell.Type).init()
-                        layoutCellCache[key] = cell
-                    }
-                }
+        if
+            let item = dataSource.itemAtIndexPath(indexPath),
+            let cellClass = item.cellClass,
+            let key = NSStringFromClass(cellClass).components(separatedBy: ".").last
+        {
+            cell = layoutCellCache[key]
+            
+            if cell == nil && cellClass is UICollectionViewCell.Type {
+                cell = (cellClass as! UICollectionViewCell.Type).init()
+                layoutCellCache[key] = cell
             }
         }
         

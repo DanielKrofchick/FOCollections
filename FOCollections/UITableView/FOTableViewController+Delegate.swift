@@ -276,20 +276,23 @@ extension FOTableViewController {
      
     //MARK:- utils
     
+    // dequeueReusableCell results in infinite loop. Therefore keep our own sizing cache
     open func layoutCellForIndexPath(_ indexPath: IndexPath) -> UITableViewCell? {
         var cell: UITableViewCell? = nil
         
-        if let item = dataSource.itemAtIndexPath(indexPath) {
-            if let cellClass = item.cellClass {
-                if let key = NSStringFromClass(cellClass).components(separatedBy: ".").last {
-                    cell = layoutCellCache[key]
-                    
-                    if cell == nil && cellClass is UITableViewCell.Type {
-                        cell = (cellClass as! UITableViewCell.Type).init()
-                        layoutCellCache[key] = cell
-                    }
-                }
+        if
+            let item = dataSource.itemAtIndexPath(indexPath),
+            let cellClass = item.cellClass,
+            let key = NSStringFromClass(cellClass).components(separatedBy: ".").last
+        {
+            cell = layoutCellCache[key]
+            
+            if cell == nil && cellClass is UITableViewCell.Type {
+                cell = (cellClass as! UITableViewCell.Type).init()
+                layoutCellCache[key] = cell
             }
+            
+            cell?.separatorInset = tableView.separatorInset
         }
         
         return cell
