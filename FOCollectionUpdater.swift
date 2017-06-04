@@ -130,6 +130,7 @@ struct FOCollectionUpdater {
         // moves
         update.moves = moves(m, to: t, at: index)
         
+        // transform back to f indexPaths
         if let insertions = update.insertions {
             update.insertions = insertions.map({
                 path -> StatePath in
@@ -167,6 +168,13 @@ struct FOCollectionUpdater {
                 
                 return new
             })
+        }
+        
+        // Filter out moves that don't go anywhere
+        if let moves = update.moves {
+            update.moves = moves.filter{
+                $0.from.indexPath != $0.to.indexPath
+            }
         }
         
         return update
@@ -234,20 +242,16 @@ struct FOCollectionUpdater {
         return paths + [path]
     }
     
-    func moves(_ a: [StatePath], to b: [StatePath], at index: Int) -> [Move] {
+    func moves(_ from: [StatePath], to: [StatePath], at index: Int) -> [Move] {
         var moves = [Move]()
         
-        if a.count != b.count {
-            return moves
-        }
-        
-        b.forEach {
-            bPath in
-            if let aIndex = indexOf(bPath, in: a, at: index) {
-                let aPath = a[aIndex]
+        to.forEach {
+            tPath in
+            if let fIndex = indexOf(tPath, in: from, at: index) {
+                let fPath = from[fIndex]
                 
-                if aPath != bPath {
-                    moves.append(Move(from: aPath, to: bPath))
+                if fPath != tPath {
+                    moves.append(Move(from: fPath, to: tPath))
                 }
             }
         }

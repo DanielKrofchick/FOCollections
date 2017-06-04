@@ -29,9 +29,9 @@ class TableViewController: FOTableViewController {
         queueUpdate({
             let sections = [
                 self.section("A", identifiers: ["a1"], color: .blue),
-                self.section("X", identifiers: ["x1", "x2", "x3", "x4"], color: .purple),
+                self.section("F", identifiers: ["f1", "f2"], color: .brown),
+                self.section("X", identifiers: ["x1", "x3", "x4"], color: .purple),
                 self.section("B", identifiers: ["b1"], color: .green),
-                self.section("F", identifiers: ["f1"], color: .brown),
                 ]
             
             self.insertSections(sections, indexes: IndexSet(integersIn: 0..<sections.count))
@@ -40,13 +40,16 @@ class TableViewController: FOTableViewController {
         queueUpdate({
             let newSections = [
                 self.section("Z", identifiers: ["z1"], color: .yellow),
-                self.section("X", identifiers: ["x4", "x5", "x3", "x1"], color: .purple),
-                self.section("F", identifiers: ["f1"], color: .brown),
-                self.section("A", identifiers: ["a1", "a2"], color: .blue),
+                self.section("X", identifiers: ["x3", "x4", "x1"], color: .purple),
+                self.section("A", identifiers: ["a1"], color: .blue),
+                self.section("F", identifiers: ["f1", "f2"], color: .brown),
                 ]
             let startPaths = self.dataSource.statePaths()
             let endPaths = self.dataSource.statePaths(sections: newSections)
             let updater = FOCollectionUpdater(from: startPaths, to: endPaths)
+            
+            
+            //DO DELETIONS SEPERATELY if they are in a section move"
             
             let update0 = updater.update(index: 0)
             let update1 = updater.update(index: 1, filter: update0)
