@@ -26,6 +26,7 @@ class TableViewController: FOTableViewController {
         queueUpdate({
             self.clearAllItems()
         })
+        
         queueUpdate({
             let sections = [
                 self.section("A", identifiers: ["a1"], color: .blue),
@@ -48,7 +49,6 @@ class TableViewController: FOTableViewController {
             let endPaths = self.dataSource.statePaths(sections: newSections)
             let updater = FOCollectionUpdater(from: startPaths, to: endPaths)
             
-            
             //DO DELETIONS SEPERATELY if they are in a section move"
             
             let update0 = updater.update(index: 0)
@@ -62,6 +62,37 @@ class TableViewController: FOTableViewController {
             
             print("yello")
         })
+        
+        //        queue.addOperation(FOCompletionOperation(work: {
+        //            operation in
+        //            let newSections = [
+        //                self.section("Z", identifiers: ["z1"], color: .yellow),
+        ////                self.section("F", identifiers: ["f1", "f2"], color: .brown),
+        //                self.section("X", identifiers: ["x3", "x1", "x4", "x5"], color: .purple),
+        //                self.section("A", identifiers: ["a1"], color: .blue),
+        //                ]
+        //            let startPaths = self.dataSource.statePaths()
+        //            let endPaths = self.dataSource.statePaths(sections: newSections)
+        //            let updater = FOCollectionUpdater(from: startPaths, to: endPaths)
+        //
+        //            //DO DELETIONS SEPERATELY if they are in a section move"
+        //
+        //            let update0 = updater.update(index: 0)
+        //            let update1 = updater.update(index: 1, filter: update0)
+        //
+        //            self.tableView.beginUpdates()
+        //            _ = self.dataSource.clearAllItems(self.tableView)
+        //            self.dataSource.insertSections(newSections, atIndexes: IndexSet(integersIn: 0..<newSections.count), tableView: self.tableView, viewController: self)
+        //
+        ////            self.updateItems(update: update1)
+        //
+        ////            self.tableView.beginUpdates()
+        //            self.updateSections(update: update0)
+        ////            self.tableView.endUpdates()
+        //            
+        //            self.tableView.endUpdates()
+        //            operation.finish()
+        //        }, queue: DispatchQueue.main))
     }
     
     func updateSections(update: Update) {

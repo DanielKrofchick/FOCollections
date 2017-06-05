@@ -63,6 +63,90 @@ extension FOTableViewDataSource {
     
 }
 
+extension Array {
+    
+    func find(_ path: StatePath, at index: Int) -> [StatePath] {
+        return (self as! [StatePath]).filter{
+            $0.identifierPath[0..<index] == path.identifierPath[0..<index]
+        }
+    }
+    
+    func updateIndexPath( _ path: StatePath, index: Int) -> StatePath  {
+        var result = path
+        
+        if
+            let _ = self as? [StatePath],
+            let found = find(path, at: index).first
+        {
+            result.indexPath = found.indexPath
+        }
+        
+        return result
+    }
+    
+    func updateIndexPath( _ move: Move, index: Int) -> Move  {
+        var result = move
+        
+        if
+            let _ = self as? [StatePath],
+            let found = find(move.from, at: index).first
+        {
+            result.from.indexPath = found.indexPath
+        }
+        
+        return result
+    }
+    
+    func delete(_ path: StatePath, at index: Int) -> [StatePath] {
+        return (self as! [StatePath]).filter{
+            $0.identifierPath[0...index] != path.identifierPath[0...index]
+        }
+    }
+    
+    func insert(path: StatePath, at index: Int) -> [StatePath] {
+        return (self as! [StatePath]) + [path]
+    }
+    
+    // up (+1), down (-1)
+    func shift(_ path: StatePath, by: Int, atIndex index: Int) -> [StatePath] {
+        var result = self as! [StatePath]
+        
+        for i in 0..<result.count {
+            let p = result[i]
+            
+            if
+                p.indexPath[0..<index] == path.indexPath[0..<index],
+                p.indexPath[index] >= path.indexPath[index],
+                p.identifierPath[0..<index] != path.identifierPath[0..<index]
+            {
+                var newIndexPath = p.indexPath
+                newIndexPath[index] = Swift.max(0, newIndexPath[index] + by)
+                
+                let newPath = StatePath(indexPath: newIndexPath, identifierPath: p.identifierPath)
+                
+                result.remove(at: i)
+                result.insert(newPath, at: i)
+            }
+        }
+        
+        return result
+    }
+    
+    func move(_ move: Move, atIndex index: Int) -> [StatePath] {
+        return (self as! [StatePath]).map({
+            (path) -> StatePath in
+            var newPath = path
+            
+            if newPath.identifierPath[0...index] == move.from.identifierPath[0...index] {
+                newPath.indexPath[0...index] = move.to.indexPath[0...index]
+            }
+            
+            return newPath
+        })
+    }
+    
+}
+
 struct FOCollectionUpdater {
     
     let from: [StatePath]
@@ -84,30 +168,30 @@ struct FOCollectionUpdater {
         if let filter = filter {
             // Remove _to_ items for insertions
             filter.insertions?.forEach{
-                t = delete($0, from: t, at: filter.index)
+                t = t.delete($0, at: filter.index)
             }
             
             // Remove _from_ items for deletions
             filter.deletions?.forEach{
-                m = delete($0, from: m, at: filter.index)
+                m = m.delete($0, at: filter.index)
             }
             
             // Shift down _from_ items for deletions
             filter.deletions?.forEach{
-                m = shift(-1, statePaths: m, for: $0, atIndex: filter.index)
+                m = m.shift($0, by: -1, atIndex: filter.index)
             }
             
             // Shift up _from_ items for insertions
             filter.insertions?.forEach{
-                m = shift(1, statePaths: m, for: $0, atIndex: filter.index)
+                m = m.shift($0, by: 1, atIndex: filter.index)
             }
             
             // Move
             filter.moves?.forEach{
                 mv in
-                m = shift(-1, statePaths: m, for: mv.from, atIndex: filter.index)
-                m = shift(1, statePaths: m, for: mv.to, atIndex: filter.index)
-                m = move(statePaths: m, for: mv, atIndex: filter.index)
+                m = m.shift(mv.from, by: -1, atIndex: filter.index)
+                m = m.shift(mv.to, by: 1, atIndex: filter.index)
+                m = m.move(mv, atIndex: filter.index)
             }
         }
         
@@ -115,16 +199,16 @@ struct FOCollectionUpdater {
         update.deletions = deleted(m, to: t, at: index)
         
         update.deletions?.forEach {
-            m = delete($0, from: m, at: index)
-            m = shift(-1, statePaths: m, for: $0, atIndex: index)
+            m = m.delete($0, at: index)
+            m = m.shift($0, by: -1, atIndex: index)
         }
         
         // insertions
         update.insertions = deleted(t, to: m, at: index)
 
         update.insertions?.forEach {
-            m = insert($0, into: m, at: index)
-            m = shift(1, statePaths: m, for: $0, atIndex: index)
+            m = m.insert(path: $0, at: index)
+            m = m.shift($0, by: 1, atIndex: index)
         }
         
         // moves
@@ -132,42 +216,15 @@ struct FOCollectionUpdater {
         
         // transform back to f indexPaths
         if let insertions = update.insertions {
-            update.insertions = insertions.map({
-                path -> StatePath in
-                var new = path
-                
-                if let found = find(new, in: f, index: index).first {
-                    new.indexPath = found.indexPath
-                }
-                
-                return new
-            })
+            update.insertions = insertions.map{f.updateIndexPath($0, index: index)}
         }
         
         if let deletions = update.deletions {
-            update.deletions = deletions.map({
-                path -> StatePath in
-                var new = path
-                
-                if let found = find(new, in: f, index: index).first {
-                    new.indexPath = found.indexPath
-                }
-                
-                return new
-            })
+            update.deletions = deletions.map{f.updateIndexPath($0, index: index)}
         }
         
         if let moves = update.moves {
-            update.moves = moves.map({
-                (move) -> Move in
-                var new = move
-                
-                if let found = find(move.from, in: f, index: index).first {
-                    new.from.indexPath = found.indexPath
-                }
-                
-                return new
-            })
+            update.moves = moves.map{f.updateIndexPath($0, index: index)}
         }
         
         // Filter out moves that don't go anywhere
@@ -180,48 +237,6 @@ struct FOCollectionUpdater {
         return update
     }
     
-    func find(_ path: StatePath, in paths: [StatePath], index: Int) -> [StatePath] {
-        return paths.filter{$0.identifierPath[0..<index] == path.identifierPath[0..<index]}
-    }
-    
-    // up (+1), down (-1)
-    func shift(_ value: Int, statePaths: [StatePath], for statePath: StatePath, atIndex index: Int) -> [StatePath] {
-        var result = statePaths
-        
-        for i in 0..<result.count {
-            let path = result[i]
-            
-            if
-                path.indexPath[0..<index] == statePath.indexPath[0..<index],
-                path.indexPath[index] >= statePath.indexPath[index],
-                path.identifierPath[0..<index] != statePath.identifierPath[0..<index]
-            {
-                var newIndexPath = path.indexPath
-                newIndexPath[index] = max(0, newIndexPath[index] + value)
-                
-                let newPath = StatePath(indexPath: newIndexPath, identifierPath: path.identifierPath)
-                
-                result.remove(at: i)
-                result.insert(newPath, at: i)
-            }
-        }
-        
-        return result
-    }
-    
-    func move(statePaths: [StatePath], for move: Move, atIndex index: Int) -> [StatePath] {
-        return statePaths.map({
-            (path) -> StatePath in
-            var newPath = path
-            
-            if newPath.identifierPath[0...index] == move.from.identifierPath[0...index] {
-                newPath.indexPath[0...index] = move.to.indexPath[0...index]
-            }
-            
-            return newPath
-        })
-    }
-    
     func deleted(_ a: [StatePath], to b: [StatePath], at index: Int) -> [StatePath] {
         return a.filter{
             aPath in
@@ -230,16 +245,6 @@ struct FOCollectionUpdater {
                 aPath.identifierPath[index] == bPath.identifierPath[index]
             }.count == 0
         }
-    }
-    
-    func delete(_ path: StatePath, from paths: [StatePath], at index: Int) -> [StatePath] {
-        return paths.filter{
-            $0.identifierPath[0...index] != path.identifierPath[0...index]
-        }
-    }
-    
-    func insert(_ path: StatePath, into paths: [StatePath], at index: Int) -> [StatePath] {
-        return paths + [path]
     }
     
     func moves(_ from: [StatePath], to: [StatePath], at index: Int) -> [Move] {
