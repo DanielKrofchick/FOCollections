@@ -43,7 +43,7 @@ class TableViewController: FOTableViewController {
                 self.section("Z", identifiers: ["z1"], color: .yellow),
                 self.section("X", identifiers: ["x3", "x4", "x1"], color: .purple),
                 self.section("A", identifiers: ["a1"], color: .blue),
-                self.section("F", identifiers: ["f1", "f2"], color: .brown),
+                self.section("F", identifiers: ["f1", "f2", "f3"], color: .brown),
                 ]
             let startPaths = self.dataSource.statePaths()
             let endPaths = self.dataSource.statePaths(sections: newSections)

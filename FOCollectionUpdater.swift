@@ -71,7 +71,7 @@ extension Array {
         }
     }
     
-    func updateIndexPath( _ path: StatePath, index: Int) -> StatePath  {
+    func updateIndexPath(_ path: StatePath, index: Int) -> StatePath  {
         var result = path
         
         if
@@ -84,7 +84,7 @@ extension Array {
         return result
     }
     
-    func updateIndexPath( _ move: Move, index: Int) -> Move  {
+    func updateIndexPath(_ move: Move, index: Int) -> Move  {
         var result = move
         
         if
@@ -108,7 +108,7 @@ extension Array {
     }
     
     // up (+1), down (-1)
-    func shift(_ path: StatePath, by: Int, atIndex index: Int) -> [StatePath] {
+    func shift(_ path: StatePath, by: Int, at index: Int) -> [StatePath] {
         var result = self as! [StatePath]
         
         for i in 0..<result.count {
@@ -132,7 +132,7 @@ extension Array {
         return result
     }
     
-    func move(_ move: Move, atIndex index: Int) -> [StatePath] {
+    func move(_ move: Move, at index: Int) -> [StatePath] {
         return (self as! [StatePath]).map({
             (path) -> StatePath in
             var newPath = path
@@ -143,6 +143,45 @@ extension Array {
             
             return newPath
         })
+    }
+    
+    func indexOf(_ path: StatePath, at index: Int) -> Int? {
+        return (self as! [StatePath]).enumerated().reduce([Int]()) { (result, element: (i: Int, aPath: StatePath)) -> [Int] in
+            var r = result
+            
+            if element.aPath.identifierPath[index] == path.identifierPath[index] {
+                r.append(element.i)
+            }
+            
+            return r
+            }.first
+    }
+    
+    func moves(to: [StatePath], at index: Int) -> [Move] {
+        var moves = [Move]()
+        
+        to.forEach {
+            tPath in
+            if let fIndex = indexOf(tPath, at: index) {
+                let fPath = (self as! [StatePath])[fIndex]
+                
+                if fPath != tPath {
+                    moves.append(Move(from: fPath, to: tPath))
+                }
+            }
+        }
+        
+        return moves
+    }
+    
+    func deleted(to: [StatePath], at index: Int) -> [StatePath] {
+        return (self as! [StatePath]).filter{
+            aPath in
+            return to.filter{
+                toPath in
+                aPath.identifierPath[index] == toPath.identifierPath[index]
+                }.count == 0
+        }
     }
     
 }
@@ -178,41 +217,40 @@ struct FOCollectionUpdater {
             
             // Shift down _from_ items for deletions
             filter.deletions?.forEach{
-                m = m.shift($0, by: -1, atIndex: filter.index)
+                m = m.shift($0, by: -1, at: filter.index)
             }
             
             // Shift up _from_ items for insertions
             filter.insertions?.forEach{
-                m = m.shift($0, by: 1, atIndex: filter.index)
+                m = m.shift($0, by: 1, at: filter.index)
             }
             
             // Move
             filter.moves?.forEach{
-                mv in
-                m = m.shift(mv.from, by: -1, atIndex: filter.index)
-                m = m.shift(mv.to, by: 1, atIndex: filter.index)
-                m = m.move(mv, atIndex: filter.index)
+                m = m.shift($0.from, by: -1, at: filter.index)
+                m = m.shift($0.to, by: 1, at: filter.index)
+                m = m.move($0, at: filter.index)
             }
         }
         
         // deletions
-        update.deletions = deleted(m, to: t, at: index)
+        update.deletions = m.deleted(to: t, at: index)
         
         update.deletions?.forEach {
             m = m.delete($0, at: index)
-            m = m.shift($0, by: -1, atIndex: index)
+            m = m.shift($0, by: -1, at: index)
         }
         
         // insertions
-        update.insertions = deleted(t, to: m, at: index)
+        update.insertions = t.deleted(to: m, at: index)
 
         update.insertions?.forEach {
             m = m.insert(path: $0, at: index)
-            m = m.shift($0, by: 1, atIndex: index)
+            m = m.shift($0, by: 1, at: index)
         }
         
         // moves
-        update.moves = moves(m, to: t, at: index)
+        update.moves = m.moves(to: t, at: index)
         
         // transform back to f indexPaths
         if let insertions = update.insertions {
@@ -235,45 +273,6 @@ struct FOCollectionUpdater {
         }
         
         return update
-    }
-    
-    func deleted(_ a: [StatePath], to b: [StatePath], at index: Int) -> [StatePath] {
-        return a.filter{
-            aPath in
-            return b.filter{
-                bPath in
-                aPath.identifierPath[index] == bPath.identifierPath[index]
-            }.count == 0
-        }
-    }
-    
-    func moves(_ from: [StatePath], to: [StatePath], at index: Int) -> [Move] {
-        var moves = [Move]()
-        
-        to.forEach {
-            tPath in
-            if let fIndex = indexOf(tPath, in: from, at: index) {
-                let fPath = from[fIndex]
-                
-                if fPath != tPath {
-                    moves.append(Move(from: fPath, to: tPath))
-                }
-            }
-        }
-        
-        return moves
-    }
-    
-    func indexOf(_ path: StatePath, in paths: [StatePath], at index: Int) -> Int? {
-        return paths.enumerated().reduce([Int]()) { (result, element: (i: Int, aPath: StatePath)) -> [Int] in
-            var r = result
-            
-            if element.aPath.identifierPath[index] == path.identifierPath[index] {
-                r.append(element.i)
-            }
-            
-            return r
-        }.first
     }
     
 }
