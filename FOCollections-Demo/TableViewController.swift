@@ -27,72 +27,99 @@ class TableViewController: FOTableViewController {
             self.clearAllItems()
         })
         
+        let sections1 = [
+            self.section("A", identifiers: ["a1", "a2"], color: .blue),
+            self.section("C", identifiers: ["c1", "c2", "c3"], color: .cyan),
+            self.section("F", identifiers: ["f1", "f2"], color: .brown),
+            self.section("X", identifiers: ["x1", "x2", "x3", "x4"], color: .purple),
+            self.section("B", identifiers: ["b1"], color: .green),
+            ]
+        let sections2 = [
+            self.section("Z", identifiers: ["z1"], color: .yellow),
+            self.section("X", identifiers: ["x3", "x4", "x1"], color: .purple),
+            self.section("A", identifiers: ["a1"], color: .blue),
+            self.section("F", identifiers: ["f1", "f2", "x2", "f3"], color: .brown),
+            ]
+        
         queueUpdate({
-            let sections = [
-                self.section("A", identifiers: ["a1"], color: .blue),
-                self.section("F", identifiers: ["f1", "f2"], color: .brown),
-                self.section("X", identifiers: ["x1", "x3", "x4"], color: .purple),
-                self.section("B", identifiers: ["b1"], color: .green),
-                ]
-            
-            self.insertSections(sections, indexes: IndexSet(integersIn: 0..<sections.count))
+            self.insertSections(sections1, indexes: IndexSet(integersIn: 0..<sections1.count))
         })
         
         queueUpdate({
-            let newSections = [
-                self.section("Z", identifiers: ["z1"], color: .yellow),
-                self.section("X", identifiers: ["x3", "x4", "x1"], color: .purple),
-                self.section("A", identifiers: ["a1"], color: .blue),
-                self.section("F", identifiers: ["f1", "f2", "f3"], color: .brown),
-                ]
             let startPaths = self.dataSource.statePaths()
-            let endPaths = self.dataSource.statePaths(sections: newSections)
+            let endPaths = self.dataSource.statePaths(sections: sections2)
             let updater = FOCollectionUpdater(from: startPaths, to: endPaths)
             
-            //DO DELETIONS SEPERATELY if they are in a section move"
-            
             let update0 = updater.update(index: 0)
-            let update1 = updater.update(index: 1, filter: update0)
             
             self.updateSections(update: update0)
+            
+            let transformed = self.transform(fromSections: sections1, toSections: sections2, update: update0)
+            
+            _ = self.dataSource.clearAllItems(self.tableView)
+            self.dataSource.insertSections(transformed, atIndexes: IndexSet(integersIn: 0..<transformed.count), tableView: self.tableView, viewController: self)
+            
+            self.refreshVisibleCells()
+        })
+        
+        queueUpdate({
+            let startPaths = self.dataSource.statePaths()
+            let endPaths = self.dataSource.statePaths(sections: sections2)
+            let updater = FOCollectionUpdater(from: startPaths, to: endPaths)
+            
+            let update1 = updater.update(index: 1)
+            
             self.updateItems(update: update1)
             
             _ = self.dataSource.clearAllItems(self.tableView)
-            self.dataSource.insertSections(newSections, atIndexes: IndexSet(integersIn: 0..<newSections.count), tableView: self.tableView, viewController: self)
+            self.dataSource.insertSections(sections2, atIndexes: IndexSet(integersIn: 0..<sections2.count), tableView: self.tableView, viewController: self)
             
-            print("yello")
+            self.refreshVisibleCells()
+        })
+    }
+    
+    func transform(fromSections: [FOTableSection], toSections: [FOTableSection], update: Update) -> [FOTableSection] {
+        func index(path: StatePath, in sections: [FOTableSection]) -> Int? {
+            return sections.index(where: {
+                (section) -> Bool in
+                section.identifier == path.identifierPath.identifiers[0]
+            })
+        }
+        
+        func rearrange<T>(array: Array<T>, fromIndex: Int, toIndex: Int) -> Array<T> {
+            var arr = array
+            let element = arr.remove(at: fromIndex)
+            arr.insert(element, at: toIndex)
+            
+            return arr
+        }
+        
+        var result = fromSections
+        
+        update.deletions?.forEach({
+            path in
+            if let index = index(path: path, in: result) {
+                result.remove(at: index)
+            }
         })
         
-        //        queue.addOperation(FOCompletionOperation(work: {
-        //            operation in
-        //            let newSections = [
-        //                self.section("Z", identifiers: ["z1"], color: .yellow),
-        ////                self.section("F", identifiers: ["f1", "f2"], color: .brown),
-        //                self.section("X", identifiers: ["x3", "x1", "x4", "x5"], color: .purple),
-        //                self.section("A", identifiers: ["a1"], color: .blue),
-        //                ]
-        //            let startPaths = self.dataSource.statePaths()
-        //            let endPaths = self.dataSource.statePaths(sections: newSections)
-        //            let updater = FOCollectionUpdater(from: startPaths, to: endPaths)
-        //
-        //            //DO DELETIONS SEPERATELY if they are in a section move"
-        //
-        //            let update0 = updater.update(index: 0)
-        //            let update1 = updater.update(index: 1, filter: update0)
-        //
-        //            self.tableView.beginUpdates()
-        //            _ = self.dataSource.clearAllItems(self.tableView)
-        //            self.dataSource.insertSections(newSections, atIndexes: IndexSet(integersIn: 0..<newSections.count), tableView: self.tableView, viewController: self)
-        //
-        ////            self.updateItems(update: update1)
-        //
-        ////            self.tableView.beginUpdates()
-        //            self.updateSections(update: update0)
-        ////            self.tableView.endUpdates()
-        //            
-        //            self.tableView.endUpdates()
-        //            operation.finish()
-        //        }, queue: DispatchQueue.main))
+        update.insertions?.forEach({
+            path in
+            if let index = index(path: path, in: toSections) {
+                let section = toSections[index]
+                result.insert(section, at: index)
+            }
+        })
+        
+        update.moves?.forEach({
+            move in
+            if let fromIndex = index(path: move.from, in: result) {
+                let toIndex = move.to.indexPath[0]
+                result = rearrange(array: result, fromIndex: fromIndex, toIndex: toIndex)
+            }
+        })
+        
+        return result
     }
     
     func updateSections(update: Update) {
