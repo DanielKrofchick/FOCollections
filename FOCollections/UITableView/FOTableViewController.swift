@@ -307,3 +307,150 @@ open class FOTableViewController: UIViewController, UITableViewDelegate {
     }
     
 }
+
+extension FOTableViewController {
+    
+    func animateUpdate(_ to: [FOTableSection], with animation: UITableViewRowAnimation = .automatic) {
+        queue.addOperation(FOCompletionOperation(work: {
+            [weak self] (operation) -> Void in
+            if let this = self {
+                // Update sections
+                this.tableView.beginUpdates()
+                
+                let fromSections0 = this.dataSource.sections
+                let fromPaths0 = this.dataSource.statePaths()
+                let toPaths0 = this.dataSource.statePaths(sections: to)
+                let updater0 = FOCollectionUpdater(from: fromPaths0, to: toPaths0)
+                
+                let update0 = updater0.update(index: 0)
+                
+                this.updateSections(update: update0, with: animation)
+                
+                let transformed = this.transform(fromSections: fromSections0, toSections: to, update: update0)
+                
+                _ = this.dataSource.clearAllItems(this.tableView)
+                this.dataSource.insertSections(transformed, atIndexes: IndexSet(integersIn: 0..<transformed.count), tableView: this.tableView, viewController: this)
+                
+                this.tableView.endUpdates()
+                
+                CATransaction.begin()
+                CATransaction.setCompletionBlock {
+                    operation.finish()
+                }
+                
+                // Update items
+                this.tableView.beginUpdates()
+                
+                let fromPaths1 = this.dataSource.statePaths()
+                let toPaths1 = this.dataSource.statePaths(sections: to)
+                let updater1 = FOCollectionUpdater(from: fromPaths1, to: toPaths1)
+                
+                let update1 = updater1.update(index: 1)
+                
+                this.updateItems(update: update1, with: animation)
+                
+                _ = this.dataSource.clearAllItems(this.tableView)
+                this.dataSource.insertSections(to, atIndexes: IndexSet(integersIn: 0..<to.count), tableView: this.tableView, viewController: this)
+                
+                this.tableView.endUpdates()
+                this.refreshVisibleCells()
+                CATransaction.commit()
+            }
+        }, queue: DispatchQueue.main))
+    }
+    
+    fileprivate func transform(fromSections: [FOTableSection], toSections: [FOTableSection], update: Update) -> [FOTableSection] {
+        var result = fromSections
+        
+        update.deletions?.forEach({
+            path in
+            if let index = index(path: path, in: result) {
+                result.remove(at: index)
+            }
+        })
+        
+        update.insertions?.forEach({
+            path in
+            if let index = index(path: path, in: toSections) {
+                let section = toSections[index]
+                result.insert(section, at: index)
+            }
+        })
+        
+        update.moves?.forEach({
+            move in
+            if let fromIndex = index(path: move.from, in: result) {
+                let toIndex = move.to.indexPath[0]
+                result = rearrange(array: result, fromIndex: fromIndex, toIndex: toIndex)
+            }
+        })
+        
+        return result
+    }
+    
+    fileprivate func index(path: StatePath, in sections: [FOTableSection]) -> Int? {
+        return sections.index(where: {
+            (section) -> Bool in
+            section.identifier == path.identifierPath.identifiers[0]
+        })
+    }
+    
+    fileprivate func rearrange<T>(array: Array<T>, fromIndex: Int, toIndex: Int) -> Array<T> {
+        var arr = array
+        let element = arr.remove(at: fromIndex)
+        arr.insert(element, at: toIndex)
+        
+        return arr
+    }
+    
+    fileprivate func updateSections(update: Update, with animation: UITableViewRowAnimation) {
+        if
+            let deletions = update.deletions,
+            deletions.count > 0
+        {
+            tableView.deleteSections(IndexSet(deletions.map{$0.indexPath[0]}), with: animation)
+        }
+        
+        if
+            let insertions = update.insertions,
+            insertions.count > 0
+        {
+            tableView.insertSections(IndexSet(insertions.map{$0.indexPath[0]}), with: animation)
+        }
+        
+        if
+            let moves = update.moves,
+            moves.count > 0
+        {
+            for move in moves {
+                tableView.moveSection(move.from.indexPath[0], toSection: move.to.indexPath[0])
+            }
+        }
+    }
+    
+    fileprivate func updateItems(update: Update, with animation: UITableViewRowAnimation) {
+        if
+            let deletions = update.deletions,
+            deletions.count > 0
+        {
+            tableView.deleteRows(at: deletions.map{$0.indexPath}, with: animation)
+        }
+        
+        if
+            let insertions = update.insertions,
+            insertions.count > 0
+        {
+            tableView.insertRows(at: insertions.map{$0.indexPath}, with: animation)
+        }
+        
+        if
+            let moves = update.moves,
+            moves.count > 0
+        {
+            for move in moves {
+                tableView.moveRow(at: move.from.indexPath, to: move.to.indexPath)
+            }
+        }
+    }
+    
+}

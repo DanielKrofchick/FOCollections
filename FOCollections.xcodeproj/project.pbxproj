@@ -21,6 +21,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		4C28B9811EE71324006AE8A5 /* FOTableViewDataSource+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9801EE71324006AE8A5 /* FOTableViewDataSource+Updater.swift */; };
+		4C28B9831EE7137F006AE8A5 /* Array+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9821EE7137F006AE8A5 /* Array+Updater.swift */; };
+		4C28B9851EE713A5006AE8A5 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9841EE713A5006AE8A5 /* Update.swift */; };
+		4C28B9871EE713C6006AE8A5 /* StatePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9861EE713C6006AE8A5 /* StatePath.swift */; };
+		4C28B9891EE713FB006AE8A5 /* IdentifierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9881EE713FB006AE8A5 /* IdentifierPath.swift */; };
+		4C28B98B1EE71406006AE8A5 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B98A1EE71406006AE8A5 /* Move.swift */; };
 		4C34C1ED1C756F4300A71D29 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C34C1EC1C756F4300A71D29 /* MenuController.swift */; };
 		4C34C1EF1C756FC800A71D29 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C34C1EE1C756FC800A71D29 /* MenuItem.swift */; };
 		4C4921521BFD3FEB001511AC /* FOCollections.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4921511BFD3FEB001511AC /* FOCollections.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -95,6 +101,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C28B9801EE71324006AE8A5 /* FOTableViewDataSource+Updater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOTableViewDataSource+Updater.swift"; sourceTree = "<group>"; };
+		4C28B9821EE7137F006AE8A5 /* Array+Updater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Updater.swift"; sourceTree = "<group>"; };
+		4C28B9841EE713A5006AE8A5 /* Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
+		4C28B9861EE713C6006AE8A5 /* StatePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatePath.swift; sourceTree = "<group>"; };
+		4C28B9881EE713FB006AE8A5 /* IdentifierPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifierPath.swift; sourceTree = "<group>"; };
+		4C28B98A1EE71406006AE8A5 /* Move.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		4C34C1EC1C756F4300A71D29 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		4C34C1EE1C756FC800A71D29 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		4C49214F1BFD3FEB001511AC /* FOCollections.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FOCollections.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +176,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C28B97F1EE712F7006AE8A5 /* FOCollectionUpdater */ = {
+			isa = PBXGroup;
+			children = (
+				4CB756CD1ED4B9D3000C3414 /* FOCollectionUpdater.swift */,
+				4C28B9861EE713C6006AE8A5 /* StatePath.swift */,
+				4C28B9881EE713FB006AE8A5 /* IdentifierPath.swift */,
+				4C28B9841EE713A5006AE8A5 /* Update.swift */,
+				4C28B98A1EE71406006AE8A5 /* Move.swift */,
+				4C28B9801EE71324006AE8A5 /* FOTableViewDataSource+Updater.swift */,
+				4C28B9821EE7137F006AE8A5 /* Array+Updater.swift */,
+			);
+			name = FOCollectionUpdater;
+			sourceTree = "<group>";
+		};
 		4C49215E1BFD3FEB001511AC /* FOCollectionsTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +202,7 @@
 		4C75205F1BFA348100D01CC1 /* FOCollections */ = {
 			isa = PBXGroup;
 			children = (
+				4C28B97F1EE712F7006AE8A5 /* FOCollectionUpdater */,
 				4C7520621BFA34A000D01CC1 /* UICollectionView */,
 				4C7520611BFA349600D01CC1 /* UITableView */,
 				4C7520601BFA348900D01CC1 /* Shared */,
@@ -191,7 +218,6 @@
 				4C7520651BFA34BD00D01CC1 /* FOCompletionOperation.swift */,
 				4CCA35FB1C03F41500A09AD6 /* FOPairedIndexPath.swift */,
 				4CB029851CD7D31600F1252D /* NSIndexPath+Extensions.swift */,
-				4CB756CD1ED4B9D3000C3414 /* FOCollectionUpdater.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -467,19 +493,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C28B98B1EE71406006AE8A5 /* Move.swift in Sources */,
 				4C7520851BFA34CA00D01CC1 /* FOCollectionViewDataSource.swift in Sources */,
 				4C34C1ED1C756F4300A71D29 /* MenuController.swift in Sources */,
 				4C7520741BFA34C500D01CC1 /* FOTableViewDataSource+Delegate.swift in Sources */,
 				4C7520881BFA34CA00D01CC1 /* FOCollectionItem.swift in Sources */,
 				4C7AEC3A1BF502AE001A2636 /* CollectionViewController.swift in Sources */,
 				4C7520861BFA34CA00D01CC1 /* FOCollectionViewDataSource+Delegate.swift in Sources */,
+				4C28B9831EE7137F006AE8A5 /* Array+Updater.swift in Sources */,
 				4C7AEC071BF5027A001A2636 /* AppDelegate.swift in Sources */,
 				4C7520711BFA34C500D01CC1 /* FOTableViewController.swift in Sources */,
 				4C7520761BFA34C500D01CC1 /* FOTableItem.swift in Sources */,
+				4C28B9851EE713A5006AE8A5 /* Update.swift in Sources */,
 				4C7520661BFA34BD00D01CC1 /* FOCollectionsGlobal.swift in Sources */,
 				D1A861141BFFB3E700FA6479 /* FOCollectionPagingItem.swift in Sources */,
 				4C7520871BFA34CA00D01CC1 /* FOCollectionSection.swift in Sources */,
 				4C7520831BFA34CA00D01CC1 /* FOCollectionViewController+Delegate.swift in Sources */,
+				4C28B9891EE713FB006AE8A5 /* IdentifierPath.swift in Sources */,
 				4C7AEC3B1BF502AE001A2636 /* TableViewController.swift in Sources */,
 				4C7520731BFA34C500D01CC1 /* FOTableViewDataSource.swift in Sources */,
 				4CCA35FC1C03F41500A09AD6 /* FOPairedIndexPath.swift in Sources */,
@@ -490,7 +520,9 @@
 				4C34C1EF1C756FC800A71D29 /* MenuItem.swift in Sources */,
 				D1A8610E1BFFAEBC00FA6479 /* CollectionCellItem.swift in Sources */,
 				4C7520681BFA34BD00D01CC1 /* FOCompletionOperation.swift in Sources */,
+				4C28B9811EE71324006AE8A5 /* FOTableViewDataSource+Updater.swift in Sources */,
 				4C9FAE9C1C038058001A4885 /* TableCellItem.swift in Sources */,
+				4C28B9871EE713C6006AE8A5 /* StatePath.swift in Sources */,
 				4C7520671BFA34BD00D01CC1 /* NSArray+Extensions.swift in Sources */,
 				4CB029881CD7D32800F1252D /* FOTablePagingItem.swift in Sources */,
 				4C7520751BFA34C500D01CC1 /* FOTableSection.swift in Sources */,
