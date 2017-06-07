@@ -310,7 +310,7 @@ open class FOTableViewController: UIViewController, UITableViewDelegate {
 
 extension FOTableViewController {
     
-    func animateUpdate(_ to: [FOTableSection], with animation: UITableViewRowAnimation = .automatic) {
+    func animateUpdate(_ to: [FOTableSection], with animation: UITableViewRowAnimation = .automatic, completion: (() -> ())? = nil) {
         queue.addOperation(FOCompletionOperation(work: {
             [weak self] (operation) -> Void in
             if let this = self {
@@ -328,6 +328,10 @@ extension FOTableViewController {
                 
                 let transformed = this.transform(fromSections: fromSections0, toSections: to, update: update0)
                 
+                transformed.forEach({ (section) in
+                    print("transformed", section.identifier!, section.items!.count)
+                })
+                
                 _ = this.dataSource.clearAllItems(this.tableView)
                 this.dataSource.insertSections(transformed, atIndexes: IndexSet(integersIn: 0..<transformed.count), tableView: this.tableView, viewController: this)
                 
@@ -336,6 +340,7 @@ extension FOTableViewController {
                 CATransaction.begin()
                 CATransaction.setCompletionBlock {
                     operation.finish()
+                    completion?()
                 }
                 
                 // Update items
@@ -353,8 +358,10 @@ extension FOTableViewController {
                 this.dataSource.insertSections(to, atIndexes: IndexSet(integersIn: 0..<to.count), tableView: this.tableView, viewController: this)
                 
                 this.tableView.endUpdates()
-                this.refreshVisibleCells()
+
                 CATransaction.commit()
+                
+                this.refreshVisibleCells()
             }
         }, queue: DispatchQueue.main))
     }
@@ -377,13 +384,15 @@ extension FOTableViewController {
             }
         })
         
-        update.moves?.forEach({
-            move in
-            if let fromIndex = index(path: move.from, in: result) {
-                let toIndex = move.to.indexPath[0]
-                result = rearrange(array: result, fromIndex: fromIndex, toIndex: toIndex)
+        toSections.enumerated().forEach {
+            (s) in
+            if
+                let index = result.index(of: s.element),
+                index != s.offset
+            {
+                result.move(at: index, to: s.offset)
             }
-        })
+        }
         
         return result
     }
@@ -393,14 +402,6 @@ extension FOTableViewController {
             (section) -> Bool in
             section.identifier == path.identifierPath.identifiers[0]
         })
-    }
-    
-    fileprivate func rearrange<T>(array: Array<T>, fromIndex: Int, toIndex: Int) -> Array<T> {
-        var arr = array
-        let element = arr.remove(at: fromIndex)
-        arr.insert(element, at: toIndex)
-        
-        return arr
     }
     
     fileprivate func updateSections(update: Update, with animation: UITableViewRowAnimation) {
@@ -454,3 +455,10 @@ extension FOTableViewController {
     }
     
 }
+
+extension Array {
+    mutating func move(at oldIndex: Int, to newIndex: Int) {
+        insert(remove(at: oldIndex), at: newIndex)
+    }
+}
+
