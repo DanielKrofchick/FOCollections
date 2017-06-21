@@ -92,4 +92,8 @@ open class FOTableSection: NSObject, UITableViewDelegate {
         }
     }
     
+    open override func isEqual(_ object: Any?) -> Bool {
+        return identifier == (object as? FOTableSection)?.identifier
+    }
+    
 }

@@ -89,30 +89,14 @@ extension Array {
             return newPath
         })
     }
-    
-    func indexOf(_ path: StatePath, at index: Int) -> Int? {
-        return (self as! [StatePath]).enumerated().reduce([Int]()) { (result, element: (i: Int, aPath: StatePath)) -> [Int] in
-            var r = result
-            
-            if element.aPath.identifierPath[index] == path.identifierPath[index] {
-                r.append(element.i)
-            }
-            
-            return r
-            }.first
-    }
-    
+        
     func moves(to: [StatePath], at index: Int) -> [Move] {
         var moves = [Move]()
         
         to.forEach {
             tPath in
-            if let fIndex = indexOf(tPath, at: index) {
-                let fPath = (self as! [StatePath])[fIndex]
-                
-                if fPath != tPath {
-                    moves.append(Move(from: fPath, to: tPath))
-                }
+            if let fPath = find(tPath, at: index).first {
+                moves.append(Move(from: fPath, to: tPath))
             }
         }
         

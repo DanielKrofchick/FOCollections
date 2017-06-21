@@ -11,6 +11,7 @@ import UIKit
 class TableViewController: FOTableViewController {
     
     let refresh = UIButton(type: .system)
+    var stop = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +19,18 @@ class TableViewController: FOTableViewController {
         tableView.backgroundColor = UIColor.orange
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(TableViewController.play))
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
+        stop = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        stop = false
         play()
     }
     
@@ -28,46 +40,63 @@ class TableViewController: FOTableViewController {
         })
         
 //        let sections1 = [
-//            self.section("A", identifiers: ["a1"], color: .blue),
-//            self.section("B", identifiers: ["b1"], color: .green),
-//            self.section("C", identifiers: ["c1"], color: .cyan),
-//            self.section("D", identifiers: ["d1"], color: .yellow),
+//            self.section("G", identifiers: ["g1", "g2", "g3", "g4"], color: .blue),
+//            self.section("H", identifiers: ["h1", "h2", "h3", "h4", "h5"], color: .green),
+//            self.section("Z", identifiers: ["z1", "z2"], color: .cyan),
+//            self.section("Y", identifiers: ["y1", "y2", "y3"], color: .yellow),
+//            self.section("W", identifiers: ["w1"], color: .magenta),
 //            ]
 //
-////        let sections2 = [
-////            self.section("Z", identifiers: ["z1"], color: createSectionColor()),
-////            self.section("B", identifiers: ["b1"], color: .green),
-////            self.section("J", identifiers: ["j1", "j2"], color: createSectionColor()),
-////            self.section("A", identifiers: ["a1"], color: .blue),
-////            self.section("H", identifiers: ["h1"], color: createSectionColor()),
-////            self.section("C", identifiers: ["c1"], color: .cyan),
-////            self.section("N", identifiers: ["n1", "n2", "n3", "n4", "n5"], color: createSectionColor()),
-////            self.section("D", identifiers: ["d1"], color: .yellow),
-////            ]
-//        
+//        let sections2 = [
+//            self.section("YY", identifiers: ["yy1", "yy2"], color: .cyan),
+//            self.section("V", identifiers: ["v1", "v2", "v3", "v4", "v5"], color: .green),
+//            self.section("G", identifiers: ["g1", "g2", "g3", "g4"], color: .blue),
+//            self.section("Z", identifiers: ["z1", "z2"], color: .cyan),
+//            self.section("W", identifiers: ["w1"], color: .magenta),
+//            self.section("Y", identifiers: ["y1", "y2", "y3"], color: .yellow),
+//            self.section("H", identifiers: ["h1", "h2", "h3", "h4", "h5"], color: .green),
+//            ]
+//
 //        queueUpdate({
 //            self.insertSections(sections1, indexes: IndexSet(integersIn: 0..<sections1.count))
 //        })
 //
-////        animateUpdate(sections2)
+//        animateUpdate(sections2)
         
         doMutate()
     }
     
+    var count = Int(0)
+    
     func doMutate() {
         queueWork {
-            let newSections = self.mutate(self.dataSource.sections)
-            
-            print("---")
-            newSections.forEach({ (section) in
-                print(section.identifier!, section.items!.count)
-            })
-            
-            self.animateUpdate(newSections, with: .automatic, completion: {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.doMutate()
+            [weak self] in
+            if let this = self {
+                
+                if this.stop {
+                    return
                 }
-            })
+                
+                this.count += 1
+                
+                print("-\(this.count)-")
+                
+                this.dataSource.sections.forEach({ (section) in
+                    print("old", section.identifier!, section.items!.count)
+                })
+                
+                let newSections = this.mutate(this.dataSource.sections)
+                
+                newSections.forEach({ (section) in
+                    print("new", section.identifier!, section.items!.count)
+                })
+                
+                this.animateUpdate(newSections, with: .automatic, completion: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        this.doMutate()
+                    }
+                })
+            }
         }
     }
     

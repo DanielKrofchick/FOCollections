@@ -328,9 +328,9 @@ extension FOTableViewController {
                 
                 let transformed = this.transform(fromSections: fromSections0, toSections: to, update: update0)
                 
-                transformed.forEach({ (section) in
-                    print("transformed", section.identifier!, section.items!.count)
-                })
+//                transformed.forEach({ (section) in
+//                    print("transformed", section.identifier!, section.items!.count)
+//                })
                 
                 _ = this.dataSource.clearAllItems(this.tableView)
                 this.dataSource.insertSections(transformed, atIndexes: IndexSet(integersIn: 0..<transformed.count), tableView: this.tableView, viewController: this)
