@@ -12,7 +12,7 @@ extension Array {
     
     func find(_ path: StatePath, at index: Int) -> [StatePath] {
         return (self as! [StatePath]).filter{
-            $0.identifierPath[0..<index] == path.identifierPath[0..<index]
+            $0.identifierPath[index] == path.identifierPath[index]
         }
     }
     

@@ -313,56 +313,71 @@ extension FOTableViewController {
     func animateUpdate(_ to: [FOTableSection], with animation: UITableViewRowAnimation = .automatic, completion: (() -> ())? = nil) {
         queue.addOperation(FOCompletionOperation(work: {
             [weak self] (operation) -> Void in
-            if let this = self {
-                // Update sections
-                this.tableView.beginUpdates()
-                
-                let fromSections0 = this.dataSource.sections
-                let fromPaths0 = this.dataSource.statePaths()
-                let toPaths0 = this.dataSource.statePaths(sections: to)
-                let updater0 = FOCollectionUpdater(from: fromPaths0, to: toPaths0)
-                
-                let update0 = updater0.update(index: 0)
-                
-                this.updateSections(update: update0, with: animation)
-                
-                let transformed = this.transform(fromSections: fromSections0, toSections: to, update: update0)
-                
-//                transformed.forEach({ (section) in
-//                    print("transformed", section.identifier!, section.items!.count)
-//                })
-                
-                _ = this.dataSource.clearAllItems(this.tableView)
-                this.dataSource.insertSections(transformed, atIndexes: IndexSet(integersIn: 0..<transformed.count), tableView: this.tableView, viewController: this)
-                
-                this.tableView.endUpdates()
-                
-                CATransaction.begin()
-                CATransaction.setCompletionBlock {
-                    operation.finish()
-                    completion?()
+            UIView.animate(withDuration: 0.3, animations: {
+                if let this = self {
+                    // Update sections
+                    
+                    let date = Date()
+                    
+                    CATransaction.begin()
+                    CATransaction.setCompletionBlock {
+                        //                    print("first", Date().timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate)
+                        operation.finish()
+                        completion?()
+                    }
+                    
+                    this.tableView.beginUpdates()
+                    
+                    let fromSections0 = this.dataSource.sections
+                    let fromPaths0 = this.dataSource.statePaths()
+                    let toPaths0 = this.dataSource.statePaths(sections: to)
+                    let updater0 = FOCollectionUpdater(from: fromPaths0, to: toPaths0)
+                    
+                    let update0 = updater0.update(index: 0)
+                    
+                    this.updateSections(update: update0, with: animation)
+                    
+                    let transformed = this.transform(fromSections: fromSections0, toSections: to, update: update0)
+                    
+                    //                transformed.forEach({ (section) in
+                    //                    print("transformed", section.identifier!, section.items!.count)
+                    //                })
+                    
+                    _ = this.dataSource.clearAllItems(this.tableView)
+                    this.dataSource.insertSections(transformed, atIndexes: IndexSet(integersIn: 0..<transformed.count), tableView: this.tableView, viewController: this)
+                    
+                    this.tableView.endUpdates()
+                    
+                    CATransaction.commit()
+                    
+                    CATransaction.begin()
+                    CATransaction.setCompletionBlock {
+                        //                    print("second", Date().timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate)
+                    }
+                    
+                    // Update items
+                    this.tableView.beginUpdates()
+                    
+                    let fromPaths1 = this.dataSource.statePaths()
+                    let toPaths1 = this.dataSource.statePaths(sections: to)
+                    let updater1 = FOCollectionUpdater(from: fromPaths1, to: toPaths1)
+                    
+                    let update1 = updater1.update(index: 1)
+                    
+                    this.updateItems(update: update1, with: animation)
+                    
+                    _ = this.dataSource.clearAllItems(this.tableView)
+                    this.dataSource.insertSections(to, atIndexes: IndexSet(integersIn: 0..<to.count), tableView: this.tableView, viewController: this)
+                    
+                    this.tableView.endUpdates()
+                    
+                    CATransaction.commit()
+                    
+                    this.refreshVisibleCells()
+                    
+                    //                print("end", Date().timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate)
                 }
-                
-                // Update items
-                this.tableView.beginUpdates()
-                
-                let fromPaths1 = this.dataSource.statePaths()
-                let toPaths1 = this.dataSource.statePaths(sections: to)
-                let updater1 = FOCollectionUpdater(from: fromPaths1, to: toPaths1)
-                
-                let update1 = updater1.update(index: 1)
-                
-                this.updateItems(update: update1, with: animation)
-                
-                _ = this.dataSource.clearAllItems(this.tableView)
-                this.dataSource.insertSections(to, atIndexes: IndexSet(integersIn: 0..<to.count), tableView: this.tableView, viewController: this)
-                
-                this.tableView.endUpdates()
-
-                CATransaction.commit()
-                
-                this.refreshVisibleCells()
-            }
+            })
         }, queue: DispatchQueue.main))
     }
     

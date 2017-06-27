@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableCellItem: FOTableItem {
+class DemoTableItem: FOTableItem {
     
     var color = UIColor.white
     
@@ -18,16 +18,30 @@ class TableCellItem: FOTableItem {
         self.identifier = identifier
         self.color = color
         reuseIdentifier = NSStringFromClass(type(of: self))
-        cellClass = UITableViewCell.self
+        cellClass = DemoTableCell.self
     }
     
     override func configure(_ cell: UITableViewCell, tableView: UITableView, indexPath: IndexPath) {
-        cell.backgroundColor = color
         cell.textLabel?.text = identifier
+        
+        if let section = section as? DemoTableSection {
+            cell.backgroundColor = section.color
+        }
+        
+        if let cell = cell as? DemoTableCell {
+            cell.indicator.backgroundColor = color
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
-        return 50.0
+        return 25
+    }
+    
+    override func copy() -> Any {
+        let item = DemoTableItem(identifier: identifier!)
+        item.color = color
+        
+        return item
     }
 
 }
