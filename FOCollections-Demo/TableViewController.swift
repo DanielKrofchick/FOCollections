@@ -35,25 +35,24 @@ class TableViewController: FOTableViewController {
     }
     
     func play() {
-        queueUpdate({
-            self.clearAllItems()
-        })
-        
+//        queueUpdate({
+//            self.clearAllItems()
+//        })
+//        
 //        let sections1 = [
-//            self.section("A", identifiers: ["a0", "a1", "a2"], color: createSectionColor()),
-//            self.section("Z", identifiers: ["z0", "z1", "z2"], color: createSectionColor()),
+//            self.section("G", identifiers: ["g2", "g1", "u0", "g0"], color: .random()),
 //            ]
 //
 //        let sections2 = [
-//            self.section("L", identifiers: ["l0", "l1"], color: createSectionColor()),
-//            self.section("I", identifiers: ["i0"], color: createSectionColor()),
+//            self.section("U", identifiers: ["u2", "u3", "u0", "u1"], color: .random()),
+//            self.section("G", identifiers: ["g1", "u0", "g0", "g0"], color: .random()),
 //            ]
 //
 //        queueUpdate({
 //            self.insertSections(sections1, indexes: IndexSet(integersIn: 0..<sections1.count))
 //        })
 //
-//        animateUpdate(sections1)
+////        animateUpdate(sections1)
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
 //            self.animateUpdate(sections2)
 //        }
@@ -96,8 +95,8 @@ class TableViewController: FOTableViewController {
     let itemMoveP = 0.4
     let itemDeleteP = 0.2
     let itemInsertP = 0.2
-    let maxNewItems = Int(3)
-    let maxNewSections = Int(3)
+    let newItemP = 0.6
+    let newSectionP = 0.6
     
     var deletedSectionIdentifiers = [String]()
     
@@ -108,10 +107,10 @@ class TableViewController: FOTableViewController {
         
         result = sectionDeleteMutate(result)
         result = sectionMoveMutate(result)
+        result = sectionInsertMutate(result)
+        result = itemDeleteMutate(result)
         result = itemMoveMutate(result)
         result = itemInsertMutate(result)
-        result = itemDeleteMutate(result)
-        result = sectionInsertMutate(result)
         
         return result
     }
@@ -125,8 +124,6 @@ class TableViewController: FOTableViewController {
             let p = Double(arc4random()) / Double(UInt32.max)
             
             if toIndex != s.offset && p <= sectionMoveP {
-                print("section move: \(s.element.identifier!) from: \(s.offset) to: \(toIndex)")
-
                 result = rearrange(array: result, fromIndex: s.offset, toIndex: toIndex)
             }
         }
@@ -147,8 +144,6 @@ class TableViewController: FOTableViewController {
                 }
                 
                 result.remove(at: s.offset)
-                
-                print("section delete: \(s.element.identifier!)")
             }
         }
         
@@ -166,16 +161,12 @@ class TableViewController: FOTableViewController {
                 if p <= sectionInsertP {
                     let newSection = createSection(currentSections: result)
                     result.insert(newSection, at: s.offset)
-                    
-                    print("section insert: \(newSection.identifier!) (\(newSection.items!.count))")
                 }
             }
         } else {
-            for _ in 0..<random(range: 0..<maxNewSections) {
+            while randomP() <= newSectionP {
                 let newSection = createSection(currentSections: result)
                 result.insert(newSection, at: 0)
-                
-                print("section insert: \(newSection.identifier!) (\(newSection.items!.count))")
             }
         }
         
@@ -183,7 +174,7 @@ class TableViewController: FOTableViewController {
     }
     
     func createSection(currentSections: [FOTableSection]) -> FOTableSection {
-        let sectionIdentifiers = currentSections.map{$0.identifier!}
+        let sectionIdentifiers = currentSections.sectionIdentifiers()
         let newSectionCharacter = createSectionIdentifier().uppercased()
         var newSectionIdentifier = newSectionCharacter
         
@@ -191,13 +182,13 @@ class TableViewController: FOTableViewController {
             newSectionIdentifier = newSectionIdentifier + newSectionCharacter
         }
         
-        var itemIdentifiers = [String]()
+        var iIdentifiers = [String]()
         
-        for i in 0..<random(range: 1..<maxNewItems + 1) {
-            itemIdentifiers.append("\(newSectionIdentifier.lowercased())\(i)")
+        while randomP() <= newItemP {
+            iIdentifiers.append(currentSections.newItemIdentifier(sectionIdentifier: newSectionIdentifier, omit: iIdentifiers))
         }
         
-        return section(newSectionIdentifier, identifiers: itemIdentifiers, color: .random())
+        return section(newSectionIdentifier, identifiers: iIdentifiers, color: .random())
     }
     
     func createSectionIdentifier() -> String {
@@ -270,7 +261,7 @@ extension TableViewController {
 
 }
 
-private extension Array where Element:FOTableSection {
+extension Array where Element:FOTableSection {
     
     func log(title: String) {
         forEach({ (section) in
@@ -279,6 +270,10 @@ private extension Array where Element:FOTableSection {
             }))
         })
     }
+    
+}
+
+private extension Array where Element:FOTableSection {
     
     func duplicate() -> [FOTableSection] {
         return map{$0.copy()} as! [FOTableSection]
@@ -384,7 +379,7 @@ private extension Array where Element:FOTableSection {
             let items = section.items,
             indexPath.item <= items.count
         {
-            section.items?.insert(item ?? DemoTableItem(identifier: result.newItemIdentifier(section: section), color: section.color), at: indexPath.item)
+            section.items?.insert(item ?? DemoTableItem(identifier: result.newItemIdentifier(sectionIdentifier: section.identifier!), color: section.color), at: indexPath.item)
         }
         
         return result
@@ -430,16 +425,15 @@ private extension Array where Element:FOTableSection {
         })
     }
     
-    func newItemIdentifier(section: FOTableSection) -> String {
-        let iIdentifiers = itemIdentifiers()
-        let sIdentifiers = section.items!.map{$0.identifier!}
-        var result = sIdentifiers.first!
-        var count = Int(0)
+    func newItemIdentifier(sectionIdentifier: String, omit: [String] = [String]()) -> String {
+        let iIdentifiers = itemIdentifiers() + omit
+        var count = 0
+        var result = ""
         
-        while iIdentifiers.contains(result) {
-            result = section.identifier!.lowercased() + String(count)
+        repeat {
+            result = sectionIdentifier.lowercased() + String(count)
             count += 1
-        }
+        } while iIdentifiers.contains(result)
         
         return result
     }

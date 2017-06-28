@@ -339,9 +339,7 @@ extension FOTableViewController {
                     
                     let transformed = this.transform(fromSections: fromSections0, toSections: to, update: update0)
                     
-                    //                transformed.forEach({ (section) in
-                    //                    print("transformed", section.identifier!, section.items!.count)
-                    //                })
+                    transformed.log(title: "transformed")
                     
                     _ = this.dataSource.clearAllItems(this.tableView)
                     this.dataSource.insertSections(transformed, atIndexes: IndexSet(integersIn: 0..<transformed.count), tableView: this.tableView, viewController: this)
@@ -383,6 +381,7 @@ extension FOTableViewController {
     
     fileprivate func transform(fromSections: [FOTableSection], toSections: [FOTableSection], update: Update) -> [FOTableSection] {
         var result = fromSections
+        let iIdentifiers: [String] = update.insertions != nil ? itemIdentifiers(fromSections) : [String]()
         
         update.deletions?.forEach({
             path in
@@ -394,7 +393,7 @@ extension FOTableViewController {
         update.insertions?.forEach({
             path in
             if let index = index(path: path, in: toSections) {
-                let section = toSections[index]
+                let section = removeDuplicateItems(toSections[index], itemIdentifiers: iIdentifiers)
                 result.insert(section, at: index)
             }
         })
@@ -407,6 +406,60 @@ extension FOTableViewController {
             {
                 result.move(at: index, to: s.offset)
             }
+        }
+        
+        return result
+    }
+    
+    private func itemIdentifiers(_ sections: [FOTableSection]) -> [String] {
+        return sections.reduce([String](), { (sResult, section) -> [String] in
+            if let items = section.items {
+                return sResult + items.reduce([String](), { (iResult, item) -> [String] in
+                    if let identifier = item.identifier {
+                        return iResult + [identifier]
+                    } else {
+                        return iResult
+                    }
+                })
+            } else {
+                return sResult
+            }
+        })
+    }
+    
+    private func itemIdentifiers(_ section: FOTableSection) -> [String] {
+        if let items = section.items {
+            return items.reduce([String](), { (iResult, item) -> [String] in
+                if let identifier = item.identifier {
+                    return iResult + [identifier]
+                } else {
+                    return iResult
+                }
+            })
+        } else {
+            return [String]()
+        }
+    }
+    
+    private func removeDuplicateItems(_ section: FOTableSection, itemIdentifiers: [String]) -> FOTableSection {
+        let sIdentifiers = self.itemIdentifiers(section)
+        let iIdentifiers = Array(itemIdentifiers)
+        let duplicates = iIdentifiers.filter{sIdentifiers.contains($0)}
+        var result = section
+        
+        if
+            !duplicates.isEmpty,
+            let section = section.copy() as? FOTableSection
+        {
+            result = section
+            result.items = result.items?.filter({
+                item in
+                if let identifier = item.identifier {
+                    return !duplicates.contains(identifier)
+                } else {
+                    return true
+                }
+            })
         }
         
         return result
