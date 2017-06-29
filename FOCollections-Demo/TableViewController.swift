@@ -8,56 +8,81 @@
 
 import UIKit
 
+let sectionMoveP = 0.2
+let sectionDeleteP = 0.2
+let sectionInsertP = 0.2
+let itemMoveP = 0.4
+let itemDeleteP = 0.2
+let itemInsertP = 0.2
+let newItemP = 0.6
+let newSectionP = 0.6
+let sliderMin = Float(0.0)
+let sliderMax = Float(1.0)
+
 class TableViewController: FOTableViewController {
     
     let refresh = UIButton(type: .system)
-    var stop = false
+    let slider = UISlider()
+    var autoPlay = true {
+        didSet {
+            play = autoPlay
+        }
+    }
+    var play = false {
+        didSet {
+            configureBarItems()
+            
+            if play {
+                doMutate()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.backgroundColor = UIColor.orange
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(TableViewController.play))
+        slider.minimumValue = sliderMin
+        slider.maximumValue = sliderMax
+        slider.value = (sliderMax - sliderMin) * 0.5
+        navigationItem.titleView = slider
+        
+        play = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        stop = true
+        play = false
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    func configureBarItems() {
+        var items = [UIBarButtonItem]()
         
-        stop = false
-        play()
+        let autoPlayItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(didSelectAutoPlay))
+
+        if !autoPlay {
+            autoPlayItem.tintColor = .red
+        }
+
+        items.append(autoPlayItem)
+        
+        if play {
+            items.append(UIBarButtonItem(barButtonSystemItem: .pause, target: self, action: #selector(didSelectPlay)))
+        } else {
+            items.append(UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(didSelectPlay)))
+        }
+        
+        navigationItem.rightBarButtonItems = items
     }
     
-    func play() {
-//        queueUpdate({
-//            self.clearAllItems()
-//        })
-//        
-//        let sections1 = [
-//            self.section("G", identifiers: ["g2", "g1", "u0", "g0"], color: .random()),
-//            ]
-//
-//        let sections2 = [
-//            self.section("U", identifiers: ["u2", "u3", "u0", "u1"], color: .random()),
-//            self.section("G", identifiers: ["g1", "u0", "g0", "g0"], color: .random()),
-//            ]
-//
-//        queueUpdate({
-//            self.insertSections(sections1, indexes: IndexSet(integersIn: 0..<sections1.count))
-//        })
-//
-////        animateUpdate(sections1)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//            self.animateUpdate(sections2)
-//        }
-        
-        doMutate()
+    func didSelectPlay() {
+        play = !play
+    }
+    
+    func didSelectAutoPlay() {
+        autoPlay = !autoPlay
     }
     
     var count = Int(0)
@@ -65,45 +90,37 @@ class TableViewController: FOTableViewController {
     func doMutate() {
         queueWork {
             [weak self] in
-            if let this = self {
+            if
+                let this = self,
+                this.play
+            {
+                let oldSections = this.dataSource.sections
+                var newSections = [FOTableSection]()
                 
-                if this.stop {
-                    return
+                while newSections.isEmpty || newSections.compare(oldSections) {
+                    newSections = this.mutate(oldSections)
                 }
                 
                 this.count += 1
                 print("-\(this.count)-")
-                
-                this.dataSource.sections.log(title: " ")
-                
-                let newSections = this.mutate(this.dataSource.sections)
-
+                oldSections.log(title: " ")
                 newSections.log(title: ">")
                 
-                this.animateUpdate(newSections, with: .automatic, completion: {
+                this.animateUpdate(newSections, with: .automatic, duration: TimeInterval(this.slider.value), completion: {
                     DispatchQueue.main.asyncAfter(deadline: .now()) {
-                        this.doMutate()
+                        if this.autoPlay {
+                            this.doMutate()
+                        } else {
+                            this.play = false
+                        }
                     }
                 })
             }
         }
     }
     
-    let sectionMoveP = 0.2
-    let sectionDeleteP = 0.2
-    let sectionInsertP = 0.2
-    let itemMoveP = 0.4
-    let itemDeleteP = 0.2
-    let itemInsertP = 0.2
-    let newItemP = 0.6
-    let newSectionP = 0.6
-    
-    var deletedSectionIdentifiers = [String]()
-    
     func mutate(_ sections: [FOTableSection]) -> [FOTableSection] {
         var result = sections
-        
-        deletedSectionIdentifiers.removeAll()
         
         result = sectionDeleteMutate(result)
         result = sectionMoveMutate(result)
@@ -114,16 +131,19 @@ class TableViewController: FOTableViewController {
         
         return result
     }
-        
+    
+}
+
+extension TableViewController {
+    
     func sectionMoveMutate(_ sections: [FOTableSection]) -> [FOTableSection] {
         var result = sections
-
+        
         sections.enumerated().forEach{
             s in
             let toIndex = random(range: 0..<result.count)
-            let p = Double(arc4random()) / Double(UInt32.max)
             
-            if toIndex != s.offset && p <= sectionMoveP {
+            if toIndex != s.offset && randomP() <= sectionMoveP {
                 result = rearrange(array: result, fromIndex: s.offset, toIndex: toIndex)
             }
         }
@@ -136,13 +156,7 @@ class TableViewController: FOTableViewController {
         
         sections.enumerated().reversed().forEach{
             s in
-            let p = Double(arc4random()) / Double(UInt32.max)
-            
-            if p <= sectionDeleteP {
-                if let identifier = s.element.identifier {
-                   deletedSectionIdentifiers.append(identifier)
-                }
-                
+            if randomP() <= sectionDeleteP {
                 result.remove(at: s.offset)
             }
         }
@@ -156,76 +170,20 @@ class TableViewController: FOTableViewController {
         if sections.count > 0 {
             sections.enumerated().reversed().forEach{
                 s in
-                let p = Double(arc4random()) / Double(UInt32.max)
-                
-                if p <= sectionInsertP {
-                    let newSection = createSection(currentSections: result)
+                if randomP() <= sectionInsertP {
+                    let newSection = result.createSection()
                     result.insert(newSection, at: s.offset)
                 }
             }
         } else {
             while randomP() <= newSectionP {
-                let newSection = createSection(currentSections: result)
+                let newSection =  result.createSection()
                 result.insert(newSection, at: 0)
             }
         }
         
         return result
     }
-    
-    func createSection(currentSections: [FOTableSection]) -> FOTableSection {
-        let sectionIdentifiers = currentSections.sectionIdentifiers()
-        let newSectionCharacter = createSectionIdentifier().uppercased()
-        var newSectionIdentifier = newSectionCharacter
-        
-        while sectionIdentifiers.contains(newSectionIdentifier) || deletedSectionIdentifiers.contains(newSectionIdentifier) {
-            newSectionIdentifier = newSectionIdentifier + newSectionCharacter
-        }
-        
-        var iIdentifiers = [String]()
-        
-        while randomP() <= newItemP {
-            iIdentifiers.append(currentSections.newItemIdentifier(sectionIdentifier: newSectionIdentifier, omit: iIdentifiers))
-        }
-        
-        return section(newSectionIdentifier, identifiers: iIdentifiers, color: .random())
-    }
-    
-    func createSectionIdentifier() -> String {
-        let sectionCharacters = "abcdefghijklmnopqrstuvwxyz"
-        let characterIndex = random(range: 0..<sectionCharacters.characters.count)
-        let index = sectionCharacters.index(sectionCharacters.startIndex, offsetBy: characterIndex)
-        let character = sectionCharacters[index]
-        
-        return "\(character)"
-    }
-    
-    func random(range: Range<Int>) -> Int {
-        let min = range.lowerBound
-        let max = range.upperBound
-        
-        return Int(arc4random_uniform(UInt32(max - min))) + min
-    }
-    
-    fileprivate func rearrange<T>(array: Array<T>, fromIndex: Int, toIndex: Int) -> Array<T> {
-        var arr = array
-        let element = arr.remove(at: fromIndex)
-        arr.insert(element, at: toIndex)
-        
-        return arr
-    }
-    
-    func section(_ sectionIdentifier: String, identifiers: [String], color: UIColor) -> FOTableSection {
-        let section = DemoTableSection(identifier: sectionIdentifier, color: color)
-        
-        section.items = identifiers.map{DemoTableItem(identifier: $0, color: color)}
-        
-        return section
-    }
-    
-}
-
-extension TableViewController {
 
     func itemDeleteMutate(_ sections: [FOTableSection]) -> [FOTableSection] {
         var result = sections.duplicate()
@@ -257,6 +215,14 @@ extension TableViewController {
         result = result.removeEmpty()
         
         return result
+    }
+    
+    fileprivate func rearrange<T>(array: Array<T>, fromIndex: Int, toIndex: Int) -> Array<T> {
+        var arr = array
+        let element = arr.remove(at: fromIndex)
+        arr.insert(element, at: toIndex)
+        
+        return arr
     }
 
 }
@@ -324,8 +290,6 @@ private extension Array where Element:FOTableSection {
         
         if let indexPath = findItem(identifier)  {
             result = deleteAt(indexPath)
-
-            print("delete item: \(identifier)")
         }
         
         return result
@@ -438,6 +402,42 @@ private extension Array where Element:FOTableSection {
         return result
     }
     
+    func newSectionIdentifier() -> String {
+        let sIdentifiers = sectionIdentifiers()
+        let sectionCharacters = "abcdefghijklmnopqrstuvwxyz"
+        let characterIndex = Int(random(range: 0..<sectionCharacters.characters.count))
+        let index = sectionCharacters.index(sectionCharacters.startIndex, offsetBy: characterIndex)
+        let character = String(sectionCharacters[index]).uppercased()
+        
+        var result = character
+
+        while sIdentifiers.contains(result) {
+            result = result + character
+        }
+        
+        return result
+    }
+    
+    func createSection() -> FOTableSection {
+        let sectionIdentifier = newSectionIdentifier()
+        var itemIdentifiers = [String]()
+        
+        while randomP() <= newItemP {
+            itemIdentifiers.append(newItemIdentifier(sectionIdentifier: sectionIdentifier, omit: itemIdentifiers))
+        }
+        
+        return section(sectionIdentifier, identifiers: itemIdentifiers, color: .random())
+    }
+    
+    func compare(_ sections: [FOTableSection]) -> Bool {
+        let aItemIdentifiers = itemIdentifiers()
+        let bItemIdentifiers = sections.itemIdentifiers()
+        let aSectionIdentifiers = sectionIdentifiers()
+        let bSectionIdentifiers = sections.sectionIdentifiers()
+        
+        return aItemIdentifiers == bItemIdentifiers && aSectionIdentifiers == bSectionIdentifiers
+    }
+    
 }
 
 private extension Array {
@@ -468,4 +468,16 @@ private func randomP() -> Double {
 
 private func random(range: CountableRange<UInt32>) -> UInt32 {
     return range.lowerBound + arc4random_uniform(range.upperBound - range.lowerBound)
+}
+
+private func random(range: Range<Int>) -> Int {
+    return Int(range.lowerBound) + Int(arc4random_uniform(UInt32(range.upperBound - range.lowerBound)))
+}
+
+private func section(_ sectionIdentifier: String, identifiers: [String], color: UIColor) -> FOTableSection {
+    let section = DemoTableSection(identifier: sectionIdentifier, color: color)
+    
+    section.items = identifiers.map{DemoTableItem(identifier: $0, color: color)}
+    
+    return section
 }
