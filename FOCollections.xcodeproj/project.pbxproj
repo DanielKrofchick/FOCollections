@@ -49,6 +49,7 @@
 		4C49217E1BFD4021001511AC /* NSArray+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520641BFA34BD00D01CC1 /* NSArray+Extensions.swift */; };
 		4C49217F1BFD4021001511AC /* FOCompletionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520651BFA34BD00D01CC1 /* FOCompletionOperation.swift */; };
 		4C49218B1BFD42A5001511AC /* FOCollections.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 4C49218A1BFD42A5001511AC /* FOCollections.podspec */; };
+		4C4A18851F069BC100F53251 /* FOTableViewController+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A18841F069BC100F53251 /* FOTableViewController+Updater.swift */; };
 		4C7520661BFA34BD00D01CC1 /* FOCollectionsGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520631BFA34BD00D01CC1 /* FOCollectionsGlobal.swift */; };
 		4C7520671BFA34BD00D01CC1 /* NSArray+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520641BFA34BD00D01CC1 /* NSArray+Extensions.swift */; };
 		4C7520681BFA34BD00D01CC1 /* FOCompletionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520651BFA34BD00D01CC1 /* FOCompletionOperation.swift */; };
@@ -118,6 +119,7 @@
 		4C49215F1BFD3FEB001511AC /* FOCollectionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FOCollectionsTests.swift; sourceTree = "<group>"; };
 		4C4921611BFD3FEB001511AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C49218A1BFD42A5001511AC /* FOCollections.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = FOCollections.podspec; sourceTree = SOURCE_ROOT; };
+		4C4A18841F069BC100F53251 /* FOTableViewController+Updater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOTableViewController+Updater.swift"; sourceTree = "<group>"; };
 		4C7520631BFA34BD00D01CC1 /* FOCollectionsGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCollectionsGlobal.swift; path = FOCollections/Shared/FOCollectionsGlobal.swift; sourceTree = "<group>"; };
 		4C7520641BFA34BD00D01CC1 /* NSArray+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSArray+Extensions.swift"; path = "FOCollections/Shared/NSArray+Extensions.swift"; sourceTree = "<group>"; };
 		4C7520651BFA34BD00D01CC1 /* FOCompletionOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCompletionOperation.swift; path = FOCollections/Shared/FOCompletionOperation.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				4C28B98A1EE71406006AE8A5 /* Move.swift */,
 				4C28B9801EE71324006AE8A5 /* FOTableViewDataSource+Updater.swift */,
 				4C28B9821EE7137F006AE8A5 /* Array+Updater.swift */,
+				4C4A18841F069BC100F53251 /* FOTableViewController+Updater.swift */,
 			);
 			name = FOCollectionUpdater;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				4C7520721BFA34C500D01CC1 /* FOTableViewController+Delegate.swift in Sources */,
 				4CB756CE1ED4B9D3000C3414 /* FOCollectionUpdater.swift in Sources */,
 				D1A861101BFFAEFE00FA6479 /* CollectionSectionItem.swift in Sources */,
+				4C4A18851F069BC100F53251 /* FOTableViewController+Updater.swift in Sources */,
 				4C34C1EF1C756FC800A71D29 /* MenuItem.swift in Sources */,
 				D1A8610E1BFFAEBC00FA6479 /* CollectionCellItem.swift in Sources */,
 				4C7520681BFA34BD00D01CC1 /* FOCompletionOperation.swift in Sources */,

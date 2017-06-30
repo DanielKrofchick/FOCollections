@@ -26,6 +26,10 @@ struct FOCollectionUpdater {
         
         var m = f
         
+        // This logic was designed to allow section and item updates at the same time,
+        // but that doesn't work for many edge cases that result in two animations for the
+        // same cell; i.e. a section moves, and an item in that section moves to another section.
+        // Keeping this around for reference, but it is not being used and the logic may be a bit off.
         if let filter = filter {
             // Remove _to_ items for insertions
             filter.insertions?.forEach{
