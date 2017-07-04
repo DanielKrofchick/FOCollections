@@ -77,6 +77,16 @@
 		4CA07F4B1F02C1C50083A8E6 /* DemoTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA07F4A1F02C1C50083A8E6 /* DemoTableSection.swift */; };
 		4CB029861CD7D31600F1252D /* NSIndexPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB029851CD7D31600F1252D /* NSIndexPath+Extensions.swift */; };
 		4CB029881CD7D32800F1252D /* FOTablePagingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB029871CD7D32800F1252D /* FOTablePagingItem.swift */; };
+		4CB2D8341F0BED1D00854ECE /* FOCollectionUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB756CD1ED4B9D3000C3414 /* FOCollectionUpdater.swift */; };
+		4CB2D8351F0BED1D00854ECE /* StatePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9861EE713C6006AE8A5 /* StatePath.swift */; };
+		4CB2D8361F0BED1D00854ECE /* IdentifierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9881EE713FB006AE8A5 /* IdentifierPath.swift */; };
+		4CB2D8371F0BED1D00854ECE /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9841EE713A5006AE8A5 /* Update.swift */; };
+		4CB2D8381F0BED1D00854ECE /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B98A1EE71406006AE8A5 /* Move.swift */; };
+		4CB2D8391F0BED1D00854ECE /* FOTableViewDataSource+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9801EE71324006AE8A5 /* FOTableViewDataSource+Updater.swift */; };
+		4CB2D83A1F0BED1D00854ECE /* Array+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9821EE7137F006AE8A5 /* Array+Updater.swift */; };
+		4CB2D83B1F0BED1D00854ECE /* FOTableViewController+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A18841F069BC100F53251 /* FOTableViewController+Updater.swift */; };
+		4CB2D83C1F0BED1D00854ECE /* FOTablePagingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB029871CD7D32800F1252D /* FOTablePagingItem.swift */; };
+		4CB2D83D1F0BED1D00854ECE /* NSIndexPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB029851CD7D31600F1252D /* NSIndexPath+Extensions.swift */; };
 		4CB756CE1ED4B9D3000C3414 /* FOCollectionUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB756CD1ED4B9D3000C3414 /* FOCollectionUpdater.swift */; };
 		4CCA35FC1C03F41500A09AD6 /* FOPairedIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCA35FB1C03F41500A09AD6 /* FOPairedIndexPath.swift */; };
 		4CCA35FD1C03F52900A09AD6 /* FOPairedIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCA35FB1C03F41500A09AD6 /* FOPairedIndexPath.swift */; };
@@ -469,24 +479,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CB2D8371F0BED1D00854ECE /* Update.swift in Sources */,
 				D1A861151BFFB45A00FA6479 /* FOCollectionPagingItem.swift in Sources */,
 				4CCA35FD1C03F52900A09AD6 /* FOPairedIndexPath.swift in Sources */,
 				4C4921781BFD401E001511AC /* FOTableViewDataSource+Delegate.swift in Sources */,
 				4C4921711BFD401B001511AC /* FOCollectionSection.swift in Sources */,
 				4C49216F1BFD401B001511AC /* FOCollectionViewDataSource.swift in Sources */,
 				4C4921751BFD401E001511AC /* FOTableViewController.swift in Sources */,
+				4CB2D8361F0BED1D00854ECE /* IdentifierPath.swift in Sources */,
+				4CB2D83C1F0BED1D00854ECE /* FOTablePagingItem.swift in Sources */,
+				4CB2D83A1F0BED1D00854ECE /* Array+Updater.swift in Sources */,
 				4C49217F1BFD4021001511AC /* FOCompletionOperation.swift in Sources */,
 				4C49216D1BFD401B001511AC /* FOCollectionViewController+Delegate.swift in Sources */,
 				4C49217A1BFD401E001511AC /* FOTableItem.swift in Sources */,
 				4C4921761BFD401E001511AC /* FOTableViewController+Delegate.swift in Sources */,
 				4C49217D1BFD4021001511AC /* FOCollectionsGlobal.swift in Sources */,
+				4CB2D8341F0BED1D00854ECE /* FOCollectionUpdater.swift in Sources */,
+				4CB2D83D1F0BED1D00854ECE /* NSIndexPath+Extensions.swift in Sources */,
+				4CB2D8351F0BED1D00854ECE /* StatePath.swift in Sources */,
 				4C4921721BFD401B001511AC /* FOCollectionItem.swift in Sources */,
 				4C49216E1BFD401B001511AC /* FOCollectionViewController+DelegateFlowLayout.swift in Sources */,
+				4CB2D8391F0BED1D00854ECE /* FOTableViewDataSource+Updater.swift in Sources */,
 				4C4921791BFD401E001511AC /* FOTableSection.swift in Sources */,
 				4C49217E1BFD4021001511AC /* NSArray+Extensions.swift in Sources */,
 				4C4921771BFD401E001511AC /* FOTableViewDataSource.swift in Sources */,
 				4C4921701BFD401B001511AC /* FOCollectionViewDataSource+Delegate.swift in Sources */,
 				4C49216C1BFD401B001511AC /* FOCollectionViewController.swift in Sources */,
+				4CB2D83B1F0BED1D00854ECE /* FOTableViewController+Updater.swift in Sources */,
+				4CB2D8381F0BED1D00854ECE /* Move.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
