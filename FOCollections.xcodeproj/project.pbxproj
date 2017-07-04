@@ -181,7 +181,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4C28B97F1EE712F7006AE8A5 /* FOCollectionUpdater */ = {
+		4C28B97F1EE712F7006AE8A5 /* CollectionUpdater */ = {
 			isa = PBXGroup;
 			children = (
 				4CB2D8401F0BF74400854ECE /* CollectionUpdater.swift */,
@@ -193,7 +193,7 @@
 				4CB2D8421F0BF74400854ECE /* FOTableViewDataSource+Updater.swift */,
 				4CB2D8411F0BF74400854ECE /* FOTableViewController+Updater.swift */,
 			);
-			name = FOCollectionUpdater;
+			name = CollectionUpdater;
 			sourceTree = "<group>";
 		};
 		4C49215E1BFD3FEB001511AC /* FOCollectionsTests */ = {
@@ -208,9 +208,9 @@
 		4C75205F1BFA348100D01CC1 /* FOCollections */ = {
 			isa = PBXGroup;
 			children = (
-				4C28B97F1EE712F7006AE8A5 /* FOCollectionUpdater */,
 				4C7520621BFA34A000D01CC1 /* UICollectionView */,
 				4C7520611BFA349600D01CC1 /* UITableView */,
+				4C28B97F1EE712F7006AE8A5 /* CollectionUpdater */,
 				4C7520601BFA348900D01CC1 /* Shared */,
 			);
 			name = FOCollections;
