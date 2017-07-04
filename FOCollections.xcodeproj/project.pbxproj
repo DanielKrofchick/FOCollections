@@ -21,12 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		4C28B9811EE71324006AE8A5 /* FOTableViewDataSource+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9801EE71324006AE8A5 /* FOTableViewDataSource+Updater.swift */; };
-		4C28B9831EE7137F006AE8A5 /* Array+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9821EE7137F006AE8A5 /* Array+Updater.swift */; };
-		4C28B9851EE713A5006AE8A5 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9841EE713A5006AE8A5 /* Update.swift */; };
-		4C28B9871EE713C6006AE8A5 /* StatePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9861EE713C6006AE8A5 /* StatePath.swift */; };
-		4C28B9891EE713FB006AE8A5 /* IdentifierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9881EE713FB006AE8A5 /* IdentifierPath.swift */; };
-		4C28B98B1EE71406006AE8A5 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B98A1EE71406006AE8A5 /* Move.swift */; };
 		4C34C1ED1C756F4300A71D29 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C34C1EC1C756F4300A71D29 /* MenuController.swift */; };
 		4C34C1EF1C756FC800A71D29 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C34C1EE1C756FC800A71D29 /* MenuItem.swift */; };
 		4C4921521BFD3FEB001511AC /* FOCollections.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4921511BFD3FEB001511AC /* FOCollections.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -49,7 +43,6 @@
 		4C49217E1BFD4021001511AC /* NSArray+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520641BFA34BD00D01CC1 /* NSArray+Extensions.swift */; };
 		4C49217F1BFD4021001511AC /* FOCompletionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520651BFA34BD00D01CC1 /* FOCompletionOperation.swift */; };
 		4C49218B1BFD42A5001511AC /* FOCollections.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 4C49218A1BFD42A5001511AC /* FOCollections.podspec */; };
-		4C4A18851F069BC100F53251 /* FOTableViewController+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A18841F069BC100F53251 /* FOTableViewController+Updater.swift */; };
 		4C7520661BFA34BD00D01CC1 /* FOCollectionsGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520631BFA34BD00D01CC1 /* FOCollectionsGlobal.swift */; };
 		4C7520671BFA34BD00D01CC1 /* NSArray+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520641BFA34BD00D01CC1 /* NSArray+Extensions.swift */; };
 		4C7520681BFA34BD00D01CC1 /* FOCompletionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7520651BFA34BD00D01CC1 /* FOCompletionOperation.swift */; };
@@ -77,19 +70,16 @@
 		4CA07F4B1F02C1C50083A8E6 /* DemoTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA07F4A1F02C1C50083A8E6 /* DemoTableSection.swift */; };
 		4CB029861CD7D31600F1252D /* NSIndexPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB029851CD7D31600F1252D /* NSIndexPath+Extensions.swift */; };
 		4CB029881CD7D32800F1252D /* FOTablePagingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB029871CD7D32800F1252D /* FOTablePagingItem.swift */; };
-		4CB2D8341F0BED1D00854ECE /* FOCollectionUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB756CD1ED4B9D3000C3414 /* FOCollectionUpdater.swift */; };
-		4CB2D8351F0BED1D00854ECE /* StatePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9861EE713C6006AE8A5 /* StatePath.swift */; };
-		4CB2D8361F0BED1D00854ECE /* IdentifierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9881EE713FB006AE8A5 /* IdentifierPath.swift */; };
-		4CB2D8371F0BED1D00854ECE /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9841EE713A5006AE8A5 /* Update.swift */; };
-		4CB2D8381F0BED1D00854ECE /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B98A1EE71406006AE8A5 /* Move.swift */; };
-		4CB2D8391F0BED1D00854ECE /* FOTableViewDataSource+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9801EE71324006AE8A5 /* FOTableViewDataSource+Updater.swift */; };
-		4CB2D83A1F0BED1D00854ECE /* Array+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C28B9821EE7137F006AE8A5 /* Array+Updater.swift */; };
-		4CB2D83B1F0BED1D00854ECE /* FOTableViewController+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A18841F069BC100F53251 /* FOTableViewController+Updater.swift */; };
 		4CB2D83C1F0BED1D00854ECE /* FOTablePagingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB029871CD7D32800F1252D /* FOTablePagingItem.swift */; };
 		4CB2D83D1F0BED1D00854ECE /* NSIndexPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB029851CD7D31600F1252D /* NSIndexPath+Extensions.swift */; };
-		4CB756CE1ED4B9D3000C3414 /* FOCollectionUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB756CD1ED4B9D3000C3414 /* FOCollectionUpdater.swift */; };
-		4CCA35FC1C03F41500A09AD6 /* FOPairedIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCA35FB1C03F41500A09AD6 /* FOPairedIndexPath.swift */; };
-		4CCA35FD1C03F52900A09AD6 /* FOPairedIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCA35FB1C03F41500A09AD6 /* FOPairedIndexPath.swift */; };
+		4CB2D8471F0BF74400854ECE /* Array+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB2D83F1F0BF74400854ECE /* Array+Updater.swift */; };
+		4CB2D8481F0BF74400854ECE /* CollectionUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB2D8401F0BF74400854ECE /* CollectionUpdater.swift */; };
+		4CB2D8491F0BF74400854ECE /* FOTableViewController+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB2D8411F0BF74400854ECE /* FOTableViewController+Updater.swift */; };
+		4CB2D84A1F0BF74400854ECE /* FOTableViewDataSource+Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB2D8421F0BF74400854ECE /* FOTableViewDataSource+Updater.swift */; };
+		4CB2D84B1F0BF74400854ECE /* IdentifierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB2D8431F0BF74400854ECE /* IdentifierPath.swift */; };
+		4CB2D84C1F0BF74400854ECE /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB2D8441F0BF74400854ECE /* Move.swift */; };
+		4CB2D84D1F0BF74400854ECE /* StatePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB2D8451F0BF74400854ECE /* StatePath.swift */; };
+		4CB2D84E1F0BF74400854ECE /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB2D8461F0BF74400854ECE /* Update.swift */; };
 		D1A8610E1BFFAEBC00FA6479 /* CollectionCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A8610D1BFFAEBC00FA6479 /* CollectionCellItem.swift */; };
 		D1A861101BFFAEFE00FA6479 /* CollectionSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A8610F1BFFAEFE00FA6479 /* CollectionSectionItem.swift */; };
 		D1A861141BFFB3E700FA6479 /* FOCollectionPagingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A861131BFFB3E700FA6479 /* FOCollectionPagingItem.swift */; };
@@ -114,12 +104,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4C28B9801EE71324006AE8A5 /* FOTableViewDataSource+Updater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOTableViewDataSource+Updater.swift"; sourceTree = "<group>"; };
-		4C28B9821EE7137F006AE8A5 /* Array+Updater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Updater.swift"; sourceTree = "<group>"; };
-		4C28B9841EE713A5006AE8A5 /* Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
-		4C28B9861EE713C6006AE8A5 /* StatePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatePath.swift; sourceTree = "<group>"; };
-		4C28B9881EE713FB006AE8A5 /* IdentifierPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifierPath.swift; sourceTree = "<group>"; };
-		4C28B98A1EE71406006AE8A5 /* Move.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		4C34C1EC1C756F4300A71D29 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		4C34C1EE1C756FC800A71D29 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		4C49214F1BFD3FEB001511AC /* FOCollections.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FOCollections.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,7 +113,6 @@
 		4C49215F1BFD3FEB001511AC /* FOCollectionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FOCollectionsTests.swift; sourceTree = "<group>"; };
 		4C4921611BFD3FEB001511AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C49218A1BFD42A5001511AC /* FOCollections.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = FOCollections.podspec; sourceTree = SOURCE_ROOT; };
-		4C4A18841F069BC100F53251 /* FOTableViewController+Updater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FOTableViewController+Updater.swift"; sourceTree = "<group>"; };
 		4C7520631BFA34BD00D01CC1 /* FOCollectionsGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCollectionsGlobal.swift; path = FOCollections/Shared/FOCollectionsGlobal.swift; sourceTree = "<group>"; };
 		4C7520641BFA34BD00D01CC1 /* NSArray+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSArray+Extensions.swift"; path = "FOCollections/Shared/NSArray+Extensions.swift"; sourceTree = "<group>"; };
 		4C7520651BFA34BD00D01CC1 /* FOCompletionOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCompletionOperation.swift; path = FOCollections/Shared/FOCompletionOperation.swift; sourceTree = "<group>"; };
@@ -159,8 +142,14 @@
 		4CA07F4A1F02C1C50083A8E6 /* DemoTableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoTableSection.swift; sourceTree = "<group>"; };
 		4CB029851CD7D31600F1252D /* NSIndexPath+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSIndexPath+Extensions.swift"; path = "FOCollections/Shared/NSIndexPath+Extensions.swift"; sourceTree = "<group>"; };
 		4CB029871CD7D32800F1252D /* FOTablePagingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOTablePagingItem.swift; path = FOCollections/UITableView/FOTablePagingItem.swift; sourceTree = "<group>"; };
-		4CB756CD1ED4B9D3000C3414 /* FOCollectionUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCollectionUpdater.swift; sourceTree = "<group>"; };
-		4CCA35FB1C03F41500A09AD6 /* FOPairedIndexPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOPairedIndexPath.swift; sourceTree = "<group>"; };
+		4CB2D83F1F0BF74400854ECE /* Array+Updater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+Updater.swift"; path = "FOCollections/FOCollectionUpdater/Array+Updater.swift"; sourceTree = "<group>"; };
+		4CB2D8401F0BF74400854ECE /* CollectionUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionUpdater.swift; path = FOCollections/FOCollectionUpdater/CollectionUpdater.swift; sourceTree = "<group>"; };
+		4CB2D8411F0BF74400854ECE /* FOTableViewController+Updater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FOTableViewController+Updater.swift"; path = "FOCollections/FOCollectionUpdater/FOTableViewController+Updater.swift"; sourceTree = "<group>"; };
+		4CB2D8421F0BF74400854ECE /* FOTableViewDataSource+Updater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FOTableViewDataSource+Updater.swift"; path = "FOCollections/FOCollectionUpdater/FOTableViewDataSource+Updater.swift"; sourceTree = "<group>"; };
+		4CB2D8431F0BF74400854ECE /* IdentifierPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdentifierPath.swift; path = FOCollections/FOCollectionUpdater/IdentifierPath.swift; sourceTree = "<group>"; };
+		4CB2D8441F0BF74400854ECE /* Move.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Move.swift; path = FOCollections/FOCollectionUpdater/Move.swift; sourceTree = "<group>"; };
+		4CB2D8451F0BF74400854ECE /* StatePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatePath.swift; path = FOCollections/FOCollectionUpdater/StatePath.swift; sourceTree = "<group>"; };
+		4CB2D8461F0BF74400854ECE /* Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Update.swift; path = FOCollections/FOCollectionUpdater/Update.swift; sourceTree = "<group>"; };
 		D1A8610D1BFFAEBC00FA6479 /* CollectionCellItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCellItem.swift; sourceTree = "<group>"; };
 		D1A8610F1BFFAEFE00FA6479 /* CollectionSectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionSectionItem.swift; sourceTree = "<group>"; };
 		D1A861131BFFB3E700FA6479 /* FOCollectionPagingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FOCollectionPagingItem.swift; path = FOCollections/UICollectionView/FOCollectionPagingItem.swift; sourceTree = "<group>"; };
@@ -195,14 +184,14 @@
 		4C28B97F1EE712F7006AE8A5 /* FOCollectionUpdater */ = {
 			isa = PBXGroup;
 			children = (
-				4CB756CD1ED4B9D3000C3414 /* FOCollectionUpdater.swift */,
-				4C28B9861EE713C6006AE8A5 /* StatePath.swift */,
-				4C28B9881EE713FB006AE8A5 /* IdentifierPath.swift */,
-				4C28B9841EE713A5006AE8A5 /* Update.swift */,
-				4C28B98A1EE71406006AE8A5 /* Move.swift */,
-				4C28B9801EE71324006AE8A5 /* FOTableViewDataSource+Updater.swift */,
-				4C28B9821EE7137F006AE8A5 /* Array+Updater.swift */,
-				4C4A18841F069BC100F53251 /* FOTableViewController+Updater.swift */,
+				4CB2D8401F0BF74400854ECE /* CollectionUpdater.swift */,
+				4CB2D83F1F0BF74400854ECE /* Array+Updater.swift */,
+				4CB2D8431F0BF74400854ECE /* IdentifierPath.swift */,
+				4CB2D8441F0BF74400854ECE /* Move.swift */,
+				4CB2D8451F0BF74400854ECE /* StatePath.swift */,
+				4CB2D8461F0BF74400854ECE /* Update.swift */,
+				4CB2D8421F0BF74400854ECE /* FOTableViewDataSource+Updater.swift */,
+				4CB2D8411F0BF74400854ECE /* FOTableViewController+Updater.swift */,
 			);
 			name = FOCollectionUpdater;
 			sourceTree = "<group>";
@@ -233,7 +222,6 @@
 				4C7520631BFA34BD00D01CC1 /* FOCollectionsGlobal.swift */,
 				4C7520641BFA34BD00D01CC1 /* NSArray+Extensions.swift */,
 				4C7520651BFA34BD00D01CC1 /* FOCompletionOperation.swift */,
-				4CCA35FB1C03F41500A09AD6 /* FOPairedIndexPath.swift */,
 				4CB029851CD7D31600F1252D /* NSIndexPath+Extensions.swift */,
 			);
 			name = Shared;
@@ -479,34 +467,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CB2D8371F0BED1D00854ECE /* Update.swift in Sources */,
 				D1A861151BFFB45A00FA6479 /* FOCollectionPagingItem.swift in Sources */,
-				4CCA35FD1C03F52900A09AD6 /* FOPairedIndexPath.swift in Sources */,
 				4C4921781BFD401E001511AC /* FOTableViewDataSource+Delegate.swift in Sources */,
 				4C4921711BFD401B001511AC /* FOCollectionSection.swift in Sources */,
 				4C49216F1BFD401B001511AC /* FOCollectionViewDataSource.swift in Sources */,
 				4C4921751BFD401E001511AC /* FOTableViewController.swift in Sources */,
-				4CB2D8361F0BED1D00854ECE /* IdentifierPath.swift in Sources */,
 				4CB2D83C1F0BED1D00854ECE /* FOTablePagingItem.swift in Sources */,
-				4CB2D83A1F0BED1D00854ECE /* Array+Updater.swift in Sources */,
 				4C49217F1BFD4021001511AC /* FOCompletionOperation.swift in Sources */,
 				4C49216D1BFD401B001511AC /* FOCollectionViewController+Delegate.swift in Sources */,
 				4C49217A1BFD401E001511AC /* FOTableItem.swift in Sources */,
 				4C4921761BFD401E001511AC /* FOTableViewController+Delegate.swift in Sources */,
 				4C49217D1BFD4021001511AC /* FOCollectionsGlobal.swift in Sources */,
-				4CB2D8341F0BED1D00854ECE /* FOCollectionUpdater.swift in Sources */,
 				4CB2D83D1F0BED1D00854ECE /* NSIndexPath+Extensions.swift in Sources */,
-				4CB2D8351F0BED1D00854ECE /* StatePath.swift in Sources */,
 				4C4921721BFD401B001511AC /* FOCollectionItem.swift in Sources */,
 				4C49216E1BFD401B001511AC /* FOCollectionViewController+DelegateFlowLayout.swift in Sources */,
-				4CB2D8391F0BED1D00854ECE /* FOTableViewDataSource+Updater.swift in Sources */,
 				4C4921791BFD401E001511AC /* FOTableSection.swift in Sources */,
 				4C49217E1BFD4021001511AC /* NSArray+Extensions.swift in Sources */,
 				4C4921771BFD401E001511AC /* FOTableViewDataSource.swift in Sources */,
 				4C4921701BFD401B001511AC /* FOCollectionViewDataSource+Delegate.swift in Sources */,
 				4C49216C1BFD401B001511AC /* FOCollectionViewController.swift in Sources */,
-				4CB2D83B1F0BED1D00854ECE /* FOTableViewController+Updater.swift in Sources */,
-				4CB2D8381F0BED1D00854ECE /* Move.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,39 +501,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C28B98B1EE71406006AE8A5 /* Move.swift in Sources */,
+				4CB2D84C1F0BF74400854ECE /* Move.swift in Sources */,
 				4C7520851BFA34CA00D01CC1 /* FOCollectionViewDataSource.swift in Sources */,
 				4C34C1ED1C756F4300A71D29 /* MenuController.swift in Sources */,
 				4C7520741BFA34C500D01CC1 /* FOTableViewDataSource+Delegate.swift in Sources */,
 				4C7520881BFA34CA00D01CC1 /* FOCollectionItem.swift in Sources */,
+				4CB2D84E1F0BF74400854ECE /* Update.swift in Sources */,
+				4CB2D8481F0BF74400854ECE /* CollectionUpdater.swift in Sources */,
 				4C7AEC3A1BF502AE001A2636 /* CollectionViewController.swift in Sources */,
 				4C7520861BFA34CA00D01CC1 /* FOCollectionViewDataSource+Delegate.swift in Sources */,
-				4C28B9831EE7137F006AE8A5 /* Array+Updater.swift in Sources */,
 				4C7AEC071BF5027A001A2636 /* AppDelegate.swift in Sources */,
 				4C7520711BFA34C500D01CC1 /* FOTableViewController.swift in Sources */,
 				4C7520761BFA34C500D01CC1 /* FOTableItem.swift in Sources */,
-				4C28B9851EE713A5006AE8A5 /* Update.swift in Sources */,
+				4CB2D8491F0BF74400854ECE /* FOTableViewController+Updater.swift in Sources */,
+				4CB2D84A1F0BF74400854ECE /* FOTableViewDataSource+Updater.swift in Sources */,
 				4C7520661BFA34BD00D01CC1 /* FOCollectionsGlobal.swift in Sources */,
 				D1A861141BFFB3E700FA6479 /* FOCollectionPagingItem.swift in Sources */,
 				4C7520871BFA34CA00D01CC1 /* FOCollectionSection.swift in Sources */,
+				4CB2D84B1F0BF74400854ECE /* IdentifierPath.swift in Sources */,
 				4CA07F491F02C0EA0083A8E6 /* DemoTableCell.swift in Sources */,
 				4CA07F4B1F02C1C50083A8E6 /* DemoTableSection.swift in Sources */,
 				4C7520831BFA34CA00D01CC1 /* FOCollectionViewController+Delegate.swift in Sources */,
-				4C28B9891EE713FB006AE8A5 /* IdentifierPath.swift in Sources */,
 				4C7AEC3B1BF502AE001A2636 /* TableViewController.swift in Sources */,
 				4C7520731BFA34C500D01CC1 /* FOTableViewDataSource.swift in Sources */,
-				4CCA35FC1C03F41500A09AD6 /* FOPairedIndexPath.swift in Sources */,
 				4C7520821BFA34CA00D01CC1 /* FOCollectionViewController.swift in Sources */,
 				4C7520721BFA34C500D01CC1 /* FOTableViewController+Delegate.swift in Sources */,
-				4CB756CE1ED4B9D3000C3414 /* FOCollectionUpdater.swift in Sources */,
+				4CB2D84D1F0BF74400854ECE /* StatePath.swift in Sources */,
 				D1A861101BFFAEFE00FA6479 /* CollectionSectionItem.swift in Sources */,
-				4C4A18851F069BC100F53251 /* FOTableViewController+Updater.swift in Sources */,
 				4C34C1EF1C756FC800A71D29 /* MenuItem.swift in Sources */,
 				D1A8610E1BFFAEBC00FA6479 /* CollectionCellItem.swift in Sources */,
 				4C7520681BFA34BD00D01CC1 /* FOCompletionOperation.swift in Sources */,
-				4C28B9811EE71324006AE8A5 /* FOTableViewDataSource+Updater.swift in Sources */,
+				4CB2D8471F0BF74400854ECE /* Array+Updater.swift in Sources */,
 				4C9FAE9C1C038058001A4885 /* DemoTableItem.swift in Sources */,
-				4C28B9871EE713C6006AE8A5 /* StatePath.swift in Sources */,
 				4C7520671BFA34BD00D01CC1 /* NSArray+Extensions.swift in Sources */,
 				4CB029881CD7D32800F1252D /* FOTablePagingItem.swift in Sources */,
 				4C7520751BFA34C500D01CC1 /* FOTableSection.swift in Sources */,

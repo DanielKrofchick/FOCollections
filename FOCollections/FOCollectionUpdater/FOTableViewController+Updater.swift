@@ -10,7 +10,7 @@ import UIKit
 
 extension FOTableViewController {
     
-    func animateUpdate(_ to: [FOTableSection], with animation: UITableViewRowAnimation = .automatic, duration: TimeInterval? = nil, completion: (() -> ())? = nil) {
+    open func animateUpdate(_ to: [FOTableSection], with animation: UITableViewRowAnimation = .automatic, duration: TimeInterval? = nil, completion: (() -> ())? = nil) {
         queue.addOperation(FOCompletionOperation(work: {
             [weak self] (operation) -> Void in
             if let duration = duration {
@@ -48,7 +48,7 @@ extension FOTableViewController {
             let fromSections0 = dataSource.sections
             let fromPaths0 = dataSource.statePaths()
             let toPaths0 = dataSource.statePaths(sections: to)
-            let updater0 = FOCollectionUpdater(from: fromPaths0, to: toPaths0)
+            let updater0 = CollectionUpdater(from: fromPaths0, to: toPaths0)
             let update0 = updater0.update(index: 0)
             
             updateSections(update: update0, with: animation)
@@ -74,7 +74,7 @@ extension FOTableViewController {
             
             let fromPaths1 = dataSource.statePaths()
             let toPaths1 = dataSource.statePaths(sections: to)
-            let updater1 = FOCollectionUpdater(from: fromPaths1, to: toPaths1)
+            let updater1 = CollectionUpdater(from: fromPaths1, to: toPaths1)
             let update1 = updater1.update(index: 1)
             
             updateItems(update: update1, with: animation)

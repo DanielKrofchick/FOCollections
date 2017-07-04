@@ -1,5 +1,5 @@
 //
-//  FOCollectionUpdater.swift
+//  CollectionUpdater.swift
 //  FOCollections
 //
 //  Created by Daniel Krofchick on 2017-05-23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FOCollectionUpdater {
+struct CollectionUpdater {
     
     let from: [StatePath]
     let to: [StatePath]
