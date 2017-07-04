@@ -86,35 +86,35 @@ extension FOTableViewController {
             return 0
         }
     }
-
+    
     open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        var result = UITableViewAutomaticDimension
+        
         if let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, estimatedHeightForRowAt: indexPath) {
-            return value
-        } else if let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, heightForRowAt: indexPath) {
-            return value
-        } else {
-            return UITableViewAutomaticDimension
+            result = value
         }
+        
+        return result
     }
     
     open func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        if let value = delegateWithSectionIndex(section)?.tableView?(tableView, heightForHeaderInSection: section) {
-            return value
-        } else if let value = delegateWithSectionIndex(section)?.tableView?(tableView, estimatedHeightForHeaderInSection: section) {
-            return value
-        } else {
-            return 0
+        var result = UITableViewAutomaticDimension
+        
+        if let value = delegateWithSectionIndex(section)?.tableView?(tableView, estimatedHeightForHeaderInSection: section) {
+            result = value
         }
+        
+        return result
     }
     
     open func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-        if let value = delegateWithSectionIndex(section)?.tableView?(tableView, heightForFooterInSection: section) {
-            return value
-        } else if let value = delegateWithSectionIndex(section)?.tableView?(tableView, estimatedHeightForFooterInSection: section) {
-            return value
-        } else {
-            return 0
+        var result = UITableViewAutomaticDimension
+        
+        if let value = delegateWithSectionIndex(section)?.tableView?(tableView, estimatedHeightForFooterInSection: section) {
+            result = value
         }
+        
+        return result
     }
 
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
