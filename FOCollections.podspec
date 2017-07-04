@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "FOCollections"
-  s.version      = "0.2.1"
+  s.version      = "0.2.2"
   s.summary      = "UITableView and UICollectionView controller and data-source classes that make it easy to work with large code bases."
   s.homepage     = "https://github.com/DanielKrofchick/FOCollections.git"
   s.license      = { :type => 'MIT', :text => <<-LICENSE
