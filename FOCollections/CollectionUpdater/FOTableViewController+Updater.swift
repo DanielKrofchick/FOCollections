@@ -15,15 +15,15 @@ extension FOTableViewController {
             [weak self] (operation) -> Void in
             if let duration = duration {
                 UIView.animate(withDuration: duration, animations: {
-                    self?.doAnimateUpdate(to, completion: completion, operation: operation)
+                    self?.doAnimateUpdate(to, animation: animation, completion: completion, operation: operation)
                 })
             } else {
-                self?.doAnimateUpdate(to, completion: completion, operation: operation)
+                self?.doAnimateUpdate(to, animation: animation, completion: completion, operation: operation)
             }
         }, queue: DispatchQueue.main))
     }
     
-    private func doAnimateUpdate(_ to: [FOTableSection], with animation: UITableViewRowAnimation = .automatic, completion: (() -> ())?, operation: FOCompletionOperation) {
+    private func doAnimateUpdate(_ to: [FOTableSection], animation: UITableViewRowAnimation, completion: (() -> ())?, operation: FOCompletionOperation) {
         //let date = Date()
         var doneCount = 0
         
