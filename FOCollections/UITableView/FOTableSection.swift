@@ -73,10 +73,11 @@ open class FOTableSection: NSObject, UITableViewDelegate {
         return view?.frame.height ?? 0
     }
     
-    // Need to provide a positive estimate value for heightForHeaderInSection to be called
+    // Need to provide a positive estimate value for heightForHeaderInSection to be called.
+    // Size larger than non-estimate causes animation glitch.
     public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         if self.tableView(tableView, viewForHeaderInSection: section) != nil {
-            return CGFloat(30)
+            return CGFloat(1)
         } else {
             return UITableViewAutomaticDimension
         }
@@ -95,9 +96,10 @@ open class FOTableSection: NSObject, UITableViewDelegate {
     }
     
     // Need to provide a positive estimate value for heightForFooterInSection to be called
+    // Size larger than non-estimate causes animation glitch.
     public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
         if self.tableView(tableView, viewForFooterInSection: section) != nil {
-            return CGFloat(30)
+            return CGFloat(1)
         } else {
             return UITableViewAutomaticDimension
         }
