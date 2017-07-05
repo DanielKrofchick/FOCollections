@@ -73,6 +73,15 @@ open class FOTableSection: NSObject, UITableViewDelegate {
         return view?.frame.height ?? 0
     }
     
+    // Need to provide a positive estimate value for heightForHeaderInSection to be called
+    public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        if self.tableView(tableView, viewForHeaderInSection: section) != nil {
+            return CGFloat(30)
+        } else {
+            return UITableViewAutomaticDimension
+        }
+    }
+    
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return footer
     }
@@ -83,6 +92,15 @@ open class FOTableSection: NSObject, UITableViewDelegate {
         sizeView(view, tableView: tableView)
         
         return view?.frame.height ?? 0
+    }
+    
+    // Need to provide a positive estimate value for heightForFooterInSection to be called
+    public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+        if self.tableView(tableView, viewForFooterInSection: section) != nil {
+            return CGFloat(30)
+        } else {
+            return UITableViewAutomaticDimension
+        }
     }
     
     fileprivate func sizeView(_ view: UIView?, tableView: UITableView) {
