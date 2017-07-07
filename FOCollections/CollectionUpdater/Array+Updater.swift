@@ -10,10 +10,14 @@ import Foundation
 
 extension Array {
     
-    func find(_ path: StatePath, at index: Int) -> [StatePath] {
-        return (self as! [StatePath]).filter{
-            $0.identifierPath[index] == path.identifierPath[index]
+    func find(_ path: StatePath, at index: Int) -> StatePath? {
+        for p in (self as! [StatePath]) {
+            if p.identifierPath[index] == path.identifierPath[index] {
+                return p
+            }
         }
+        
+        return nil
     }
     
     func updateIndexPath(_ path: StatePath, index: Int) -> StatePath  {
@@ -21,7 +25,7 @@ extension Array {
         
         if
             let _ = self as? [StatePath],
-            let found = find(path, at: index).first
+            let found = find(path, at: index)
         {
             result.indexPath = found.indexPath
         }
@@ -34,7 +38,7 @@ extension Array {
         
         if
             let _ = self as? [StatePath],
-            let found = find(move.from, at: index).first
+            let found = find(move.from, at: index)
         {
             result.from.indexPath = found.indexPath
         }
@@ -95,7 +99,7 @@ extension Array {
         
         to.forEach {
             tPath in
-            if let fPath = find(tPath, at: index).first {
+            if let fPath = find(tPath, at: index) {
                 moves.append(Move(from: fPath, to: tPath))
             }
         }

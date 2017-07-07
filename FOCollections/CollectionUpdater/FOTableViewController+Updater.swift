@@ -51,6 +51,8 @@ extension FOTableViewController {
             let updater0 = CollectionUpdater(from: fromPaths0, to: toPaths0)
             let update0 = updater0.update(index: 0)
             
+            print("s", "d", update0.deletions?.count ?? 0, "i", update0.insertions?.count ?? 0, "m", update0.moves?.count ?? 0)
+            
             updateSections(update: update0, with: animation)
             
             let transformed = transform(fromSections: fromSections0, toSections: to, update: update0)
@@ -76,6 +78,8 @@ extension FOTableViewController {
             let toPaths1 = dataSource.statePaths(sections: to)
             let updater1 = CollectionUpdater(from: fromPaths1, to: toPaths1)
             let update1 = updater1.update(index: 1)
+            
+            print("i", "d", update1.deletions?.count ?? 0, "i", update1.insertions?.count ?? 0, "m", update1.moves?.count ?? 0)
             
             updateItems(update: update1, with: animation)
             
