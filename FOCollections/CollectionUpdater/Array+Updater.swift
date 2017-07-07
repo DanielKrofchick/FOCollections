@@ -109,11 +109,8 @@ extension Array {
     
     func deleted(to: [StatePath], at index: Int) -> [StatePath] {
         return (self as! [StatePath]).filter{
-            aPath in
-            return to.filter{
-                toPath in
-                aPath.identifierPath[index] == toPath.identifierPath[index]
-                }.count == 0
+            path in
+            return to.find(path, at: index) == nil
         }
     }
     
