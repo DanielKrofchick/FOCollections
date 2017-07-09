@@ -60,7 +60,7 @@ struct CollectionUpdater {
         }
         
         // deletions
-        update.deletions = m.deleted(to: t, at: index).sorted()
+        update.deletions = m.deleted(to: t, at: index, map: nil).sorted()
         
         update.deletions?.forEach {
             m = m.delete($0, at: index)
@@ -68,7 +68,7 @@ struct CollectionUpdater {
         }
         
         // insertions
-        update.insertions = t.deleted(to: m, at: index).sorted()
+        update.insertions = t.deleted(to: m, at: index, map: nil).sorted()
 
         update.insertions?.forEach {
             m = m.insert(path: $0, at: index)
@@ -76,19 +76,19 @@ struct CollectionUpdater {
         }
         
         // moves
-        update.moves = m.moves(to: t, at: index)
+        update.moves = m.moves(to: t, at: index, map: nil)
         
         // transform back to f indexPaths
         if let insertions = update.insertions {
-            update.insertions = insertions.map{f.updateIndexPath($0, index: index)}
+            update.insertions = insertions.map{f.updateIndexPath($0, index: index, map: nil)}
         }
         
         if let deletions = update.deletions {
-            update.deletions = deletions.map{f.updateIndexPath($0, index: index)}
+            update.deletions = deletions.map{f.updateIndexPath($0, index: index, map: nil)}
         }
         
         if let moves = update.moves {
-            update.moves = moves.map{f.updateIndexPath($0, index: index)}
+            update.moves = moves.map{f.updateIndexPath($0, index: index, map: nil)}
         }
         
         // Filter out moves that don't go anywhere
