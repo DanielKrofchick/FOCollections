@@ -191,6 +191,7 @@
 				4CB2D8451F0BF74400854ECE /* StatePath.swift */,
 				4CB2D8461F0BF74400854ECE /* Update.swift */,
 				4CB2D8421F0BF74400854ECE /* FOTableViewDataSource+Updater.swift */,
+				4CB2D8411F0BF74400854ECE /* FOTableViewController+Updater.swift */,
 			);
 			name = CollectionUpdater;
 			sourceTree = "<group>";
@@ -260,7 +261,6 @@
 			children = (
 				4C75205F1BFA348100D01CC1 /* FOCollections */,
 				4C4921511BFD3FEB001511AC /* FOCollections.h */,
-				4CB2D8411F0BF74400854ECE /* FOTableViewController+Updater.swift */,
 				4C49218A1BFD42A5001511AC /* FOCollections.podspec */,
 				4C4921531BFD3FEB001511AC /* Info.plist */,
 				4C7AEC051BF5027A001A2636 /* Demo */,

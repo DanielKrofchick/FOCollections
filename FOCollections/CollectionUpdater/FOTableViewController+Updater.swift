@@ -24,7 +24,7 @@ extension FOTableViewController {
     }
     
     private func doAnimateUpdate(_ to: [FOTableSection], animation: UITableViewRowAnimation, completion: (() -> ())?, operation: FOCompletionOperation) {
-        //let date = Date()
+        let date = Date()
         var doneCount = 0
         
         func processDone() {
@@ -39,7 +39,7 @@ extension FOTableViewController {
         func doUpdateSections() {
             CATransaction.begin()
             CATransaction.setCompletionBlock {
-                //print("first", Date().timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate)
+                print("doAnimateUpdate", "sections-animate", Date().timeIntervalSince(date))
                 processDone()
             }
             
@@ -60,6 +60,7 @@ extension FOTableViewController {
             _ = dataSource.clearAllItems(tableView)
             dataSource.insertSections(transformed, atIndexes: IndexSet(integersIn: 0..<transformed.count), tableView: tableView, viewController: self)
             
+            print("doAnimateUpdate", "sections-compute", Date().timeIntervalSince(date))
             tableView.endUpdates()
             
             CATransaction.commit()
@@ -68,7 +69,7 @@ extension FOTableViewController {
         func doUpdateItems() {
             CATransaction.begin()
             CATransaction.setCompletionBlock {
-                //print("second", Date().timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate)
+                print("doAnimateUpdate", "items-animate", Date().timeIntervalSince(date))
                 processDone()
             }
             
@@ -86,14 +87,18 @@ extension FOTableViewController {
             _ = dataSource.clearAllItems(tableView)
             dataSource.insertSections(to, atIndexes: IndexSet(integersIn: 0..<to.count), tableView: tableView, viewController: self)
             
+            print("doAnimateUpdate", "items-compute", Date().timeIntervalSince(date))
             tableView.endUpdates()
             
             CATransaction.commit()
         }
         
         doUpdateSections()
+        print("doAnimateUpdate", "sections", Date().timeIntervalSince(date))
         doUpdateItems()
+        print("doAnimateUpdate", "items", Date().timeIntervalSince(date))
         refreshVisibleCells()
+        print("doAnimateUpdate", "refresh", Date().timeIntervalSince(date))
     }
     
     fileprivate func transform(fromSections: [FOTableSection], toSections: [FOTableSection], update: Update) -> [FOTableSection] {

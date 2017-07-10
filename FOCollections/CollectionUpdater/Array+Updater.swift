@@ -22,10 +22,9 @@ extension Array {
     
     func find(_ path: StatePath, at index: Int, map: [IdentifierPath: StatePath]?) -> StatePath? {
         if
-            let map = map,
-            let result = map[path.identifierPath]
+            let map = map
         {
-            return result
+            return map[path.identifierPath]
         }
         
         for p in (self as! [StatePath]) {
@@ -42,7 +41,7 @@ extension Array {
         var result = path
         
         if
-            let _ = self as? [StatePath],
+//            let _ = self as? [StatePath],
             let found = find(path, at: index, map: m)
         {
             result.indexPath = found.indexPath
@@ -55,7 +54,7 @@ extension Array {
         var result = move
         
         if
-            let _ = self as? [StatePath],
+//            let _ = self as? [StatePath],
             let found = find(move.from, at: index, map: map)
         {
             result.from.indexPath = found.indexPath
@@ -65,9 +64,25 @@ extension Array {
     }
     
     func delete(_ path: StatePath, at index: Int) -> [StatePath] {
-        return (self as! [StatePath]).filter{
-            $0.identifierPath[0...index] != path.identifierPath[0...index]
+        var result = (self as! [StatePath])
+        var offset: Int?
+        
+        for r in result.enumerated() {
+            if r.element.identifierPath[0...index] == path.identifierPath[0...index] {
+                offset = r.offset
+                break
+            }
         }
+        
+        if let offset = offset {
+            result.remove(at: offset)
+        }
+        
+        return result
+        
+//        return (self as! [StatePath]).filter{
+//            $0.identifierPath[0...index] != path.identifierPath[0...index]
+//        }
     }
     
     func insert(path: StatePath, at index: Int) -> [StatePath] {
@@ -76,27 +91,25 @@ extension Array {
     
     // up (+1), down (-1)
     func shift(_ path: StatePath, by: Int, at index: Int) -> [StatePath] {
-        var result = self as! [StatePath]
+        let pathA = path.indexPath[0..<index]
+        let pathB = path.indexPath[index]
+        let pathC = path.identifierPath[0..<index]
         
-        for i in 0..<result.count {
-            let p = result[i]
-            
+        return (self as! [StatePath]).map {
+            p in
             if
-                p.indexPath[0..<index] == path.indexPath[0..<index],
-                p.indexPath[index] >= path.indexPath[index],
-                p.identifierPath[0..<index] != path.identifierPath[0..<index]
+                p.indexPath[0..<index] == pathA,
+                p.indexPath[index] >= pathB,
+                p.identifierPath[0..<index] != pathC
             {
                 var newIndexPath = p.indexPath
                 newIndexPath[index] = Swift.max(0, newIndexPath[index] + by)
                 
-                let newPath = StatePath(indexPath: newIndexPath, identifierPath: p.identifierPath)
-                
-                result.remove(at: i)
-                result.insert(newPath, at: i)
+                return StatePath(indexPath: newIndexPath, identifierPath: p.identifierPath)
+            } else {
+                return p
             }
         }
-        
-        return result
     }
     
     func move(_ move: Move, at index: Int) -> [StatePath] {
@@ -113,12 +126,12 @@ extension Array {
     }
         
     func moves(to: [StatePath], at index: Int, map: [IdentifierPath: StatePath]?) -> [Move] {
-        let m = map ?? to.mapping()
+        let m = map ?? mapping()
         var moves = [Move]()
         
-        (self as! [StatePath]).forEach {
-            fPath in
-            if let tPath = find(fPath, at: index, map: m) {
+        to.forEach {
+            tPath in
+            if let fPath = find(tPath, at: index, map: m) {
                 moves.append(Move(from: fPath, to: tPath))
             }
         }

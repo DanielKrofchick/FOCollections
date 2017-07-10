@@ -108,7 +108,7 @@ class TableViewController: FOTableViewController {
                 
                 let date = Date()
                 this.animateUpdate(newSections, with: .automatic, duration: TimeInterval(this.slider.value), completion: {
-                    print(Date().timeIntervalSince(date) - TimeInterval(this.slider.value))
+                    print("animateUpdate", Date().timeIntervalSince(date), "slider", TimeInterval(this.slider.value))
                     
                     if this.autoPlay {
                         this.doMutate()
