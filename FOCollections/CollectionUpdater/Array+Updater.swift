@@ -41,7 +41,6 @@ extension Array {
         var result = path
         
         if
-//            let _ = self as? [StatePath],
             let found = find(path, at: index, map: m)
         {
             result.indexPath = found.indexPath
@@ -54,7 +53,6 @@ extension Array {
         var result = move
         
         if
-//            let _ = self as? [StatePath],
             let found = find(move.from, at: index, map: map)
         {
             result.from.indexPath = found.indexPath
@@ -79,10 +77,6 @@ extension Array {
         }
         
         return result
-        
-//        return (self as! [StatePath]).filter{
-//            $0.identifierPath[0...index] != path.identifierPath[0...index]
-//        }
     }
     
     func insert(path: StatePath, at index: Int) -> [StatePath] {
@@ -124,7 +118,7 @@ extension Array {
             return newPath
         })
     }
-        
+    
     func moves(to: [StatePath], at index: Int, map: [IdentifierPath: StatePath]?) -> [Move] {
         let m = map ?? mapping()
         var moves = [Move]()

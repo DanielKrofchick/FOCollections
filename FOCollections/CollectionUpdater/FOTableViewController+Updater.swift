@@ -24,7 +24,7 @@ extension FOTableViewController {
     }
     
     private func doAnimateUpdate(_ to: [FOTableSection], animation: UITableViewRowAnimation, completion: (() -> ())?, operation: FOCompletionOperation) {
-        let date = Date()
+        
         var doneCount = 0
         
         func processDone() {
@@ -39,19 +39,16 @@ extension FOTableViewController {
         func doUpdateSections() {
             CATransaction.begin()
             CATransaction.setCompletionBlock {
-                print("doAnimateUpdate", "sections-animate", Date().timeIntervalSince(date))
                 processDone()
             }
             
             tableView.beginUpdates()
             
             let fromSections0 = dataSource.sections
-            let fromPaths0 = dataSource.statePaths()
+            let fromPaths0 = dataSource.statePaths(sections: dataSource.sections)
             let toPaths0 = dataSource.statePaths(sections: to)
             let updater0 = CollectionUpdater(from: fromPaths0, to: toPaths0)
             let update0 = updater0.update(index: 0)
-            
-            print("s", "d", update0.deletions?.count ?? 0, "i", update0.insertions?.count ?? 0, "m", update0.moves?.count ?? 0)
             
             updateSections(update: update0, with: animation)
             
@@ -60,7 +57,6 @@ extension FOTableViewController {
             _ = dataSource.clearAllItems(tableView)
             dataSource.insertSections(transformed, atIndexes: IndexSet(integersIn: 0..<transformed.count), tableView: tableView, viewController: self)
             
-            print("doAnimateUpdate", "sections-compute", Date().timeIntervalSince(date))
             tableView.endUpdates()
             
             CATransaction.commit()
@@ -69,36 +65,29 @@ extension FOTableViewController {
         func doUpdateItems() {
             CATransaction.begin()
             CATransaction.setCompletionBlock {
-                print("doAnimateUpdate", "items-animate", Date().timeIntervalSince(date))
                 processDone()
             }
             
             tableView.beginUpdates()
             
-            let fromPaths1 = dataSource.statePaths()
+            let fromPaths1 = dataSource.statePaths(sections: dataSource.sections)
             let toPaths1 = dataSource.statePaths(sections: to)
             let updater1 = CollectionUpdater(from: fromPaths1, to: toPaths1)
             let update1 = updater1.update(index: 1)
-            
-            print("i", "d", update1.deletions?.count ?? 0, "i", update1.insertions?.count ?? 0, "m", update1.moves?.count ?? 0)
             
             updateItems(update: update1, with: animation)
             
             _ = dataSource.clearAllItems(tableView)
             dataSource.insertSections(to, atIndexes: IndexSet(integersIn: 0..<to.count), tableView: tableView, viewController: self)
             
-            print("doAnimateUpdate", "items-compute", Date().timeIntervalSince(date))
             tableView.endUpdates()
             
             CATransaction.commit()
         }
         
         doUpdateSections()
-        print("doAnimateUpdate", "sections", Date().timeIntervalSince(date))
         doUpdateItems()
-        print("doAnimateUpdate", "items", Date().timeIntervalSince(date))
         refreshVisibleCells()
-        print("doAnimateUpdate", "refresh", Date().timeIntervalSince(date))
     }
     
     fileprivate func transform(fromSections: [FOTableSection], toSections: [FOTableSection], update: Update) -> [FOTableSection] {

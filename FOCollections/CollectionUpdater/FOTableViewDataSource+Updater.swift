@@ -10,22 +10,6 @@ import Foundation
 
 extension FOTableViewDataSource {
     
-    func statePaths() -> [StatePath] {
-        var result = [StatePath]()
-        
-        enumerated().forEach {
-            (index, item) in
-            if
-                let indexPath = self.indexPathsForItem(item).first,
-                let identifierPath = self.indentifierPath(indexPath: indexPath)
-            {
-                result.append(StatePath(indexPath: indexPath, identifierPath: identifierPath))
-            }
-        }
-        
-        return result
-    }
-    
     func statePaths(sections: [FOTableSection]) -> [StatePath] {
         var result = [StatePath]()
         

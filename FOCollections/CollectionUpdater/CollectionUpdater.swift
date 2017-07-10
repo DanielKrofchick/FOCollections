@@ -19,16 +19,12 @@ struct CollectionUpdater {
     }
     
     func update(index: Int, filter: Update? = nil) -> Update {
-        let date = Date()
         var update = Update(index: index)
         
         let f = Array(Set(from.map{$0[0...index]!}.filter{$0 != nil}))
         var t = Array(Set(to.map{$0[0...index]!}.filter{$0 != nil}))
         
         var m = f
-        
-        let format = "%.5f"
-        print("* initialize", String(format: format, Date().timeIntervalSince(date)))
         
         // This logic was designed to allow section and item updates at the same time,
         // but that doesn't work for many edge cases that result in two animations for the
@@ -65,51 +61,37 @@ struct CollectionUpdater {
         
         // deletions
         update.deletions = m.deleted(to: t, at: index, map: nil).sorted()
-        print("* calculate deletions", String(format: format, Date().timeIntervalSince(date)))
         
         update.deletions?.forEach {
-            let d = Date()
             m = m.delete($0, at: index)
-            print("* do deletions (1)", String(format: format, Date().timeIntervalSince(d)))
             m = m.shift($0, by: -1, at: index)
-            print("* do deletions (2)", String(format: format, Date().timeIntervalSince(d)))
         }
-        print("* do deletions", String(format: format, Date().timeIntervalSince(date)))
         
         // insertions
         update.insertions = t.deleted(to: m, at: index, map: nil).sorted()
-        print("* calculate insertions", String(format: format, Date().timeIntervalSince(date)))
         
         update.insertions?.forEach {
-            let d = Date()
             m = m.insert(path: $0, at: index)
-            print("* do insertions (1)", String(format: format, Date().timeIntervalSince(d)))
             m = m.shift($0, by: 1, at: index)
-            print("* do insertions (2)", String(format: format, Date().timeIntervalSince(d)))
         }
-        print("* do insertions", String(format: format, Date().timeIntervalSince(date)))
         
         // moves
         update.moves = m.moves(to: t, at: index, map: nil)
-        print("* calculate moves", String(format: format, Date().timeIntervalSince(date)))
-
+        
         // transform back to f indexPaths
         if let insertions = update.insertions {
             let map = f.mapping()
             update.insertions = insertions.map{f.updateIndexPath($0, index: index, map: map)}
-            print("* transform insertions", String(format: format, Date().timeIntervalSince(date)))
         }
         
         if let deletions = update.deletions {
             let map = f.mapping()
             update.deletions = deletions.map{f.updateIndexPath($0, index: index, map: map)}
-            print("* transform deletions", String(format: format, Date().timeIntervalSince(date)))
         }
         
         if let moves = update.moves {
             let map = f.mapping()
             update.moves = moves.map{f.updateIndexPath($0, index: index, map: map)}
-            print("* transform moves", String(format: format, Date().timeIntervalSince(date)))
         }
         
         // Filter out moves that don't go anywhere
@@ -117,7 +99,6 @@ struct CollectionUpdater {
             update.moves = moves.filter{
                 $0.from.indexPath != $0.to.indexPath
             }
-            print("* filter moves", String(format: format, Date().timeIntervalSince(date)))
         }
         
         return update
