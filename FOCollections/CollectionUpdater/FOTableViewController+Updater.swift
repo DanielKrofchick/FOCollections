@@ -24,7 +24,7 @@ extension FOTableViewController {
     }
     
     private func doAnimateUpdate(_ to: [FOTableSection], animation: UITableViewRowAnimation, completion: (() -> ())?, operation: FOCompletionOperation) {
-        //let date = Date()
+        
         var doneCount = 0
         
         func processDone() {
@@ -39,14 +39,13 @@ extension FOTableViewController {
         func doUpdateSections() {
             CATransaction.begin()
             CATransaction.setCompletionBlock {
-                //print("first", Date().timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate)
                 processDone()
             }
             
             tableView.beginUpdates()
             
             let fromSections0 = dataSource.sections
-            let fromPaths0 = dataSource.statePaths()
+            let fromPaths0 = dataSource.statePaths(sections: dataSource.sections)
             let toPaths0 = dataSource.statePaths(sections: to)
             let updater0 = CollectionUpdater(from: fromPaths0, to: toPaths0)
             let update0 = updater0.update(index: 0)
@@ -66,13 +65,12 @@ extension FOTableViewController {
         func doUpdateItems() {
             CATransaction.begin()
             CATransaction.setCompletionBlock {
-                //print("second", Date().timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate)
                 processDone()
             }
             
             tableView.beginUpdates()
             
-            let fromPaths1 = dataSource.statePaths()
+            let fromPaths1 = dataSource.statePaths(sections: dataSource.sections)
             let toPaths1 = dataSource.statePaths(sections: to)
             let updater1 = CollectionUpdater(from: fromPaths1, to: toPaths1)
             let update1 = updater1.update(index: 1)

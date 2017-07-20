@@ -11,6 +11,7 @@ import Foundation
 struct IdentifierPath {
     
     var identifiers: [String]
+    fileprivate var cache = NSCache<NSString, iPath>()
     
     init(identifiers: [String]) {
         self.identifiers = identifiers
@@ -24,7 +25,15 @@ struct IdentifierPath {
         if range.lowerBound < 0 || range.upperBound > identifiers.count || identifiers.count == 0 {
             return nil
         } else {
-            return IdentifierPath(identifiers: Array(identifiers[range]))
+            if let c = cache.object(forKey: String(describing: range) as NSString) {
+                return c.x
+            }
+            
+            let path = IdentifierPath(identifiers: Array(identifiers[range]))
+            
+            cache.setObject(iPath(x: path), forKey: String(describing: range) as NSString)
+            
+            return path
         }
     }
     
@@ -32,17 +41,32 @@ struct IdentifierPath {
         return self[index...index]
     }
     
-    public subscript(range: CountableRange<Int>) -> IdentifierPath {
-        var result = [String]()
-        
-        identifiers.enumerated().forEach {
-            (index, identifier) in
-            if index >= range.lowerBound && index <= range.upperBound {
-                result.append(identifier)
+    public subscript(range: CountableRange<Int>) -> IdentifierPath? {
+        if range.lowerBound < 0 || range.upperBound > identifiers.count || identifiers.count == 0 {
+            return nil
+        } else {
+            if let c = cache.object(forKey: String(describing: range) as NSString) {
+                return c.x
             }
+            
+            let path = IdentifierPath(identifiers: Array(identifiers[range]))
+            
+            cache.setObject(iPath(x: path), forKey: String(describing: range) as NSString)
+            
+            return path
         }
+    }
+    
+}
+
+private class iPath: NSObject {
+    
+    var x: IdentifierPath!
+    
+    required init(x: IdentifierPath) {
+        super.init()
         
-        return IdentifierPath(identifiers: result)
+        self.x = x
     }
     
 }

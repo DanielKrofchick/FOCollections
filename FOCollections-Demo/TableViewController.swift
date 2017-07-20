@@ -8,14 +8,14 @@
 
 import UIKit
 
-let sectionMoveP = 0.2
+let sectionMoveP = 0.5
 let sectionDeleteP = 0.2
-let sectionInsertP = 0.2
+let sectionInsertP = 0.6
 let itemMoveP = 0.4
 let itemDeleteP = 0.2
 let itemInsertP = 0.2
-let newItemP = 0.6
-let newSectionP = 0.6
+let newItemP = 0.7
+let newSectionP = 0.99
 let sliderMin = Float(0.0)
 let sliderMax = Float(1.0)
 
@@ -106,13 +106,14 @@ class TableViewController: FOTableViewController {
                 oldSections.log(title: " ")
                 newSections.log(title: ">")
                 
+                let date = Date()
                 this.animateUpdate(newSections, with: .automatic, duration: TimeInterval(this.slider.value), completion: {
-                    DispatchQueue.main.asyncAfter(deadline: .now()) {
-                        if this.autoPlay {
-                            this.doMutate()
-                        } else {
-                            this.play = false
-                        }
+                    print("animateUpdate", Date().timeIntervalSince(date), "slider", TimeInterval(this.slider.value))
+                    
+                    if this.autoPlay {
+                        this.doMutate()
+                    } else {
+                        this.play = false
                     }
                 })
             }
