@@ -15,18 +15,21 @@ extension FOTableViewDataSource {
         
         sections.enumerated().forEach {
             (sectionIndex, section) in
-            section.items?.enumerated().forEach({
-                (itemIndex, item) in
-                if
-                    let sectionID = section.identifier,
-                    let itemID = item.identifier
-                {
-                    let identifierPath = IdentifierPath(identifiers: [sectionID, itemID])
-                    let indexPath = IndexPath(item: itemIndex, section: sectionIndex)
-                    
-                    result.append(StatePath(indexPath: indexPath, identifierPath: identifierPath))
+            if let sectionID = section.identifier {
+                if section.items?.isEmpty == false {
+                    section.items?.enumerated().forEach({
+                        (itemIndex, item) in
+                        if let itemID = item.identifier {
+                            let identifierPath = IdentifierPath(identifiers: [sectionID, itemID])
+                            let indexPath = IndexPath(item: itemIndex, section: sectionIndex)
+                            
+                            result.append(StatePath(indexPath: indexPath, identifierPath: identifierPath))
+                        }
+                    })
+                } else {
+                    result.append(StatePath(indexPath: IndexPath(index: sectionIndex), identifierPath: IdentifierPath(identifiers: [sectionID])))
                 }
-            })
+            }
         }
         
         return result

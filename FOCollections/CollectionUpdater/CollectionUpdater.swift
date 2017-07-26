@@ -21,8 +21,8 @@ struct CollectionUpdater {
     func update(index: Int, filter: Update? = nil) -> Update {
         var update = Update(index: index)
         
-        let f = Array(Set(from.map{$0[0...index]!}.filter{$0 != nil}))
-        var t = Array(Set(to.map{$0[0...index]!}.filter{$0 != nil}))
+        let f = Array(Set(from.flatMap{$0[0...index]}))
+        var t = Array(Set(to.flatMap{$0[0...index]}))
         
         var m = f
         

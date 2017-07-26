@@ -22,7 +22,7 @@ struct IdentifierPath {
     }
     
     public subscript(range: CountableClosedRange<Int>) -> IdentifierPath? {
-        if range.lowerBound < 0 || range.upperBound > identifiers.count || identifiers.count == 0 {
+        if range.lowerBound < 0 || range.upperBound >= identifiers.count || identifiers.count == 0 {
             return nil
         } else {
             if let c = cache.object(forKey: String(describing: range) as NSString) {
@@ -42,7 +42,7 @@ struct IdentifierPath {
     }
     
     public subscript(range: CountableRange<Int>) -> IdentifierPath? {
-        if range.lowerBound < 0 || range.upperBound > identifiers.count || identifiers.count == 0 {
+        if range.lowerBound < 0 || range.upperBound >= identifiers.count || identifiers.count == 0 {
             return nil
         } else {
             if let c = cache.object(forKey: String(describing: range) as NSString) {
