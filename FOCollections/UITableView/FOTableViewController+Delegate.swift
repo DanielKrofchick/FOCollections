@@ -293,6 +293,7 @@ extension FOTableViewController {
             }
             
             cell?.separatorInset = tableView.separatorInset
+            cell?.layoutMargins = tableView.layoutMargins
         }
         
         return cell
