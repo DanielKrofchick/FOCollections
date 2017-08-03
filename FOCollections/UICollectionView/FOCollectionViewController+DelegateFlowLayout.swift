@@ -22,7 +22,7 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
             
             return value
         } else {
-            return CGSize.zero
+            return (collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize ?? CGSize.zero
         }
     }
     
@@ -30,7 +30,7 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
         if let value = delegateWithSectionIndex(section)?.collectionView?(collectionView, layout: collectionViewLayout, insetForSectionAt: section) {
             return value
         } else {
-            return UIEdgeInsets.zero
+            return (collectionViewLayout as? UICollectionViewFlowLayout)?.sectionInset ?? UIEdgeInsets.zero
         }
     }
     
@@ -38,7 +38,7 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
         if let value = delegateWithSectionIndex(section)?.collectionView?(collectionView, layout: collectionViewLayout, minimumLineSpacingForSectionAt: section) {
             return value
         } else {
-            return 0
+            return (collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing ?? 0
         }
     }
     
@@ -46,7 +46,7 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
         if let value = delegateWithSectionIndex(section)?.collectionView?(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: section) {
             return value
         } else {
-            return 0
+            return (collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing ?? 0
         }
     }
     
@@ -54,7 +54,7 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
         if let value = delegateWithSectionIndex(section)?.collectionView?(collectionView, layout: collectionViewLayout, referenceSizeForHeaderInSection: section) {
             return value
         } else {
-            return CGSize.zero
+            return (collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize ?? CGSize.zero
         }
     }
     
@@ -62,7 +62,7 @@ extension FOCollectionViewController: UICollectionViewDelegateFlowLayout {
         if let value = delegateWithSectionIndex(section)?.collectionView?(collectionView, layout: collectionViewLayout, referenceSizeForFooterInSection: section) {
             return value
         } else {
-            return CGSize.zero
+            return (collectionViewLayout as? UICollectionViewFlowLayout)?.footerReferenceSize ?? CGSize.zero
         }
     }
     
