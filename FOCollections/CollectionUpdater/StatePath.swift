@@ -36,7 +36,7 @@ extension StatePath: Hashable {
     
     var hashValue: Int {
         get {
-            return indexPath.hashValue + identifierPath.hashValue
+            return indexPath.hashValue ^ identifierPath.hashValue
         }
     }
 }

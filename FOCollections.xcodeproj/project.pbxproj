@@ -393,6 +393,7 @@
 					};
 					4C7AEC021BF5027A001A2636 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = 65BXR42ZXA;
 						LastSwiftMigration = 0820;
 					};
 				};
@@ -758,6 +759,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 65BXR42ZXA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FOCollections-Demo",
@@ -776,6 +778,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 65BXR42ZXA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FOCollections-Demo",
