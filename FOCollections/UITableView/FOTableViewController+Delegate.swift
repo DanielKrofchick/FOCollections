@@ -87,30 +87,63 @@ extension FOTableViewController {
         }
     }
     
+    open func tableView(_ tableView: UITableView, shouldEstimateHeightForRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
     open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         var result = UITableViewAutomaticDimension
         
-        if let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, estimatedHeightForRowAt: indexPath) {
+        if
+            self.tableView(tableView, shouldEstimateHeightForRowAt: indexPath),
+            let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, estimatedHeightForRowAt: indexPath)
+        {
+            result = value
+        } else if
+            let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, heightForRowAt: indexPath)
+        {
             result = value
         }
         
         return result
+    }
+
+    open func tableView(_ tableView: UITableView, shouldEstimateHeightForHeaderInSection section: Int) -> Bool {
+        return false
     }
     
     open func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         var result = UITableViewAutomaticDimension
         
-        if let value = delegateWithSectionIndex(section)?.tableView?(tableView, estimatedHeightForHeaderInSection: section) {
+        if
+            self.tableView(tableView, shouldEstimateHeightForHeaderInSection: section),
+            let value = delegateWithSectionIndex(section)?.tableView?(tableView, estimatedHeightForHeaderInSection: section)
+        {
+            result = value
+        } else if
+            let value = delegateWithSectionIndex(section)?.tableView?(tableView, heightForHeaderInSection: section)
+        {
             result = value
         }
         
         return result
     }
+
+    open func tableView(_ tableView: UITableView, shouldEstimateHeightForFooterInSection section: Int) -> Bool {
+        return false
+    }
     
     open func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
         var result = UITableViewAutomaticDimension
         
-        if let value = delegateWithSectionIndex(section)?.tableView?(tableView, estimatedHeightForFooterInSection: section) {
+        if
+            self.tableView(tableView, shouldEstimateHeightForFooterInSection: section),
+            let value = delegateWithSectionIndex(section)?.tableView?(tableView, estimatedHeightForFooterInSection: section)
+        {
+            result = value
+        } else if
+            let value = delegateWithSectionIndex(section)?.tableView?(tableView, heightForFooterInSection: section)
+        {
             result = value
         }
         
