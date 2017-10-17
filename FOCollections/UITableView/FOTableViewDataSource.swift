@@ -84,6 +84,7 @@ open class FOTableViewDataSource: NSObject {
         keyCache.removeAll(keepingCapacity: true)
     }
     
+    @discardableResult
     open func appendItems(_ items: [FOTableItem], toSectionAtIndex sectionIndex: Int, tableView: UITableView, viewController: UIViewController) -> [IndexPath]? {
         var indexPaths: [IndexPath]? = nil
         
@@ -104,6 +105,7 @@ open class FOTableViewDataSource: NSObject {
         return indexPaths
     }
     
+    @discardableResult
     open func prependItems(_ items: [FOTableItem], toSectionAtIndex sectionIndex: Int, tableView: UITableView, viewController: UIViewController) -> [IndexPath]? {
         var indexPaths: [IndexPath]? = nil
         
@@ -126,6 +128,7 @@ open class FOTableViewDataSource: NSObject {
         return indexPaths
     }
     
+    @discardableResult
     open func clearAllItems(_ tableView: UITableView) -> IndexSet? {
         let indexes = IndexSet(integersIn: NSMakeRange(0, numberOfSections(in: tableView)).toRange()!)
         deleteSectionsAtIndexes(indexes, tableView: tableView)
@@ -133,6 +136,7 @@ open class FOTableViewDataSource: NSObject {
         return indexes.count == 0 ? nil : indexes
     }
     
+    @discardableResult
     open func setPagingState(_ pagingState: PagingState, sectionIndex: Int, tableView: UITableView, viewController: UIViewController) -> IndexPath? {
         var pagingIndexPath: IndexPath? = nil
         

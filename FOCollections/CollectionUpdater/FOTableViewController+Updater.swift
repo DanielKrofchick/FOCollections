@@ -54,7 +54,7 @@ extension FOTableViewController {
             
             let transformed = transform(fromSections: fromSections0, toSections: to, update: update0)
             
-            _ = dataSource.clearAllItems(tableView)
+            dataSource.clearAllItems(tableView)
             dataSource.insertSections(transformed, atIndexes: IndexSet(integersIn: 0..<transformed.count), tableView: tableView, viewController: self)
             
             tableView.endUpdates()
@@ -77,7 +77,7 @@ extension FOTableViewController {
             
             updateItems(update: update1, with: animation)
             
-            _ = dataSource.clearAllItems(tableView)
+            dataSource.clearAllItems(tableView)
             dataSource.insertSections(to, atIndexes: IndexSet(integersIn: 0..<to.count), tableView: tableView, viewController: self)
             
             tableView.endUpdates()

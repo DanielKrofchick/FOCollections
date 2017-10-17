@@ -87,6 +87,7 @@ open class FOCollectionViewDataSource: NSObject {
         keyCache.removeAll(keepingCapacity: true)
     }
     
+    @discardableResult
     open func appendItems(_ items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, collectionView: UICollectionView, viewController: UIViewController) -> [IndexPath]? {
         var indexPaths: [IndexPath]? = nil
 
@@ -107,6 +108,7 @@ open class FOCollectionViewDataSource: NSObject {
         return indexPaths
     }
     
+    @discardableResult
     open func prependItems(_ items: [FOCollectionItem], toSectionAtIndex sectionIndex: Int, collectionView: UICollectionView, viewController: UIViewController) -> [IndexPath]? {
         var indexPaths: [IndexPath]? = nil
         
@@ -129,6 +131,7 @@ open class FOCollectionViewDataSource: NSObject {
         return indexPaths
     }
     
+    @discardableResult
     open func clearAllItems(_ collectionView: UICollectionView) -> IndexSet? {
         let indexes = IndexSet(integersIn: NSMakeRange(0, numberOfSections(in: collectionView)).toRange()!)
         deleteSectionsAtIndexes(indexes, collectionView: collectionView)
@@ -136,6 +139,7 @@ open class FOCollectionViewDataSource: NSObject {
         return indexes.count == 0 ? nil : indexes
     }
     
+    @discardableResult
     open func setPagingState(_ pagingState: PagingState, sectionIndex: Int, collectionView: UICollectionView, viewController: UIViewController) -> IndexPath? {
         var pagingIndexPath: IndexPath? = nil
         
