@@ -178,11 +178,11 @@ extension FOTableViewController {
         delegateWithIndexPath(indexPath)?.tableView?(tableView, didUnhighlightRowAt: indexPath)
     }
     
-    open public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    open func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         return delegateWithIndexPath(indexPath)?.tableView?(tableView, willSelectRowAt: indexPath)
     }
     
-    open public func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
+    open func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
         return delegateWithIndexPath(indexPath)?.tableView?(tableView, willDeselectRowAt: indexPath)
     }
     
@@ -202,11 +202,11 @@ extension FOTableViewController {
         }
     }
     
-    open public func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+    open func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return delegateWithIndexPath(indexPath)?.tableView?(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath)
     }
     
-    open public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    open func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         return delegateWithIndexPath(indexPath)?.tableView?(tableView, editActionsForRowAt: indexPath)
     }
 
