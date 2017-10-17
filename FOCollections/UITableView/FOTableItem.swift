@@ -96,6 +96,12 @@ open class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {return 0}
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {return UITableViewCell()}
     
+    // Default implementations.
+    open func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {return indexPath}
+    open func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {return indexPath}
+    open func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {return "Delete"}
+    open func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {return nil}
+    
 }
 
 public protocol Equality {
