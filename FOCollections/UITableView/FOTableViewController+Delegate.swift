@@ -86,28 +86,38 @@ extension FOTableViewController {
             return 0
         }
     }
-    
-    open func tableView(_ tableView: UITableView, shouldEstimateHeightForRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-    
-    open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        var result = UITableViewAutomaticDimension
-        
-        if
-            self.tableView(tableView, shouldEstimateHeightForRowAt: indexPath),
-            let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, estimatedHeightForRowAt: indexPath)
-        {
-            result = value
-        } else if
-            let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, heightForRowAt: indexPath)
-        {
-            result = value
-        }
-        
-        return result
-    }
 
+    // Enabling casues animation glitches if estimated-height != height. Routing through heightForRowAt, to disable, causes slow table updates.
+    // Implement tableView:estimatedHeightForRowAt and route through delegateTableView:estimatedHeightForRowAt to forward estimate calls to items.
+//    open func tableView(_ tableView: UITableView, shouldEstimateHeightForRowAt indexPath: IndexPath) -> Bool {
+//        return false
+//    }
+//
+//    open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        var result = UITableViewAutomaticDimension
+//
+//        if
+//            self.tableView(tableView, shouldEstimateHeightForRowAt: indexPath),
+//            let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, estimatedHeightForRowAt: indexPath)
+//        {
+//            result = value
+//        } else if
+//            let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, heightForRowAt: indexPath)
+//        {
+//            result = value
+//        }
+//
+//        return result
+//    }
+
+    open func delegateTableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, estimatedHeightForRowAt: indexPath) {
+            return value
+        } else {
+            return UITableViewAutomaticDimension
+        }
+    }
+    
     open func tableView(_ tableView: UITableView, shouldEstimateHeightForHeaderInSection section: Int) -> Bool {
         return false
     }
