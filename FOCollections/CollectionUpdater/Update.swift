@@ -3,7 +3,7 @@
 //  FOCollections
 //
 //  Created by Daniel Krofchick on 2017-06-06.
-//  Copyright © 2017 Figure1. All rights reserved.
+//  Copyright © 2017 Figure 1 Inc. All rights reserved.
 //
 
 struct Update {
