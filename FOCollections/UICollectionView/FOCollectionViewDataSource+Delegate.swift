@@ -30,16 +30,4 @@ extension FOCollectionViewDataSource: UICollectionViewDataSource {
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sections.count 
     }
-
-    /**
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-    }
-
-    func collectionView(collectionView: UICollectionView, canMoveItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-    }
-
-    func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-    }
-    **/
-    
 }
