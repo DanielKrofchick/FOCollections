@@ -3,7 +3,7 @@
 //  FOCollectionsExamples
 //
 //  Created by Daniel Krofchick on 2015-11-11.
-//  Copyright © 2015 Figure1. All rights reserved.
+//  Copyright © 2015 Figure 1 Inc. All rights reserved.
 //
 
 import UIKit
@@ -55,22 +55,9 @@ extension FOTableViewDataSource: UITableViewDataSource {
         }
     }
 
-    /**
-    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
-    }
-    
-    func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-    }
-    **/
-
     open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         delegateWithIndexPath(indexPath)?.tableView?(tableView, commit: editingStyle, forRowAt: indexPath)
     }
-    
-    /**
-    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-    }
-    **/
     
      //MARK:- utils
     fileprivate func delegateWithIndexPath(_ indexPath: IndexPath) -> UITableViewDataSource? {

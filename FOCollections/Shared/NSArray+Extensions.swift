@@ -3,7 +3,7 @@
 //  FOCollections
 //
 //  Created by Daniel Krofchick on 2015-11-05.
-//  Copyright © 2015 Figure1. All rights reserved.
+//  Copyright © 2015 Figure 1 Inc. All rights reserved.
 //
 
 extension Array {

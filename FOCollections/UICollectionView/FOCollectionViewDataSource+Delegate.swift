@@ -3,7 +3,7 @@
 //  FOCollectionsExamples
 //
 //  Created by Daniel Krofchick on 2015-11-11.
-//  Copyright © 2015 Figure1. All rights reserved.
+//  Copyright © 2015 Figure 1 Inc. All rights reserved.
 //
 
 import UIKit
@@ -30,16 +30,4 @@ extension FOCollectionViewDataSource: UICollectionViewDataSource {
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sections.count 
     }
-
-    /**
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-    }
-
-    func collectionView(collectionView: UICollectionView, canMoveItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-    }
-
-    func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-    }
-    **/
-    
 }
