@@ -3,7 +3,7 @@
 //  FOCollectionsExamples
 //
 //  Created by Daniel Krofchick on 2015-11-11.
-//  Copyright © 2015 Figure1. All rights reserved.
+//  Copyright © 2015 Figure 1 Inc. All rights reserved.
 //
 
 import UIKit
@@ -86,29 +86,6 @@ extension FOTableViewController {
             return 0
         }
     }
-
-    // Enabling casues animation glitches if estimated-height != height. Routing through heightForRowAt, to disable, causes slow table updates.
-    // Implement tableView:estimatedHeightForRowAt and route through delegateTableView:estimatedHeightForRowAt to forward estimate calls to items.
-//    open func tableView(_ tableView: UITableView, shouldEstimateHeightForRowAt indexPath: IndexPath) -> Bool {
-//        return false
-//    }
-//
-//    open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        var result = UITableViewAutomaticDimension
-//
-//        if
-//            self.tableView(tableView, shouldEstimateHeightForRowAt: indexPath),
-//            let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, estimatedHeightForRowAt: indexPath)
-//        {
-//            result = value
-//        } else if
-//            let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, heightForRowAt: indexPath)
-//        {
-//            result = value
-//        }
-//
-//        return result
-//    }
 
     open func delegateTableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if let value = delegateWithIndexPath(indexPath)?.tableView?(tableView, estimatedHeightForRowAt: indexPath) {

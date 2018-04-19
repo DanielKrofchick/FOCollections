@@ -3,7 +3,7 @@
 //  FOCollections
 //
 //  Created by Daniel Krofchick on 2016-02-17.
-//  Copyright © 2016 Figure1. All rights reserved.
+//  Copyright © 2016 Figure 1 Inc. All rights reserved.
 //
 
 import UIKit

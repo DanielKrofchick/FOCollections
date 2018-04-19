@@ -3,7 +3,7 @@
 //  Figure1
 //
 //  Created by Daniel Krofchick on 2015-04-23.
-//  Copyright (c) 2015 Movable Science. All rights reserved.
+//  Copyright (c) 2015 Figure 1 Inc.. All rights reserved.
 //
 
 import UIKit

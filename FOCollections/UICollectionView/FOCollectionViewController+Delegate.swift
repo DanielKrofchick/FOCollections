@@ -3,7 +3,7 @@
 //  FOCollections
 //
 //  Created by Daniel Krofchick on 2015-11-08.
-//  Copyright © 2015 Figure1. All rights reserved.
+//  Copyright © 2015 Figure 1 Inc. All rights reserved.
 //
 
 // MARK: UICollectionViewDelegate - Forwarding
@@ -108,11 +108,6 @@ extension FOCollectionViewController  {
         delegateWithIndexPath(indexPath)?.collectionView?(collectionView, performAction: action, forItemAt: indexPath, withSender: sender)
     }
     
-    /**
-    override public func collectionView(collectionView: UICollectionView, transitionLayoutForOldLayout fromLayout: UICollectionViewLayout, newLayout toLayout: UICollectionViewLayout) -> UICollectionViewTransitionLayout {
-    }
-    **/
-
     @available(iOS 9.0, *)
     override open func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
         if let value = delegateWithIndexPath(indexPath)?.collectionView?(collectionView, canFocusItemAt: indexPath) {
@@ -120,23 +115,5 @@ extension FOCollectionViewController  {
         } else {
             return true
         }
-    }
-    
-    /**
-    override public func collectionView(collectionView: UICollectionView, shouldUpdateFocusInContext context: UICollectionViewFocusUpdateContext) -> Bool {
-    }
-    
-    override public func collectionView(collectionView: UICollectionView, didUpdateFocusInContext context: UICollectionViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
-    }
-    
-    override public func indexPathForPreferredFocusedViewInCollectionView(collectionView: UICollectionView) -> NSIndexPath? {
-    }
-    
-    override public func collectionView(collectionView: UICollectionView, targetIndexPathForMoveFromItemAtIndexPath originalIndexPath: NSIndexPath, toProposedIndexPath proposedIndexPath: NSIndexPath) -> NSIndexPath {
-    }
-    
-    override public func collectionView(collectionView: UICollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
-    }
-    **/
-    
+    }    
 }
