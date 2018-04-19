@@ -26,6 +26,16 @@ open class FOCollectionSection: NSObject, UICollectionViewDelegateFlowLayout {
         return items?.safe(index)
     }
     
+    func indexPathForItem(_ item: FOCollectionItem, section: Int) -> IndexPath? {
+        var indexPath: IndexPath?
+        
+        if let itemIndex = items?.index(of: item) {
+            indexPath = IndexPath(item: itemIndex, section: section)
+        }
+        
+        return indexPath
+    }
+    
     func indexPathsForItem(_ item: FOCollectionItem, section: Int) -> [IndexPath] {
         var indexPaths = [IndexPath]()
         

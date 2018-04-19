@@ -1,4 +1,5 @@
-FOCollections.xcodeproj/project.xcworkspace/xcuserdata/xiaoma.xcuserdatad/UserInterfaceState.xcuserstate
+FOCollections.xcodeproj/project.xcworkspace/xcshareddata/*
+FOCollections.xcodeproj/project.xcworkspace/xcuserdata/*
 FOCollections.xcodeproj/xcuserdata/xiaoma.xcuserdatad/xcschemes/FOCollections 2.xcscheme
 FOCollections.xcodeproj/xcuserdata/xiaoma.xcuserdatad/xcschemes/FOCollections-Universal.xcscheme
 FOCollections.xcodeproj/xcuserdata/xiaoma.xcuserdatad/xcschemes/FOCollections.xcscheme
@@ -6,3 +7,4 @@ FOCollections.xcodeproj/xcuserdata/xiaoma.xcuserdatad/xcschemes/xcschememanageme
 FOCollections.framework/*
 FOCollections.xcodeproj/xcuserdata/*
 build/**
+.DS_Store

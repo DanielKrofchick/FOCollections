@@ -267,6 +267,16 @@ open class FOTableViewDataSource: NSObject {
         return indexSet as IndexSet
     }
     
+    open func indexPathForItem(_ item: FOTableItem) -> IndexPath? {
+        for (sectionIndex, section) in sections.enumerated() {
+            if let indexPath = section.indexPathForItem(item, section: sectionIndex) {
+                return indexPath
+            }
+        }
+        
+        return nil
+    }
+    
     open func indexPathsForItem(_ item: FOTableItem) -> [IndexPath] {
         var indexPaths = [IndexPath]()
         

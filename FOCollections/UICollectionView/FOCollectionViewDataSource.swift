@@ -270,6 +270,16 @@ open class FOCollectionViewDataSource: NSObject {
         return indexSet as IndexSet
     }
     
+    open func indexPathForItem(_ item: FOCollectionItem) -> IndexPath? {
+        for (sectionIndex, section) in sections.enumerated() {
+            if let indexPath = section.indexPathForItem(item, section: sectionIndex) {
+                return indexPath
+            }
+        }
+        
+        return nil
+    }
+    
     open func indexPathsForItem(_ item: FOCollectionItem) -> [IndexPath] {
         var indexPaths = [IndexPath]()
         

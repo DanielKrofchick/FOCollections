@@ -41,6 +41,18 @@ open class FOCollectionItem: NSObject, UICollectionViewDelegateFlowLayout {
         return operations
     }
     
+    open func cell() -> UICollectionViewCell? {
+        if
+            let viewController = viewController as? FOCollectionViewController,
+            let indexPath = viewController.dataSource.indexPathForItem(self),
+            let cell = viewController.collectionView?.cellForItem(at: indexPath)
+        {
+            return cell
+        }
+        
+        return nil
+    }
+    
     open func cells() -> [UICollectionViewCell] {
         var cells = [UICollectionViewCell]()
         

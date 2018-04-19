@@ -27,6 +27,16 @@ open class FOTableSection: NSObject, UITableViewDelegate {
         return items?.safe(index)
     }
     
+    func indexPathForItem(_ item: FOTableItem, section: Int) -> IndexPath? {
+        var indexPath: IndexPath?
+        
+        if let itemIndex = items?.index(of: item) {
+            indexPath = IndexPath(item: itemIndex, section: section)
+        }
+        
+        return indexPath
+    }
+    
     func indexPathsForItem(_ item: FOTableItem, section: Int) -> [IndexPath] {
         var indexPaths = [IndexPath]()
         

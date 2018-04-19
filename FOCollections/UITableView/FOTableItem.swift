@@ -34,10 +34,22 @@ open class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
                 self?.setResource(resource, result: result, forKey: key, tableView: tableView, indexPath: indexPath)
             }) {
                 operations.append(operation)
-            }
+            }          
         }
         
         return operations
+    }
+    
+    open func cell() -> UITableViewCell? {
+        if
+            let viewController = viewController as? FOTableViewController,
+            let indexPath = viewController.dataSource.indexPathForItem(self),
+            let cell = viewController.tableView.cellForRow(at: indexPath)
+        {
+            return cell
+        }
+        
+        return nil
     }
     
     open func cells() -> [UITableViewCell] {
