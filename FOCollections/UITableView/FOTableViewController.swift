@@ -56,9 +56,11 @@ open class FOTableViewController: UIViewController, UITableViewDelegate {
         
         view.backgroundColor = UIColor.white
         
+        tableView.frame = view.bounds
         tableView.backgroundColor = UIColor.white
         tableView.dataSource = dataSource
         tableView.delegate = self
+        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(tableView)
         
         defaultSeparatorInset = tableView.separatorInset
@@ -67,13 +69,11 @@ open class FOTableViewController: UIViewController, UITableViewDelegate {
     }
     
     fileprivate func createTableView(frame: CGRect = CGRect.zero, style: UITableViewStyle = .plain) {
-        tableView = UITableView(frame: CGRect.zero, style: style)
+        tableView = UITableView(frame: frame, style: style)
     }
     
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        tableView.frame = view.bounds
         
         if clearCellInsets {
             tableView.layoutMargins = UIEdgeInsets.zero
