@@ -10,14 +10,15 @@ import UIKit
 
 open class FOCollectionItem: NSObject, UICollectionViewDelegateFlowLayout {
 
-    open var data: AnyObject? = nil                                              // Data cargo
-    open var identifier: String? = nil                                           // Unique item ID
-    open var reuseIdentifier: String? = nil                                      // collectionView reuseIdentifier
-    open var cellClass: AnyClass? = nil                                          // View Class to register with the collectionView
-    open var columns = Int(1)                                                    // Columns spanned by the item, depends on layout
-    open var operations = [Operation]()                                        // Operations returned from getResources are stored here and cancelled on cell didEndDisplaying
-    open weak var section: FOCollectionSection?                                  // Weak reference to section
-    open weak var viewController: UIViewController? = nil                        // Weak reference to viewController
+    open var data: AnyObject? = nil                                         // Data cargo
+    open var identifier: String? = nil                                      // Unique item ID
+    open var reuseIdentifier: String? = nil                                 // collectionView reuseIdentifier
+    open var cellClass: AnyClass? = nil                                     // View Class to register with the collectionView
+    open var columns = Int(1)                                               // Columns spanned by the item, depends on layout
+    open var operations = [Operation]()                                     // Operations returned from getResources are stored here and cancelled on cell didEndDisplaying
+    open var displayDate = Date()                                           // Last time willDisplay was called for item
+    open weak var section: FOCollectionSection?                             // Weak reference to section
+    open weak var viewController: UIViewController? = nil                   // Weak reference to viewController
     
     open func configure(_ cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: IndexPath){}
     // Gets the reource identified by key

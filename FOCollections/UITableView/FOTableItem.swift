@@ -10,13 +10,14 @@ import UIKit
 
 open class FOTableItem: NSObject, UITableViewDelegate, UITableViewDataSource {
     
-    open var data: Any? = nil                                              // Data cargo
-    open var identifier: String? = nil                                           // Unique item ID
-    open var reuseIdentifier: String? = nil                                      // collectionView reuseIdentifier
-    open var cellClass: AnyClass? = nil                                          // View Class to register with the collectionViews
-    open var operations = [Operation]()                                        // Operations returned from getResources are stored here and cancelled on cell didEndDisplaying
-    weak open var section: FOTableSection?                                       // Weak reference to section
-    weak open var viewController: UIViewController? = nil
+    open var data: Any? = nil                                               // Data cargo
+    open var identifier: String? = nil                                      // Unique item ID
+    open var reuseIdentifier: String? = nil                                 // collectionView reuseIdentifier
+    open var cellClass: AnyClass? = nil                                     // View Class to register with the collectionViews
+    open var operations = [Operation]()                                     // Operations returned from getResources are stored here and cancelled on cell didEndDisplaying
+    open var displayDate = Date()                                           // Last time willDisplay was called for item
+    weak open var section: FOTableSection?                                  // Weak reference to section
+    weak open var viewController: UIViewController? = nil                   // Weak reference to viewController
     
     open func configure(_ cell: UITableViewCell, tableView: UITableView, indexPath: IndexPath){}
     // Gets the reource identified by key

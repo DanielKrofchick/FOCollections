@@ -57,7 +57,7 @@ extension FOCollectionViewController  {
     }
     
     override open func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        // delayopenone cycle to allow cell to finish being created
+        // delay one cycle to allow cell to finish being created
         DispatchQueue.main.async(execute: {
             DispatchQueue.main.async(execute: {
                 DispatchQueue.main.async(execute: {
@@ -68,6 +68,10 @@ extension FOCollectionViewController  {
                 })
             })
         })
+        
+        if let item = dataSource.itemAtIndexPath(indexPath) {
+            item.displayDate = Date()
+        }
         
         delegateWithIndexPath(indexPath)?.collectionView?(collectionView, willDisplay: cell, forItemAt: indexPath)
     }

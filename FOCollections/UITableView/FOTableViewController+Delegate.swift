@@ -28,6 +28,10 @@ extension FOTableViewController {
             })
         })
         
+        if let item = dataSource.itemAtIndexPath(indexPath) {
+            item.displayDate = Date()
+        }
+        
         delegateWithIndexPath(indexPath)?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)
     }
     
