@@ -57,9 +57,9 @@ extension FOTableViewController {
             dataSource.clearAllItems(tableView)
             dataSource.insertSections(transformed, atIndexes: IndexSet(integersIn: 0..<transformed.count), tableView: tableView, viewController: self)
             
-            tableView.endUpdates()
-            
             CATransaction.commit()
+            
+            tableView.endUpdates()
         }
         
         func doUpdateItems() {
@@ -80,9 +80,9 @@ extension FOTableViewController {
             dataSource.clearAllItems(tableView)
             dataSource.insertSections(to, atIndexes: IndexSet(integersIn: 0..<to.count), tableView: tableView, viewController: self)
             
-            tableView.endUpdates()
-            
             CATransaction.commit()
+
+            tableView.endUpdates()
         }
         
         doUpdateSections()
