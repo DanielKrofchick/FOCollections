@@ -192,7 +192,7 @@ open class FOCollectionViewController: UICollectionViewController {
         pagingTimer?.invalidate()
     }
     
-    func checkForPaging() {
+    @objc func checkForPaging() {
         addPagingCellIfNeeded()
         triggerPagingIfNeeded()
     }

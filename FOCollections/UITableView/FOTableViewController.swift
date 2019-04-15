@@ -243,7 +243,7 @@ open class FOTableViewController: UIViewController, UITableViewDelegate {
         pagingTimer?.invalidate()
     }
     
-    func checkForPaging() {
+    @objc func checkForPaging() {
         addPagingCellIfNeeded()
         triggerPagingIfNeeded()
     }

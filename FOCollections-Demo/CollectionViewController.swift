@@ -23,7 +23,7 @@ class CollectionViewController: FOCollectionViewController {
         play()
     }
     
-    func play() {
+    @objc func play() {
         queueUpdate({[weak self] in self?.clearAllItems()})
         
         queueUpdate({[weak self] in self?.insertSections([self!.section(UIColor.blue)], indexes: IndexSet(integer: 0))})

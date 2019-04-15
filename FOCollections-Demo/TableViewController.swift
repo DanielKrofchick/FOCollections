@@ -77,11 +77,11 @@ class TableViewController: FOTableViewController {
         navigationItem.rightBarButtonItems = items
     }
     
-    func didSelectPlay() {
+    @objc func didSelectPlay() {
         play = !play
     }
     
-    func didSelectAutoPlay() {
+    @objc func didSelectAutoPlay() {
         autoPlay = !autoPlay
     }
     
